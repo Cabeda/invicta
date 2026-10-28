@@ -12,4 +12,5 @@ uv pip install --python .venv/bin/python -r prototypes/costa-cabral/requirements
 command -v ffmpeg >/dev/null || { echo 'Install ffmpeg to render MP4 videos.'; exit 1; }
 .venv/bin/python prototypes/costa-cabral/capture_replay.py
 .venv/bin/python prototypes/costa-cabral/render.py
+.venv/bin/python prototypes/costa-cabral/prepare_3d.py
 .venv/bin/python prototypes/costa-cabral/presentation.py "$@"

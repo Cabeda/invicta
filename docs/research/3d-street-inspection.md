@@ -1,6 +1,6 @@
 # Inspecting the Costa Cabral simulation in 3D
 
-Research checked **28 October 2026**. This note evaluates feasibility; no 3D renderer, city asset package or CARLA installation was created.
+Research checked **28 October 2026**. The initial feasibility recommendation has now been implemented as a browser 3D inspection prototype. See [the implementation and verification notes](../../prototypes/costa-cabral/3D.md). CARLA and surveyed terrain have not been installed or added.
 
 ## Recommendation for this project
 

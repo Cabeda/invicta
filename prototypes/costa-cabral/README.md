@@ -66,6 +66,8 @@ The one-command workflow completed all 18 scenario runs. A saved baseline scenar
 
 ## Proposal video and website
 
+**Integrated 3D:** choose **Explore in 3D / Explorar em 3D** above the replay, or open `proposal/index.html?dimension=3d&camera=conde&view=restricted` through the local HTTP server. Orbit around synchronized baseline/proposal views, move a street-level camera, follow the same bus, hide buildings, share the camera pose or record the 3D view to WebM. See [3D.md](3D.md) for controls, provenance and verification. The view uses one-second native trajectories and SUMO vehicle dimensions, with 2,089 mapped building footprints. Terrain is flat and building heights are estimated; this is not a surveyed city. 3D requires HTTP(S), WebGL2 and DecompressionStream; the original 2D HTML still opens directly.
+
 Open `proposal/index.html` for the bilingual public-facing presentation. Its PT/EN switch also changes the captioned film. Two 60-second 1080p H.264 videos are included:
 
 - `proposal/costa-cabral-pt.mp4`
@@ -83,6 +85,6 @@ Rebuild the full presentation with one command (requires `ffmpeg`):
 
 Use `--skip-video` to rebuild only the site/archive after changing text or layout. `--case busy --camera conde --language both` renders another predefined scenario/camera. The standardized MP4 filenames are replaced, so rerun the default command to restore the original moderate-demand films.
 
-`costa-cabral-proposal-site.zip` is the portable website export. Unzip and upload **all files together** to a static host; `index.html` is the entry point. There is no backend, database, API key, build step or external JavaScript dependency. A local preview link is local to the user's machine; this task prepares the bundle without publishing it to a public host. Keep both MP4s, posters and the supporting result/source files beside the HTML.
+`costa-cabral-proposal-site.zip` is the portable website export. Unzip and upload **all files and nested folders together** to a static host; `index.html` is the entry point. There is no backend, database, API key, build step or remote JavaScript dependency. Three.js 0.186.1 and its MIT licence are bundled under `vendor/`; retain `inspection-assets/` and `inspection-3d.js` as well. A local preview link is local to the user's machine; this task prepares the bundle without publishing it to a public host. Keep both MP4s, posters and the supporting result/source files beside the HTML.
 
 The compressed native replay dataset is retained in `media/replays.json.gz`. Native FCD XML and capture logs are under ignored `runs/media/`. Hashes of the source network, routes and stop definitions accompany each replay. Adding capture preserved all 60 completed stop events in the checked baseline clip exactly.

@@ -174,6 +174,9 @@ def render_video(data,lang,case,camera,fps=FPS):
  print('Video saved:',target,flush=True)
 
 def export_site(data):
+ shutil.copy2(ROOT/'inspection-3d.js',SITE/'inspection-3d.js')
+ shutil.copytree(ROOT/'vendor',SITE/'vendor',dirs_exist_ok=True)
+ shutil.copytree(ROOT/'inspection-assets',SITE/'inspection-assets',dirs_exist_ok=True)
  if (SITE/'video-info.json').exists():data['video_info']=json.loads((SITE/'video-info.json').read_text())
  compact=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')
  page=(ROOT/'proposal.template.html').read_text().replace('__PRESENTATION_DATA__',compact)
@@ -183,12 +186,12 @@ def export_site(data):
  (SITE/'experiment.html').write_text(lab)
  shutil.copy2(ROOT/'results.csv',SITE/'results.csv');shutil.copy2(ROOT/'FINDINGS.md',SITE/'findings.md')
  (SITE/'sources.json').write_text(json.dumps(data['sources'],ensure_ascii=False,indent=2))
- readme='''COSTA CABRAL — STATIC PROPOSAL WEBSITE\n\nOpen index.html directly, or serve this folder with: python3 -m http.server 8080\n\nPublish by uploading ALL extracted files together to any static website host.\nNo backend, database, API key or build step is required.\nKeep filenames and relative paths intact. index.html is the entry point.\n\nPT/EN language switch. Synchronized actual SUMO trajectory replays.\nThree precomputed demand cases; these controls do not run new simulations.\nMP4 videos have burned-in PT or EN captions.\nThe browser can record the selected view to WebM if MediaRecorder is supported.\n\nThese are simulated trajectories and uncalibrated outcomes, not observed traffic\nor a validated forecast. Input schedule: 2 Sep 2026. Seed 17 in replays;\nreported metrics aggregate seeds 17,42,73. Unserved demand remains explicit.\nVehicle symbols are enlarged and motion interpolates four-second samples.\n\nOSM (c) OpenStreetMap contributors, ODbL. Municipal GIS/STCP catalogue: CC0.\nSource URLs/hashes in sources.json. Detailed model limitations in findings.md.\n'''
+ readme='''COSTA CABRAL — STATIC PROPOSAL WEBSITE\n\nServe this whole folder with: python3 -m http.server 8080\nOpen http://localhost:8080/?dimension=3d for 3D, or omit the query for 2D.\nThe 2D page also opens directly; 3D modules/assets require HTTP and WebGL2.\nA modern browser with DecompressionStream is required for compressed assets.\n\nPublish by uploading ALL extracted files together to any static website host.\nNo backend, database, API key or build step is required.\nKeep filenames and relative paths intact. index.html is the entry point.\n\nPT/EN language switch. Synchronized actual SUMO trajectory replays.\n2D map and 3D inspection: orbit, street camera, bus following, building toggle.\n3D uses one-second SUMO output and model vehicle dimensions; 2D uses four seconds.\nThe 3D network is flat; building heights are estimated. Not a surveyed city.\nKeep vendor/ and inspection-assets/ folders and inspection-3d.js in the export.\nThree precomputed demand cases; these controls do not run new simulations.\nMP4 videos have burned-in PT or EN captions.\nThe browser can record the selected view to WebM if MediaRecorder is supported.\n\nThese are simulated trajectories and uncalibrated outcomes, not observed traffic\nor a validated forecast. Input schedule: 2 Sep 2026. Seed 17 in replays;\nreported metrics aggregate seeds 17,42,73. Unserved demand remains explicit.\nVehicle symbols are enlarged and motion interpolates four-second samples.\n\nOSM (c) OpenStreetMap contributors, ODbL. Municipal GIS/STCP catalogue: CC0.\nSource URLs/hashes in sources.json. Detailed model limitations in findings.md.\n'''
  (SITE/'README.txt').write_text(readme)
  archive=ROOT/'costa-cabral-proposal-site.zip'
  with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
-  for path in sorted(SITE.iterdir()):
-   if path.is_file():z.write(path,path.name)
+  for path in sorted(SITE.rglob('*')):
+   if path.is_file():z.write(path,path.relative_to(SITE))
  print('Website bundle:',archive,flush=True)
 
 if __name__=='__main__':
