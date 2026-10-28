@@ -4,6 +4,12 @@ Question: does a two-direction corridor restriction preserve local access and ju
 
 **Throwaway, uncalibrated experiment. These are simulator outcomes, not a forecast or observed Porto performance.**
 
+## Goal and local needs
+
+Primary goal: help buses meet their published schedules while catering to residents, shoppers, businesses and everyday services. Assess early departures as well as late arrivals; practical local access is an explicit requirement.
+
+The current final-stop arrival check (no more than three minutes late) is illustrative. It does not assess early departures or whole-route punctuality. Shopper, visitor and service access are not yet represented; the resident permit remains a local-origin/destination proxy. Faster completed bus trips alone do not establish success.
+
 ## Inputs and decisions
 
 - SUMO 1.28.0; street map and source hashes in `data/manifest.json`.

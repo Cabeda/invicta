@@ -1,0 +1,72 @@
+# Costa Cabral: what the next report needs
+
+Reviewed 28 October 2026 against the current prototype. This is a prioritized modelling and measurement plan, not a claim that the missing observations are available or that the proposal has been validated. See [the experiment findings](../../prototypes/costa-cabral/FINDINGS.md) for the existing results and [3D inspection research](3d-street-inspection.md) for visualization options.
+
+**Agreed focus:** buses should meet their published schedules while catering to residents, shoppers, businesses and everyday services. Punctuality is the primary goal; practical local access is an explicit requirement. Faster average driving time is supporting evidence. See the [project brief](../PROJECT_BRIEF.md) for assessment rules and the distinction between local needs and vehicle exemptions.
+
+## The most consequential gap
+
+We need to establish whether the proposal improves journeys across the affected network, including displaced traffic and people waiting for buses. The current completed-bus averages cannot settle that question: some requested journeys have no permitted route, some remain queued, traffic is synthetic, and the surrounding network is clipped. These are documented model properties, not evidence that the real street policy would strand those journeys.
+
+The existing comparison already simulates individual vehicles with SUMO. A street-level 3D view would change what we can inspect. Additional geometry, demand and behaviour inputs would change what the model represents. Both are useful, but neither substitutes for the other.
+
+Local capability check: this turn ran the installed native `sumo-gui --version` successfully. It returned SUMO GUI 1.28.0, Darwin arm64, with `GUI` in its build features and no `OSG` feature advertised. No native 3D view was launched. This does not change the existing experiment results.
+
+## Missing variables, in decision order
+
+Priorities below are recommendations based on the current implementation, rather than a measured sensitivity ranking. Rank them again after sensitivity experiments.
+
+| Priority | Variables to add or improve | Current state | What they could change in the decision |
+|---|---|---|---|
+| 1 | Origins/destinations; movements at each junction; demand by mode and 5–15-minute interval; entry queues and initial traffic; alternative-route capacity | Synthetic hourly demand, random departures, empty-network start, static fastest routes within a clipped district | Whether the bus benefit survives realistic congestion, and where displaced traffic and delay go. Widen the diversion area and audit apparently disconnected trips before drawing a network-wide conclusion. |
+| 1 | Real bus arrivals/departures at each stop; upstream lateness; boarding/alighting counts; passenger loads; stop dwell distributions; bus types and stop capacity | Dated 2 September timetable; buses start at the first mapped corridor stop; assumed 20-second dwell; no passengers | Whether priority improves punctuality and headway regularity, rather than only corridor driving time. Loads permit passenger-time and capacity analysis. |
+| 1 | Actual lane directions and widths; turn restrictions; turn pockets; junction storage; stop positions; signal phases, offsets, pedestrian stages and clearance times | Eight directed stretches normalized to meet the two-lane premise; imported junctions and generated signals | Whether a claimed capacity improvement is physically and operationally feasible. A signal-equipment inventory is not a controller timing plan. |
+| 1 | Pedestrian flows and routes; crossings and waiting times; sidewalk and platform space; wheelchair/pushchair access; cycling and motorcycle lateral behaviour | No pedestrian demand; bicycles/motorcycles exist as vehicle classes, without a calibrated model of sharing limited width | Whether buses, bikes and motorcycles can share the proposed street acceptably, and whether crossing/access conditions deteriorate. Include people entering and leaving buses. |
+| 2 | Resident eligibility, entrances and garage access; adjacent-street access; visitors, carers, deliveries, servicing, refuse and emergency vehicles; taxi pickup/drop-off | Permit proxy only for a trip starting or ending on a corridor edge | How much permitted traffic remains, which legitimate trips are missed, and whether an access rule is workable. These are policy choices to specify explicitly. |
+| 2 | Loading and parking occupancy; delivery frequency and duration; double parking; ride-hailing stops; blocked bus stops; enforcement response | Municipal loading geometry is a contextual layer; no curbside activity or blockage process | Whether occasional obstructions erase reliability gains. Test a blocked lane/stop, not only an unobstructed average hour. |
+| 2 | Compliance rates; permit checks and delays; barrier failures; enforcement location, hours and operating capacity | Perfect compliance; no permit-processing or enforcement delay | How the scheme performs under realistic operation, and its recurring cost. Test leakage and access-control queues separately. |
+| 2 | Network route-choice feedback; different departure times; mode shift; destination changes; parking search; demand growth | Fixed paired requests and static routing; no behavioural adaptation | Separate the immediate redistribution effect from uncertain longer-term behaviour. Preserve a same-demand comparison, then show adaptation cases explicitly. |
+| 2 | Typical school weekdays versus holidays; both peaks and off-peak; wet days; works and events; service disruptions | One holiday-weekday timetable, one demand hour, three assumed demand cases | Whether the result holds beyond the selected hour. Use matched-day data and separate unusual events rather than mixing incompatible snapshots. |
+| 3 | Street gradient, bus power/braking and real fleet mix; building/vegetation geometry where relevant | No terrain import; generic vehicle types; no surveyed buildings | Operational effects of slopes and vehicle performance, and the geometry needed for credible street-level visibility checks. A rendered slope must agree with the simulation network before claiming a performance effect. |
+| 3 | Capital quantities and rates; design and monitoring; enforcement/permit administration; maintenance and replacement; construction traffic management | No sourced euro estimate | A phased budget with one-off and recurring costs, dependencies and a price date. Use quantities and comparable quotations/contracts; distinguish cost estimates from actual outturns. |
+| 3 | Fleet emission classes, energy use, traffic on diversion routes; environmental monitoring location and conditions | No calibrated environmental appraisal | Whether an improvement on Costa Cabral shifts emissions/noise elsewhere. Tailpipe emissions and measured ambient concentrations are different outputs. |
+
+Evidence for the current-state column is in [README.md](../../prototypes/costa-cabral/README.md), [experiment.py](../../prototypes/costa-cabral/experiment.py), [prepare.py](../../prototypes/costa-cabral/prepare.py) and [FINDINGS.md](../../prototypes/costa-cabral/FINDINGS.md). The table proposes additional variables; it does not say SUMO lacks these capabilities.
+
+## Change the report's scorecard
+
+Use a small set of agreed goals and constraints before ranking alternatives. Proposed outputs:
+
+1. **Bus service:** median and 95th-percentile corridor and whole-route journey times; lateness at every relevant stop; headway variability and bunching; passenger waiting, onboard time, overcrowding and missed boardings. Agree punctuality and headway thresholds with the service operator; the current three-minute final-stop threshold is illustrative.
+2. **All requested travel:** requested, routed, inserted, completed and unfinished journeys by group; entry queues and in-network queues separately; additional distance and time on diversion roads. Show completed-trip means alongside the completion rate, never by themselves.
+3. **Who gains or loses:** passenger-hours saved and lost, residents' detours, delivery/service access, adjacent-street effects and access for people with reduced mobility. A bus and a car should not automatically have equal weight when the goal concerns people.
+4. **Street operation:** queue length relative to storage, time blocking crossings/junctions, bus-stop obstruction, pedestrian waiting and usable walking space. Include narrow locations and simultaneous opposing movements.
+5. **Safety evidence:** observed issues and speed/interaction distributions; appropriately scoped conflict indicators after calibration. Zero simulator collision records do not establish safety, and a visual near miss is not by itself a validated risk estimate.
+6. **Delivery:** intervention map and quantities, capital and annual operating ranges, responsible dependencies, temporary construction effects, and a reversible-trial monitoring plan.
+7. **Uncertainty:** identify measured, inferred and assumed inputs; show sensitivity to uncertain demand, dwell, compliance and signal settings. Distinguish variation between random seeds from uncertainty in those inputs. Validate on observations not used to fit the model.
+
+SUMO can make stop duration depend on passenger boarding and capacity; those inputs must be supplied. Its sublane model supports lateral sharing/overtaking behaviours relevant to bicycles and motorcycles, but enabling it requires calibrated widths and behaviour. Its SSM device provides surrogate conflict measures with documented limitations, including vehicle-only encounters and incomplete coverage of some conflict types. These are available modelling tools, not proof of validity for Costa Cabral. [Stop and boarding definitions](https://eclipse.dev/sumo/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html#stops), [sublane model](https://eclipse.dev/sumo/docs/Simulation/SublaneModel.html), [SSM device](https://eclipse.dev/sumo/docs/Simulation/Output/SSM_Device.html), [calibration example](https://eclipse.dev/sumo/docs/Tutorials/Calibration/San_Pablo_Dam.html).
+
+## How Porto's open data helps
+
+Use [Porto's open-data catalogue](https://dadosabertos.cm-porto.pt/) for physical inventories and provenance, and the [Urban Platform](https://plataformaurbana.porto.digital/acao/) as a lead for operational data. Neither should be treated as a complete calibrated city model.
+
+The earlier 28 October probes recorded in [the research report](traffic-simulation-tools.md#public-broker-verified-contents-and-freshness) found old publicly exposed traffic observations and a timetable archive ending in September. Some bus position observations were current, but matching historical stop-level AVL, passenger loads and signal plans were not established. Loading locations do not tell us how often or how long vehicles stop there. Census information can help weight affected populations, but it is not an observed trip matrix or a resident permit register.
+
+The practical next acquisition is a **matched study period**: traffic and turning counts, queue/travel-time observations, current service schedules plus bus AVL and load/boarding data, actual signal plans, and a physical audit at critical junctions and stops. Ask Porto Digital/municipality/STCP for the operational histories and metadata they can share; where unavailable, plan targeted observations. The correct number of observation days and modelling runs depends on variability and the decision being tested, not a universal quota.
+
+## Make 3D inspection feed back into the report
+
+The useful workflow is to freeze a scenario, enter it at a particular time, inspect it from a bus/bike/pedestrian viewpoint, and record an issue with its location, time, affected users and evidence status. Link the issue to a proposed geometry, access or operating change; rerun SUMO after making that change. An annotation alone must not silently alter model results.
+
+Start with candidate inspection windows around Combatentes, Conde Ferreira and Areosa, already available as replay cameras. These are convenient investigation areas, not a claim that they are the corridor's three worst locations. At each, check opposing buses, bicycle/motorcycle passing space, crossings while queues form, stop boarding space, legitimate property access and a temporary loading obstruction.
+
+The current film/replay is unsuitable for precise clearance or conflict appraisal: symbols are enlarged and trajectories are sampled every four seconds then interpolated. A 3D inspection capture should use true vehicle dimensions, lane/path-aware positioning and more frequent native output. Use each original one-second simulation step first; if finer dynamics are needed, change the simulation step deliberately, rerun both policies and check how results change. Creating extra interpolated frames does not add simulated decisions. Elevation output also requires elevation in the network. [FCD positions, time steps and elevation](https://eclipse.dev/sumo/docs/Simulation/Output/FCDOutput.html), [simulation step and action step](https://eclipse.dev/sumo/docs/Car-Following-Models/index.html#actionsteplength), [elevation inputs and affected models](https://eclipse.dev/sumo/docs/Networks/Elevation.html).
+
+For tight bus turns, use surveyed kerbs and the actual vehicle dimensions/steering geometry for a swept-path assessment. For sightlines, use verified object positions and heights. For accessible walking space, measure the usable width and obstructions. A visually plausible 3D rendering can help locate questions; unverified dimensions cannot settle them.
+
+## Suggested next increment
+
+Keep SUMO as the traffic engine. Add a browser 3D inspection view to the existing bilingual proposal, initially at a few junctions, using the same scenario/time controls and actual simulated trajectories. Show whether geometry is measured, mapped or estimated, and let viewers export location/time issue pins. In parallel, replace the highest-impact assumptions above. Only expand the immersive environment after the small areas demonstrate useful inspection and the baseline matches observations.
+
+This is a proposed next increment, not an implemented feature. The existing website remains a 2D replay of precomputed cases. New traffic rules or demand values require a simulation rerun; a static 3D view would have that same distinction.

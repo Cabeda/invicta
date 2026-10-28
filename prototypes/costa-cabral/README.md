@@ -1,5 +1,7 @@
 # Costa Cabral access experiment — THROWAWAY
 
+**Project focus:** buses meeting their published schedules while catering to residents, shoppers, businesses and everyday services. Practical local access is an explicit requirement. See the [agreed project brief](../../docs/PROJECT_BRIEF.md); the current shopper/service-access policy is not yet modelled.
+
 Question: can both directions of Rua de Costa Cabral be restricted to buses, local residents, taxis, bicycles and motorcycles, while ordinary cars can directly cross at junctions?
 
 The user explicitly confirmed **crossings only**, not short longitudinal connecting stretches. The prototype answers the policy/routing question and exposes simulated tradeoffs. It is **not calibrated and does not justify implementation**.

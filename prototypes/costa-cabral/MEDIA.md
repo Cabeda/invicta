@@ -2,6 +2,8 @@
 
 The presentation asks whether a restricted two-direction corridor could prioritize buses while preserving resident access and direct junction crossings. It is a proposal for discussion using an **uncalibrated model**. It does not claim observed or guaranteed real-world improvements.
 
+The agreed goal is bus punctuality while catering to residents, shoppers, businesses and everyday services. The bilingual site and films now lead with this goal. The first displayed metric is the existing illustrative final-stop arrival check (no more than three minutes late), with unfinished bus trips counted as failures. Early departures, upstream lateness and shopper/service access still require explicit modelling and validation. Local needs do not automatically grant new vehicle exemptions.
+
 ## Delivered outputs
 
 - Portuguese and English MP4s: `proposal/costa-cabral-pt.mp4`, `proposal/costa-cabral-en.mp4`.
@@ -19,7 +21,7 @@ The MP4s are 60 seconds, 1920 × 1080, H.264, 25 fps, with burned-in explanatory
 | 0–7 s | Corridor, proposal and allowed groups. |
 | 7–15 s | Two-direction access diagram; direct crossings remain possible. This is schematic, not surveyed engineering. |
 | 15–51 s | Synchronized baseline/restricted SUMO trajectories, 08:12–08:24, at 20× simulated time. |
-| 51–60 s | Completed-trip bus means across three seeds, explicit no-route demand, and validation/trial next steps. |
+| 51–60 s | Illustrative final-stop schedule check across three seeds, completed-trip bus means as supporting evidence, explicit no-route demand, and validation/trial next steps. |
 
 A persistent label states that the traffic is simulated and uncalibrated. Standardized films use the moderate-demand case; the CLI also accepts another case and junction camera. The video metadata identifies the actual chosen settings, and the website film caption follows that metadata rather than the interactive replay's independently selected case.
 
