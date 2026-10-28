@@ -1,0 +1,22 @@
+{
+  "pt": {
+    "file": "costa-cabral-pt.mp4",
+    "case": "moderate",
+    "camera": "corridor",
+    "duration_seconds": 60,
+    "fps": 25,
+    "width": 1920,
+    "height": 1080,
+    "sha256": "0d658e636a33897c31d907db0c0685cda06a3d0951dcdf8ea7c0291786243040"
+  },
+  "en": {
+    "file": "costa-cabral-en.mp4",
+    "case": "moderate",
+    "camera": "corridor",
+    "duration_seconds": 60,
+    "fps": 25,
+    "width": 1920,
+    "height": 1080,
+    "sha256": "ca1c7e76926d96cc824ea336bbe85effca583f7f672b77e1a0c0fb964914f0cd"
+  }
+}

@@ -61,3 +61,26 @@ This is scratch code and frozen experimental output. No tests or production fram
 ## Verification performed
 
 The one-command workflow completed all 18 scenario runs. A saved baseline scenario was replayed with an identical route file and identical group metrics after disabling mutable partial-route caching. All final runs reported zero teleports. Browser DOM checks covered shortcut rejection, crossing/resident access, demand switching, a complete guided walkthrough and report generation; 6,018 road polylines rendered without horizontal page overflow. No production test suite was introduced.
+
+## Proposal video and website
+
+Open `proposal/index.html` for the bilingual public-facing presentation. Its PT/EN switch also changes the captioned film. Two 60-second 1080p H.264 videos are included:
+
+- `proposal/costa-cabral-pt.mp4`
+- `proposal/costa-cabral-en.mp4`
+
+The replay uses actual SUMO FCD outputs from seed 17, synchronized between policies, from 08:12 to 08:24. Positions are sampled every four seconds and interpolated for playback; vehicle symbols are enlarged for legibility. The displayed numerical outcomes still aggregate three seeds from the full one-hour experiment. These are simulated trajectories, not observed vehicle tracking.
+
+The site controls demand case, camera/junction, comparison versus a single policy, replay time, speed and language. It exports the current selection as JSON. In a browser supporting MediaRecorder/canvas.captureStream, **Record view (WebM)** records the selected camera, language, demand and policy view from its current time to the end. This recording remains local in the browser and does not call a simulation service. It is a replay of precomputed scenarios; new access rules or demand values still require the Python experiment runner.
+
+Rebuild the full presentation with one command (requires `ffmpeg`):
+
+```sh
+./prototypes/costa-cabral/export-proposal.sh
+```
+
+Use `--skip-video` to rebuild only the site/archive after changing text or layout. `--case busy --camera conde --language both` renders another predefined scenario/camera. The standardized MP4 filenames are replaced, so rerun the default command to restore the original moderate-demand films.
+
+`costa-cabral-proposal-site.zip` is the portable website export. Unzip and upload **all files together** to a static host; `index.html` is the entry point. There is no backend, database, API key, build step or external JavaScript dependency. A local preview link is local to the user's machine; this task prepares the bundle without publishing it to a public host. Keep both MP4s, posters and the supporting result/source files beside the HTML.
+
+The compressed native replay dataset is retained in `media/replays.json.gz`. Native FCD XML and capture logs are under ignored `runs/media/`. Hashes of the source network, routes and stop definitions accompany each replay. Adding capture preserved all 60 completed stop events in the checked baseline clip exactly.

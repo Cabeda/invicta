@@ -4,3 +4,9 @@ __pycache__/
 prototypes/costa-cabral/data/raw/
 prototypes/costa-cabral/data/*.net.xml
 prototypes/costa-cabral/runs/
+
+# Rebuildable presentation intermediates; portable outputs remain available locally.
+prototypes/costa-cabral/media/*.json
+prototypes/costa-cabral/media/*.jpg
+prototypes/costa-cabral/media/encode-*.log
+prototypes/costa-cabral/costa-cabral-proposal-site.zip
