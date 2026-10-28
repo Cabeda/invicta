@@ -1,0 +1,11 @@
+[
+  "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6122,41.1558,-8.5998,41.16623333333333",
+  "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6122,41.16623333333333,-8.5998,41.17666666666667",
+  "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6122,41.17666666666667,-8.5998,41.1871",
+  "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5998,41.1558,-8.587399999999999,41.16623333333333",
+  "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5998,41.16623333333333,-8.587399999999999,41.17666666666667",
+  "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5998,41.17666666666667,-8.587399999999999,41.1871",
+  "https://api.openstreetmap.org/api/0.6/map?bbox=-8.587399999999999,41.1558,-8.575,41.16623333333333",
+  "https://api.openstreetmap.org/api/0.6/map?bbox=-8.587399999999999,41.16623333333333,-8.575,41.17666666666667",
+  "https://api.openstreetmap.org/api/0.6/map?bbox=-8.587399999999999,41.17666666666667,-8.575,41.1871"
+]

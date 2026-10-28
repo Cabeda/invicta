@@ -1,0 +1,65 @@
+{
+  "retrieved_at": "2026-10-28T12:20:06.021166+00:00",
+  "bbox": [
+    -8.6122,
+    41.1558,
+    -8.575,
+    41.1871
+  ],
+  "sources": [
+    {
+      "file": "network.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6122,41.1558,-8.575,41.1871",
+      "sha256": "651c5979d9758f08dc44a77f967ec7748b413e811286f92affb08c7f99a29686",
+      "bytes": 5815403,
+      "tile_urls": [
+        "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6122,41.1558,-8.5998,41.16623333333333",
+        "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6122,41.16623333333333,-8.5998,41.17666666666667",
+        "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6122,41.17666666666667,-8.5998,41.1871",
+        "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5998,41.1558,-8.587399999999999,41.16623333333333",
+        "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5998,41.16623333333333,-8.587399999999999,41.17666666666667",
+        "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5998,41.17666666666667,-8.587399999999999,41.1871",
+        "https://api.openstreetmap.org/api/0.6/map?bbox=-8.587399999999999,41.1558,-8.575,41.16623333333333",
+        "https://api.openstreetmap.org/api/0.6/map?bbox=-8.587399999999999,41.16623333333333,-8.575,41.17666666666667",
+        "https://api.openstreetmap.org/api/0.6/map?bbox=-8.587399999999999,41.17666666666667,-8.575,41.1871"
+      ]
+    },
+    {
+      "file": "bus_corridors.geojson",
+      "url": "https://dadosabertos.cm-porto.pt/dataset/54464c4e-9e19-11f1-84ed-6abdb6d5cf34/resource/5d3992d9-3437-4d59-84a6-ac5db23cf6a7/download/ext-corredores-bus-geojson.geojson",
+      "sha256": "b7af5e24df59f71b396d91cb50c61ba23efe0ef45f493b462d02bd8bf26aeb3a",
+      "bytes": 38974
+    },
+    {
+      "file": "loading.geojson",
+      "url": "https://dadosabertos.cm-porto.pt/dataset/5309382a-9e19-11f1-84ed-6abdb6d5cf34/resource/b8cdc156-9471-4a32-9349-cef306e46008/download/ext-cargas-e-descargas-geojson.geojson",
+      "sha256": "56287608f30d1193afc28a789c67c1b2574db50e0ae151250df9cf8968d85dbc",
+      "bytes": 214010
+    },
+    {
+      "file": "gtfs.zip",
+      "url": "https://dadosabertos.cm-porto.pt/dataset/71490e40-9e19-11f1-84ed-6abdb6d5cf34/resource/51340c18-0ef5-4895-b099-cf7247ea54f4/download/gtfs_feed.zip",
+      "sha256": "6bf73d93cf943de9f51254020ef7d089acc40403666a7b878f12150b4559f7e1",
+      "bytes": 4512116
+    },
+    {
+      "file": "buses.json",
+      "url": "https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType%3D%3Dbus&limit=1000",
+      "sha256": "c16a7661e153a21b4a57c09f4699817aad60816db5ad80570df379a4107fb3bb",
+      "bytes": 253910
+    }
+  ],
+  "lane_normalization": {
+    "premise": "Two lanes total, one in each mapped direction; survey required",
+    "directed_edges": [
+      "1019391558#0",
+      "1019391558#5",
+      "1083211593#0",
+      "1083211593#3",
+      "482331424#0",
+      "482331424#2",
+      "482331424#6",
+      "482331424#8"
+    ]
+  }
+}

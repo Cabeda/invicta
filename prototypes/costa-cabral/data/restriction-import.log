@@ -1,0 +1,46 @@
+Success.
+
+Warning: Ambiguity in turnarounds computation at junction '10008024968'.
+Warning: Ambiguity in turnarounds computation at junction '12170107877'.
+Warning: Ambiguity in turnarounds computation at junction '13165007187'.
+Warning: Ambiguity in turnarounds computation at junction '13272506218'.
+Warning: Ambiguity in turnarounds computation at junction '1731168731'.
+Warning: Found sharp turn with radius 5.88 at the end of edge '-141435215#2'.
+Warning: Found sharp turn with radius 6.63 at the start of edge '-161124007#2'.
+Warning: Found angle of 100.80 degrees at edge '-173015835', segment 1.
+Warning: Found sharp turn with radius 7.51 at the end of edge '-351255911#0'.
+Warning: Found angle of 100.77 degrees at edge '-351255911#1', segment 5.
+Warning: Found angle of 108.33 degrees at edge '-39549973#1', segment 1.
+Warning: Found angle of 100.57 degrees at edge '-443685793#1', segment 0.
+Warning: Found angle of 99.37 degrees at edge '-450404338#2', segment 0.
+Warning: Found sharp turn with radius 8.13 at the start of edge '-452441996#1'.
+Warning: Found sharp turn with radius 4.46 at the start of edge '-997785532'.
+Warning: Minor green from edge '1017147075#3' to edge '13265074#0' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Minor green from edge '-1017147075#2' to edge '453762040' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Minor green from edge '31396393#0' to edge '453761208' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Minor green from edge '-453761207#2' to edge '-13715562#2' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Minor green from edge '-899751514#1' to edge '-477530378#2' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Non-static traffic light 'GS_299575943' does not define variable phase length.
+Warning: Non-static traffic light 'GS_299575944' does not define variable phase length.
+Warning: Non-static traffic light 'cluster_10894511562_1387283703_3897692280_773982493' does not define variable phase length.
+Warning: Non-static traffic light 'cluster_12514310079_299574281_299594483_444023185_#3more' does not define variable phase length.
+Warning: Speed of straight connection '1204263613#1_0->440117023#1_0' reduced by 7.63 due to turning radius of 14.86 (length=5.23, angle=35.55).
+Warning: Speed of straight connection '1082972078_0->1082977725#0_0' reduced by 12.04 due to turning radius of 45.05 (length=11.12, angle=29.41).
+Warning: Speed of straight connection '1082972078_1->1082977725#0_1' reduced by 13.20 due to turning radius of 38.63 (length=9.51, angle=29.41).
+Warning: Speed of straight connection '1082972078_2->1082977725#0_2' reduced by 14.45 due to turning radius of 32.30 (length=7.92, angle=29.41).
+Warning: Speed of straight connection '161124196_0->-98836021_0' reduced by 13.51 due to turning radius of 13.80 (length=3.85, angle=31.99).
+Warning: Intersecting left turns at junction 'cluster_10894511562_1387283703_3897692280_773982493' from lane '27292882#7_0' and lane '-1083211594_0' (increase junction radius to avoid this).
+Warning: Intersecting left turns at junction 'cluster_1103464865_112613628_112613629_12514558263_#2more' from lane '743539878#3_0' and lane '161124159#0_0' (increase junction radius to avoid this).
+Warning: Connection '-1346486668#2_0->-705505996_0' is only 0.06m short.
+Warning: Connection '-1245335823_0->-1346486668#1_0' is only 0.00m short.
+Warning: Connection '351525744#1_0->351525741#0_0' is only 0.00m short.
+Warning: Intersecting left turns at junction 'cluster_12514558372_3570149405_3570149417_4393941433_#1more' from lane '351255869#0_0' and lane '1186568750_0' (increase junction radius to avoid this).
+Warning: Intersecting left turns at junction 'cluster_2060757021_2060757028' from lane '-195652240#1_0' and lane '-195652231#0_0' (increase junction radius to avoid this).
+Warning: Intersecting left turns at junction 'cluster_3230463783_433469154' from lane '37393312#1_0' and lane '-316864620_0' (increase junction radius to avoid this).
+Warning: Non-static traffic light 'cluster_10894511562_1387283703_3897692280_773982493' does not define variable phase length.
+Warning: 50 total messages of type: Ambiguity in turnarounds computation at junction '%'.
+Warning: 11 total messages of type: Found angle of % degrees at edge '%', segment %.
+Warning: 19 total messages of type: Found sharp turn with radius % at the % of edge '%'.
+Warning: 25 total messages of type: Minor green from edge '%' to edge '%' exceeds %m/s. Maybe a left-turn lane is missing.
+Warning: 6 total messages of type: Non-static traffic light '%' does not define variable phase length.
+Warning: 116 total messages of type: Speed of % connection '%' reduced by % due to turning radius of % (length=%, angle=%).

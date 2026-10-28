@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-10-28T12:20:06.940454+00:00 by Eclipse SUMO netconvert 1.28.0
+<netconvertConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <osm-files value="/Users/jose.cabeda/Git/invicta/prototypes/costa-cabral/data/raw/network.osm.xml"/>
+    </input>
+
+    <output>
+        <output-file value="/Users/jose.cabeda/Git/invicta/prototypes/costa-cabral/data/baseline.net.xml"/>
+        <output.street-names value="true"/>
+        <output.original-names value="true"/>
+        <ptstop-output value="/Users/jose.cabeda/Git/invicta/prototypes/costa-cabral/data/osm-stops.add.xml"/>
+    </output>
+
+    <projection>
+        <proj.utm value="true"/>
+    </projection>
+
+    <processing>
+        <geometry.remove value="true"/>
+    </processing>
+
+    <tls_building>
+        <tls.discard-simple value="true"/>
+        <tls.join value="true"/>
+        <tls.guess-signals value="true"/>
+        <tls.default-type value="actuated"/>
+    </tls_building>
+
+    <ramp_guessing>
+        <ramps.guess value="true"/>
+    </ramp_guessing>
+
+    <edge_removal>
+        <keep-edges.by-vclass value="passenger,bus,taxi,bicycle,motorcycle"/>
+    </edge_removal>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+        <junctions.join value="true"/>
+    </junctions>
+
+    <formats>
+        <osm.bike-access value="true"/>
+    </formats>
+
+</netconvertConfiguration>
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <busStop id="-4573825412" name="CNTT2" lane="-1016548268#1_0" startPos="0.00" endPos="15.00" friendlyPos="true"/>
+    <busStop id="-4573825413" name="CONS3" lane="-1016548268#4_0" startPos="65.97" endPos="80.97" friendlyPos="true"/>
+    <busStop id="-7990276391" name="HSM3" lane="-13797599#0_0" startPos="62.66" endPos="77.66" friendlyPos="true"/>
+    <busStop id="-7990276393" name="VFM7" lane="-212710692_0" startPos="85.39" endPos="100.39" friendlyPos="true"/>
+    <busStop id="-7990276394" name="CSP1" lane="-448867798#0_0" startPos="19.63" endPos="34.63" friendlyPos="true"/>
+    <busStop id="-7990276395" name="ADA4" lane="-448867798#0_0" startPos="254.98" endPos="269.98" friendlyPos="true"/>
+    <busStop id="-8001483697" name="ADA3" lane="-448867798#0_0" startPos="249.31" endPos="264.31" friendlyPos="true"/>
+    <busStop id="-8001483698" name="CSP2" lane="-448867798#1_0" startPos="72.76" endPos="87.76" friendlyPos="true"/>
+    <busStop id="-8001483699" name="VFM6" lane="-212710692_0" startPos="39.23" endPos="54.23" friendlyPos="true"/>
+    <busStop id="-8001483700" name="HSM4" lane="-13797599#0_0" startPos="19.51" endPos="34.51" friendlyPos="true"/>
+    <busStop id="4573825412" name="CNTT2" lane="1016548268#0_0" startPos="53.38" endPos="68.38" friendlyPos="true"/>
+    <busStop id="4573825413" name="CONS3" lane="1016548268#2_0" startPos="32.17" endPos="47.17" friendlyPos="true"/>
+    <busStop id="7990276390" name="LAPA1" lane="39657991_0" startPos="18.11" endPos="33.11" friendlyPos="true"/>
+    <busStop id="7990276391" name="HSM3" lane="13797599#0_0" startPos="18.96" endPos="33.96" friendlyPos="true"/>
+    <busStop id="7990276393" name="VFM7" lane="212710692_0" startPos="15.16" endPos="30.16" friendlyPos="true"/>
+    <busStop id="7990276394" name="CSP1" lane="448867798#0_0" startPos="255.07" endPos="270.07" friendlyPos="true"/>
+    <busStop id="7990276395" name="ADA4" lane="448867798#0_0" startPos="18.25" endPos="33.25" friendlyPos="true"/>
+    <busStop id="8001483697" name="ADA3" lane="448867798#0_0" startPos="23.89" endPos="38.89" friendlyPos="true"/>
+    <busStop id="8001483698" name="CSP2" lane="448867798#1_0" startPos="11.68" endPos="26.68" friendlyPos="true"/>
+    <busStop id="8001483699" name="VFM6" lane="212710692_0" startPos="61.32" endPos="76.32" friendlyPos="true"/>
+    <busStop id="8001483700" name="HSM4" lane="13797599#0_0" startPos="62.17" endPos="77.17" friendlyPos="true"/>
+</additional>
