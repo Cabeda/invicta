@@ -26,3 +26,5 @@ GitHub and Vercel are managed independently. Automatic GitHub deployment integra
 ## Verification
 
 The production alias returned HTTP 200 without cookies or account authentication. The page, JavaScript modules, legacy study, report, 3D scene and both busy-case native replays matched the local export byte for byte. Browser-style compression negotiation retained valid gzip payloads for the viewer's own `DecompressionStream`. Legacy `/proposal/…` paths redirect to the corresponding published paths.
+
+The extended701 release also verified16 Porto stops,15 interval controls, the whole-line service model's63 workings/3,024 calls, restored service settings in shared links, and the rebuilt Bolhão3D scene. Static response snapshots retain publisher bytes through `.gitattributes`, including original whitespace; their SHA-256 hashes remain verifiable.

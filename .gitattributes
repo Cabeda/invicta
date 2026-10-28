@@ -1,0 +1,6 @@
+# Preserve byte-exact publisher responses and their hashes across platforms.
+# Formatting in these evidence snapshots belongs to the original publishers.
+prototypes/line-701/data/official/** -text -whitespace
+prototypes/line-701/data/official-extension/** -text -whitespace
+prototypes/costa-cabral/proposal/701-official/** -text -whitespace
+prototypes/costa-cabral/proposal/701-extension/** -text -whitespace
