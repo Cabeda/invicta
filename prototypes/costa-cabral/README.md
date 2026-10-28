@@ -1,5 +1,7 @@
 # Costa Cabral access experiment — THROWAWAY
 
+**Current entry point:** `proposal/index.html` now opens the [line 701 route-first pilot](../line-701/README.md). This earlier street study, its population calculator and its films remain available at `proposal/legacy.html`. References below describe that archived experiment; its MP4s are not films of the new 701 intervention.
+
 **Project focus:** buses meeting their published schedules while catering to residents, shoppers, businesses and everyday services. Practical local access is an explicit requirement. See the [agreed project brief](../../docs/PROJECT_BRIEF.md); the current shopper/service-access policy is not yet modelled.
 
 Question: can both directions of Rua de Costa Cabral be restricted to buses, local residents, taxis, bicycles and motorcycles, while ordinary cars can directly cross at junctions?

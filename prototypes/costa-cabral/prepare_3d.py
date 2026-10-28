@@ -28,11 +28,15 @@ def scene():
         hashes[policy] = digest(file)
         for edge in policy_net.findall('edge'):
             for lane in edge.findall('lane'):
+                allow, disallow = lane.get('allow', '').split(), lane.get('disallow', '').split()
+                def permits(kind):
+                    return (not allow or kind in allow or 'all' in allow) and kind not in disallow and 'all' not in disallow
                 lanes.append({'id': policy + '|' + lane.get('id'), 'local_id': lane.get('id'), 'policy': policy,
                               'edge': edge.get('id'), 'shape': shape(lane.get('shape')),
                               'length': float(lane.get('length')), 'width': float(lane.get('width', 3.2)),
                               'internal': edge.get('function') == 'internal',
-                              'corridor': edge.get('name') == 'Rua de Costa Cabral'})
+                              'bus_priority': permits('bus') and not permits('passenger'),
+                              'corridor': edge.get('id') in result['route_edge_ids'] if 'route_edge_ids' in result else edge.get('name') == 'Rua de Costa Cabral'})
         junctions[policy] = [shape(j.get('shape')) for j in policy_net.findall('junction') if j.get('shape')]
     frozen = ROOT / 'data/buildings-3d.json.gz'
     if frozen.exists():
@@ -84,6 +88,8 @@ def scene():
              'lane_ids': [l['id'] for l in lanes], 'network_sha256': hashes, 'scene_schema': 2,
              'projection': dict(net.find('location').attrib),
              'bus_info': {b['id']: {'line': b['line'], 'trip': b['trip_id']} for b in result['buses']},
+             'capture_edges': result.get('replay_edge_ids'),
+             'show_lane_permissions': 'route_edge_ids' in result,
              'notes': 'Flat model. Lane widths/junctions are imported or generated, not surveyed. Building heights mostly estimated.'}
     save('scene.json.gz', value)
     print('Buildings:', len(buildings['features']), 'OSM heights:', sum(b['height_source'] == 'osm_height' for b in buildings['features']), flush=True)
@@ -117,6 +123,10 @@ def capture(case, policy, scene_data):
             if START <= t <= END:
                 rows = []
                 for v in el:
+                    idx = lane_index.get(policy + '|' + v.get('lane'), -1)
+                    if scene_data.get('capture_edges') and idx >= 0:
+                        lane = scene_data['lanes'][idx]
+                        if not lane['internal'] and lane['edge'] not in scene_data['capture_edges']: continue
                     ident = v.get('id')
                     if ident not in ids:
                         ids[ident] = len(vehicles)

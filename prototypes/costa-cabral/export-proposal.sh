@@ -14,3 +14,6 @@ command -v ffmpeg >/dev/null || { echo 'Install ffmpeg to render MP4 videos.'; e
 .venv/bin/python prototypes/costa-cabral/render.py
 .venv/bin/python prototypes/costa-cabral/prepare_3d.py
 .venv/bin/python prototypes/costa-cabral/presentation.py "$@"
+if [ -f prototypes/line-701/results.json ]; then
+ .venv/bin/python prototypes/line-701/build_site.py
+fi

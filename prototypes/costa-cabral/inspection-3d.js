@@ -2,15 +2,15 @@
 import * as T from './vendor/three.module.js';
 import { OrbitControls } from './vendor/OrbitControls.js';
 
-async function readAsset(name) {
-  const response = await fetch(new URL(`./inspection-assets/${name}.json.gz`, import.meta.url));
+async function readAsset(name, assetBase = './inspection-assets/') {
+  const response = await fetch(new URL(`${assetBase}${name}.json.gz`, import.meta.url));
   if (!response.ok) throw new Error(`Missing inspection asset: ${name}`);
   const stream = response.body.pipeThrough(new DecompressionStream('gzip'));
   return new Response(stream).json();
 }
 
-export async function createInspection({ data, getState, label, changed }) {
-  const source = await readAsset('scene');
+export async function createInspection({ data, getState, label, changed, assetBase = './inspection-assets/' }) {
+  const source = await readAsset('scene', assetBase);
   const mid = data.cameras.corridor;
   const origin = [(mid[0] + mid[2]) / 2, (mid[1] + mid[3]) / 2];
   const world = (x, y, h = 0) => new T.Vector3(x - origin[0], h, origin[1] - y);
@@ -98,7 +98,8 @@ export async function createInspection({ data, getState, label, changed }) {
   const policyGeometry = {};
   for (const policy of ['baseline', 'restricted']) {
     const external = source.lanes.filter(l => !l.internal && l.policy === policy);
-    const general = external.filter(l => !l.corridor), local = external.filter(l => l.corridor);
+    const highlighted = l => source.show_lane_permissions ? l.corridor && l.bus_priority : l.corridor;
+    const general = external.filter(l => !highlighted(l)), local = external.filter(highlighted);
     policyGeometry[policy] = { road: ribbons(general, l => l.width, .025), corridor: ribbons(local, l => l.width, .035),
       junction: surfaces(source.junctions[policy], .02), guide: ribbons(local, () => .07, .045) };
   }
@@ -306,7 +307,7 @@ export async function createInspection({ data, getState, label, changed }) {
     document.getElementById('threeState').textContent = label('threeLoading');
     await Promise.all(['baseline', 'restricted'].map(async policy => {
       const key = `${current}-${policy}`;
-      if (!cache.has(key)) cache.set(key, await readAsset(key));
+      if (!cache.has(key)) cache.set(key, await readAsset(key, assetBase));
     }));
     if (token !== generation) return;
     caseKey = current; loading = false;

@@ -1,0 +1,874 @@
+{
+  "schema_version": "invicta.line701.source_facts.v1",
+  "compiled_at": "2026-10-28T17:54:51.200944+00:00",
+  "route_id": "701",
+  "service_date": "2026-10-28",
+  "timezone": "Europe/Lisbon",
+  "direction_id": 1,
+  "direction_label": "Bolhão (VOLTA)",
+  "active_service_id": "UTIL ESCOLAR:FLUXO 3 20261027",
+  "segment": {
+    "start_stop_id": "ARS3",
+    "end_stop_id": "MPL4",
+    "intermediate_marques_stop_id": "MPL7",
+    "stop_count": 13,
+    "stops": [
+      {
+        "stop_id": "ARS3",
+        "stop_name": "AREOSA",
+        "stop_code": "ARS3",
+        "zone_id": "PRT3",
+        "stop_lat": 41.180613,
+        "stop_lon": -8.583518,
+        "stop_sequence": 41,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "AA2",
+        "stop_name": "ALTO DA AREOSA",
+        "stop_code": "AA2",
+        "zone_id": "PRT3",
+        "stop_lat": 41.178703,
+        "stop_lon": -8.584196,
+        "stop_sequence": 42,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "ACO2",
+        "stop_name": "ANTÓNIO COELHO",
+        "stop_code": "ACO2",
+        "zone_id": "PRT3",
+        "stop_lat": 41.17696,
+        "stop_lon": -8.58531,
+        "stop_sequence": 43,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "STJ3",
+        "stop_name": "S.TA JUSTA",
+        "stop_code": "STJ3",
+        "zone_id": "PRT3",
+        "stop_lat": 41.174476,
+        "stop_lon": -8.58658,
+        "stop_sequence": 44,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "BRRS2",
+        "stop_name": "BARROCAS",
+        "stop_code": "BRRS2",
+        "zone_id": "PRT3",
+        "stop_lat": 41.171884,
+        "stop_lon": -8.587983,
+        "stop_sequence": 45,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "CF2",
+        "stop_name": "CONDE FERREIRA",
+        "stop_code": "CF2",
+        "zone_id": "PRT3",
+        "stop_lat": 41.169839,
+        "stop_lon": -8.58929,
+        "stop_sequence": 46,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "LW2",
+        "stop_name": "LUIS WOODHOUSE",
+        "stop_code": "LW2",
+        "zone_id": "PRT1",
+        "stop_lat": 41.16824,
+        "stop_lon": -8.59184,
+        "stop_sequence": 47,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "SVT4",
+        "stop_name": "SILVA TAPADA",
+        "stop_code": "SVT4",
+        "zone_id": "PRT1",
+        "stop_lat": 41.16748,
+        "stop_lon": -8.59324,
+        "stop_sequence": 48,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "PLIM2",
+        "stop_name": "PIRES DE LIMA",
+        "stop_code": "PLIM2",
+        "zone_id": "PRT1",
+        "stop_lat": 41.16618,
+        "stop_lon": -8.59721,
+        "stop_sequence": 49,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "COMB4",
+        "stop_name": "COMBATENTES",
+        "stop_code": "COMB4",
+        "zone_id": "PRT1",
+        "stop_lat": 41.165141,
+        "stop_lon": -8.59884,
+        "stop_sequence": 50,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "LIMA2",
+        "stop_name": "LIMA",
+        "stop_code": "LIMA2",
+        "zone_id": "PRT1",
+        "stop_lat": 41.162091,
+        "stop_lon": -8.600088,
+        "stop_sequence": 51,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "MPL7",
+        "stop_name": "MARQUÊS",
+        "stop_code": "MPL7",
+        "zone_id": "PRT1",
+        "stop_lat": 41.161773,
+        "stop_lon": -8.60314,
+        "stop_sequence": 52,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "MPL4",
+        "stop_name": "MARQUÊS",
+        "stop_code": "MPL4",
+        "zone_id": "PRT1",
+        "stop_lat": 41.161358,
+        "stop_lon": -8.604809,
+        "stop_sequence": 53,
+        "description": null,
+        "designated_timing_point": true
+      }
+    ],
+    "street_sequence_as_notified": [
+      "Rua de Costa Cabral",
+      "Rua da Alegria",
+      "Rua da Constituição",
+      "Praça do Marquês"
+    ]
+  },
+  "api": {
+    "base_url": "https://stcp.pt",
+    "stops": {
+      "path": "/api/route/701/stops/direction",
+      "params": {
+        "direction_id": 1
+      },
+      "schema": "{success, stops:[{stop_id,stop_name,stop_code,stop_lat,stop_lon,stop_sequence}], timepoint_stop_ids:[string]}"
+    },
+    "shape": {
+      "path": "/api/route/701/shape",
+      "params": {
+        "direction_id": 1
+      },
+      "schema": "{success,coordinates:[{lat,lng,sequence}]}",
+      "coordinates_count": 548
+    },
+    "services": {
+      "path": "/api/route/701/services",
+      "params": {
+        "date": "2026-10-28"
+      },
+      "schema": "{services:[service_id],active_service_id,selected_date,today}"
+    },
+    "route_schedule": {
+      "path": "/api/route/701/schedule",
+      "params": {
+        "direction_id": 1,
+        "service_id": "UTIL ESCOLAR:FLUXO 3 20261027"
+      },
+      "schema": "{selected_stops:[{stopId,timepoint,...}],schedule:[{trip_id,trip_headsign,direction_id,service_days,stops:[{stop_id,arrival_time,departure_time,...}]}]}"
+    },
+    "stop_schedule": {
+      "path": "/api/stops/{stop_id}/schedule",
+      "params": {
+        "route_id": "701",
+        "direction_id": 1,
+        "service_id": "UTIL ESCOLAR:FLUXO 3 20261027"
+      },
+      "schema": "{stop_id,route_id,direction_id,service_id,schedule:{hour:[{minute,arrival_time,departure_time,headsign,direction_id}]}}",
+      "missing_fields": [
+        "trip_id",
+        "timepoint"
+      ]
+    },
+    "vehicles": {
+      "path": "/api/route/701/vehicles",
+      "params": {
+        "direction_id": 1
+      },
+      "schema": "{vehicles:[{trip_id,direction_id,latitude,longitude,bearing,speed,timestamp,vehicle_id,entity_id,...}],timestamp}"
+    },
+    "stop_realtime": {
+      "path": "/api/stops/{stop_id}/realtime",
+      "params": {},
+      "schema": "{arrivals:[{route_short_name,trip_id,estimated_arrival_time,scheduled_arrival_time,delay_minutes,status,...}],last_updated,data_source}"
+    }
+  },
+  "schedule": {
+    "source_role": "scheduled_reference_not_observed",
+    "trips": 63,
+    "trip_association_method": "Sort route schedule by unique MPL4 arrival time; sort each stop schedule by time; associate by rank. All 13 stop lists contain 63 unique times; all 63 MPL4 anchors match exactly; all joined stop times are nondecreasing. This is a derived association because stop endpoints omit trip_id.",
+    "inbound_trips_with_COD4_time": 39,
+    "inbound_trips_without_COD4_time": 24,
+    "morning_selection": "08:00 <= scheduled ARS3 arrival < 09:00; 5 departures; includes downstream arrivals after09:00",
+    "morning": [
+      {
+        "trip_id": "701_0_2|327|D1|T2|N2",
+        "headsign": "Bolhão",
+        "first_published_timing_point": "ERM3",
+        "stop_times": [
+          {
+            "stop_id": "ARS3",
+            "arrival_time": "08:12:50",
+            "departure_time": "08:12:50",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "AA2",
+            "arrival_time": "08:13:46",
+            "departure_time": "08:13:46",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "ACO2",
+            "arrival_time": "08:14:40",
+            "departure_time": "08:14:40",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "STJ3",
+            "arrival_time": "08:15:54",
+            "departure_time": "08:15:54",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "BRRS2",
+            "arrival_time": "08:17:13",
+            "departure_time": "08:17:13",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "CF2",
+            "arrival_time": "08:18:17",
+            "departure_time": "08:18:17",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LW2",
+            "arrival_time": "08:19:27",
+            "departure_time": "08:19:27",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "SVT4",
+            "arrival_time": "08:20:03",
+            "departure_time": "08:20:03",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "PLIM2",
+            "arrival_time": "08:21:34",
+            "departure_time": "08:21:34",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "COMB4",
+            "arrival_time": "08:22:23",
+            "departure_time": "08:22:23",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LIMA2",
+            "arrival_time": "08:23:52",
+            "departure_time": "08:23:52",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL7",
+            "arrival_time": "08:25:15",
+            "departure_time": "08:25:15",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL4",
+            "arrival_time": "08:26:00",
+            "departure_time": "08:26:00",
+            "designated_timing_point": true,
+            "source_role": "scheduled_timing_point"
+          }
+        ]
+      },
+      {
+        "trip_id": "701_0_2|327|D1|T6|N4",
+        "headsign": "Bolhão",
+        "first_published_timing_point": "COD4",
+        "stop_times": [
+          {
+            "stop_id": "ARS3",
+            "arrival_time": "08:23:50",
+            "departure_time": "08:23:50",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "AA2",
+            "arrival_time": "08:24:46",
+            "departure_time": "08:24:46",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "ACO2",
+            "arrival_time": "08:25:40",
+            "departure_time": "08:25:40",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "STJ3",
+            "arrival_time": "08:26:54",
+            "departure_time": "08:26:54",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "BRRS2",
+            "arrival_time": "08:28:13",
+            "departure_time": "08:28:13",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "CF2",
+            "arrival_time": "08:29:17",
+            "departure_time": "08:29:17",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LW2",
+            "arrival_time": "08:30:27",
+            "departure_time": "08:30:27",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "SVT4",
+            "arrival_time": "08:31:03",
+            "departure_time": "08:31:03",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "PLIM2",
+            "arrival_time": "08:32:34",
+            "departure_time": "08:32:34",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "COMB4",
+            "arrival_time": "08:33:23",
+            "departure_time": "08:33:23",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LIMA2",
+            "arrival_time": "08:34:52",
+            "departure_time": "08:34:52",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL7",
+            "arrival_time": "08:36:15",
+            "departure_time": "08:36:15",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL4",
+            "arrival_time": "08:37:00",
+            "departure_time": "08:37:00",
+            "designated_timing_point": true,
+            "source_role": "scheduled_timing_point"
+          }
+        ]
+      },
+      {
+        "trip_id": "701_0_2|327|D1|T9|N4",
+        "headsign": "Bolhão",
+        "first_published_timing_point": "ERM3",
+        "stop_times": [
+          {
+            "stop_id": "ARS3",
+            "arrival_time": "08:34:50",
+            "departure_time": "08:34:50",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "AA2",
+            "arrival_time": "08:35:46",
+            "departure_time": "08:35:46",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "ACO2",
+            "arrival_time": "08:36:40",
+            "departure_time": "08:36:40",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "STJ3",
+            "arrival_time": "08:37:54",
+            "departure_time": "08:37:54",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "BRRS2",
+            "arrival_time": "08:39:13",
+            "departure_time": "08:39:13",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "CF2",
+            "arrival_time": "08:40:17",
+            "departure_time": "08:40:17",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LW2",
+            "arrival_time": "08:41:27",
+            "departure_time": "08:41:27",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "SVT4",
+            "arrival_time": "08:42:03",
+            "departure_time": "08:42:03",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "PLIM2",
+            "arrival_time": "08:43:34",
+            "departure_time": "08:43:34",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "COMB4",
+            "arrival_time": "08:44:23",
+            "departure_time": "08:44:23",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LIMA2",
+            "arrival_time": "08:45:52",
+            "departure_time": "08:45:52",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL7",
+            "arrival_time": "08:47:15",
+            "departure_time": "08:47:15",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL4",
+            "arrival_time": "08:48:00",
+            "departure_time": "08:48:00",
+            "designated_timing_point": true,
+            "source_role": "scheduled_timing_point"
+          }
+        ]
+      },
+      {
+        "trip_id": "701_0_2|327|D1|T7|N5",
+        "headsign": "Bolhão",
+        "first_published_timing_point": "COD4",
+        "stop_times": [
+          {
+            "stop_id": "ARS3",
+            "arrival_time": "08:45:50",
+            "departure_time": "08:45:50",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "AA2",
+            "arrival_time": "08:46:46",
+            "departure_time": "08:46:46",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "ACO2",
+            "arrival_time": "08:47:40",
+            "departure_time": "08:47:40",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "STJ3",
+            "arrival_time": "08:48:54",
+            "departure_time": "08:48:54",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "BRRS2",
+            "arrival_time": "08:50:13",
+            "departure_time": "08:50:13",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "CF2",
+            "arrival_time": "08:51:17",
+            "departure_time": "08:51:17",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LW2",
+            "arrival_time": "08:52:27",
+            "departure_time": "08:52:27",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "SVT4",
+            "arrival_time": "08:53:03",
+            "departure_time": "08:53:03",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "PLIM2",
+            "arrival_time": "08:54:34",
+            "departure_time": "08:54:34",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "COMB4",
+            "arrival_time": "08:55:23",
+            "departure_time": "08:55:23",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LIMA2",
+            "arrival_time": "08:56:52",
+            "departure_time": "08:56:52",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL7",
+            "arrival_time": "08:58:15",
+            "departure_time": "08:58:15",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL4",
+            "arrival_time": "08:59:00",
+            "departure_time": "08:59:00",
+            "designated_timing_point": true,
+            "source_role": "scheduled_timing_point"
+          }
+        ]
+      },
+      {
+        "trip_id": "701_0_2|327|D1|T4|N4",
+        "headsign": "Bolhão",
+        "first_published_timing_point": "COD4",
+        "stop_times": [
+          {
+            "stop_id": "ARS3",
+            "arrival_time": "08:57:43",
+            "departure_time": "08:57:43",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "AA2",
+            "arrival_time": "08:58:31",
+            "departure_time": "08:58:31",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "ACO2",
+            "arrival_time": "08:59:17",
+            "departure_time": "08:59:17",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "STJ3",
+            "arrival_time": "09:00:21",
+            "departure_time": "09:00:21",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "BRRS2",
+            "arrival_time": "09:01:28",
+            "departure_time": "09:01:28",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "CF2",
+            "arrival_time": "09:02:23",
+            "departure_time": "09:02:23",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LW2",
+            "arrival_time": "09:03:23",
+            "departure_time": "09:03:23",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "SVT4",
+            "arrival_time": "09:03:54",
+            "departure_time": "09:03:54",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "PLIM2",
+            "arrival_time": "09:05:12",
+            "departure_time": "09:05:12",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "COMB4",
+            "arrival_time": "09:05:54",
+            "departure_time": "09:05:54",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "LIMA2",
+            "arrival_time": "09:07:11",
+            "departure_time": "09:07:11",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL7",
+            "arrival_time": "09:08:21",
+            "departure_time": "09:08:21",
+            "designated_timing_point": false,
+            "source_role": "scheduled_non_timing_point_reference"
+          },
+          {
+            "stop_id": "MPL4",
+            "arrival_time": "09:09:00",
+            "departure_time": "09:09:00",
+            "designated_timing_point": true,
+            "source_role": "scheduled_timing_point"
+          }
+        ]
+      }
+    ],
+    "calendar_caveat": "services API selected_date20261028 resolves active service. Nested route service_days all false and dates null; do not interpret as no service. Current full calendar_dates export not verified.",
+    "intermediate_timepoint_caveat": "Only MPL4 is listed as timing point within this segment. Non-timingpoint seconds are operator scheduled references; interpolation algorithm and current raw GTFS timepoint0 values not exposed by inspected API."
+  },
+  "observations": {
+    "broker_701_snapshot": [
+      {
+        "entity_id": "urn:ngsi-ld:Vehicle:porto:stcp:bus:3379",
+        "fleet_vehicle_id": "3379",
+        "direction_id": 0,
+        "trip_id": "701_0_1|327|D1|T11|N2",
+        "observation_time": "2026-10-28T17:52:30.00Z",
+        "coordinates_lon_lat": [
+          -8.582574844,
+          41.183101654
+        ],
+        "speed_as_published": 4.4,
+        "matches_current_inbound_trip_id": false
+      },
+      {
+        "entity_id": "urn:ngsi-ld:Vehicle:porto:stcp:bus:3325",
+        "fleet_vehicle_id": "3325",
+        "direction_id": 0,
+        "trip_id": "701_0_1|327|D1|T1|N14",
+        "observation_time": "2026-10-28T17:52:36.00Z",
+        "coordinates_lon_lat": [
+          -8.580550194,
+          41.187393188
+        ],
+        "speed_as_published": 7.8,
+        "matches_current_inbound_trip_id": false
+      },
+      {
+        "entity_id": "urn:ngsi-ld:Vehicle:porto:stcp:bus:1430",
+        "fleet_vehicle_id": "1430",
+        "direction_id": 0,
+        "trip_id": "701_0_1|327|D1|T2|N11",
+        "observation_time": "2026-10-28T17:52:30.00Z",
+        "coordinates_lon_lat": [
+          -8.525891304,
+          41.23682785
+        ],
+        "speed_as_published": 0,
+        "matches_current_inbound_trip_id": false
+      },
+      {
+        "entity_id": "urn:ngsi-ld:Vehicle:porto:stcp:bus:3342",
+        "fleet_vehicle_id": "3342",
+        "direction_id": 0,
+        "trip_id": "701_0_1|327|D1|T7|N11",
+        "observation_time": "2026-10-28T17:52:29.00Z",
+        "coordinates_lon_lat": [
+          -8.570935249,
+          41.203598022
+        ],
+        "speed_as_published": 1.9,
+        "matches_current_inbound_trip_id": false
+      },
+      {
+        "entity_id": "urn:ngsi-ld:Vehicle:porto:stcp:bus:1426",
+        "fleet_vehicle_id": "1426",
+        "direction_id": 1,
+        "trip_id": "701_0_2|327|D1|T4|N14",
+        "observation_time": "2026-10-28T17:52:31.00Z",
+        "coordinates_lon_lat": [
+          -8.583547592,
+          41.180606842
+        ],
+        "speed_as_published": 0,
+        "matches_current_inbound_trip_id": true
+      },
+      {
+        "entity_id": "urn:ngsi-ld:Vehicle:porto:stcp:bus:3330",
+        "fleet_vehicle_id": "3330",
+        "direction_id": 1,
+        "trip_id": "701_0_2|327|D1|T6|N11",
+        "observation_time": "2026-10-28T17:52:31.00Z",
+        "coordinates_lon_lat": [
+          -8.567702293,
+          41.205898285
+        ],
+        "speed_as_published": 0,
+        "matches_current_inbound_trip_id": true
+      },
+      {
+        "entity_id": "urn:ngsi-ld:Vehicle:porto:stcp:bus:1397",
+        "fleet_vehicle_id": "1397",
+        "direction_id": 1,
+        "trip_id": "701_0_2|327|D1|T9|N9",
+        "observation_time": "2026-10-28T17:52:33.00Z",
+        "coordinates_lon_lat": [
+          -8.531705856,
+          41.224643707
+        ],
+        "speed_as_published": 0,
+        "matches_current_inbound_trip_id": true
+      }
+    ],
+    "historical_08_09_observations_available": false,
+    "historical_availability_status": "not verified; false here means no archive obtained in this research, not proof of nonexistence",
+    "stcp_vehicle_timestamp_caveat": "Per-vehicle timestamp/vehicle_id null in inspected STCP API; top-level timestamp is response-generation timestamp. Broker observationDateTime and stable fleetVehicleId are preferable for collector quality checks.",
+    "arrival_prediction_caveat": "Stop realtime endpoint returns estimated arrivals and delay_minutes; scheduled_arrival_time is null in samples. Predictions are not actual stop passages; identical delay value at multiple stops does not localize delay."
+  },
+  "municipal_gtfs": {
+    "resource_id": "51340c18-0ef5-4895-b099-cf7247ea54f4",
+    "sha256": "6bf73d93cf943de9f51254020ef7d089acc40403666a7b878f12150b4559f7e1",
+    "feed_start_date": "20260901",
+    "feed_end_date": "20260923",
+    "calendar_rows": 0,
+    "calendar_dates_min": "20260901",
+    "calendar_dates_max": "20260923",
+    "role": "dated_reference_only",
+    "newer_official_full_gtfs_archive_verified": false,
+    "current_api_newer_than_archive": true
+  },
+  "source_bundle": "data/official",
+  "metadata_file": "data/official/metadata.json",
+  "source_urls": {
+    "inbound_stops": "https://stcp.pt/api/route/701/stops/direction?direction_id=1",
+    "outbound_stops": "https://stcp.pt/api/route/701/stops/direction?direction_id=0",
+    "inbound_shape": "https://stcp.pt/api/route/701/shape?direction_id=1",
+    "services": "https://stcp.pt/api/route/701/services?date=2026-10-28",
+    "schedule": "https://stcp.pt/api/route/701/schedule?service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "vehicles": "https://stcp.pt/api/route/701/vehicles?direction_id=1",
+    "ARS3_realtime": "https://stcp.pt/api/stops/ARS3/realtime",
+    "MPL4_realtime": "https://stcp.pt/api/stops/MPL4/realtime",
+    "gtfs_package": "https://dadosabertos.cm-porto.pt/api/3/action/package_show?id=horarios-paragens-e-rotas-stcp",
+    "stop_js": "https://stcp.pt/build/cst_stop_detail.c3a64679.js",
+    "route_js": "https://stcp.pt/build/cst_line_detail.a3eee17e.js",
+    "ARS3_schedule": "https://stcp.pt/api/stops/ARS3/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "AA2_schedule": "https://stcp.pt/api/stops/AA2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "ACO2_schedule": "https://stcp.pt/api/stops/ACO2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "STJ3_schedule": "https://stcp.pt/api/stops/STJ3/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "BRRS2_schedule": "https://stcp.pt/api/stops/BRRS2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "CF2_schedule": "https://stcp.pt/api/stops/CF2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "LW2_schedule": "https://stcp.pt/api/stops/LW2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "SVT4_schedule": "https://stcp.pt/api/stops/SVT4/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "PLIM2_schedule": "https://stcp.pt/api/stops/PLIM2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "COMB4_schedule": "https://stcp.pt/api/stops/COMB4/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "LIMA2_schedule": "https://stcp.pt/api/stops/LIMA2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "MPL7_schedule": "https://stcp.pt/api/stops/MPL7/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "MPL4_schedule": "https://stcp.pt/api/stops/MPL4/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "gtfs_zip": "https://dadosabertos.cm-porto.pt/dataset/71490e40-9e19-11f1-84ed-6abdb6d5cf34/resource/51340c18-0ef5-4895-b099-cf7247ea54f4/download/gtfs_feed.zip",
+    "broker_buses": "https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType%3D%3Dbus&limit=1000"
+  },
+  "limitations": [
+    "Not a current validated traffic model or private-car access policy",
+    "No historical morning bus or traffic-count series acquired",
+    "Current per-trip shapes/GTFS shape_id not exposed by inspected route shape endpoint",
+    "No completeness, update-rate or uptime guarantee verified for public APIs"
+  ]
+}

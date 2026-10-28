@@ -1,0 +1,19 @@
+{
+  "route": "701",
+  "direction_id": 1,
+  "start_stop": "ARS3",
+  "end_stop": "MPL4",
+  "priority_segments": [
+    "leg_03",
+    "leg_04",
+    "leg_05",
+    "leg_06",
+    "leg_07",
+    "leg_08",
+    "leg_09",
+    "leg_10",
+    "leg_11",
+    "leg_12"
+  ],
+  "note": "Draft lane permission policy; leaves mapped lane counts, signals and geometry unchanged. Not a street-design approval."
+}

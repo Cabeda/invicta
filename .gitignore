@@ -10,3 +10,7 @@ prototypes/costa-cabral/media/*.json
 prototypes/costa-cabral/media/*.jpg
 prototypes/costa-cabral/media/encode-*.log
 prototypes/costa-cabral/costa-cabral-proposal-site.zip
+prototypes/line-701/runs/
+prototypes/line-701/data/*.net.xml
+prototypes/line-701/data/*-network.log
+prototypes/line-701/invicta-line-701-site.zip

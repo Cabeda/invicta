@@ -1,0 +1,45 @@
+{
+  "source": "Queried with TraCI vehicletype getters from the original SUMO 1.28.0 route definitions, including class defaults; not surveyed Porto fleet dimensions",
+  "types": {
+    "background": {
+      "length": 5.0,
+      "width": 1.8,
+      "height": 1.5
+    },
+    "bicycle": {
+      "length": 1.6,
+      "width": 0.65,
+      "height": 1.7
+    },
+    "bus": {
+      "length": 12.0,
+      "width": 2.5,
+      "height": 3.4
+    },
+    "crossing": {
+      "length": 5.0,
+      "width": 1.8,
+      "height": 1.5
+    },
+    "motorcycle": {
+      "length": 2.2,
+      "width": 0.9,
+      "height": 1.5
+    },
+    "resident": {
+      "length": 5.0,
+      "width": 1.8,
+      "height": 1.5
+    },
+    "taxi": {
+      "length": 5.0,
+      "width": 1.8,
+      "height": 1.5
+    },
+    "through": {
+      "length": 5.0,
+      "width": 1.8,
+      "height": 1.5
+    }
+  }
+}

@@ -1,0 +1,66 @@
+# Line 701: Areosa → Marquês data and direction
+
+Verified on **28 October 2026**, principally through read-only official HTTP APIs at **17:50–17:53 UTC**. The current STCP website provides a substantially fresher reference than the municipal GTFS archive. This establishes the route and scheduled service; it does not establish a calibrated traffic baseline or observed morning punctuality.
+
+## Fix the pilot's direction and endpoints
+
+Use **701, direction_id=1, destination Bolhão / VOLTA**, beginning at **Areosa ARS3** and ending at **Marquês MPL4**, with **Marquês MPL7** retained as a separate preceding stop. The current inbound API lists ARS3 at sequence 41, MPL7 at 52 and MPL4 at 53. Outbound direction 0 instead uses Areosa ARS2 and Marquês MPL2. Identical names are insufficient identifiers. [Current line page](https://stcp.pt/pt/linhas/701), [inbound stops](https://stcp.pt/api/route/701/stops/direction?direction_id=1), [outbound stops](https://stcp.pt/api/route/701/stops/direction?direction_id=0).
+
+The inbound street sequence includes **Rua de Costa Cabral → Rua da Alegria → Rua da Constituição → Praça do Marquês**. STCP's notice effective from 24 August explicitly gives this route after traffic-direction changes. Its notice effective from 15 October restores MPL7 to its usual position. Consequently, a simulation that simply follows Costa Cabral down to Marquês misses part of the current bus route. Validate the imported lane graph against these notices and the current shape. [Route-change notice](https://stcp.pt/pt/viajar/alteracoes-de-servico/varias-linhas-alteracao-percurso-alt-sentido-transito-r-costa-cabral-porto), [MPL7 restoration](https://stcp.pt/pt/viajar/alteracoes-de-servico/normalizacao-de-paragem-obras-r-constituicao-porto-1).
+
+Current endpoint coordinates are ARS3 **41.180613, −8.583518**; MPL7 **41.161773, −8.603140**; MPL4 **41.161358, −8.604809**. The direction-level shape contains **548 ordered latitude/longitude points** for the whole Codiceira–Bolhão direction. It supplies geometry without an exposed GTFS `shape_id` or per-trip branch identifier; clip and map-match the pilot section rather than using the entire line. [Stops](https://stcp.pt/api/route/701/stops/direction?direction_id=1), [shape](https://stcp.pt/api/route/701/shape?direction_id=1).
+
+## Current morning scheduled reference
+
+For **Wednesday 28 October 2026**, the service API selects `UTIL ESCOLAR:FLUXO 3 20261027`. The route timetable returns **63 inbound trips**, including 39 with a Codiceira timing-point time and 24 without one; the latter first have a published time at Ermesinde (Estação). This distinguishes workings without claiming their precise first physical stop. The older feed also contained long and shorter workings, so do not equate line number with one full-length trip pattern. [Date-resolved services](https://stcp.pt/api/route/701/services?date=2026-10-28), [current route timetable](https://stcp.pt/api/route/701/schedule?service_id=UTIL%20ESCOLAR%3AFLUXO%203%2020261027&direction_id=1).
+
+The individual-stop API exposes scheduled seconds for all 13 stops. Below are the **five departures scheduled at ARS3 between 08:00 inclusive and 09:00 exclusive**; the last continues beyond 09:00. Times are local Lisbon time. Each column follows one departure through the segment. **Only MPL4 is designated as a timing point within this segment.** Other times are operator-published scheduled references, suitable for an explicitly estimated replay; they are not observed passages or independently validated exact checkpoints. [ARS3 timetable](https://stcp.pt/api/stops/ARS3/schedule?route_id=701&service_id=UTIL%20ESCOLAR%3AFLUXO%203%2020261027&direction_id=1), [MPL7 timetable](https://stcp.pt/api/stops/MPL7/schedule?route_id=701&service_id=UTIL%20ESCOLAR%3AFLUXO%203%2020261027&direction_id=1), [MPL4 timetable](https://stcp.pt/api/stops/MPL4/schedule?route_id=701&service_id=UTIL%20ESCOLAR%3AFLUXO%203%2020261027&direction_id=1), [timing-point IDs](https://stcp.pt/api/route/701/stops/direction?direction_id=1).
+
+| Sequence | Stop | Code | Trip A | Trip B | Trip C | Trip D | Trip E |
+|---|---|---|---|---|---|---|---|
+| 41 | Areosa | ARS3 | 08:12:50 | 08:23:50 | 08:34:50 | 08:45:50 | 08:57:43 |
+| 42 | Alto da Areosa | AA2 | 08:13:46 | 08:24:46 | 08:35:46 | 08:46:46 | 08:58:31 |
+| 43 | António Coelho | ACO2 | 08:14:40 | 08:25:40 | 08:36:40 | 08:47:40 | 08:59:17 |
+| 44 | S.ta Justa | STJ3 | 08:15:54 | 08:26:54 | 08:37:54 | 08:48:54 | 09:00:21 |
+| 45 | Barrocas | BRRS2 | 08:17:13 | 08:28:13 | 08:39:13 | 08:50:13 | 09:01:28 |
+| 46 | Conde Ferreira | CF2 | 08:18:17 | 08:29:17 | 08:40:17 | 08:51:17 | 09:02:23 |
+| 47 | Luis Woodhouse | LW2 | 08:19:27 | 08:30:27 | 08:41:27 | 08:52:27 | 09:03:23 |
+| 48 | Silva Tapada | SVT4 | 08:20:03 | 08:31:03 | 08:42:03 | 08:53:03 | 09:03:54 |
+| 49 | Pires de Lima | PLIM2 | 08:21:34 | 08:32:34 | 08:43:34 | 08:54:34 | 09:05:12 |
+| 50 | Combatentes | COMB4 | 08:22:23 | 08:33:23 | 08:44:23 | 08:55:23 | 09:05:54 |
+| 51 | Lima | LIMA2 | 08:23:52 | 08:34:52 | 08:45:52 | 08:56:52 | 09:07:11 |
+| 52 | Marquês | MPL7 | 08:25:15 | 08:36:15 | 08:47:15 | 08:58:15 | 09:08:21 |
+| 53 | Marquês — timing point | MPL4 | 08:26:00 | 08:37:00 | 08:48:00 | 08:59:00 | 09:09:00 |
+
+The other stop URLs use the same `/api/stops/{code}/schedule` pattern and parameters; all 13 raw responses were saved. The individual-stop endpoint omits `trip_id`. Association to route trips is therefore **derived**: sort each stop's 63 unique scheduled times; sort route trips by their 63 unique MPL4 times; verify every MPL4 anchor matches and every joined trip's stop times increase. All those checks passed. A–E correspond respectively to `701_0_2|327|D1|T2|N2`, `...|T6|N4`, `...|T9|N4`, `...|T7|N5`, `...|T4|N4`. Full IDs and provenance are preserved in the facts JSON. These give scheduled ARS3→MPL4 durations of **13m10s for A–D and 11m17s for E**, not measured running times.
+
+The API's nested `service_days` has all weekday flags false and start/end dates null, despite the date-resolved active service. Do not interpret this as no service or infer a new calendar from the service-name suffix. The inspected API does not expose a complete current `calendar_dates.txt`. It also does not expose the current interpolation algorithm or raw intermediate `timepoint` flags. In the older GTFS, intermediate `timepoint=0` values are approximate/interpolated scheduled times and `timepoint=1` means an exact **schedule** time; neither denotes an actual observation. [Current schedule](https://stcp.pt/api/route/701/schedule?service_id=UTIL%20ESCOLAR%3AFLUXO%203%2020261027&direction_id=1), [GTFS schedule specification](https://gtfs.org/documentation/schedule/reference/#stop_timestxt).
+
+## Current APIs versus the municipal GTFS
+
+The official catalogue still lists **64 resources**, ending in “GTFS STCP 01-09-2026 Mais Recente”. A fresh download returned SHA-256 `6bf73d93cf943de9f51254020ef7d089acc40403666a7b878f12150b4559f7e1`, identical to the previously frozen source. Its `feed_info.txt` covers **1–23 September 2026**; `calendar.txt` has no service rows and `calendar_dates.txt` spans the same dates. That archive uses direction 1/Bolhão but omits MPL7 from the inspected inbound trip patterns. It is a **dated reference**, not the October timetable. No newer official full GTFS ZIP was verified in this research; current website APIs nevertheless provide fresher stops, shapes and timetables. The catalogue declares CCZero for its GTFS dataset. [Catalogue metadata/API](https://dadosabertos.cm-porto.pt/api/3/action/package_show?id=horarios-paragens-e-rotas-stcp), [actual latest archive](https://dadosabertos.cm-porto.pt/dataset/71490e40-9e19-11f1-84ed-6abdb6d5cf34/resource/51340c18-0ef5-4895-b099-cf7247ea54f4/download/gtfs_feed.zip).
+
+## What is actually observed
+
+| Source inspected | Verified useful fields | Limits |
+|---|---|---|
+| [STCP route vehicles](https://stcp.pt/api/route/701/vehicles?direction_id=1) | Four inbound vehicle records in the saved snapshot, current trip IDs, coordinates, direction, bearing, start date/time and a response timestamp. | Per-vehicle timestamp and vehicle ID were null. Response time does not prove GPS observation age. A short working's `current_stop_sequence` is not the sequence of the direction-level long-route stop list. |
+| [Porto public bus broker](https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType%3D%3Dbus&limit=1000) | Of 270 bus entities, seven carried `stcp:route:701`; three were inbound. Those three had stable fleet IDs, coordinates and **observationDateTime 17:52:31–17:52:33 UTC**. All three trip annotations matched current inbound timetable trip IDs exactly. | One snapshot proves neither complete service coverage nor update frequency. Validate timestamp age, duplicates, GPS/map matching and published speed units before deriving running speeds. |
+| [ARS3 arrival predictions](https://stcp.pt/api/stops/ARS3/realtime), [MPL4 predictions](https://stcp.pt/api/stops/MPL4/realtime) | Route, trip ID, estimated arrival, `delay_minutes`, status and last-update time. | The samples' `scheduled_arrival_time` was null. These are **predictions**, not actual arrival/departure logs. Identical delay values at multiple downstream stops do not identify the location where delay arose. |
+
+These website endpoints were discovered in STCP's own public [route JavaScript](https://stcp.pt/build/cst_line_detail.a3eee17e.js) and [stop JavaScript](https://stcp.pt/build/cst_stop_detail.c3a64679.js); no login or key was needed for the tested GETs. A documented bulk API contract, reuse licence for these particular website responses, rate limits and uptime guarantees were not verified. The broker's separately published bus dataset is labelled CCZero. [Bus dataset](https://dadosabertos.cm-porto.pt/dataset/urban-platform-bus-location).
+
+No public **08:00–09:00 historical AVL or actual stop-passage series for 28 October** was obtained. Porto Digital documents bus movement and a historical Data Lake, providing a supported lead for requesting an export, without establishing public access to that history. Prospective observation collection can build future history; it cannot reconstruct this morning from an evening snapshot. [Urban Platform mobility case](https://plataformaurbana.porto.digital/acao/#AVPGM).
+
+## Consequences for the first experiment
+
+1. **Measure delay gained inside the segment.** Record entry lateness at ARS3 separately from arrival lateness at MPL4, then compare observed segment running time and dwell by stop/link across comparable weekdays. A bus can enter Areosa late for reasons outside this pilot. Use actual stop events where available, otherwise label geofence-inferred events and uncertainty; predicted delay alone cannot locate bottlenecks.
+2. **Keep the current route and both Marquês stops.** Include Alegria/Constituição junctions, cross traffic, queues, stop dwell and upstream/downstream buffers. ARS3 also serves line 702, so changes affect more than 701. [Official ARS3 details](https://stcp.pt/api/stops/ARS3).
+3. **Treat car-access findings as a graph screen until checked.** A directed lane graph can identify a modeled property-access disconnection, a turn dependency or a large detour when general traffic is restricted. It cannot establish where private-car flow legally or practically must remain. Field checks and municipal access rules must resolve garages, deliveries, residents, accessibility, emergency/service vehicles, signed turns, loading times and feasible alternative junction capacity. None of the inspected bus APIs establishes that policy.
+4. **Separate illustrative scenarios from an evidence-backed recommendation.** Current scheduled bus times plus synthetic cars can test the mechanics of a bus-priority idea. Claiming that a particular link causes real delay, or that a restriction preserves necessary access, requires matched AVL/stop events, approach/turn counts, controller timings, dwell/boarding evidence and street/access verification.
+
+## Reproducible source handoff
+
+The implementation preserved the complete bundle durably under [`prototypes/line-701/data/official/`](../../prototypes/line-701/data/official/) and the structured facts in [`data/source-facts.json`](../../prototypes/line-701/data/source-facts.json). Its metadata filenames are now relative to that folder; the response hashes and retrieval times are unchanged. All 26 response hashes were verified after copying. The static website also includes this source bundle in `701-official/`.
+
+The temporary source bundle **`/tmp/invicta-701-current/`** contains raw stops, shape, services, route schedule, all 13 stop schedules, current vehicle/prediction snapshots, broker entities, municipal latest GTFS and public frontend code. **`metadata.json`** records each URL, UTC retrieval interval, status, size and SHA-256. **`/tmp/invicta-701-current-facts.json`** provides endpoint parameters and schemas, the selected service, current segment, five morning trips, timing-point caveats, observation matching and source URLs; **`morning_stop_times.json`** is the smaller timetable extract. These are source inputs for the implementation agent; the report is the durable research deliverable.
