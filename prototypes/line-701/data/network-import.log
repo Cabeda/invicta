@@ -1,0 +1,116 @@
+Success.
+
+Warning: Discarding unknown compound 'usage.main' in type 'railway.light_rail|usage.main' (first occurrence for edge '13530233').
+Warning: Discarding unknown compound 'usage.tourism' in type 'railway.tram|usage.tourism' (first occurrence for edge '26119502').
+Warning: Discarding unknown compound 'cycleway.lane' in type 'cycleway.lane|highway.tertiary' (first occurrence for edge '35145272').
+Warning: Discarding unknown compound 'psv' in type 'highway.pedestrian|psv' (first occurrence for edge '112465238').
+Warning: Discarding unknown compound 'cycleway.lane' in type 'cycleway.lane|highway.secondary' (first occurrence for edge '141476900').
+Warning: Discarding unusable type 'railway.platform' (first occurrence for edge '238551970').
+Warning: Discarding unusable type 'railway.station' (first occurrence for edge '286784206').
+Warning: Discarding unusable type 'waterway.stream' (first occurrence for edge '549393011').
+Warning: Discarding unusable type 'aeroway.helipad' (first occurrence for edge '666674333').
+Warning: Discarding unusable type 'usage.transmission' (first occurrence for edge '1257242406').
+Warning: Removing pt stop '124365951' on non existing edge '26207628'.
+Warning: Removing pt stop '124367355' on non existing edge '1352313442'.
+Warning: Removing pt stop '1277692188' on non existing edge '386440068'.
+Warning: Removing pt stop '1554874538' on non existing edge '165660770#9'.
+Warning: Removing pt stop '1554874542' on non existing edge '26119502#3'.
+Warning: PT line '207: Campanhã ⇒ Mercado da Foz' in relation 2791852 has a gap of 4 stops, only keeping first part.
+Warning: PT line '300: Circular (Aliados ⇒ Hospital de São João)' in relation 6447444 has a gap of 4 stops, only keeping first part.
+Warning: PT line in relation 11068870 with no stops ignored. Probably OSM file is incomplete.
+Warning: PT line in relation 11071476 with no stops ignored. Probably OSM file is incomplete.
+Warning: PT line '600: Maia (Barca) ⇒ Aliados' in relation 11734938 has a gap of 3 stops, only keeping first part.
+Warning: PT line '400: Aliados ⇒ Parque Nascente' in relation 11753105 has a gap of 6 stops, only keeping first part.
+Warning: PT line '400: Parque Nascente ⇒ Aliados' in relation 11755866 has a gap of 4 stops, only keeping first part.
+Warning: direction of restriction relation could not be determined
+Warning: Ignoring restriction relation '15767418'.
+Warning: direction of restriction relation could not be determined
+Warning: Ignoring restriction relation '15767419'.
+Warning: Ignoring restriction relation '15877412' with unknown from-way.
+Warning: No way found for reference '1187730285' in relation '16059623'
+Warning: Ignoring restriction relation '16059623' with unknown from-way.
+Warning: Ignoring restriction relation '7842348' with unknown to-way.
+Warning: Could not find corresponding edge or compatible lane for free-floating pt stop '14081485839' (Hospital de Santo António). Thus, it will be removed!
+Warning: Could not find corresponding edge or compatible lane for free-floating pt stop '14081485866' (São Bento). Thus, it will be removed!
+Warning: Could not find corresponding edge or compatible lane for free-floating pt stop '14081485953' (Hospital de Santo António). Thus, it will be removed!
+Warning: Could not find corresponding edge or compatible lane for free-floating pt stop '14081485980' (São Bento). Thus, it will be removed!
+Warning: Cannot assign stop 11018676585 on edge '1186317085' to pt line '14258652'. Ignoring!
+Warning: Cannot revise pt stop localization for pt line '15866972', which has no route edges. Ignoring!
+Warning: Removed invalid stop '3379782775' from line '15866972'.
+Warning: Removed invalid stop '3379782773' from line '15866972'.
+Warning: Removed invalid stop '3379782779' from line '15866972'.
+Warning: Removed invalid stop '3397147921' from line '15866972'.
+Warning: Cannot revise pt stop localization for pt line '15866973', which has no route edges. Ignoring!
+Warning: Removed invalid stop '374362823' from line '15866973'.
+Warning: Cannot revise pt stop localization for pt line '15866974', which has no route edges. Ignoring!
+Warning: Cannot revise pt stop localization for pt line '15866975', which has no route edges. Ignoring!
+Warning: Could not assign stop '4468114299' to pt line '15879295' (closest edge '448850568#0', distance 163.01). Ignoring!
+Warning: Cannot assign stop 2343359235 on edge '856996058' to pt line '15886889'. Ignoring!
+Warning: Cannot revise pt stop localization for pt line '1710380', which has no route edges. Ignoring!
+Warning: Cannot assign stop 2343359235 on edge '856996058' to pt line '6715661'. Ignoring!
+Warning: Converting invalid rail_crossing to priority junction '6640652551'.
+Warning: Not joining junctions 10017874480,112613589,444004652 (only 1 entry node).
+Warning: Reducing junction cluster 1386051849,2246086926,25620737 (parallel outgoing 215200349#0,26119880#0).
+Warning: Not joining junctions 112651985,112651987,3522178890,445439300,445439326,9278855128,9278855136,9278855137 (6 incoming edges).
+Warning: Not joining junctions 10840461246,12111398042,12111398043,1788787039,1788787081,1788787115,4685392611,4685392612,4685392613,4685392616,5291538831 (slip lane).
+Warning: Reducing junction cluster 11473523075,299614041,299614078,4751728994 (parallel outgoing -549266396#2,36747395#0).
+Warning: Not joining junctions 1223751769,12514558310,12987548643 (only 1 exit node).
+Warning: Not joining junctions 10914847285,1548084659 (parallel incoming -141435224#0,-765587015#0).
+Warning: Reducing junction cluster 10914847286,1548085141,1548085262,1548085285,791709788 (6 incoming edges).
+Warning: Reducing junction cluster 10916547342,427277909,7844352886 (parallel incoming -840658724#0,482324651#2).
+Warning: Reducing junction cluster 11012578979,444004622,444004626,444004628,444004630 (parallel incoming -37855521,-37855522).
+Warning: Ambiguity in turnarounds computation at junction '10008024968'.
+Warning: Ambiguity in turnarounds computation at junction '12170107877'.
+Warning: Ambiguity in turnarounds computation at junction '13165007187'.
+Warning: Ambiguity in turnarounds computation at junction '13272506218'.
+Warning: Ambiguity in turnarounds computation at junction '1731168731'.
+Warning: Found sharp turn with radius 5.92 at the end of edge '-141435215#2'.
+Warning: Found sharp turn with radius 6.64 at the start of edge '-161124007#2'.
+Warning: Found angle of 100.81 degrees at edge '-173015835', segment 1.
+Warning: Found sharp turn with radius 7.51 at the end of edge '-351255911#0'.
+Warning: Found angle of 100.80 degrees at edge '-351255911#1', segment 5.
+Warning: Found angle of 108.31 degrees at edge '-39549973#1', segment 1.
+Warning: Found angle of 100.58 degrees at edge '-443685793#1', segment 0.
+Warning: Found angle of 99.37 degrees at edge '-450404338#2', segment 0.
+Warning: Found sharp turn with radius 8.96 at the start of edge '-452441983#0'.
+Warning: Found sharp turn with radius 8.08 at the start of edge '-452441996#1'.
+Warning: Replacing loaded roundabout '1135289857#0 1135289857#1 1135289857#2 1135289857#3 1135289857#4 1135289858 1135289859 1135289860 1135289861 1303513434 152618126' with '1135289857#0 1135289857#1 1135289857#2 1135289857#3 1135289857#4 1135289858 1135289859 1135289860 1135289861 152618126'.
+Warning: Replacing loaded roundabout '1070035543 1070035544#0 1070035544#1 1070241947 508109562 603025759' with '1070035543 1070035544#0 1070035544#1 1070241947 508109562'.
+Warning: Replacing loaded roundabout '35139979#0 35139979#1 35139979#2 35139979#3 35139979#4 35139979#5' with '35139979#1 35139979#2 35139979#3 35139979#4 35139979#5'.
+Warning: Replacing loaded roundabout '1017121220 1284180954 961034087#0 961034087#1 961034088#0 961034088#1 961034089 961034090 961034095' with '1017121220 961034087#0 961034087#1 961034088#0 961034088#1 961034089 961034090 961034095'.
+Warning: Edge '124539828#0' is not connected to outgoing edges at junction 'cluster_1386051845_1386051854'.
+Warning: Lane '124539828#0_0' is not connected from any incoming edge at junction '1386051842'.
+Warning: The traffic light '2086440304' does not control any links; it will not be build.
+Warning: Could not build program '0' for traffic light '2086440304'
+Warning: Minor green from edge '-899751514#1' to edge '-477530378#2' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Minor green from edge '34772371#6' to edge '452076898#3' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Minor green from edge '120692681#0' to edge '13268415#0' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Minor green from edge '747471006#0' to edge '-385795773#1' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Minor green from edge '-747471006#6' to edge '26119759#0' exceeds 19.44m/s. Maybe a left-turn lane is missing.
+Warning: Speed of straight connection '1204263613#1_0->440117023#1_0' reduced by 7.63 due to turning radius of 14.84 (length=5.24, angle=35.60).
+Warning: Speed of straight connection '1082972078_0->1082977725#0_0' reduced by 12.07 due to turning radius of 44.86 (length=11.12, angle=29.45).
+Warning: Speed of straight connection '1082972078_1->1082977725#0_1' reduced by 13.24 due to turning radius of 38.46 (length=9.50, angle=29.45).
+Warning: Speed of straight connection '1082972078_2->1082977725#0_2' reduced by 14.49 due to turning radius of 32.14 (length=7.90, angle=29.45).
+Warning: Speed of straight connection '161124196_0->-98836021_0' reduced by 13.49 due to turning radius of 13.87 (length=3.85, angle=31.88).
+Warning: Intersecting left turns at junction 'cluster_1103464865_112613628_112613629_12514558263_#2more' from lane '743539878#3_0' and lane '161124159#0_0' (increase junction radius to avoid this).
+Warning: Connection '-1346486668#2_0->-705505996_0' is only 0.06m short.
+Warning: Connection '-1245335823_0->-1346486668#1_0' is only 0.00m short.
+Warning: Connection '351525744#1_0->351525741#0_0' is only 0.00m short.
+Warning: Intersecting left turns at junction 'cluster_12514558372_3570149405_3570149417_4393941433_#1more' from lane '351255869#0_0' and lane '1186568750_0' (increase junction radius to avoid this).
+Warning: Intersecting left turns at junction 'cluster_2060757021_2060757028' from lane '-195652240#1_0' and lane '-195652231#0_0' (increase junction radius to avoid this).
+Warning: Intersecting left turns at junction 'cluster_3230463783_433469154' from lane '37393312#1_0' and lane '-316864620_0' (increase junction radius to avoid this).
+Warning: Stop '4468114299' named 'Avenida dos Aliados' from line '15879295' on edge '1062979389' is not part of the route.
+Warning: Removed 20 pt stops because they could not be assigned to the network
+Warning: 53 total messages of type: Ambiguity in turnarounds computation at junction '%'.
+Warning: 17 total messages of type: Cannot revise pt stop localization for pt line '%', which has no route edges. Ignoring!
+Warning: 12 total messages of type: Discarding unknown compound '%' in type '%' (first occurrence for edge '%').
+Warning: 6 total messages of type: Discarding unusable type '%' (first occurrence for edge '%').
+Warning: 12 total messages of type: Found angle of % degrees at edge '%', segment %.
+Warning: 26 total messages of type: Found sharp turn with radius % at the % of edge '%'.
+Warning: 45 total messages of type: Minor green from edge '%' to edge '%' exceeds %m/s. Maybe a left-turn lane is missing.
+Warning: 80 total messages of type: Not joining junctions % (%).
+Warning: 9 total messages of type: PT line '%' in relation % has a gap of % stops, only keeping first part.
+Warning: 15 total messages of type: Reducing junction cluster % (%).
+Warning: 64 total messages of type: Removed invalid stop '%' from line '%'.
+Warning: 41 total messages of type: Removing pt stop '%' on non existing edge '%'.
+Warning: 138 total messages of type: Speed of % connection '%' reduced by % due to turning radius of % (length=%, angle=%).

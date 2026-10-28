@@ -1,10 +1,12 @@
-# Line 701: Areosa → Marquês, inbound towards Bolhão
+# Line 701: Porto municipal extent to Bolhão, with whole-line service checks
 
-Study date: 2026-10-28. Current official route/service snapshot; 13 stops, approximately 3.14km. Ends at MPL4 after the restored MPL7 stop.
+Study date: 2026-10-28. 16 Porto stops, 4.545km inside the CAOP2025 municipality. Areosa ARS3 is the first stop inside Porto; the municipal entry is about 60m before it. Bolhão 0BLRB is the final stop.
 
 ## What is known
 
-Current STCP route shape, ordered stops and stop schedule seconds are frozen with source URLs, timestamps and hashes. Only MPL4 is a designated timing point within this section. Other stop times are published non-timepoint references. This section does not model the entire 701 line.
+Current STCP shape, ordered stops and scheduled seconds are frozen with URLs, timestamps and hashes. MPL4 and 0BLRB are designated timing points in Porto. Other calls are intermediate published references. DGT CAOP2025 locates the municipal entry; these are cartographic source positions, not a survey.
+
+Native vehicles start at the mapped municipal entry using an assumed 6s lead before the Areosa reference. There is no official boundary timetable. Reported entry lateness remains measured at Areosa, so it also includes the modeled approach delay. The boundary-crossing edge is excluded from new permission policies to avoid extending restrictions into another municipality.
 
 ## Observed sample
 
@@ -49,42 +51,119 @@ This is a structural screen using generated side-road connector/ordinary-traffic
 | leg_10 | COMB4 → LIMA2 | 0 | priority / existing priority |
 | leg_11 | LIMA2 → MPL7 | 0 | priority / existing priority |
 | leg_12 | MPL7 → MPL4 | 0 | priority / existing priority |
+| leg_13 | MPL4 → DCAS2 | 5 | retain general traffic |
+| leg_14 | DCAS2 → FTNH2 | 2 | retain general traffic |
+| leg_15 | FTNH2 → 0BLRB | 0 | priority / existing priority |
 
-## Simulated section performance
+## Simulated Porto street performance
 
-Native SUMO; current official timetable; synthetic traffic, fixed 20-second dwell, guessed signals, three seeds, five target 701 trips only. The late-entry case adds an assumed 180 seconds before Areosa. Additional delay in section is final lateness minus actual simulated entry lateness. Intermediate non-timepoint references are not used for holding. MPL4 departures are held to its published time. All unserved requests remain in the accounting.
+Native SUMO; extended frozen-OSM district, synthetic OD samples including new Marquês–Bolhão demand, fixed 20-second dwell, unverified signals, three seeds and five target 701 trips only. These new outputs supersede the shorter-network results; changed demand/network scope prevents treating differences from the earlier batch as policy gains. The late-entry case adds 180 seconds before municipal entry. Final lateness minus Areosa lateness measures added delay after the first published checkpoint, including intentional timing-point holds. MPL4 and 0BLRB departures wait for their published times. Every unserved request remains visible.
 
 | Case | Variant | Completed 701 journeys / planned | Mean final lateness sec (completed only) | Mean unserved all vehicles |
 |---|---|---:|---:|---:|
-| moderate | baseline | 15/15 | -109.0 | 0.3 |
-| moderate | restricted | 15/15 | -90.5 | 0.3 |
-| moderate | all_priority | 15/15 | -88.3 | 0.3 |
-| busy | baseline | 15/15 | -41.3 | 1.7 |
-| busy | restricted | 15/15 | -81.3 | 1.7 |
-| busy | all_priority | 15/15 | -89.7 | 1.7 |
-| busy | leg_01 | 14/15 | -73.7 | 30.0 |
-| busy | leg_02 | 15/15 | -85.7 | 1.7 |
-| busy | leg_03 | 15/15 | -64.6 | 1.7 |
-| busy | leg_04 | 15/15 | -80.0 | 1.7 |
-| busy | leg_05 | 15/15 | -65.2 | 1.7 |
-| busy | leg_06 | 15/15 | -65.2 | 1.7 |
-| busy | leg_07 | 10/15 | -32.3 | 256.7 |
-| busy | leg_08 | 15/15 | -41.3 | 1.7 |
-| busy | leg_09 | 15/15 | -88.9 | 1.7 |
-| busy | leg_10 | 15/15 | -41.3 | 1.7 |
-| busy | leg_11 | 15/15 | -83.5 | 1.7 |
-| busy | leg_12 | 15/15 | -73.7 | 1.7 |
-| late | baseline | 15/15 | 126.1 | 1.7 |
-| late | restricted | 15/15 | 94.2 | 1.7 |
-| late | all_priority | 15/15 | 98.9 | 1.7 |
+| moderate | baseline | 15/15 | -41.3 | 0.0 |
+| moderate | restricted | 15/15 | -52.2 | 0.0 |
+| moderate | all_priority | 15/15 | -60.9 | 41.7 |
+| busy | baseline | 15/15 | -49.9 | 1.0 |
+| busy | restricted | 12/15 | -63.8 | 31.7 |
+| busy | all_priority | 15/15 | -30.8 | 68.0 |
+| busy | leg_01 | 15/15 | -26.3 | 1.0 |
+| busy | leg_02 | 15/15 | -48.5 | 1.0 |
+| busy | leg_03 | 15/15 | -38.4 | 1.0 |
+| busy | leg_04 | 15/15 | -41.7 | 1.0 |
+| busy | leg_05 | 15/15 | -48.8 | 1.0 |
+| busy | leg_06 | 15/15 | -48.8 | 1.0 |
+| busy | leg_07 | 15/15 | -55.5 | 1.0 |
+| busy | leg_08 | 15/15 | -49.9 | 1.0 |
+| busy | leg_09 | 15/15 | -40.0 | 1.0 |
+| busy | leg_10 | 15/15 | -49.9 | 1.0 |
+| busy | leg_11 | 15/15 | -46.6 | 1.0 |
+| busy | leg_12 | 15/15 | -53.2 | 1.0 |
+| busy | leg_13 | 15/15 | -55.3 | 60.3 |
+| busy | leg_14 | 15/15 | -30.3 | 18.0 |
+| busy | leg_15 | 15/15 | -39.2 | 1.0 |
+| late | baseline | 15/15 | 111.4 | 1.0 |
+| late | restricted | 15/15 | 141.9 | 1.0 |
+| late | all_priority | 15/15 | 120.0 | 68.0 |
+
+### Native punctuality and spacing checks
+
+These counts cover the five requested native journeys across three seeds. Missing timing-point calls cannot pass the strict check. Arrival-spacing events compare the actual consecutive pair with half its published-time separation; the count is withheld when bus journeys are incomplete. A native timetable pass does not establish sufficient passenger capacity or practical access.
+
+| Case | Package | Late timing-point arrivals / planned | Missing calls | Short-gap events | Strict check |
+|---|---|---:|---:|---:|---|
+| moderate | baseline | 9/30 | 0 | 0 | fail |
+| moderate | restricted | 6/30 | 0 | 0 | fail |
+| moderate | all_priority | 4/30 | 0 | 0 | fail |
+| busy | baseline | 6/30 | 0 | 0 | fail |
+| busy | restricted | 1/30 | 6 | unavailable | fail |
+| busy | all_priority | 6/30 | 0 | 0 | fail |
+| late | baseline | 29/30 | 0 | 0 | fail |
+| late | restricted | 30/30 | 0 | 0 | fail |
+| late | all_priority | 28/30 | 0 | 0 | fail |
+
+## Whole-line bunching and cascade checks
+
+A separate operational model covers all 56 stops, 63 inbound workings and 3,024 published calls: 39 start at Codiceira, 24 at Ermesinde. Unserved upstream stops on short workings stay null. All intermediate-reference associations are derived from unique timetable matchings, not raw per-stop trip IDs.
+
+This model uses fluid passenger arrivals, capacity limits, boarding/alighting dwell, single-berth queues and timing-point/headway holding. Running budgets and recovery are assumptions. It simulates one direction with independent vehicles per trip; road traffic outside Porto, other routes, outbound service and shared vehicle rotations are absent. The strict goal is zero late timing-point arrivals, zero early timing-point departures, no gap below half the published spacing, and no passengers left behind. Meeting that goal in a what-if model is not a real-world guarantee.
+
+Default no-shock versus injected-delay scenario:
+
+```json
+{
+  "reference": {
+    "trips": 63,
+    "calls": 3024,
+    "timing_calls": 354,
+    "late_timing_calls": 158,
+    "max_lateness": 1102.6526333726652,
+    "early_timing_departures": 0,
+    "short_gap_events": 29,
+    "short_gap_trip_pairs": 3,
+    "passenger_arrivals": 15539.70833333333,
+    "boardings": 15491.009629818524,
+    "passengers_left": 48.69870351481109,
+    "capacity_denied_calls": 160,
+    "passenger_balance_error": -4.32720526077901e-12,
+    "max_load": 70,
+    "max_queue": 14.786139264149277,
+    "runtime_budget_floor_events": 536,
+    "target_met": false
+  },
+  "scenario": {
+    "trips": 63,
+    "calls": 3024,
+    "timing_calls": 354,
+    "late_timing_calls": 163,
+    "max_lateness": 1102.6526333726652,
+    "early_timing_departures": 0,
+    "short_gap_events": 39,
+    "short_gap_trip_pairs": 4,
+    "passenger_arrivals": 15539.70833333333,
+    "boardings": 15491.009629818524,
+    "passengers_left": 48.69870351481109,
+    "capacity_denied_calls": 160,
+    "passenger_balance_error": -4.32720526077901e-12,
+    "max_load": 70,
+    "max_queue": 14.786139264149277,
+    "runtime_budget_floor_events": 536,
+    "target_met": false
+  },
+  "other_trips_changed": 2,
+  "other_trips_later": 1
+}
+```
+
+Reduce neither journey counts nor passenger demand to manufacture a punctuality gain. Compare the same demand without the injected delay; secondary changes and short-gap events expose passenger–dwell feedback, while remaining queues expose capacity failures. A late bus can collect more passengers and slow further; a following bus can collect fewer and catch up. Native SUMO separately retains vehicle following and queue spillback within the Porto road network.
 
 ## Interpretation and next steps
 
-Use the actual passage-window profile to identify where deviation from the published reference grows, then collect repeated complete trips before attributing causes. Missing Areosa coverage means inherited lateness and full-section added observed delay cannot be separated for that trip. A single-trip evening increase is a lead for investigation, not proof that car traffic, signals or boarding caused it.
+Use the passage-window profile to identify where deviation grows, then collect repeated complete trips before attributing causes. Missing Areosa/Bolhão coverage prevents claiming full-section observed punctuality. A single evening trajectory is an investigative lead, not a causal diagnosis.
 
-Compare an access-preserving package, unrestricted baseline and individual-leg tests. Individual effects must not be added together. Permission-only policies retain identical network geometry and signal programs; a no-change leg is an exact neutral control. Do not rank a policy on faster completed trips when bus or other requests remain unserved.
+Compare the connectivity-screened package, unrestricted baseline and individual-leg tests. Individual effects must not be added together. Permission-only policies retain identical network geometry and signal programs; a no-change leg is an exact neutral control. Do not rank a policy on faster completed trips when bus or other requests remain unserved.
 
-Map-match and audit the actual bus turns, widths, stop locations, signal phases and loading/property access; obtain a matched AVL/door-open/history dataset and target-route passenger loads. Include other bus lines in subsequent network validation. Extend to the full 701 line after this direction and section are validated.
+Obtain matched full-line AVL and door-open events, boarding/load counts, actual recovery and turnaround times, controller phases, other-line interactions and vehicle/block circulation. Audit lane directions, widths, turns and property/loading access. Calibrate both layers before optimizing for real punctuality or choosing an implementation.
 
 ## Code-first controls
 
@@ -94,5 +173,6 @@ Map-match and audit the actual bus turns, widths, stop locations, signal phases 
 
 - [Official line 701](https://stcp.pt/pt/linhas/701)
 - [STCP route stops API](https://stcp.pt/api/route/701/stops/direction?direction_id=1)
+- [DGT CAOP2025 Porto municipality](https://ogcapi.dgterritorio.gov.pt/collections/municipios/items/1312?f=json)
 - [Porto Digital public bus broker](https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType%3D%3Dbus&limit=1000)
 - Source/API/hash detail: `701-source-facts.json`. Native per-run data: `701-experiments.json`. Observation windows: `701-observations.json`.

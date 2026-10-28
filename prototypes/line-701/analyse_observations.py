@@ -9,7 +9,7 @@ def secs(text):
 def analyse():
  route=json.loads((ROOT/'data/route.json').read_text());official=ROOT/'data/official'
  schedule=json.loads((official/'schedule.json').read_text())['schedule']
- def endpoint(trip):return next(s for s in trip['stops'] if s['stop_id']=='MPL4')['arrival_time']
+ def endpoint(trip):return next(s for s in trip['stops'] if s['stop_id']==route['end'])['arrival_time']
  schedule=sorted(schedule,key=lambda t:secs(endpoint(t)))
  if len({endpoint(t) for t in schedule})!=len(schedule):raise RuntimeError('Ambiguous timetable anchor join')
  bystop={}
@@ -21,11 +21,14 @@ def analyse():
   bystop[stop['stop_id']]=calls
  full={}
  for i,trip in enumerate(schedule):
-  if bystop['MPL4'][i]['arrival_time']!=endpoint(trip):raise RuntimeError('MPL4 anchor mismatch')
+  if bystop[route['end']][i]['arrival_time']!=endpoint(trip):raise RuntimeError('Terminal timetable anchor mismatch')
+  for sid in [s['stop_id'] for s in route['stops'] if s['designated_timing_point']]:
+   anchor=next(s for s in trip['stops'] if s['stop_id']==sid)['arrival_time']
+   if bystop[sid][i]['arrival_time']!=anchor:raise RuntimeError('Timing-point anchor mismatch')
   full[trip['trip_id']]={'trip_id':trip['trip_id'],'stops':{sid:secs(calls[i]['arrival_time']) for sid,calls in bystop.items()}}
   times=list(full[trip['trip_id']]['stops'].values())
   if any(b<a for a,b in zip(times,times[1:])):raise RuntimeError('Non-monotonic trip/stop timetable association')
- net=sumolib.net.readNet(str(ROOT.parent/'costa-cabral/data/baseline.net.xml'),maxcache=0)
+ net=sumolib.net.readNet(str(ROOT/'data/baseline.net.xml'),maxcache=0)
  timezone=ZoneInfo('Europe/Lisbon');day=datetime.date.fromisoformat(route['study_date'])
  points=route['full_shape'];lengths=route['shape_lengths'];traces={};counts={'polls':0,'raw_rows':0,'duplicates':0,'unmatched_trip':0,'wrong_service_date':0,'stale_or_future':0,'off_route':0,'accepted':0};seen=set()
  file=ROOT/'data/observations/positions.ndjson'

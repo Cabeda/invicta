@@ -104,7 +104,9 @@ def capture(case, policy, scene_data):
     target = OUT / f'{key}.json.gz'
     if target.exists():
         cached = json.loads(gzip.decompress(target.read_bytes()))
-        if cached['input_hashes'] == hashes and cached.get('step') == 1 and cached.get('scene_schema') == 2: return
+        if (cached['input_hashes'] == hashes and cached.get('step') == 1 and cached.get('scene_schema') == 2
+                and cached.get('start') == START and cached.get('end') == END
+                and cached.get('capture_edges') == scene_data.get('capture_edges')): return
     add = ET.parse(inputs[2])
     for element in list(add.getroot()):
         if element.tag == 'edgeData': add.getroot().remove(element)
@@ -137,7 +139,7 @@ def capture(case, policy, scene_data):
                 frames.append({'t': t, 'vehicles': rows})
             el.clear()
     save(f'{key}.json.gz', {'case': case, 'policy': policy, 'seed': 17, 'start': START, 'end': END, 'step': 1, 'scene_schema': 2,
-                           'frames': frames, 'vehicles': vehicles, 'input_hashes': hashes,
+                           'frames': frames, 'vehicles': vehicles, 'input_hashes': hashes,'capture_edges':scene_data.get('capture_edges'),
                            'source': 'Native SUMO one-second FCD; front bumper coordinates; same original simulation step and inputs',
                            'captured_at': datetime.datetime.now(datetime.timezone.utc).isoformat()})
 

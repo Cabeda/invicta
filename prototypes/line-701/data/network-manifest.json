@@ -1,0 +1,45 @@
+{
+  "captured_at": "2026-10-28T19:46:37.173417+00:00",
+  "source": "OpenStreetMap API; original frozen area plus southern buffer to Bolhão",
+  "inputs": [
+    {
+      "file": "../costa-cabral/data/network.osm.xml.gz",
+      "sha256": "30a747524bfdf4155d6a6058ba65310b23495ec0315bf5164a9d323da9414db0",
+      "role": "Original frozen street-study source"
+    },
+    {
+      "file": "southern-tile-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6143,41.146,-8.602,41.156",
+      "bbox": [
+        -8.6143,
+        41.146,
+        -8.602,
+        41.156
+      ],
+      "sha256": "6ed610fef043c83af1a55846cda3f77fe14990a9e8ecdb8f87462d0081fa85b0",
+      "bytes": 9592862
+    },
+    {
+      "file": "southern-tile-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.602,41.146,-8.5897,41.156",
+      "bbox": [
+        -8.602,
+        41.146,
+        -8.5897,
+        41.156
+      ],
+      "sha256": "9a57aa24e27707b2d8a0b3482814faf6373d87a9df9469e6994f54d5b18bfc83",
+      "bytes": 4808150
+    }
+  ],
+  "merged_sha256": "1a2378ffd125bf45e64dff2227bbdd905e1b9d310169b5a2582b026255dbc3a5",
+  "licence": "ODbL, © OpenStreetMap contributors",
+  "baseline": "Unmodified OSM import of extended district, not a surveyed lane inventory. All policies use this same geometry.",
+  "network_sha256": "60e16318e04263aa1412cc2629325c8ef2b6a8c3fbc4cd70230c06559635f7c6",
+  "projection": {
+    "netOffset": "-532362.31,-4555848.88",
+    "convBoundary": "0.00,0.00,3680.22,4118.68",
+    "origBoundary": "-8.614247,41.153273,-8.570248,41.190339",
+    "projParameter": "+proj=utm +zone=29 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+  }
+}

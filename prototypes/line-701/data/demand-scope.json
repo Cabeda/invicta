@@ -1,0 +1,15 @@
+{
+  "source": "Synthetic OD samples; valid legacy pairs plus generated pairs around Marqu\u00eas\u2013Bolh\u00e3o, not measured demand.",
+  "pool_sizes": {
+    "through": 120,
+    "background": 120,
+    "resident": 119,
+    "crossing": 22
+  },
+  "new_southern_pairs": {
+    "through": 60,
+    "background": 60,
+    "resident": 60,
+    "crossing": 17
+  }
+}

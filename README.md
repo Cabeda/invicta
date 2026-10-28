@@ -4,9 +4,9 @@
 
 A bilingual, interactive Porto mobility demo: help buses meet their schedules while keeping everyday access workable for residents, shoppers and other travellers.
 
-The current pilot follows **STCP 701 towards Bolhão, from Areosa to Marquês**, using 13 official stops and the actual route through Costa Cabral, Alegria and Constituição. Compare scheduled references, timestamped GPS passage windows and native SUMO experiments; explore bus priority by stop interval and inspect the baseline/candidate replay in 3D.
+The native street pilot follows **STCP 701 through the entire Porto municipal extent to Bolhão**, with 16 official stops and the boundary approach before Areosa. A separate whole-line service model uses all 56 stops and 63 inbound workings to test passenger/dwell feedback, bunching, capacity and schedule/headway controls. Compare scheduled references, timestamped GPS passages and native SUMO results; inspect the Porto baseline/candidate replay in 3D.
 
-**Exploratory prototype:** traffic demand, signal operation and dwell times are uncalibrated. The short GPS sample does not establish recurring delays or their causes. Structural car-connectivity checks need field verification. This is a section of one direction, not a validated model of the full bus line.
+**Exploratory prototype:** traffic, passenger demand, signals, dwell and recovery are uncalibrated. The short GPS sample does not establish recurring delays or causes. Connectivity checks need field verification. Whole-line service dynamics are assumed; outside-Porto road traffic, the reverse direction, other routes and shared vehicle rotations are not modelled. The strict zero-lateness goal can be tested, but actual punctuality is not guaranteed.
 
 ## Open locally
 

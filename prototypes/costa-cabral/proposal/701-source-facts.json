@@ -9,9 +9,21 @@
   "active_service_id": "UTIL ESCOLAR:FLUXO 3 20261027",
   "segment": {
     "start_stop_id": "ARS3",
-    "end_stop_id": "MPL4",
-    "intermediate_marques_stop_id": "MPL7",
-    "stop_count": 13,
+    "end_stop_id": "0BLRB",
+    "start_extent": "CAOP2025 municipal entry before ARS3",
+    "final_stop": {
+      "stop_id": "0BLRB",
+      "stop_name": "BOLHÃO",
+      "stop_code": "0BLRB",
+      "zone_id": "PRT1",
+      "stop_lat": 41.15194,
+      "stop_lon": -8.60711,
+      "stop_sequence": 56,
+      "description": null,
+      "designated_timing_point": true
+    },
+    "old_marques_checkpoint_stop_id": "MPL4",
+    "stop_count": 16,
     "stops": [
       {
         "stop_id": "ARS3",
@@ -155,13 +167,87 @@
         "stop_sequence": 53,
         "description": null,
         "designated_timing_point": true
+      },
+      {
+        "stop_id": "DCAS2",
+        "stop_name": "DOZE CASAS",
+        "stop_code": "DCAS2",
+        "zone_id": "PRT1",
+        "stop_lat": 41.158198,
+        "stop_lon": -8.604619,
+        "stop_sequence": 54,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "FTNH2",
+        "stop_name": "FONTINHA",
+        "stop_code": "FTNH2",
+        "zone_id": "PRT1",
+        "stop_lat": 41.155645,
+        "stop_lon": -8.604726,
+        "stop_sequence": 55,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "0BLRB",
+        "stop_name": "BOLHÃO",
+        "stop_code": "0BLRB",
+        "zone_id": "PRT1",
+        "stop_lat": 41.15194,
+        "stop_lon": -8.60711,
+        "stop_sequence": 56,
+        "description": null,
+        "designated_timing_point": true
       }
     ],
-    "street_sequence_as_notified": [
-      "Rua de Costa Cabral",
-      "Rua da Alegria",
-      "Rua da Constituição",
-      "Praça do Marquês"
+    "downstream_of_old_endpoint": [
+      {
+        "stop_id": "DCAS2",
+        "stop_name": "DOZE CASAS",
+        "stop_code": "DCAS2",
+        "zone_id": "PRT1",
+        "stop_lat": 41.158198,
+        "stop_lon": -8.604619,
+        "stop_sequence": 54,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "FTNH2",
+        "stop_name": "FONTINHA",
+        "stop_code": "FTNH2",
+        "zone_id": "PRT1",
+        "stop_lat": 41.155645,
+        "stop_lon": -8.604726,
+        "stop_sequence": 55,
+        "description": null,
+        "designated_timing_point": false
+      },
+      {
+        "stop_id": "0BLRB",
+        "stop_name": "BOLHÃO",
+        "stop_code": "0BLRB",
+        "zone_id": "PRT1",
+        "stop_lat": 41.15194,
+        "stop_lon": -8.60711,
+        "stop_sequence": 56,
+        "description": null,
+        "designated_timing_point": true
+      }
+    ],
+    "designated_timing_point_ids_within_segment": [
+      "MPL4",
+      "0BLRB"
+    ],
+    "full_direction_timing_point_ids": [
+      "COD4",
+      "ERM3",
+      "AM2",
+      "ARSM2",
+      "MPL4",
+      "0BLRB"
     ]
   },
   "api": {
@@ -223,506 +309,923 @@
     }
   },
   "schedule": {
-    "source_role": "scheduled_reference_not_observed",
+    "source_role": "operator_published_schedule_not_observed",
     "trips": 63,
-    "trip_association_method": "Sort route schedule by unique MPL4 arrival time; sort each stop schedule by time; associate by rank. All 13 stop lists contain 63 unique times; all 63 MPL4 anchors match exactly; all joined stop times are nondecreasing. This is a derived association because stop endpoints omit trip_id.",
+    "trip_association_method": "Sort 63 route trips by unique MPL4 times. Independently verify identical unique ordering at ARSM2 and 0BLRB and exact equality with per-stop anchor responses. For each intermediate stop, construct a 63-by-63 bipartite graph: an arrival may map to a trip only if it lies between the trip adjacent ARSM2/MPL4 or MPL4/0BLRB timing points. Rank join is a complete valid matching. Independently delete each of its 63 edges and recompute maximum matching; every deletion lowers the maximum from 63 to 62, proving it is the only perfect matching. All joined trip stop times strictly increase. No trip-order assumption is needed for that uniqueness proof.",
     "inbound_trips_with_COD4_time": 39,
     "inbound_trips_without_COD4_time": 24,
-    "morning_selection": "08:00 <= scheduled ARS3 arrival < 09:00; 5 departures; includes downstream arrivals after09:00",
+    "morning_selection": "08:00 <= scheduled ARS3 arrival < 09:00",
     "morning": [
       {
         "trip_id": "701_0_2|327|D1|T2|N2",
         "headsign": "Bolhão",
-        "first_published_timing_point": "ERM3",
+        "chronological_rank_1based": 10,
         "stop_times": [
           {
             "stop_id": "ARS3",
+            "stop_sequence": 41,
             "arrival_time": "08:12:50",
             "departure_time": "08:12:50",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "AA2",
+            "stop_sequence": 42,
             "arrival_time": "08:13:46",
             "departure_time": "08:13:46",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "ACO2",
+            "stop_sequence": 43,
             "arrival_time": "08:14:40",
             "departure_time": "08:14:40",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "STJ3",
+            "stop_sequence": 44,
             "arrival_time": "08:15:54",
             "departure_time": "08:15:54",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "BRRS2",
+            "stop_sequence": 45,
             "arrival_time": "08:17:13",
             "departure_time": "08:17:13",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "CF2",
+            "stop_sequence": 46,
             "arrival_time": "08:18:17",
             "departure_time": "08:18:17",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LW2",
+            "stop_sequence": 47,
             "arrival_time": "08:19:27",
             "departure_time": "08:19:27",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "SVT4",
+            "stop_sequence": 48,
             "arrival_time": "08:20:03",
             "departure_time": "08:20:03",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "PLIM2",
+            "stop_sequence": 49,
             "arrival_time": "08:21:34",
             "departure_time": "08:21:34",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "COMB4",
+            "stop_sequence": 50,
             "arrival_time": "08:22:23",
             "departure_time": "08:22:23",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LIMA2",
+            "stop_sequence": 51,
             "arrival_time": "08:23:52",
             "departure_time": "08:23:52",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL7",
+            "stop_sequence": 52,
             "arrival_time": "08:25:15",
             "departure_time": "08:25:15",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL4",
+            "stop_sequence": 53,
             "arrival_time": "08:26:00",
             "departure_time": "08:26:00",
-            "designated_timing_point": true,
-            "source_role": "scheduled_timing_point"
+            "designated_timing_point": true
+          },
+          {
+            "stop_id": "DCAS2",
+            "stop_sequence": 54,
+            "arrival_time": "08:27:45",
+            "departure_time": "08:27:45",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "FTNH2",
+            "stop_sequence": 55,
+            "arrival_time": "08:28:49",
+            "departure_time": "08:28:49",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "0BLRB",
+            "stop_sequence": 56,
+            "arrival_time": "08:31:00",
+            "departure_time": "08:31:00",
+            "designated_timing_point": true
           }
-        ]
+        ],
+        "ars3_to_bolhao_seconds": 1090,
+        "ars3_to_mpl4_seconds": 790,
+        "mpl4_to_bolhao_seconds": 300
       },
       {
         "trip_id": "701_0_2|327|D1|T6|N4",
         "headsign": "Bolhão",
-        "first_published_timing_point": "COD4",
+        "chronological_rank_1based": 11,
         "stop_times": [
           {
             "stop_id": "ARS3",
+            "stop_sequence": 41,
             "arrival_time": "08:23:50",
             "departure_time": "08:23:50",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "AA2",
+            "stop_sequence": 42,
             "arrival_time": "08:24:46",
             "departure_time": "08:24:46",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "ACO2",
+            "stop_sequence": 43,
             "arrival_time": "08:25:40",
             "departure_time": "08:25:40",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "STJ3",
+            "stop_sequence": 44,
             "arrival_time": "08:26:54",
             "departure_time": "08:26:54",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "BRRS2",
+            "stop_sequence": 45,
             "arrival_time": "08:28:13",
             "departure_time": "08:28:13",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "CF2",
+            "stop_sequence": 46,
             "arrival_time": "08:29:17",
             "departure_time": "08:29:17",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LW2",
+            "stop_sequence": 47,
             "arrival_time": "08:30:27",
             "departure_time": "08:30:27",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "SVT4",
+            "stop_sequence": 48,
             "arrival_time": "08:31:03",
             "departure_time": "08:31:03",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "PLIM2",
+            "stop_sequence": 49,
             "arrival_time": "08:32:34",
             "departure_time": "08:32:34",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "COMB4",
+            "stop_sequence": 50,
             "arrival_time": "08:33:23",
             "departure_time": "08:33:23",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LIMA2",
+            "stop_sequence": 51,
             "arrival_time": "08:34:52",
             "departure_time": "08:34:52",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL7",
+            "stop_sequence": 52,
             "arrival_time": "08:36:15",
             "departure_time": "08:36:15",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL4",
+            "stop_sequence": 53,
             "arrival_time": "08:37:00",
             "departure_time": "08:37:00",
-            "designated_timing_point": true,
-            "source_role": "scheduled_timing_point"
+            "designated_timing_point": true
+          },
+          {
+            "stop_id": "DCAS2",
+            "stop_sequence": 54,
+            "arrival_time": "08:38:45",
+            "departure_time": "08:38:45",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "FTNH2",
+            "stop_sequence": 55,
+            "arrival_time": "08:39:49",
+            "departure_time": "08:39:49",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "0BLRB",
+            "stop_sequence": 56,
+            "arrival_time": "08:42:00",
+            "departure_time": "08:42:00",
+            "designated_timing_point": true
           }
-        ]
+        ],
+        "ars3_to_bolhao_seconds": 1090,
+        "ars3_to_mpl4_seconds": 790,
+        "mpl4_to_bolhao_seconds": 300
       },
       {
         "trip_id": "701_0_2|327|D1|T9|N4",
         "headsign": "Bolhão",
-        "first_published_timing_point": "ERM3",
+        "chronological_rank_1based": 12,
         "stop_times": [
           {
             "stop_id": "ARS3",
+            "stop_sequence": 41,
             "arrival_time": "08:34:50",
             "departure_time": "08:34:50",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "AA2",
+            "stop_sequence": 42,
             "arrival_time": "08:35:46",
             "departure_time": "08:35:46",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "ACO2",
+            "stop_sequence": 43,
             "arrival_time": "08:36:40",
             "departure_time": "08:36:40",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "STJ3",
+            "stop_sequence": 44,
             "arrival_time": "08:37:54",
             "departure_time": "08:37:54",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "BRRS2",
+            "stop_sequence": 45,
             "arrival_time": "08:39:13",
             "departure_time": "08:39:13",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "CF2",
+            "stop_sequence": 46,
             "arrival_time": "08:40:17",
             "departure_time": "08:40:17",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LW2",
+            "stop_sequence": 47,
             "arrival_time": "08:41:27",
             "departure_time": "08:41:27",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "SVT4",
+            "stop_sequence": 48,
             "arrival_time": "08:42:03",
             "departure_time": "08:42:03",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "PLIM2",
+            "stop_sequence": 49,
             "arrival_time": "08:43:34",
             "departure_time": "08:43:34",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "COMB4",
+            "stop_sequence": 50,
             "arrival_time": "08:44:23",
             "departure_time": "08:44:23",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LIMA2",
+            "stop_sequence": 51,
             "arrival_time": "08:45:52",
             "departure_time": "08:45:52",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL7",
+            "stop_sequence": 52,
             "arrival_time": "08:47:15",
             "departure_time": "08:47:15",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL4",
+            "stop_sequence": 53,
             "arrival_time": "08:48:00",
             "departure_time": "08:48:00",
-            "designated_timing_point": true,
-            "source_role": "scheduled_timing_point"
+            "designated_timing_point": true
+          },
+          {
+            "stop_id": "DCAS2",
+            "stop_sequence": 54,
+            "arrival_time": "08:49:45",
+            "departure_time": "08:49:45",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "FTNH2",
+            "stop_sequence": 55,
+            "arrival_time": "08:50:49",
+            "departure_time": "08:50:49",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "0BLRB",
+            "stop_sequence": 56,
+            "arrival_time": "08:53:00",
+            "departure_time": "08:53:00",
+            "designated_timing_point": true
           }
-        ]
+        ],
+        "ars3_to_bolhao_seconds": 1090,
+        "ars3_to_mpl4_seconds": 790,
+        "mpl4_to_bolhao_seconds": 300
       },
       {
         "trip_id": "701_0_2|327|D1|T7|N5",
         "headsign": "Bolhão",
-        "first_published_timing_point": "COD4",
+        "chronological_rank_1based": 13,
         "stop_times": [
           {
             "stop_id": "ARS3",
+            "stop_sequence": 41,
             "arrival_time": "08:45:50",
             "departure_time": "08:45:50",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "AA2",
+            "stop_sequence": 42,
             "arrival_time": "08:46:46",
             "departure_time": "08:46:46",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "ACO2",
+            "stop_sequence": 43,
             "arrival_time": "08:47:40",
             "departure_time": "08:47:40",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "STJ3",
+            "stop_sequence": 44,
             "arrival_time": "08:48:54",
             "departure_time": "08:48:54",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "BRRS2",
+            "stop_sequence": 45,
             "arrival_time": "08:50:13",
             "departure_time": "08:50:13",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "CF2",
+            "stop_sequence": 46,
             "arrival_time": "08:51:17",
             "departure_time": "08:51:17",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LW2",
+            "stop_sequence": 47,
             "arrival_time": "08:52:27",
             "departure_time": "08:52:27",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "SVT4",
+            "stop_sequence": 48,
             "arrival_time": "08:53:03",
             "departure_time": "08:53:03",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "PLIM2",
+            "stop_sequence": 49,
             "arrival_time": "08:54:34",
             "departure_time": "08:54:34",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "COMB4",
+            "stop_sequence": 50,
             "arrival_time": "08:55:23",
             "departure_time": "08:55:23",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LIMA2",
+            "stop_sequence": 51,
             "arrival_time": "08:56:52",
             "departure_time": "08:56:52",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL7",
+            "stop_sequence": 52,
             "arrival_time": "08:58:15",
             "departure_time": "08:58:15",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL4",
+            "stop_sequence": 53,
             "arrival_time": "08:59:00",
             "departure_time": "08:59:00",
-            "designated_timing_point": true,
-            "source_role": "scheduled_timing_point"
+            "designated_timing_point": true
+          },
+          {
+            "stop_id": "DCAS2",
+            "stop_sequence": 54,
+            "arrival_time": "09:00:24",
+            "departure_time": "09:00:24",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "FTNH2",
+            "stop_sequence": 55,
+            "arrival_time": "09:01:15",
+            "departure_time": "09:01:15",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "0BLRB",
+            "stop_sequence": 56,
+            "arrival_time": "09:03:00",
+            "departure_time": "09:03:00",
+            "designated_timing_point": true
           }
-        ]
+        ],
+        "ars3_to_bolhao_seconds": 1030,
+        "ars3_to_mpl4_seconds": 790,
+        "mpl4_to_bolhao_seconds": 240
       },
       {
         "trip_id": "701_0_2|327|D1|T4|N4",
         "headsign": "Bolhão",
-        "first_published_timing_point": "COD4",
+        "chronological_rank_1based": 14,
         "stop_times": [
           {
             "stop_id": "ARS3",
+            "stop_sequence": 41,
             "arrival_time": "08:57:43",
             "departure_time": "08:57:43",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "AA2",
+            "stop_sequence": 42,
             "arrival_time": "08:58:31",
             "departure_time": "08:58:31",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "ACO2",
+            "stop_sequence": 43,
             "arrival_time": "08:59:17",
             "departure_time": "08:59:17",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "STJ3",
+            "stop_sequence": 44,
             "arrival_time": "09:00:21",
             "departure_time": "09:00:21",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "BRRS2",
+            "stop_sequence": 45,
             "arrival_time": "09:01:28",
             "departure_time": "09:01:28",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "CF2",
+            "stop_sequence": 46,
             "arrival_time": "09:02:23",
             "departure_time": "09:02:23",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LW2",
+            "stop_sequence": 47,
             "arrival_time": "09:03:23",
             "departure_time": "09:03:23",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "SVT4",
+            "stop_sequence": 48,
             "arrival_time": "09:03:54",
             "departure_time": "09:03:54",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "PLIM2",
+            "stop_sequence": 49,
             "arrival_time": "09:05:12",
             "departure_time": "09:05:12",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "COMB4",
+            "stop_sequence": 50,
             "arrival_time": "09:05:54",
             "departure_time": "09:05:54",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "LIMA2",
+            "stop_sequence": 51,
             "arrival_time": "09:07:11",
             "departure_time": "09:07:11",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL7",
+            "stop_sequence": 52,
             "arrival_time": "09:08:21",
             "departure_time": "09:08:21",
-            "designated_timing_point": false,
-            "source_role": "scheduled_non_timing_point_reference"
+            "designated_timing_point": false
           },
           {
             "stop_id": "MPL4",
+            "stop_sequence": 53,
             "arrival_time": "09:09:00",
             "departure_time": "09:09:00",
-            "designated_timing_point": true,
-            "source_role": "scheduled_timing_point"
+            "designated_timing_point": true
+          },
+          {
+            "stop_id": "DCAS2",
+            "stop_sequence": 54,
+            "arrival_time": "09:10:24",
+            "departure_time": "09:10:24",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "FTNH2",
+            "stop_sequence": 55,
+            "arrival_time": "09:11:15",
+            "departure_time": "09:11:15",
+            "designated_timing_point": false
+          },
+          {
+            "stop_id": "0BLRB",
+            "stop_sequence": 56,
+            "arrival_time": "09:13:00",
+            "departure_time": "09:13:00",
+            "designated_timing_point": true
           }
-        ]
+        ],
+        "ars3_to_bolhao_seconds": 917,
+        "ars3_to_mpl4_seconds": 677,
+        "mpl4_to_bolhao_seconds": 240
       }
     ],
     "calendar_caveat": "services API selected_date20261028 resolves active service. Nested route service_days all false and dates null; do not interpret as no service. Current full calendar_dates export not verified.",
-    "intermediate_timepoint_caveat": "Only MPL4 is listed as timing point within this segment. Non-timingpoint seconds are operator scheduled references; interpolation algorithm and current raw GTFS timepoint0 values not exposed by inspected API."
+    "intermediate_timepoint_caveat": "Only MPL4 is listed as timing point within this segment. Non-timingpoint seconds are operator scheduled references; interpolation algorithm and current raw GTFS timepoint0 values not exposed by inspected API.",
+    "trip_count": 63,
+    "all_trip_stop_times_file": "joined_stop_times.json",
+    "per_stop_raw_count": 17,
+    "validation": {
+      "route_trip_count": 63,
+      "all_unique_route_trip_ids": true,
+      "per_stop_count": {
+        "ARSM2": 63,
+        "ARS3": 63,
+        "AA2": 63,
+        "ACO2": 63,
+        "STJ3": 63,
+        "BRRS2": 63,
+        "CF2": 63,
+        "LW2": 63,
+        "SVT4": 63,
+        "PLIM2": 63,
+        "COMB4": 63,
+        "LIMA2": 63,
+        "MPL7": 63,
+        "MPL4": 63,
+        "DCAS2": 63,
+        "FTNH2": 63,
+        "0BLRB": 63
+      },
+      "per_stop_unique_time_count": {
+        "ARSM2": 63,
+        "ARS3": 63,
+        "AA2": 63,
+        "ACO2": 63,
+        "STJ3": 63,
+        "BRRS2": 63,
+        "CF2": 63,
+        "LW2": 63,
+        "SVT4": 63,
+        "PLIM2": 63,
+        "COMB4": 63,
+        "LIMA2": 63,
+        "MPL7": 63,
+        "MPL4": 63,
+        "DCAS2": 63,
+        "FTNH2": 63,
+        "0BLRB": 63
+      },
+      "route_anchor_unique_time_count": {
+        "ARSM2": 63,
+        "MPL4": 63,
+        "0BLRB": 63
+      },
+      "route_anchor_order_agrees": {
+        "ARSM2": true,
+        "MPL4": true,
+        "0BLRB": true
+      },
+      "per_stop_anchor_equals_route_trip_time_by_rank": {
+        "ARSM2": true,
+        "MPL4": true,
+        "0BLRB": true
+      },
+      "per_stop_arrival_equals_departure": {
+        "ARSM2": true,
+        "ARS3": true,
+        "AA2": true,
+        "ACO2": true,
+        "STJ3": true,
+        "BRRS2": true,
+        "CF2": true,
+        "LW2": true,
+        "SVT4": true,
+        "PLIM2": true,
+        "COMB4": true,
+        "LIMA2": true,
+        "MPL7": true,
+        "MPL4": true,
+        "DCAS2": true,
+        "FTNH2": true,
+        "0BLRB": true
+      },
+      "all_joined_trip_times_strictly_increase": true,
+      "morning_trip_ids_equal_previous": true,
+      "interval_only_candidate_ambiguity": {
+        "ARS3": {
+          "times_with_multiple_anchor_interval_candidates": 12,
+          "max_anchor_interval_candidates": 2
+        },
+        "AA2": {
+          "times_with_multiple_anchor_interval_candidates": 9,
+          "max_anchor_interval_candidates": 2
+        },
+        "ACO2": {
+          "times_with_multiple_anchor_interval_candidates": 6,
+          "max_anchor_interval_candidates": 2
+        },
+        "STJ3": {
+          "times_with_multiple_anchor_interval_candidates": 0,
+          "max_anchor_interval_candidates": 1
+        },
+        "BRRS2": {
+          "times_with_multiple_anchor_interval_candidates": 0,
+          "max_anchor_interval_candidates": 1
+        },
+        "CF2": {
+          "times_with_multiple_anchor_interval_candidates": 0,
+          "max_anchor_interval_candidates": 1
+        },
+        "LW2": {
+          "times_with_multiple_anchor_interval_candidates": 0,
+          "max_anchor_interval_candidates": 1
+        },
+        "SVT4": {
+          "times_with_multiple_anchor_interval_candidates": 0,
+          "max_anchor_interval_candidates": 1
+        },
+        "PLIM2": {
+          "times_with_multiple_anchor_interval_candidates": 0,
+          "max_anchor_interval_candidates": 1
+        },
+        "COMB4": {
+          "times_with_multiple_anchor_interval_candidates": 0,
+          "max_anchor_interval_candidates": 1
+        },
+        "LIMA2": {
+          "times_with_multiple_anchor_interval_candidates": 6,
+          "max_anchor_interval_candidates": 2
+        },
+        "MPL7": {
+          "times_with_multiple_anchor_interval_candidates": 12,
+          "max_anchor_interval_candidates": 2
+        },
+        "DCAS2": {
+          "times_with_multiple_anchor_interval_candidates": 0,
+          "max_anchor_interval_candidates": 1
+        },
+        "FTNH2": {
+          "times_with_multiple_anchor_interval_candidates": 0,
+          "max_anchor_interval_candidates": 1
+        }
+      },
+      "per_stop_unique_anchor_constrained_perfect_matching": {
+        "ARS3": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "AA2": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "ACO2": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "STJ3": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "BRRS2": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "CF2": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "LW2": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "SVT4": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "PLIM2": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "COMB4": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "LIMA2": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "MPL7": {
+          "anchor_interval": [
+            "ARSM2",
+            "MPL4"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "DCAS2": {
+          "anchor_interval": [
+            "MPL4",
+            "0BLRB"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        },
+        "FTNH2": {
+          "anchor_interval": [
+            "MPL4",
+            "0BLRB"
+          ],
+          "rank_matching_is_valid": true,
+          "rank_matching_size": 63,
+          "deleted_each_rank_edge_individually": 63,
+          "maximum_matching_size_after_any_one_rank_edge_removed": 62,
+          "unique_perfect_matching_proved": true
+        }
+      }
+    },
+    "trip_association_limit": "Some upstream arrivals individually fit two anchor windows, but global one-to-one matching resolves them uniquely. Proof assumes each of the 63 published stop arrivals belongs once to the 63 route trips and occurs between the adjacent published timing points; this is validated as a coherent complete timetable, not directly exposed trip identity or observed vehicle tracking.",
+    "boundary_schedule_available": false
   },
   "observations": {
     "broker_701_snapshot": [
@@ -863,12 +1366,589 @@
     "MPL7_schedule": "https://stcp.pt/api/stops/MPL7/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
     "MPL4_schedule": "https://stcp.pt/api/stops/MPL4/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
     "gtfs_zip": "https://dadosabertos.cm-porto.pt/dataset/71490e40-9e19-11f1-84ed-6abdb6d5cf34/resource/51340c18-0ef5-4895-b099-cf7247ea54f4/download/gtfs_feed.zip",
-    "broker_buses": "https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType%3D%3Dbus&limit=1000"
+    "broker_buses": "https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType%3D%3Dbus&limit=1000",
+    "services.json": "https://stcp.pt/api/route/701/services?date=2026-10-28",
+    "inbound_stops.json": "https://stcp.pt/api/route/701/stops/direction?direction_id=1",
+    "inbound_shape.json": "https://stcp.pt/api/route/701/shape?direction_id=1",
+    "schedule.json": "https://stcp.pt/api/route/701/schedule?service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "dgt_collections.json": "https://ogcapi.dgterritorio.gov.pt/collections?f=json",
+    "dgt_caop_page.html": "https://www.dgterritorio.gov.pt/atividades/cartografia/cartografia-tematica/caop",
+    "dgt_open_data_page.html": "https://www.dgterritorio.gov.pt/dados-abertos",
+    "stop_schedule_ARSM2.json": "https://stcp.pt/api/stops/ARSM2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_ARS3.json": "https://stcp.pt/api/stops/ARS3/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_AA2.json": "https://stcp.pt/api/stops/AA2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_ACO2.json": "https://stcp.pt/api/stops/ACO2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_STJ3.json": "https://stcp.pt/api/stops/STJ3/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_BRRS2.json": "https://stcp.pt/api/stops/BRRS2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_CF2.json": "https://stcp.pt/api/stops/CF2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_LW2.json": "https://stcp.pt/api/stops/LW2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_SVT4.json": "https://stcp.pt/api/stops/SVT4/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_PLIM2.json": "https://stcp.pt/api/stops/PLIM2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_COMB4.json": "https://stcp.pt/api/stops/COMB4/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_LIMA2.json": "https://stcp.pt/api/stops/LIMA2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_MPL7.json": "https://stcp.pt/api/stops/MPL7/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_MPL4.json": "https://stcp.pt/api/stops/MPL4/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_DCAS2.json": "https://stcp.pt/api/stops/DCAS2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_FTNH2.json": "https://stcp.pt/api/stops/FTNH2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_0BLRB.json": "https://stcp.pt/api/stops/0BLRB/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "dgt_municipios_queryables.json": "https://ogcapi.dgterritorio.gov.pt/collections/municipios/queryables?f=json",
+    "dgt_municipios_near_areosa.geojson": "https://ogcapi.dgterritorio.gov.pt/collections/municipios/items?f=json&bbox=-8.585,41.178,-8.579,41.186&limit=20",
+    "dgt_porto_caop2025.geojson": "https://ogcapi.dgterritorio.gov.pt/collections/municipios/items/1312?f=json",
+    "notice_costa_cabral.html": "https://stcp.pt/pt/viajar/alteracoes-de-servico/varias-linhas-alteracao-percurso-alt-sentido-transito-r-costa-cabral-porto",
+    "notice_future_santa_catarina.html": "https://stcp.pt/pt/viajar/alteracoes-de-servico/alteracao-de-percurso-obras-r-santa-catarina-porto-1",
+    "notice_mpl7_restored.html": "https://stcp.pt/pt/viajar/alteracoes-de-servico/normalizacao-de-paragem-obras-r-constituicao-porto-1",
+    "stop_schedule_COD4.json": "https://stcp.pt/api/stops/COD4/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_VGM6.json": "https://stcp.pt/api/stops/VGM6/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_COD.json": "https://stcp.pt/api/stops/COD/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_ALXH2.json": "https://stcp.pt/api/stops/ALXH2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_ALF.json": "https://stcp.pt/api/stops/ALF/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_TCT2.json": "https://stcp.pt/api/stops/TCT2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_IGRA2.json": "https://stcp.pt/api/stops/IGRA2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_BARR2.json": "https://stcp.pt/api/stops/BARR2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_ADNV2.json": "https://stcp.pt/api/stops/ADNV2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_OLVR2.json": "https://stcp.pt/api/stops/OLVR2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_VSV2.json": "https://stcp.pt/api/stops/VSV2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_CBD2.json": "https://stcp.pt/api/stops/CBD2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_SPAZ2.json": "https://stcp.pt/api/stops/SPAZ2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_RGNG2.json": "https://stcp.pt/api/stops/RGNG2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_ERMD2.json": "https://stcp.pt/api/stops/ERMD2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_STNH2.json": "https://stcp.pt/api/stops/STNH2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_FNTE2.json": "https://stcp.pt/api/stops/FNTE2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_5OTR2.json": "https://stcp.pt/api/stops/5OTR2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_VASG1.json": "https://stcp.pt/api/stops/VASG1/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_1BVE4.json": "https://stcp.pt/api/stops/1BVE4/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_ERMI2.json": "https://stcp.pt/api/stops/ERMI2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_ERM3.json": "https://stcp.pt/api/stops/ERM3/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_CRZ2.json": "https://stcp.pt/api/stops/CRZ2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_PTCR2.json": "https://stcp.pt/api/stops/PTCR2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_SBR2.json": "https://stcp.pt/api/stops/SBR2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_CGK2.json": "https://stcp.pt/api/stops/CGK2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_CNSL2.json": "https://stcp.pt/api/stops/CNSL2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_AM2.json": "https://stcp.pt/api/stops/AM2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_PCUA2.json": "https://stcp.pt/api/stops/PCUA2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_CORI2.json": "https://stcp.pt/api/stops/CORI2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_CCOR.json": "https://stcp.pt/api/stops/CCOR/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_CORM2.json": "https://stcp.pt/api/stops/CORM2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_BRO2.json": "https://stcp.pt/api/stops/BRO2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_SGM.json": "https://stcp.pt/api/stops/SGM/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_FRN2.json": "https://stcp.pt/api/stops/FRN2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_CRPO2.json": "https://stcp.pt/api/stops/CRPO2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_GIT2.json": "https://stcp.pt/api/stops/GIT2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_TRI2.json": "https://stcp.pt/api/stops/TRI2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1",
+    "stop_schedule_AFEI2.json": "https://stcp.pt/api/stops/AFEI2/schedule?route_id=701&service_id=UTIL+ESCOLAR%3AFLUXO+3+20261027&direction_id=1"
   },
   "limitations": [
-    "Not a current validated traffic model or private-car access policy",
-    "No historical morning bus or traffic-count series acquired",
-    "Current per-trip shapes/GTFS shape_id not exposed by inspected route shape endpoint",
-    "No completeness, update-rate or uptime guarantee verified for public APIs"
-  ]
+    "Frozen 28 October 2026 reference, not live service.",
+    "MPL4 and 0BLRB are designated timing points; other Porto calls are intermediate published references.",
+    "Per-stop trip IDs are derived by unique matching against route timing-point anchors; source endpoint omits IDs.",
+    "No official timetable is supplied at the municipal boundary; native entry lead is assumed.",
+    "Full-line passenger/service propagation is an assumed operational model, distinct from the Porto SUMO street simulation."
+  ],
+  "municipality": {
+    "source_organisation": "Direção-Geral do Território",
+    "dataset": "CAOP2025 Municípios",
+    "municipality": "Porto",
+    "municipality_code": "1312",
+    "raw_feature": "dgt_porto_caop2025.geojson",
+    "raw_neighbour_features": "dgt_municipios_near_areosa.geojson",
+    "source_geojson_crs": "OGC:CRS84 (longitude, latitude)",
+    "source_storage_crs": "EPSG:3763 (ETRS89 / Portugal TM06)",
+    "measurement_crs": "EPSG:3763",
+    "analysis_libraries": {
+      "shapely": "2.2.0",
+      "pyproj": "3.8.0"
+    },
+    "method": "Point-in-polygon and full ordered STCP shape intersection against raw DGT CAOP2025 municipal feature. Boundary distance and chainage measured after transforming longitude/latitude coordinates to EPSG:3763. No tolerance buffer used for classification.",
+    "all_56_stop_coordinate_results": [
+      {
+        "stop_id": "COD4",
+        "stop_sequence": 1,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 8843.581606
+      },
+      {
+        "stop_id": "VGM6",
+        "stop_sequence": 2,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 8699.908227
+      },
+      {
+        "stop_id": "COD",
+        "stop_sequence": 3,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 8456.533387
+      },
+      {
+        "stop_id": "ALXH2",
+        "stop_sequence": 4,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 8099.822264
+      },
+      {
+        "stop_id": "ALF",
+        "stop_sequence": 5,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 7848.833679
+      },
+      {
+        "stop_id": "TCT2",
+        "stop_sequence": 6,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 7607.59754
+      },
+      {
+        "stop_id": "IGRA2",
+        "stop_sequence": 7,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 7435.175553
+      },
+      {
+        "stop_id": "BARR2",
+        "stop_sequence": 8,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 7082.48913
+      },
+      {
+        "stop_id": "ADNV2",
+        "stop_sequence": 9,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 6654.384102
+      },
+      {
+        "stop_id": "OLVR2",
+        "stop_sequence": 10,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 6414.638692
+      },
+      {
+        "stop_id": "VSV2",
+        "stop_sequence": 11,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 6192.607239
+      },
+      {
+        "stop_id": "CBD2",
+        "stop_sequence": 12,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 5876.668654
+      },
+      {
+        "stop_id": "SPAZ2",
+        "stop_sequence": 13,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 5674.760122
+      },
+      {
+        "stop_id": "RGNG2",
+        "stop_sequence": 14,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 5587.359372
+      },
+      {
+        "stop_id": "ERMD2",
+        "stop_sequence": 15,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 5449.613191
+      },
+      {
+        "stop_id": "STNH2",
+        "stop_sequence": 16,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 5325.804824
+      },
+      {
+        "stop_id": "FNTE2",
+        "stop_sequence": 17,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 5055.73912
+      },
+      {
+        "stop_id": "5OTR2",
+        "stop_sequence": 18,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 4772.055833
+      },
+      {
+        "stop_id": "VASG1",
+        "stop_sequence": 19,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 4453.53092
+      },
+      {
+        "stop_id": "1BVE4",
+        "stop_sequence": 20,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 4534.398878
+      },
+      {
+        "stop_id": "ERMI2",
+        "stop_sequence": 21,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 4634.333749
+      },
+      {
+        "stop_id": "ERM3",
+        "stop_sequence": 22,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 4382.945012
+      },
+      {
+        "stop_id": "CRZ2",
+        "stop_sequence": 23,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 4027.347193
+      },
+      {
+        "stop_id": "PTCR2",
+        "stop_sequence": 24,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 3701.704267
+      },
+      {
+        "stop_id": "SBR2",
+        "stop_sequence": 25,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 3572.967554
+      },
+      {
+        "stop_id": "CGK2",
+        "stop_sequence": 26,
+        "municipalities_containing_or_covering_coordinate": [],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 3478.313106
+      },
+      {
+        "stop_id": "CNSL2",
+        "stop_sequence": 27,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 3277.446761
+      },
+      {
+        "stop_id": "AM2",
+        "stop_sequence": 28,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 3054.565841
+      },
+      {
+        "stop_id": "PCUA2",
+        "stop_sequence": 29,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 2654.677981
+      },
+      {
+        "stop_id": "CORI2",
+        "stop_sequence": 30,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 2505.832238
+      },
+      {
+        "stop_id": "CCOR",
+        "stop_sequence": 31,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 2341.119397
+      },
+      {
+        "stop_id": "CORM2",
+        "stop_sequence": 32,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 2161.224015
+      },
+      {
+        "stop_id": "BRO2",
+        "stop_sequence": 33,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 1875.037262
+      },
+      {
+        "stop_id": "SGM",
+        "stop_sequence": 34,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 1732.194328
+      },
+      {
+        "stop_id": "FRN2",
+        "stop_sequence": 35,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 1526.369875
+      },
+      {
+        "stop_id": "CRPO2",
+        "stop_sequence": 36,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 1283.148421
+      },
+      {
+        "stop_id": "GIT2",
+        "stop_sequence": 37,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 1087.624534
+      },
+      {
+        "stop_id": "TRI2",
+        "stop_sequence": 38,
+        "municipalities_containing_or_covering_coordinate": [
+          "Maia"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 876.34763
+      },
+      {
+        "stop_id": "AFEI2",
+        "stop_sequence": 39,
+        "municipalities_containing_or_covering_coordinate": [
+          "Gondomar"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 565.040148
+      },
+      {
+        "stop_id": "ARSM2",
+        "stop_sequence": 40,
+        "municipalities_containing_or_covering_coordinate": [
+          "Gondomar"
+        ],
+        "porto_status": "outside",
+        "distance_to_porto_boundary_m": 135.561382
+      },
+      {
+        "stop_id": "ARS3",
+        "stop_sequence": 41,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 56.36819
+      },
+      {
+        "stop_id": "AA2",
+        "stop_sequence": 42,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 226.697699
+      },
+      {
+        "stop_id": "ACO2",
+        "stop_sequence": 43,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 339.210762
+      },
+      {
+        "stop_id": "STJ3",
+        "stop_sequence": 44,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 580.156534
+      },
+      {
+        "stop_id": "BRRS2",
+        "stop_sequence": 45,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 860.623187
+      },
+      {
+        "stop_id": "CF2",
+        "stop_sequence": 46,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 1092.901904
+      },
+      {
+        "stop_id": "LW2",
+        "stop_sequence": 47,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 1294.528198
+      },
+      {
+        "stop_id": "SVT4",
+        "stop_sequence": 48,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 1398.185618
+      },
+      {
+        "stop_id": "PLIM2",
+        "stop_sequence": 49,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 1625.880553
+      },
+      {
+        "stop_id": "COMB4",
+        "stop_sequence": 50,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 1780.602158
+      },
+      {
+        "stop_id": "LIMA2",
+        "stop_sequence": 51,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 2134.444879
+      },
+      {
+        "stop_id": "MPL7",
+        "stop_sequence": 52,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 2268.670713
+      },
+      {
+        "stop_id": "MPL4",
+        "stop_sequence": 53,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 2254.794465
+      },
+      {
+        "stop_id": "DCAS2",
+        "stop_sequence": 54,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 1904.681045
+      },
+      {
+        "stop_id": "FTNH2",
+        "stop_sequence": 55,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 1625.298059
+      },
+      {
+        "stop_id": "0BLRB",
+        "stop_sequence": 56,
+        "municipalities_containing_or_covering_coordinate": [
+          "Porto"
+        ],
+        "porto_status": "inside",
+        "distance_to_porto_boundary_m": 1246.804468
+      }
+    ],
+    "first_stop_inside_porto": {
+      "stop_id": "ARS3",
+      "stop_sequence": 41,
+      "municipalities_containing_or_covering_coordinate": [
+        "Porto"
+      ],
+      "porto_status": "inside",
+      "distance_to_porto_boundary_m": 56.36819
+    },
+    "route_boundary_crossing_count": 1,
+    "municipal_entry": {
+      "lon": -8.58329575403366,
+      "lat": 41.18112052453768,
+      "between_shape_sequences_1based": [
+        407,
+        408
+      ],
+      "full_shape_chainage_m_epsg3763": 11652.654161,
+      "scheduled_time": null,
+      "scheduled_time_status": "No official timetable at the municipal boundary; any vehicle entry lead is a simulation assumption."
+    },
+    "ars3_shape_sequence_1based": 409,
+    "ars3_full_shape_chainage_m_epsg3763": 11712.310728,
+    "municipal_entry_to_ars3_shape_length_m_epsg3763": 59.656567,
+    "municipal_entry_to_final_shape_length_m_epsg3763": 4545.164965,
+    "ars3_to_final_shape_length_m_epsg3763": 4485.508398,
+    "full_direction_shape_length_m_epsg3763": 16197.819126,
+    "full_route_porto_intersection_type": "LineString",
+    "conclusion": "ARS3 is the first stop strictly inside Porto, 56.37 m from the CAOP boundary. The whole municipal extent begins 59.66 m along the STCP shape before ARS3, between ARSM2 (Gondomar) and ARS3. Include that short approach; ARS3 alone does not include every metre in Porto.",
+    "limits": "Classification is relative to published STCP coordinates/shape and cartographic CAOP2025, not an on-street survey; supplied source position precision is not a surveyed road-edge location.",
+    "entry_lonlat": [
+      -8.58329575403366,
+      41.18112052453768
+    ],
+    "approach_metres": 59.656567,
+    "shape_metres": 4545.164965
+  },
+  "extension_source_bundle": "701-extension"
 }

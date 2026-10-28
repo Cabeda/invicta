@@ -1,79 +1,81 @@
-# 701: Areosa → Marquês, one direction first
+# Line 701: Porto streets and whole-line reliability
 
-**Question:** can we locate where the 701 loses time, compare bus priority by stop interval, and identify car connections that need to remain? This is a throwaway, runnable investigation, not a calibrated forecast or approved design.
+**Question:** can the 701 meet its schedule throughout its inbound service without bunching, while keeping everyday access and passenger capacity workable? This is a throwaway investigation with two explicitly different layers.
 
-Open the [bilingual pilot](../costa-cabral/proposal/index.html) over HTTP, or serve it with:
+- **Native Porto streets:** the entire mapped municipal extent, beginning about 60m before Areosa ARS3 and ending at Bolhão 0BLRB. Sixteen stops, 15 stop intervals, approximately 4.545km on the official shape.
+- **Whole-line service:** all 56 stops and 63 inbound workings; 39 start at Codiceira, 24 at Ermesinde. A timetable/passenger/berth model tests delay propagation, dwell, capacity and headways. Road traffic outside Porto, the opposite direction, other lines and shared vehicle rotations are not simulated.
+
+[Live demo](https://invicta-dusky.vercel.app) · [Detailed report](REPORT.md) · [Primary-source extent and timetable research](../../docs/research/line-701-porto-extent.md)
+
+## Open locally
 
 ```sh
-python3 -m http.server 8765 --directory prototypes/costa-cabral
-# http://127.0.0.1:8765/proposal/index.html?lang=pt#route
+python3 -m http.server 8765 --directory prototypes/costa-cabral/proposal
+# http://127.0.0.1:8765/?lang=pt
 ```
 
-The website contains the official route, five scheduled morning journeys, simulated arrival profiles, twelve interval controls, car connectivity results, GPS passage evidence, CSV arrival import, 3D and WebM recording. Its policy JSON is controlled through code; new checkbox combinations require a native rerun. The earlier street experiment and regional population calculator remain in `proposal/legacy.html`.
+The bilingual website has the official map, five morning native journeys, stop profiles, fifteen interval policies, visible unserved demand, a whole-line delay/bunching explorer, CSV arrival import, 3D bus following, WebM recording and JSON/Markdown exports. The earlier street study and metropolitan what-if calculator remain in `legacy.html`.
 
-## Current route and timetable
+## Verified reference, not a traffic forecast
 
-Frozen official STCP APIs for **28 October 2026**, inbound `direction_id=1`, towards Bolhão; service `UTIL ESCOLAR:FLUXO 3 20261027`. The section contains **13 stops** and approximately **3.14 km** of official shape:
+The frozen date is **28 October 2026**, service `UTIL ESCOLAR:FLUXO 3 20261027`, direction 1 towards Bolhão. The full Porto stop sequence is:
 
-`ARS3 → AA2 → ACO2 → STJ3 → BRRS2 → CF2 → LW2 → SVT4 → PLIM2 → COMB4 → LIMA2 → MPL7 → MPL4`.
+`ARS3 → AA2 → ACO2 → STJ3 → BRRS2 → CF2 → LW2 → SVT4 → PLIM2 → COMB4 → LIMA2 → MPL7 → MPL4 → DCAS2 → FTNH2 → 0BLRB`.
 
-The current route turns from Costa Cabral into **Rua da Alegria, Rua da Constituição and Praça do Marquês**. COMB4 is already on Alegria. Both Marquês stops matter: MPL7 was restored in October; the frozen September municipal feed is not the route authority for this date. Only MPL4 is a designated timing point inside this section. Intermediate published seconds are reference times, not instructions to hold a bus or an agreed punctuality standard.
+After the two Marquês stops, the bus continues through Doze Casas, Fontinha and the Bolhão terminus. The actual source shape includes a loop via Bonjardim/João de Oliveira Ramos and then Santa Catarina, Gonçalo Cristóvão, Carvalheiras and Bolhão. Match the ordered shape rather than drawing a straight extension. A diversion published for 29–30 October is outside this dated pilot.
 
-The 08:00–09:00 Areosa references are 08:12:50, 08:23:50, 08:34:50, 08:45:50 and 08:57:43. Four run to MPL4 in a published 13m10s; the fifth in 11m17s. Per-stop APIs omit trip IDs: all 63 unique stop calls are associated by sorted rank against unique MPL4 trip anchors, with exact anchor and monotonicity checks. This is a derived association.
+DGT CAOP2025 establishes that ARS3 is the first stop inside Porto. The route crosses the boundary 59.66m before it, at 41.1811205245,−8.5832957540. The official municipal clip is 4,545.16m measured in EPSG:3763. Native map-matched positions use the SUMO projection and can differ from cartographic distances. Stop/lane geometry still needs field validation.
 
-See [primary-source research](../../docs/research/line-701-data-and-direction.md), `data/source-facts.json`, and the raw response bundle `data/official/metadata.json` for URLs, dates and hashes. `prepare_route.py` uses the official ordered shape and bus-permitted network connectivity to match 42 native edges, with stop snap distances below 10m. It does not select roads just by their names. Segment policies use whole native edges; a shared boundary edge belongs to the earlier interval. Exact stop boundaries and street design require field review.
+The five Areosa references are 08:12:50,08:23:50,08:34:50,08:45:50,08:57:43; Bolhão references are 08:31,08:42,08:53,09:03,09:13. **MPL4 and 0BLRB are the two designated timing points inside Porto.** The whole inbound line has six designated timing points. Other stop seconds are published intermediate references, not exact observed passages or operator-agreed punctuality tolerances.
 
-## What the observation sample establishes
+The per-stop API omits trip IDs. The full service dataset has 3,024 published references with derived trip IDs, uniquely matched against route timing-point anchors; the 504 nulls are only the 24 short workings' 21 unserved upstream stops. No Codiceira departures are invented for Ermesinde workings. All 69 newly frozen raw responses have hashes and retrieval times in `data/official-extension/metadata.json`.
 
-A bounded, 15-minute public Porto Digital collection captured 48 unique accepted timestamped 701 positions across 59 polls. Duplicates are removed; current trip IDs, Lisbon study date, observation age, shape distance and progress are checked. Raw positions are in `data/observations/positions.ndjson`; reproducible passage windows are in `data/observations-summary.json`.
+## Native Porto experiment
 
-One evening journey has ten stop passage windows. Between **PLIM2 (Pires de Lima) and COMB4 (Combatentes)** its deviation from the published reference grew by **137–258 seconds**, approximately **2.3–4.3 minutes**. These are brackets from consecutive GPS positions straddling a stop, not door-open arrival measurements. One trip cannot establish a recurring bottleneck or its cause. That journey has no Areosa passage, so its inherited delay and full-section added observed delay cannot be separated. The evening sample does not calibrate morning demand.
+`prepare_network.py` combines the original frozen OSM district with two additional southern tiles. It preserves the coordinate projection/offset and leaves the legacy study untouched. Every new policy shares the extended imported geometry, lane counts, connections and signals; it changes lane permissions only. The network is an unvalidated OSM import. Earlier 13-stop results are superseded; network/demand scope changed, so differences from that earlier batch are not policy gains.
 
-The CSV importer accepts `trip_id,stop_id,observed_arrival`, with an ISO timestamp including timezone, matching current trip IDs, study date and stops. A later upload for the same trip replaces its previous uploaded records. Uploaded arrivals remain in browser memory and are labelled user supplied, without independent verification. They are never presented as captured GPS evidence. Predicted arrival/delay fields are not used as measured passages.
+`prepare_route.py` maps all 16 stops and the municipal approach onto 64 directed native edges. Boundary entry has no official scheduled time. Vehicles launch with an explicitly assumed 6-second lead before the Areosa reference; entry lateness is measured at Areosa and therefore also includes approach delay. The boundary-crossing edge is excluded from new permission policies. Interval policies affect whole native edges, with shared edges owned by the earlier interval.
 
-## Native experiments and car access
+New synthetic OD pairs cover the southern extension as well as valid earlier pairs. They are not actual residents' or shoppers' demand. The connectivity screen identifies newly unreachable pairs and static detours, including the combined policy. It cannot establish practical/legal access adequacy or operational capacity. A connectivity-screened candidate can still gridlock; all requested and unfinished journeys remain visible.
 
-The baseline is byte-identical to the earlier unmodified frozen OSM import. **Lane counts, geometry, connections and signal programs stay identical across all new variants.** A policy changes lane permissions only. Existing bus-only lanes remain; new priority reserves one eligible lane and retains other general lanes where present. Only the selected inbound edges change. A no-change interval produces exactly identical native outcomes to the baseline in all three seeds.
+The full batch has **72 SUMO runs**: three seeds for three demand/entry cases and three packages, plus 15 isolated interval tests in the busy case. Only five target 701 buses are included. Dwell is fixed at 20s and signal programs are unverified. MPL4/0BLRB departures hold until their reference times. The late-entry case adds 180s before municipal entry.
 
-The access screen tests generated side-road connector and ordinary-traffic OD pairs. Restricting the first two intervals, **Areosa → Alto da Areosa → António Coelho**, makes some pairs unreachable. The candidate therefore retains general flow there and applies new/existing priority on later intervals; its combined screen has zero newly unreachable pairs. This is a sampled structural finding, not proof that those are the only possible policies, not actual residents' demand, and not a legal conclusion. Driveways, loading, visits, deliveries, emergency access, turn movements and walking access need a real inventory. Low detours do not establish that access is acceptable.
+The new candidate retains general flow in the first two intervals and in Marquês→Doze Casas→Fontinha where the generated connectivity screen finds losses. It is not an optimized or recommended design. In the busy case it completes 12/15 bus stop sequences, versus 15/15 for the baseline; in one seed it leaves 93 total vehicle requests unserved. Under assumed late entry its mean final deviation can also be worse than the baseline. The report and top-level counters preserve these failures. An individual interval's bus benefit is withheld when buses fail or a vehicle group has extra unserved demand.
 
-The full batch has **63 SUMO runs**: three seeds for three traffic/entry cases and three packages, plus all twelve individual-interval tests in the busy case. Traffic is synthetic, dwell is fixed at 20s, and imported signals are unverified. Only five target 701 buses are included; other routes and passengers are not modelled. The late-entry case adds an assumed 180 seconds before Areosa. Intermediate references do not hold buses; MPL4 departures wait for its published time.
+## Whole-line bunching and cascade model
 
-Outputs distinguish entry lateness, final lateness and delay added inside the section. Negative deviations mean early arrivals. No operator tolerance is assumed. Completed-only in-network times and all unserved requests remain visible. In one seed, the isolated LW2 → SVT4 intervention leaves all five buses unfinished; its benefit is withheld. Do not add individual interval effects or rank a policy by the surviving journeys. This model cannot yet establish whether buses will meet actual schedules or quantify workers' and shoppers' purpose-specific impacts.
+The service layer is a separate conditional model with all 63 workings and their actual scheduled patterns. It is not a full-road simulation outside Porto and is not automatically calibrated by the local SUMO results. Passenger demand, running-time recovery, capacity and dwell are assumptions exposed in the interface and JSON.
 
-## Reproduce and control using code
+It processes arrivals chronologically, including overtaking, shared single-berth queues, fluid passenger arrivals, alighting, capacity limits and boarding dwell. A delayed bus can collect more passengers and slow further; a following bus can collect fewer and catch up. A no-injected-delay reference keeps the same passenger demand and other settings. The display counts changed other trips, actual adjacent departure pairs whose gap is below half their published-time separation, capacity-denied calls and residual waiting passengers.
+
+Punctuality uses **boarding-berth access**, including a queue for the berth, rather than approach arrival. The strict project goal requires zero late arrivals at every designated timing point, no early departures there, no short-gap events, no capacity-denied boarding calls and no residual passenger queues. This is a test of an assumed model; real zero tardiness is not established. A headway hold can itself create delay, and bus benefits must not be manufactured by reducing requested demand. Times beyond 24:00 refer to the following calendar day of the same service.
+
+```sh
+node prototypes/line-701/service-cli.mjs
+node prototypes/line-701/service-cli.mjs --config /absolute/path/701-service-scenario.json --output /absolute/path/result.json
+```
+
+The website exports both settings and full results. Needed evidence includes full-line AVL/door-open history, passenger loads and boarding rates, actual running/recovery/turnaround times, vehicle blocks and interactions with other routes. Fleet rotations and the reverse direction are particularly important before claiming that delays cannot cascade into later trips.
+
+## GPS evidence and uploads
+
+The existing bounded evening sample has 48 unique accepted positions across 59 polls. It yields 11 GPS-derived passage windows, including 10 on one journey. PLIM2→COMB4 is an investigative lead: deviation from the published reference grows by 137–258s on that single evening trip. These are nominal map-matched passage brackets, not door-open events. The sample does not cover that journey's Areosa/Bolhão endpoints and cannot calibrate morning demand or prove a recurring cause.
+
+Raw positions remain in `data/observations/positions.ndjson`. Timestamp age, duplicates, current trip IDs, Lisbon observation date and shape progress are checked. CSV uploads match current service IDs and study stops, remain in browser memory, and are labelled user supplied. A later upload for the same trip replaces its earlier uploaded evidence. The dated observation importer covers the 28October evening sample; extending observation collection to overnight workings requires an explicit service-date association rather than reusing a calendar-date check.
+
+## Rebuild, share and inspect
 
 ```sh
 ./prototypes/line-701/pilot.sh
 ./prototypes/line-701/pilot.sh --scenario /absolute/path/701-policy.json
 ```
 
-The script uses the existing SUMO/Python environment; on a fresh checkout it bootstraps through the street prototype. Frozen official source responses and raw observations are inputs. Native output folders and large network files are ignored. `--quick` belongs to the experiment runner for a smoke run only; the complete website/replay requires a full batch.
+The script reuses the project's pinned SUMO environment, compiles the frozen scope, imports the extended network, reruns experiments and regenerates the static site. Quick experiment output is separate in `quick-results.json`. No live collection runs by default. A changed service date requires updated official inputs.
 
-Quick runner output is written separately to `quick-results.json`, preserving the full published results.
+Six native baseline/candidate clips cover 08:10–08:40 at one-second resolution; full metrics use all five morning journeys and the full simulation. The replay shows route/adjacent-junction traffic. Building footprints combine the frozen northern district with new southern OSM tiles; heights are source values where available and otherwise estimates. The model is flat and does not validate road safety, terrain, kerbs or pedestrian access.
 
-For a fresh bounded collection, explicitly run:
-
-```sh
-.venv/bin/python prototypes/line-701/collect_positions.py --duration 900 --interval 15
-.venv/bin/python prototypes/line-701/analyse_observations.py
-.venv/bin/python prototypes/line-701/build_site.py
-```
-
-Collection does not run in the background by default. A different service date needs refreshed official inputs and validation; this is a frozen dated pilot.
-
-`prepare_replay.py` captures six native baseline/candidate clips at one-second resolution, 08:10–08:40. Vehicles shown are on the route and adjacent junction links; metrics use the full runs. The shared 3D model is flat, with OSM footprints and estimated building heights. It supports street inspection and following the same bus in both policies, but does not validate kerbs, safety or accessibility.
-
-`build_site.py` publishes the new entry point, preserves the earlier page, generates [REPORT.md](REPORT.md), and creates `invicta-line-701-site.zip` (also copied to the older compatibility ZIP path). Host the extracted folder on any static HTTP(S) server. Keep both asset folders and `vendor/` together. The browser can export a bilingual explanation and record the new 3D view as WebM; the older MP4 films are labelled as the earlier street experiment.
-
-## Next evidence to collect
-
-Obtain repeated, complete inbound 701 trajectories with trip IDs, door-open arrivals/departures and passenger boarding/load counts. Audit the current lane directions and widths, signal phases, bus stop layouts and the property/loading/turn access inventory. Analyse time of day, inherited delay and dwell separately. Validate this section, add other bus services and affected traveller demand, then extend to the full line and opposite direction.
+`build_site.py` writes the entry page and report, keeps the legacy study, and creates `invicta-line-701-site.zip`. Extract and serve the complete folder over HTTP(S). Updates use the existing direct Vercel CLI workflow in [deployment notes](../../docs/DEPLOYMENT.md).
 
 ## Verification
 
-All 63 native runs completed, with failures retained in their results; all three packages have 15/15 completed stop sequences in each demand case. All runs reported zero collision records. Geometry, connections and signal programs match across variants after removing only lane permission attributes; the baseline bytes match the original import. The no-change `leg_08` control reproduces baseline buses and vehicle-group results exactly in every seed. `leg_10` also has identical outcomes, although it does change two lane permissions; this illustrates the limits of the generated traffic coverage. All 26 frozen official response hashes match the provenance manifest.
-
-Browser checks covered PT/EN, all 13 stop rows and 12 interval controls, incomplete bus accounting, untested drafts without invented metrics, draft URL restoration, validated CSV import with user-supplied labels, and a 390px layout without page overflow. Six native clips each contain 1,801 one-second frames. Bus-follow 3D and recording were exercised; `ffprobe` confirmed the recording is VP9 WebM at 1920×1080. Every file in the static export matches the generated ZIP. No production test suite was added.
-
-Independent review identified and prompted fixes for repeated CSV uploads and cross-date GPS attribution. A corrected upload for the same trip now replaces its earlier values. Replaying the complete GPS sample one day later rejects all 48 unique positions instead of comparing them with the frozen timetable.
+All 72 native runs completed with zero collision records; incomplete journeys are retained. Geometry, connections and signals match across variants after removing only lane permission attributes. `leg_08` remains an unchanged-permission neutral control. The service model preserves 3,024 calls, all 63 origin patterns, fixed demand between reference/shock cases, passenger accounting and capacity bounds. An exact no-demand/no-dwell timetable control passes; overload cannot claim the goal is met. Review prompted corrections for berth-access lateness, overtaken bus gap detection and boarding-denial accounting.

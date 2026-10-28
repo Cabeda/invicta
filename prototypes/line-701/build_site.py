@@ -1,6 +1,6 @@
 """Publish the route-first pilot alongside the preserved street experiment."""
 from pathlib import Path
-import csv, gzip, hashlib, json, math, shutil, statistics, zipfile
+import csv, gzip, hashlib, json, math, shutil, statistics, subprocess, zipfile
 ROOT=Path(__file__).resolve().parent;LEGACY=ROOT.parent/'costa-cabral';SITE=LEGACY/'proposal'
 
 def avg(values):
@@ -33,18 +33,31 @@ def build():
             for g in groups:
                 completed=sum(r['groups'][g]['completed'] for r in runs)
                 groups[g]['seconds']['mean']=sum((r['groups'][g]['mean_duration'] or 0)*r['groups'][g]['completed'] for r in runs)/completed if completed else None
+            timed=[b['stops'][i] for b in allb for i,s in enumerate(route['stops']) if s['designated_timing_point']]
+            late_calls=sum(c['lateness'] is not None and c['lateness']>0 for c in timed)
+            missing_calls=sum(c['lateness'] is None for c in timed)
+            early_departures=sum(c.get('departure') is not None and 0<=c['departure']<c['scheduled'] for c in timed)
+            short_gaps=0
+            for run in runs:
+                for i in range(len(route['stops'])):
+                    calls=sorted([b['stops'][i] for b in run['buses'] if b['stops'][i]['arrival'] is not None],key=lambda c:c['arrival'])
+                    short_gaps+=sum(b['arrival']-a['arrival']<abs(b['scheduled']-a['scheduled'])*.5 for a,b in zip(calls,calls[1:]))
             bycase[case][variant]={'trips':trips,'completed':sum(b['completed'] for b in allb),'planned':len(allb),
                                  'final_lateness':avg([b['final_lateness'] for b in allb]),'generated_delay':avg([b['section_generated_delay'] for b in allb]),'groups':groups,
+                                 'timing':{'planned_calls':len(timed),'late_calls':late_calls,'missing_calls':missing_calls,'early_departures':early_departures,
+                                           'short_gap_events':short_gaps if all(b['completed'] for b in allb) else None,
+                                           'zero_lateness_pass':late_calls==0 and missing_calls==0 and early_departures==0 and short_gaps==0 and all(b['completed'] for b in allb)},
                                  'full_comparison':all(b['completed'] for b in allb)}
     p=route['shape'];bounds=[min(x[0] for x in p),min(x[1] for x in p),max(x[0] for x in p),max(x[1] for x in p)]
     cameras={'corridor':[bounds[0]-180,bounds[1]-180,bounds[2]+180,bounds[3]+180]}
-    for key,stop_id in [('areosa','ARS3'),('conde','CF2'),('combatentes','COMB4'),('marques','MPL4')]:
+    for key,stop_id in [('areosa','ARS3'),('conde','CF2'),('combatentes','COMB4'),('marques','MPL4'),('fontinha','FTNH2'),('bolhao','0BLRB')]:
         stop=next(s for s in route['stops'] if s['stop_id']==stop_id);x,y=stop['point'];cameras[key]=[x-250,y-250,x+250,y+250]
     for seg in route['segments']:
         a=next(s for s in route['stops'] if s['stop_id']==seg['from']);b=next(s for s in route['stops'] if s['stop_id']==seg['to'])
         seg['shape']=[point for point,length in zip(route['full_shape'],route['shape_lengths']) if a['shape_progress']<=length<=b['shape_progress']]
         seg['shape']=[a['point']]+seg['shape']+[b['point']]
     observations=json.loads((ROOT/'data/observations-summary.json').read_text())
+    service_summary=json.loads(subprocess.run(['node',str(ROOT/'service-cli.mjs')],check=True,capture_output=True,text=True).stdout)
     public={'route':route,'cases':bycase,'access':raw['access'],'geometry':raw['geometry'],'cameras':cameras,'observations':observations,
             'colors':{'bus':'#177455','resident':'#466fba','taxi':'#bb873c','bicycle':'#2e9697','motorcycle':'#87699b','through':'#969b96','background':'#969b96','crossing':'#4a648c'},
             'meta':raw['meta'],'study_midnight':route['study_date']+'T00:00:00+00:00'}
@@ -57,21 +70,26 @@ def build():
         (SITE/'legacy.html').write_text(legacy)
     current.write_text(page)
     shutil.copy2(ROOT/'pilot.js',SITE/'line-701.js')
+    for name in ['service-model.mjs','service-panel.mjs']:shutil.copy2(ROOT/name,SITE/name)
+    shutil.copy2(ROOT/'data/official-extension/full-line-service-facts.json',SITE/'701-full-service-facts.json')
     shutil.copy2(LEGACY/'inspection-3d.js',SITE/'inspection-3d.js')
     shutil.copytree(LEGACY/'vendor',SITE/'vendor',dirs_exist_ok=True)
     shutil.copytree(ROOT/'inspection-assets',SITE/'line-701-assets',dirs_exist_ok=True)
     shutil.copytree(ROOT/'data/official',SITE/'701-official',dirs_exist_ok=True)
+    shutil.copytree(ROOT/'data/official-extension',SITE/'701-extension',dirs_exist_ok=True)
     public_facts=json.loads((ROOT/'data/source-facts.json').read_text())
     public_facts.update(source_bundle='701-official',metadata_file='701-official/metadata.json')
+    public_facts['extension_source_bundle']='701-extension'
     (SITE/'701-source-facts.json').write_text(json.dumps(public_facts,ensure_ascii=False,indent=2))
     shutil.copy2(ROOT/'data/observations-summary.json',SITE/'701-observations.json')
     shutil.copy2(ROOT/'results.json',SITE/'701-experiments.json')
-    policy={'route':'701','direction_id':1,'start_stop':'ARS3','end_stop':'MPL4','priority_segments':raw['access']['candidate_priority_segments'],
+    policy={'route':'701','direction_id':1,'start_stop':route['start'],'end_stop':route['end'],'priority_segments':raw['access']['candidate_priority_segments'],
             'note':'Draft lane permission policy; leaves mapped lane counts, signals and geometry unchanged. Not a street-design approval.'}
     (SITE/'701-policy-template.json').write_text(json.dumps(policy,ensure_ascii=False,indent=2))
     (SITE/'701-observations-template.csv').write_text('trip_id,stop_id,observed_arrival\n')
-    report=['# Line 701: Areosa → Marquês, inbound towards Bolhão','',f"Study date: {route['study_date']}. Current official route/service snapshot; 13 stops, approximately 3.14km. Ends at MPL4 after the restored MPL7 stop.",'',
-            '## What is known','', 'Current STCP route shape, ordered stops and stop schedule seconds are frozen with source URLs, timestamps and hashes. Only MPL4 is a designated timing point within this section. Other stop times are published non-timepoint references. This section does not model the entire 701 line.','',
+    report=['# Line 701: Porto municipal extent to Bolhão, with whole-line service checks','',f"Study date: {route['study_date']}. {len(route['stops'])} Porto stops, {route['municipality']['shape_metres']/1000:.3f}km inside the CAOP2025 municipality. Areosa ARS3 is the first stop inside Porto; the municipal entry is about 60m before it. Bolhão 0BLRB is the final stop.",'',
+            '## What is known','', 'Current STCP shape, ordered stops and scheduled seconds are frozen with URLs, timestamps and hashes. MPL4 and 0BLRB are designated timing points in Porto. Other calls are intermediate published references. DGT CAOP2025 locates the municipal entry; these are cartographic source positions, not a survey.',
+            '',f"Native vehicles start at the mapped municipal entry using an assumed {route['approach_lead_seconds']}s lead before the Areosa reference. There is no official boundary timetable. Reported entry lateness remains measured at Areosa, so it also includes the modeled approach delay. The boundary-crossing edge is excluded from new permission policies to avoid extending restrictions into another municipality.",'',
             '## Observed sample','',f"A bounded evening collection has {observations['counts']['accepted']} unique accepted timestamped positions from {observations['counts']['polls']} polls. Duplicate records are excluded. GPS-derived passage brackets are not door-open arrivals, and this short evening sample does not calibrate morning traffic.",'']
     for trip in observations['trips']:
         if not trip['passages']:continue
@@ -82,19 +100,30 @@ def build():
     for s in route['segments']:
         screen=raw['access']['segments'][s['id']]
         report.append(f"| {s['id']} | {s['from']} → {s['to']} | {screen['newly_unroutable']} | {'priority / existing priority' if s['id'] in policy['priority_segments'] else 'retain general traffic'} |")
-    report+=['','## Simulated section performance','', 'Native SUMO; current official timetable; synthetic traffic, fixed 20-second dwell, guessed signals, three seeds, five target 701 trips only. The late-entry case adds an assumed 180 seconds before Areosa. Additional delay in section is final lateness minus actual simulated entry lateness. Intermediate non-timepoint references are not used for holding. MPL4 departures are held to its published time. All unserved requests remain in the accounting.','', '| Case | Variant | Completed 701 journeys / planned | Mean final lateness sec (completed only) | Mean unserved all vehicles |','|---|---|---:|---:|---:|']
+    report+=['','## Simulated Porto street performance','', 'Native SUMO; extended frozen-OSM district, synthetic OD samples including new Marquês–Bolhão demand, fixed 20-second dwell, unverified signals, three seeds and five target 701 trips only. These new outputs supersede the shorter-network results; changed demand/network scope prevents treating differences from the earlier batch as policy gains. The late-entry case adds 180 seconds before municipal entry. Final lateness minus Areosa lateness measures added delay after the first published checkpoint, including intentional timing-point holds. MPL4 and 0BLRB departures wait for their published times. Every unserved request remains visible.','', '| Case | Variant | Completed 701 journeys / planned | Mean final lateness sec (completed only) | Mean unserved all vehicles |','|---|---|---:|---:|---:|']
     for case,variants in bycase.items():
         for variant,stats in variants.items():
             late=stats['final_lateness']['mean'];unserved=sum(g['unserved'] for g in stats['groups'].values())
             report.append(f"| {case} | {variant} | {stats['completed']}/{stats['planned']} | {late:.1f} | {unserved:.1f} |" if late is not None else f"| {case} | {variant} | {stats['completed']}/{stats['planned']} | unavailable | {unserved:.1f} |")
-    report+=['','## Interpretation and next steps','', 'Use the actual passage-window profile to identify where deviation from the published reference grows, then collect repeated complete trips before attributing causes. Missing Areosa coverage means inherited lateness and full-section added observed delay cannot be separated for that trip. A single-trip evening increase is a lead for investigation, not proof that car traffic, signals or boarding caused it.','',
-             'Compare an access-preserving package, unrestricted baseline and individual-leg tests. Individual effects must not be added together. Permission-only policies retain identical network geometry and signal programs; a no-change leg is an exact neutral control. Do not rank a policy on faster completed trips when bus or other requests remain unserved.','',
-             'Map-match and audit the actual bus turns, widths, stop locations, signal phases and loading/property access; obtain a matched AVL/door-open/history dataset and target-route passenger loads. Include other bus lines in subsequent network validation. Extend to the full 701 line after this direction and section are validated.','',
+    report+=['','### Native punctuality and spacing checks','', 'These counts cover the five requested native journeys across three seeds. Missing timing-point calls cannot pass the strict check. Arrival-spacing events compare the actual consecutive pair with half its published-time separation; the count is withheld when bus journeys are incomplete. A native timetable pass does not establish sufficient passenger capacity or practical access.',
+             '', '| Case | Package | Late timing-point arrivals / planned | Missing calls | Short-gap events | Strict check |','|---|---|---:|---:|---:|---|']
+    for case,variants in bycase.items():
+        for variant in ['baseline','restricted','all_priority']:
+            if variant not in variants:continue
+            t=variants[variant]['timing']
+            report.append(f"| {case} | {variant} | {t['late_calls']}/{t['planned_calls']} | {t['missing_calls']} | {t['short_gap_events'] if t['short_gap_events'] is not None else 'unavailable'} | {'pass' if t['zero_lateness_pass'] else 'fail'} |")
+    report+=['','## Whole-line bunching and cascade checks','', 'A separate operational model covers all 56 stops, 63 inbound workings and 3,024 published calls: 39 start at Codiceira, 24 at Ermesinde. Unserved upstream stops on short workings stay null. All intermediate-reference associations are derived from unique timetable matchings, not raw per-stop trip IDs.',
+             '', 'This model uses fluid passenger arrivals, capacity limits, boarding/alighting dwell, single-berth queues and timing-point/headway holding. Running budgets and recovery are assumptions. It simulates one direction with independent vehicles per trip; road traffic outside Porto, other routes, outbound service and shared vehicle rotations are absent. The strict goal is zero late timing-point arrivals, zero early timing-point departures, no gap below half the published spacing, and no passengers left behind. Meeting that goal in a what-if model is not a real-world guarantee.',
+             '', 'Default no-shock versus injected-delay scenario:','', '```json',json.dumps(service_summary,ensure_ascii=False,indent=2),'```','',
+             'Reduce neither journey counts nor passenger demand to manufacture a punctuality gain. Compare the same demand without the injected delay; secondary changes and short-gap events expose passenger–dwell feedback, while remaining queues expose capacity failures. A late bus can collect more passengers and slow further; a following bus can collect fewer and catch up. Native SUMO separately retains vehicle following and queue spillback within the Porto road network.',
+             '', '## Interpretation and next steps','', 'Use the passage-window profile to identify where deviation grows, then collect repeated complete trips before attributing causes. Missing Areosa/Bolhão coverage prevents claiming full-section observed punctuality. A single evening trajectory is an investigative lead, not a causal diagnosis.','',
+             'Compare the connectivity-screened package, unrestricted baseline and individual-leg tests. Individual effects must not be added together. Permission-only policies retain identical network geometry and signal programs; a no-change leg is an exact neutral control. Do not rank a policy on faster completed trips when bus or other requests remain unserved.','',
+             'Obtain matched full-line AVL and door-open events, boarding/load counts, actual recovery and turnaround times, controller phases, other-line interactions and vehicle/block circulation. Audit lane directions, widths, turns and property/loading access. Calibrate both layers before optimizing for real punctuality or choosing an implementation.','',
              '## Code-first controls','', '`./prototypes/line-701/pilot.sh` rebuilds the route pilot. Export a draft policy JSON from the website, then pass `--scenario /absolute/path/policy.json` to the runner. The static website does not execute new SUMO simulations. The collector and observation importer preserve timestamp/source distinctions.','',
-             '## Primary sources','', '- [Official line 701](https://stcp.pt/pt/linhas/701)', '- [STCP route stops API](https://stcp.pt/api/route/701/stops/direction?direction_id=1)', '- [Porto Digital public bus broker](https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType%3D%3Dbus&limit=1000)',
+             '## Primary sources','', '- [Official line 701](https://stcp.pt/pt/linhas/701)', '- [STCP route stops API](https://stcp.pt/api/route/701/stops/direction?direction_id=1)', '- [DGT CAOP2025 Porto municipality](https://ogcapi.dgterritorio.gov.pt/collections/municipios/items/1312?f=json)', '- [Porto Digital public bus broker](https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType%3D%3Dbus&limit=1000)',
              '- Source/API/hash detail: `701-source-facts.json`. Native per-run data: `701-experiments.json`. Observation windows: `701-observations.json`.','']
     (ROOT/'REPORT.md').write_text('\n'.join(report));shutil.copy2(ROOT/'REPORT.md',SITE/'701-report.md')
-    (SITE/'README.txt').write_text('INVICTA — LINE 701, AREOSA → MARQUÊS\n\nServe this whole folder over HTTP(S). index.html is the route-first bilingual pilot.\nlegacy.html preserves the earlier Costa Cabral study, population calculator and MP4 films.\nKeep all files, vendor/, inspection-assets/ and line-701-assets/ together.\n3D needs WebGL2 and DecompressionStream. New policies require a local SUMO rerun.\nCurrent official schedules, synthetic native experiments and GPS passage windows are distinct.\nNo calibrated traffic forecast or approved street design is established.\n')
+    (SITE/'README.txt').write_text('INVICTA — LINE 701, AREOSA → BOLHÃO\n\nServe this whole folder over HTTP(S). index.html is the route-first bilingual pilot.\nlegacy.html preserves the earlier Costa Cabral study, population calculator and MP4 films.\nKeep all files, vendor/, inspection-assets/ and line-701-assets/ together.\n3D needs WebGL2 and DecompressionStream. New policies require a local SUMO rerun.\nCurrent official schedules, synthetic native experiments and GPS passage windows are distinct.\nNo calibrated traffic forecast or approved street design is established.\n')
     archive=ROOT/'invicta-line-701-site.zip'
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
         for p in sorted(SITE.rglob('*')):
