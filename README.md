@@ -1,5 +1,7 @@
 # Invicta
 
+[Live demo](https://invicta-dusky.vercel.app/?lang=pt#route) · [Open in 3D](https://invicta-dusky.vercel.app/?lang=pt&dimension=3d&camera=combatentes&view=compare#replay)
+
 A bilingual, interactive Porto mobility demo: help buses meet their schedules while keeping everyday access workable for residents, shoppers and other travellers.
 
 The current pilot follows **STCP 701 towards Bolhão, from Areosa to Marquês**, using 13 official stops and the actual route through Costa Cabral, Alegria and Constituição. Compare scheduled references, timestamped GPS passage windows and native SUMO experiments; explore bus priority by stop interval and inspect the baseline/candidate replay in 3D.
@@ -36,5 +38,7 @@ vercel --prod
 ```
 
 [`vercel.json`](vercel.json) serves the checked-in `prototypes/costa-cabral/proposal` folder, with no install step, simulation job or server. New proposals are generated locally, committed and deployed as static assets. Keep the asset folders and `vendor/` together. Compressed replay files are fetched and decompressed by the viewer; do not add a `Content-Encoding: gzip` header to those stored gzip payloads.
+
+The live project is `invicta` in `jos-cabedas-projects`. It uses direct CLI deployment; pushing to GitHub does not automatically publish a new website version. See [deployment details](docs/DEPLOYMENT.md).
 
 Vercel configuration reference: [project configuration](https://vercel.com/docs/project-configuration/vercel-json).
