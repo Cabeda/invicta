@@ -1,5 +1,5 @@
 {
-  "retrieved_at": "2026-10-28T12:20:06.021166+00:00",
+  "retrieved_at": "2026-10-28T17:13:04.877830+00:00",
   "bbox": [
     -8.6122,
     41.1558,
@@ -49,8 +49,14 @@
       "bytes": 253910
     }
   ],
+  "baseline": {
+    "type": "Unmodified SUMO import of frozen OSM; not surveyed or calibrated",
+    "source_date": "2026-10-28",
+    "lane_changes": []
+  },
   "lane_normalization": {
-    "premise": "Two lanes total, one in each mapped direction; survey required",
+    "applies_to": "proposal_only",
+    "premise": "One lane per mapped direction in proposal; survey required",
     "directed_edges": [
       "1019391558#0",
       "1019391558#5",

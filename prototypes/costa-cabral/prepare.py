@@ -39,15 +39,14 @@ print('Importing network…',flush=True)
 r=subprocess.run(cmd,capture_output=True,text=True);(DATA/'network-import.log').write_text(r.stdout+'\n'+r.stderr)
 print(r.stdout[-1800:]);print(r.stderr[-2500:]);r.check_returncode()
 
-# The OSM importer expands some oneway=bus exceptions into a third lane.
-# This pilot explicitly models two lanes total, one per mapped direction.
+# Preserve the imported baseline. Lane simplification belongs to the proposal.
+# The imported map is not an audited as-built lane inventory.
 n=sumolib.net.readNet(str(DATA/'baseline.net.xml'));patch=ET.Element('edges');normalized=[]
 for edge in n.getEdges():
  if edge.getName()=='Rua de Costa Cabral' and len(edge.getLanes())>1:
   normalized.append(edge.getID());ET.SubElement(patch,'edge',{'id':edge.getID(),'numLanes':'1'})
 ET.ElementTree(patch).write(DATA/'two-lane-normalization.edg.xml',encoding='utf-8',xml_declaration=True)
-r=subprocess.run([str(Path(sumo.SUMO_HOME)/'bin/netconvert'),'--sumo-net-file',str(DATA/'baseline.net.xml'),'--edge-files',str(DATA/'two-lane-normalization.edg.xml'),'--output-file',str(DATA/'normalized.net.xml'),'--no-turnarounds'],capture_output=True,text=True)
-(DATA/'normalization.log').write_text(r.stdout+'\n'+r.stderr);r.check_returncode();(DATA/'normalized.net.xml').replace(DATA/'baseline.net.xml')
-manifest['lane_normalization']={'premise':'Two lanes total, one in each mapped direction; survey required','directed_edges':normalized}
+manifest['baseline']={'type':'Unmodified SUMO import of frozen OSM; not surveyed or calibrated','source_date':'2026-10-28','lane_changes':[]}
+manifest['lane_normalization']={'applies_to':'proposal_only','premise':'One lane per mapped direction in proposal; survey required','directed_edges':normalized}
 (DATA/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
-print('Two-lane normalization:',len(normalized),'directed stretches',flush=True)
+print('Imported baseline preserved; proposal-only lane changes:',len(normalized),'directed stretches',flush=True)

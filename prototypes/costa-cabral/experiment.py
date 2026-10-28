@@ -18,6 +18,8 @@ def networks():
  base=DATA/'baseline.net.xml';n=sumolib.net.readNet(str(base),maxcache=0);cor={e.getID() for e in n.getEdges() if e.getName()==CORRIDOR}
  changes=ET.Element('edges')
  for eid in sorted(cor):ET.SubElement(changes,'edge',{'id':eid,'allow':'bus taxi bicycle motorcycle custom1 pedestrian'})
+ for edge in changes:
+  if len(n.getEdge(edge.get('id')).getLanes())>1:edge.set('numLanes','1')
  patch=DATA/'restricted.edg.xml';write_xml(changes,patch)
  alt=DATA/'restricted.net.xml'
  call([Path(sumo.SUMO_HOME)/'bin/netconvert','--sumo-net-file',base,'--edge-files',patch,'--output-file',alt,'--no-turnarounds'],DATA/'restriction-import.log')
@@ -127,7 +129,13 @@ def experiment(n,cor,case,policy,seed,people,buses):
   v=ET.Element('vehicle',{'id':person['id'],'type':person['group'],'depart':f"{person['depart']:.2f}",'departLane':'best','departSpeed':'max'});ET.SubElement(v,'route',{'edges':' '.join(path)});events.append(v)
  stop_ids=set()
  for bus in buses:
-  v=ET.Element('vehicle',{'id':bus['id'],'type':'bus','line':bus['line'],'depart':str(bus['depart']),'departLane':'best','departSpeed':'max'});ET.SubElement(v,'route',{'edges':' '.join(bus['path'])})
+  bus_path=[]
+  for a,b in zip(bus['stops'],bus['stops'][1:]):
+   part=route(n,a['edge'],b['edge'],'bus')
+   if not part:bus_path=[];break
+   bus_path.extend(part if not bus_path else part[1:])
+  if not bus_path:unroutable.append(bus['id']);continue
+  v=ET.Element('vehicle',{'id':bus['id'],'type':'bus','line':bus['line'],'depart':str(bus['depart']),'departLane':'best','departSpeed':'max'});ET.SubElement(v,'route',{'edges':' '.join(bus_path)})
   for st in bus['stops']:
    sid=st['sid']+'_'+st['edge'].replace('#','_').replace('-','m')
    if sid not in stop_ids:
@@ -179,7 +187,7 @@ def main():
  for e in base.getEdges():
   if not any(e.allows(c) for c in ['passenger','bus','bicycle']):continue
   geometry.append({'id':e.getID(),'name':e.getName(),'corridor':e.getID() in cor,'length':round(e.getLength(),1),'lanes':len(e.getLanes()),'car':e.allows('passenger'),'shape':[[round(x,1),round(y,1)] for x,y in e.getShape()]})
- meta={'created_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'sumo_version':'1.28.0','service_date':'2026-09-02','traffic':'synthetic and uncalibrated','boundary':json.loads((DATA/'manifest.json').read_text())['bbox'],'cases':CASES,'seeds':seeds,'duration':DEMAND_END,'clearance':END-DEMAND_END,'gtfs_requested':requested,'gtfs_mapped':len(buses),'gtfs_skipped':skipped,'dwell_seconds':20,'lateness_threshold_seconds':180,'corridor_edges':len(cor),'normalized_carriageways':8,'resident_rule':'A synthetic permit is assigned only to trips with an origin or destination on a Costa Cabral edge. Crossing-only cars never use a Costa Cabral road edge.','signals':'Generated from OSM; not measured Porto timings.','lane_assumption':'Eight imported directed stretches normalized to one lane in each mapped direction, correcting an importer expansion of two marked lanes plus a contraflow lane. Survey required.'}
+ meta={'created_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'sumo_version':'1.28.0','service_date':'2026-09-02','traffic':'synthetic and uncalibrated','boundary':json.loads((DATA/'manifest.json').read_text())['bbox'],'cases':CASES,'seeds':seeds,'duration':DEMAND_END,'clearance':END-DEMAND_END,'gtfs_requested':requested,'gtfs_mapped':len(buses),'gtfs_skipped':skipped,'dwell_seconds':20,'lateness_threshold_seconds':180,'corridor_edges':len(cor),'normalized_carriageways':8,'baseline_kind':'Unmodified SUMO OSM import, unvalidated','lane_change_scope':'proposal_only','resident_rule':'A synthetic permit is assigned only to trips with an origin or destination on a Costa Cabral edge. Crossing-only cars never use a Costa Cabral road edge.','signals':'Generated from OSM; not measured Porto timings.','lane_assumption':'Baseline preserves the unmodified SUMO OSM import, including eight multi-lane directed stretches. Only the proposal reduces these to one lane per mapped direction. Both layouts require a field audit.'}
  # Municipal layers as context, never traffic observations.
  municipal={k:json.loads((DATA/'raw'/f).read_text()) for k,f in [('bus','bus_corridors.geojson'),('loading','loading.geojson')]}
  layers={}

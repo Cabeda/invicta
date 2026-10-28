@@ -4,6 +4,8 @@ Clarified by the user on 28 October 2026.
 
 **Primary goal: help buses meet their published schedules while catering to the everyday needs of local residents, shoppers, businesses and services.**
 
+The user further clarified that effects on **all travellers** matter, including non-residents travelling for work/study, shopping, leisure/walks and other needs. Explain immediate effects separately from conditional longer-term mode shifts. Show person-trip-weighted mean time, bus punctuality, who remains worse off, and all unserved requests. A lower average does not establish a gain for every individual.
+
 ## How alternatives should be assessed
 
 - Measure arrivals against the timetable at relevant stops, and departures that occur too early. Also show reliability, headway regularity and upstream lateness so corridor effects are not confused with delays arriving from elsewhere. Agree acceptable early/late tolerances with the operator before using them to rank real proposals.
@@ -11,11 +13,17 @@ Clarified by the user on 28 October 2026.
 - Keep requested journeys and unmet demand visible. A scenario cannot appear successful merely because difficult journeys have disappeared from the calculation. Report effects on neighbouring streets and affected groups.
 - Compare feasible alternatives on bus punctuality and local access first; then explain passenger time, cost, operational complexity and implementation phases. If no alternative meets both requirements, show the conflict and the evidence needed rather than hiding it in one weighted score.
 - Treat the Costa Cabral access restriction as an intervention being tested against this goal. Also consider supporting measures such as signal priority, stop operation and loading arrangements when the evidence justifies them.
+- Use sourced population and mode-share inputs with their geography, year and denominator intact. Population is not daily trips; person-trip shares are not fleet percentages. The 2025 INE metropolitan population, 2017 IMob references and PMUS survey profiles can inform explicit scenarios, but are not a matched present-day OD demand set.
+- Test the chicken-and-egg hypothesis rather than building it into the conclusion. Alternatives must be usable and attractive, and their capacity must accommodate the assumed shift. Show the no-switch case and adverse/no-break-even cases; do not assign a future adoption date without a validated model.
 
 ## What the current prototype establishes
 
 The access/routing rule is runnable. It retains buses, synthetic local resident permits, taxis, bicycles and motorcycles; ordinary cars may directly cross junctions. The shopper/service-access policy has not been defined or simulated, and this clarification does not silently grant additional vehicle exemptions.
 
 The existing numerical schedule check is an **illustrative final-modelled-stop arrival no more than three minutes late**, with unfinished bus trips counted as failures. It is not an agreed operator standard, an early-departure check or a validated assessment of whole-route punctuality. The traffic, signals, dwell and local permits remain assumptions. Faster completed bus trips alone do not demonstrate that the primary goal has been achieved.
+
+The baseline has been corrected: it preserves the unmodified frozen-OSM SUMO import, with the one-lane-per-mapped-direction adjustment only in the proposal. This is still an unvalidated import. Earlier results using a standardized baseline are superseded; the corrected moderate-demand bus means are about 9.86 → 9.85 minutes, with higher unserved demand in the proposal.
+
+The [population transition calculator](../prototypes/costa-cabral/TRANSITION.md) is a separate, transparent what-if model with sourced population/mode references and assumed travel times, access penalties, capacity and adoption. It does not simulate 1.86 million individual residents on the clipped corridor network.
 
 See [report input and scorecard priorities](research/costa-cabral-report-variables.md), [3D inspection options](research/3d-street-inspection.md), and [current experiment limitations](../prototypes/costa-cabral/FINDINGS.md).

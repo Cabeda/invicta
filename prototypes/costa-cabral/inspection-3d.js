@@ -94,13 +94,14 @@ export async function createInspection({ data, getState, label, changed }) {
     return geometry(vertices);
   }
 
-  const external = source.lanes.filter(l => !l.internal);
-  const general = external.filter(l => !l.corridor), corridor = external.filter(l => l.corridor);
-  const roadGeometry = ribbons(general, l => l.width, .025);
-  const corridorGeometry = ribbons(corridor, l => l.width, .035);
-  const junctionGeometry = surfaces(source.junctions, .02);
-  // Thin lane centre guides are inspection aids, not a surveyed marking inventory.
-  const guideGeometry = ribbons(corridor, () => .07, .045);
+  const corridor = source.lanes.filter(l => !l.internal && l.corridor && l.policy === 'restricted');
+  const policyGeometry = {};
+  for (const policy of ['baseline', 'restricted']) {
+    const external = source.lanes.filter(l => !l.internal && l.policy === policy);
+    const general = external.filter(l => !l.corridor), local = external.filter(l => l.corridor);
+    policyGeometry[policy] = { road: ribbons(general, l => l.width, .025), corridor: ribbons(local, l => l.width, .035),
+      junction: surfaces(source.junctions[policy], .02), guide: ribbons(local, () => .07, .045) };
+  }
   const buildingVertices = [], buildingNormals = [];
   for (const building of source.buildings.features) {
     const shape = new T.Shape(building.shape.map(p => new T.Vector2(p[0] - origin[0], p[1] - origin[1])));
@@ -133,15 +134,16 @@ export async function createInspection({ data, getState, label, changed }) {
     const sun = new T.DirectionalLight('#fff1d9', 1.6); sun.position.set(-300, 600, 180); scene.add(sun);
     const ground = new T.Mesh(new T.PlaneGeometry(18000, 18000), new T.MeshLambertMaterial({ color: '#c8d2bf' }));
     ground.rotation.x = -Math.PI / 2; ground.position.y = -.05; scene.add(ground);
-    scene.add(new T.Mesh(roadGeometry, roadMaterial), new T.Mesh(junctionGeometry, junctionMaterial));
-    scene.add(new T.Mesh(corridorGeometry, new T.MeshBasicMaterial({ color: policy === 'restricted' ? '#4d826b' : '#667574', side: T.DoubleSide })));
-    scene.add(new T.Mesh(guideGeometry, new T.MeshBasicMaterial({ color: '#c7ddd0', side: T.DoubleSide })));
+    const mesh = policyGeometry[policy];
+    scene.add(new T.Mesh(mesh.road, roadMaterial), new T.Mesh(mesh.junction, junctionMaterial));
+    scene.add(new T.Mesh(mesh.corridor, new T.MeshBasicMaterial({ color: policy === 'restricted' ? '#4d826b' : '#667574', side: T.DoubleSide })));
+    scene.add(new T.Mesh(mesh.guide, new T.MeshBasicMaterial({ color: '#c7ddd0', side: T.DoubleSide })));
     const buildings = new T.Group();
     buildings.add(new T.Mesh(buildingGeometry, buildingsMaterial));
     buildings.add(new T.LineSegments(buildingOutline, new T.LineBasicMaterial({ color: '#a89c87', transparent: true, opacity: .32 })));
     scene.add(buildings);
     const stopMaterial = new T.MeshBasicMaterial({ color: '#2d657e' });
-    for (const stop of source.stops) {
+    for (const stop of source.stops.filter(s => s.policy === policy)) {
       const lane = laneMap.get(stop.lane), p = atLane(source.lanes.indexOf(lane), stop.pos);
       if (!p) continue;
       const r = p[2] * Math.PI / 180, offset = lane.width / 2 + .5;

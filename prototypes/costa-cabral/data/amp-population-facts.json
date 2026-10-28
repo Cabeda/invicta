@@ -1,0 +1,132 @@
+{
+  "retrieved_at": "2026-10-28T17:05:50.715Z",
+  "annual_population": {
+    "publisher": "INE",
+    "indicator": "0012918",
+    "reference_year": 2025,
+    "publication_update": "2026-06-22",
+    "geography": "NUTS2024",
+    "metropolitan_population": 1861727,
+    "porto_municipality_population": 273476,
+    "municipalities": [
+      {
+        "code": "11A0104",
+        "municipality": "Arouca",
+        "population": 21459
+      },
+      {
+        "code": "11A0119",
+        "municipality": "Vale de Cambra",
+        "population": 22066
+      },
+      {
+        "code": "11A0116",
+        "municipality": "São João da Madeira",
+        "population": 23991
+      },
+      {
+        "code": "11A0107",
+        "municipality": "Espinho",
+        "population": 32455
+      },
+      {
+        "code": "11A1318",
+        "municipality": "Trofa",
+        "population": 41512
+      },
+      {
+        "code": "11A1314",
+        "municipality": "Santo Tirso",
+        "population": 69810
+      },
+      {
+        "code": "11A0113",
+        "municipality": "Oliveira de Azeméis",
+        "population": 70027
+      },
+      {
+        "code": "11A1313",
+        "municipality": "Póvoa de Varzim",
+        "population": 72364
+      },
+      {
+        "code": "11A1316",
+        "municipality": "Vila do Conde",
+        "population": 86245
+      },
+      {
+        "code": "11A1310",
+        "municipality": "Paredes",
+        "population": 88858
+      },
+      {
+        "code": "11A1315",
+        "municipality": "Valongo",
+        "population": 98930
+      },
+      {
+        "code": "11A1306",
+        "municipality": "Maia",
+        "population": 142129
+      },
+      {
+        "code": "11A0109",
+        "municipality": "Santa Maria da Feira",
+        "population": 142676
+      },
+      {
+        "code": "11A1304",
+        "municipality": "Gondomar",
+        "population": 170597
+      },
+      {
+        "code": "11A1308",
+        "municipality": "Matosinhos",
+        "population": 181930
+      },
+      {
+        "code": "11A1312",
+        "municipality": "Porto",
+        "population": 273476
+      },
+      {
+        "code": "11A1317",
+        "municipality": "Vila Nova de Gaia",
+        "population": 323202
+      }
+    ],
+    "source_url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012918&lang=PT",
+    "catalogue_url": "https://dados.gov.pt/pt/datasets/populacao-residente-n-o-64",
+    "source_sha256": "3c5ee8089de9c0efecaad38147747ff5ab8116d7df69a1cdc0291c1833ea34da",
+    "filters": {
+      "geocod": "11A",
+      "dim_3": "T",
+      "dim_4": "T"
+    }
+  },
+  "census_population": {
+    "publisher": "INE",
+    "indicator": "0014584",
+    "reference_year": 2021,
+    "publication_update": "2025-10-28",
+    "metropolitan_population": 1736228,
+    "porto_municipality_population": 231800,
+    "source_url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014584&lang=PT",
+    "source_sha256": "bcbe3053336f412227a9d11903b30074a3b60b9af185e123dca3ed314756aa37"
+  },
+  "method_note": "2025annual estimates use a newly administrative-based method with 2021–2024 revisions; Census2021 is a separate count. Population is not a count of vehicles or daily trips.",
+  "mobility_context_2017": {
+    "source_url": "https://www.amp.pt/en/noticia/apresentacao-dos-resultados-definitivos-do-inquerito-a-mobilidade-nas-areas-metropolitanas-do-porto-e-de-lisboa/",
+    "car_person_trip_share_pct": 67.6,
+    "public_collective_trip_share_pct": 11.1,
+    "walk_bike_trip_share_pct": 18.9,
+    "bike_trip_share_pct": 0.4,
+    "work_trip_purpose_pct": 30.3,
+    "shopping_trip_purpose_pct": 18.5,
+    "trip_rate_per_mobile_person_per_day": 2.72,
+    "approx_daily_person_trips": 3400000,
+    "car_occupancy_people_per_vehicle": 1.56,
+    "age_scope": "6–84 in IMob2017",
+    "validity": "2017 survey results, not current mode shares or a vehicle-type distribution; public/collective includes modes other than bus"
+  }
+}

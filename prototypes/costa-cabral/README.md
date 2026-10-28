@@ -35,7 +35,7 @@ Edit the three demand dictionaries in `experiment.py` to try other explicit assu
 
 **Assumptions:** 60 minutes of demand from an empty network plus 30 minutes to drain; three synthetic demand cases and three seeds (17/42/73); 20-second bus dwell, generated signal timings, perfect restriction compliance, static fastest routing within a buffered district. Sumolib's mutable partial-route cache is disabled; only complete routes are memoized to keep worker query order from changing paths. No measured traffic OD, turning counts, passenger demand, permit registry or observed upstream bus lateness.
 
-**Lane premise:** the OSM import created some stretches with two general lanes plus a contraflow lane. Eight directed stretches were normalized to one lane per mapped direction to model the user's two-lane premise. Existing mapped directions and bus/bike contraflow permissions remain in the baseline. This correction is a hypothesis requiring a field/layout audit, not a surveyed inventory.
+**Corrected baseline and lane premise:** the baseline now preserves the unmodified frozen-OSM SUMO import, including eight two-lane directed stretches. Only the proposal reduces those stretches to one lane per mapped direction and changes access permissions. Imported directions/contraflow and lane counts remain subject to audit; an unmodified import is not a surveyed as-built inventory. Earlier exports standardized the baseline too; their headline gains are superseded by the regenerated comparison.
 
 **Local-resident proxy:** `custom1` is a synthetic SUMO permit class with ordinary-car shape. Only trips starting or ending on a corridor road edge receive it. This does not mean all passenger cars are exempt, nor does it establish real resident eligibility. Access to adjacent streets and legitimate non-resident visits/deliveries needs a real policy decision; those rights are not inferred.
 
@@ -44,6 +44,12 @@ Edit the three demand dictionaries in `experiment.py` to try other explicit assu
 **Accounting:** requested journeys are held fixed within each baseline/restricted pair. Missing permitted routes, insertion failures and unfinished trips remain visible. Teleporting is disabled. Completed-trip means can be biased when completion differs: do not interpret the reported bus gains as an equal-served-demand welfare comparison. Some routes may need a larger district to find a legitimate diversion; some baseline queues expose unvalidated junction/traffic assumptions.
 
 **Bus measurement:** buses start at their first mapped corridor stop. Entry queue delay is SUMO insertion delay, shown separately. Final-stop arrivals ≤180 seconds late are an illustrative corridor metric, not an STCP punctuality standard or an observation of current reliability. All 21 requested trips mapped; unfinished stop sequences count as failures.
+
+## Population, non-residents and mode transition
+
+The bilingual proposal now includes **People & transition / Pessoas e transição**. It uses INE 2025 population, IMob 2017 and PMUS mode-reference presets in a separate conditional person-trip calculator. Explore immediate versus assumed later shifts, bus capacity, resident/non-resident driver access, workers/students, shoppers and leisure visitors, a break-even curve and cohort exports. Every travel-time and behavioural response is an explicit assumption; no full metropolitan OD simulation or adoption forecast is claimed. See [TRANSITION.md](TRANSITION.md).
+
+Use `node prototypes/costa-cabral/transition-cli.cjs --input /absolute/path/scenario.json --output /absolute/path/result` for the same calculation from code. Rebuilding the website uses Node as well as Python; the exported static site needs neither runtime.
 
 ## Capture / verdict
 

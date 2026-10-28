@@ -41,6 +41,6 @@ Warning: Non-static traffic light 'cluster_10894511562_1387283703_3897692280_773
 Warning: 50 total messages of type: Ambiguity in turnarounds computation at junction '%'.
 Warning: 11 total messages of type: Found angle of % degrees at edge '%', segment %.
 Warning: 19 total messages of type: Found sharp turn with radius % at the % of edge '%'.
-Warning: 25 total messages of type: Minor green from edge '%' to edge '%' exceeds %m/s. Maybe a left-turn lane is missing.
+Warning: 21 total messages of type: Minor green from edge '%' to edge '%' exceeds %m/s. Maybe a left-turn lane is missing.
 Warning: 6 total messages of type: Non-static traffic light '%' does not define variable phase length.
 Warning: 116 total messages of type: Speed of % connection '%' reduced by % due to turning radius of % (length=%, angle=%).

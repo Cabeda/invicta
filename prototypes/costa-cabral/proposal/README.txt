@@ -12,6 +12,10 @@ Keep filenames and relative paths intact. index.html is the entry point.
 PT/EN language switch. Synchronized actual SUMO trajectory replays.
 2D map and 3D inspection: orbit, street camera, bus following, building toggle.
 3D uses one-second SUMO output and model vehicle dimensions; 2D uses four seconds.
+People & transition: conditional population/mode-shift accounting, with source presets,
+assumptions, capacity, cohort impacts, break-even curve and MD/JSON/CSV export.
+This is separate from the SUMO corridor replay; no metropolitan OD forecast is claimed.
+Baseline lane reduction is now proposal-only; earlier headline bus gains are superseded.
 The 3D network is flat; building heights are estimated. Not a surveyed city.
 Keep vendor/ and inspection-assets/ folders and inspection-3d.js in the export.
 Three precomputed demand cases; these controls do not run new simulations.

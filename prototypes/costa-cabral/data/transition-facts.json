@@ -1,0 +1,568 @@
+{
+  "schema": 1,
+  "population": {
+    "retrieved_at": "2026-10-28T17:05:50.715Z",
+    "annual_population": {
+      "publisher": "INE",
+      "indicator": "0012918",
+      "reference_year": 2025,
+      "publication_update": "2026-06-22",
+      "geography": "NUTS2024",
+      "metropolitan_population": 1861727,
+      "porto_municipality_population": 273476,
+      "municipalities": [
+        {
+          "code": "11A0104",
+          "municipality": "Arouca",
+          "population": 21459
+        },
+        {
+          "code": "11A0119",
+          "municipality": "Vale de Cambra",
+          "population": 22066
+        },
+        {
+          "code": "11A0116",
+          "municipality": "São João da Madeira",
+          "population": 23991
+        },
+        {
+          "code": "11A0107",
+          "municipality": "Espinho",
+          "population": 32455
+        },
+        {
+          "code": "11A1318",
+          "municipality": "Trofa",
+          "population": 41512
+        },
+        {
+          "code": "11A1314",
+          "municipality": "Santo Tirso",
+          "population": 69810
+        },
+        {
+          "code": "11A0113",
+          "municipality": "Oliveira de Azeméis",
+          "population": 70027
+        },
+        {
+          "code": "11A1313",
+          "municipality": "Póvoa de Varzim",
+          "population": 72364
+        },
+        {
+          "code": "11A1316",
+          "municipality": "Vila do Conde",
+          "population": 86245
+        },
+        {
+          "code": "11A1310",
+          "municipality": "Paredes",
+          "population": 88858
+        },
+        {
+          "code": "11A1315",
+          "municipality": "Valongo",
+          "population": 98930
+        },
+        {
+          "code": "11A1306",
+          "municipality": "Maia",
+          "population": 142129
+        },
+        {
+          "code": "11A0109",
+          "municipality": "Santa Maria da Feira",
+          "population": 142676
+        },
+        {
+          "code": "11A1304",
+          "municipality": "Gondomar",
+          "population": 170597
+        },
+        {
+          "code": "11A1308",
+          "municipality": "Matosinhos",
+          "population": 181930
+        },
+        {
+          "code": "11A1312",
+          "municipality": "Porto",
+          "population": 273476
+        },
+        {
+          "code": "11A1317",
+          "municipality": "Vila Nova de Gaia",
+          "population": 323202
+        }
+      ],
+      "source_url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012918&lang=PT",
+      "catalogue_url": "https://dados.gov.pt/pt/datasets/populacao-residente-n-o-64",
+      "source_sha256": "3c5ee8089de9c0efecaad38147747ff5ab8116d7df69a1cdc0291c1833ea34da",
+      "filters": {
+        "geocod": "11A",
+        "dim_3": "T",
+        "dim_4": "T"
+      }
+    },
+    "census_population": {
+      "publisher": "INE",
+      "indicator": "0014584",
+      "reference_year": 2021,
+      "publication_update": "2025-10-28",
+      "metropolitan_population": 1736228,
+      "porto_municipality_population": 231800,
+      "source_url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014584&lang=PT",
+      "source_sha256": "bcbe3053336f412227a9d11903b30074a3b60b9af185e123dca3ed314756aa37"
+    },
+    "method_note": "2025annual estimates use a newly administrative-based method with 2021–2024 revisions; Census2021 is a separate count. Population is not a count of vehicles or daily trips.",
+    "mobility_context_2017": {
+      "source_url": "https://www.amp.pt/en/noticia/apresentacao-dos-resultados-definitivos-do-inquerito-a-mobilidade-nas-areas-metropolitanas-do-porto-e-de-lisboa/",
+      "car_person_trip_share_pct": 67.6,
+      "public_collective_trip_share_pct": 11.1,
+      "walk_bike_trip_share_pct": 18.9,
+      "bike_trip_share_pct": 0.4,
+      "work_trip_purpose_pct": 30.3,
+      "shopping_trip_purpose_pct": 18.5,
+      "trip_rate_per_mobile_person_per_day": 2.72,
+      "approx_daily_person_trips": 3400000,
+      "car_occupancy_people_per_vehicle": 1.56,
+      "age_scope": "6–84 in IMob2017",
+      "validity": "2017 survey results, not current mode shares or a vehicle-type distribution; public/collective includes modes other than bus"
+    }
+  },
+  "pmus": {
+    "checked_on": "2026-10-28",
+    "source_versions": [
+      {
+        "file": "PMUS Diagnostico.pdf",
+        "url": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf",
+        "official_bytes": 32459130,
+        "official_sha256": "413e65c010a1a533a57964c8e3bcda5d50af3f13d37ad1befbbf967052372629",
+        "local_sha256": "413e65c010a1a533a57964c8e3bcda5d50af3f13d37ad1befbbf967052372629",
+        "identical": true
+      },
+      {
+        "file": "PMUS Medidas.pdf",
+        "url": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Medidas.pdf",
+        "official_bytes": 15348788,
+        "official_sha256": "f71bdcf7565e8992be276e77cd7eb42ff86a987becfaa7fd8c9627b243e95d1e",
+        "local_sha256": "f71bdcf7565e8992be276e77cd7eb42ff86a987becfaa7fd8c9627b243e95d1e",
+        "identical": true
+      },
+      {
+        "file": "PMUS Fichas Acao.pdf",
+        "url": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Fichas%20Acao.pdf",
+        "official_bytes": 11163854,
+        "official_sha256": "436ee3d87f286d9b4ccb668e68bad8bda5b1e9565fe1947a2b37c367db75af66",
+        "local_sha256": "436ee3d87f286d9b4ccb668e68bad8bda5b1e9565fe1947a2b37c367db75af66",
+        "identical": true
+      }
+    ],
+    "pmus_all_trip_modes": {
+      "source_url": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf",
+      "printed_page": 91,
+      "pdf_page_1_based": 102,
+      "figure": 55,
+      "unit": "percent of surveyed person trips",
+      "geography": "Porto residents / nonresidents making trips with origin or destination in Porto; not all AMP residents",
+      "mode_keys": [
+        "car",
+        "walk",
+        "bicycle",
+        "bus",
+        "metro",
+        "train",
+        "other"
+      ],
+      "raw_rounded_percent": {
+        "resident_weekday": {
+          "car": 56.8,
+          "walk": 14.1,
+          "bicycle": 2.0,
+          "bus": 11.1,
+          "metro": 11.7,
+          "train": 0.7,
+          "other": 3.5
+        },
+        "nonresident_weekday": {
+          "car": 36.5,
+          "walk": 4.4,
+          "bicycle": 0.7,
+          "bus": 25.5,
+          "metro": 24.2,
+          "train": 6.9,
+          "other": 1.9
+        },
+        "resident_nonworkday": {
+          "car": 65.5,
+          "walk": 12.3,
+          "bicycle": 2.1,
+          "bus": 5.9,
+          "metro": 8.3,
+          "train": 1.4,
+          "other": 4.6
+        },
+        "nonresident_nonworkday": {
+          "car": 54.0,
+          "walk": 9.2,
+          "bicycle": 2.0,
+          "bus": 10.4,
+          "metro": 16.7,
+          "train": 4.5,
+          "other": 3.2
+        }
+      },
+      "normalization": "Values transcribed as printed; sums can differ from100 by0.1pp. Do not silently change source values."
+    },
+    "pmus_trip_purposes": {
+      "source_url": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf",
+      "printed_page": 89,
+      "pdf_page_1_based": 100,
+      "figure": 53,
+      "denominator": "Surveyed person trips EXCLUDING return-home journeys",
+      "unit": "percent",
+      "purpose_keys": [
+        "shopping",
+        "school",
+        "work",
+        "leisure",
+        "escort",
+        "personal",
+        "other"
+      ],
+      "raw_rounded_percent": {
+        "resident_weekday": {
+          "shopping": 6.2,
+          "school": 9.5,
+          "work": 40.7,
+          "leisure": 13.8,
+          "escort": 14.4,
+          "personal": 12.5,
+          "other": 3.0
+        },
+        "nonresident_weekday": {
+          "shopping": 2.1,
+          "school": 31.2,
+          "work": 43.4,
+          "leisure": 8.7,
+          "escort": 5.6,
+          "personal": 6.5,
+          "other": 2.5
+        },
+        "resident_nonworkday": {
+          "shopping": 12.8,
+          "school": 1.8,
+          "work": 27.7,
+          "leisure": 27.9,
+          "escort": 13.4,
+          "personal": 12.4,
+          "other": 4.0
+        },
+        "nonresident_nonworkday": {
+          "shopping": 5.9,
+          "school": 5.5,
+          "work": 32.5,
+          "leisure": 30.3,
+          "escort": 8.9,
+          "personal": 12.5,
+          "other": 4.4
+        }
+      },
+      "warning": "No validated joint mode-by-purpose distribution extracted; these marginal shares do not establish mode-switch probabilities."
+    },
+    "pmus_survey_scope": {
+      "source_url": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf",
+      "printed_pages": [
+        71,
+        72,
+        75,
+        76,
+        89,
+        90
+      ],
+      "pdf_pages_1_based": [
+        82,
+        83,
+        86,
+        87,
+        100,
+        101
+      ],
+      "fieldwork_month_days": [
+        "10-15",
+        "12-09"
+      ],
+      "year": 2024,
+      "year_status": "Inferred from revision2.0 dated2024-12-23 stating survey results incorporated; p71 omits year.",
+      "declared_target_sample_p71": {
+        "total": 4739,
+        "residents": 2373,
+        "nonresidents": 2366
+      },
+      "analysis_sample_p72": {
+        "residents": 2382,
+        "nonresidents": 2367,
+        "total_calculated": 4749
+      },
+      "resident_trips_per_day": 2.6,
+      "resident_trip_rate_status": "Survey-reported mean; do not apply to whole AMP population",
+      "nonresident_trip_rate": null,
+      "nonresident_trip_rate_missing_reason": "Diary deliberately excludes trips without origin/destination in Porto",
+      "under16": "Not surveyed",
+      "max_diary_trips": 10,
+      "diary_reference": "previous day"
+    },
+    "amp_imob2017": {
+      "source_url": "https://www.amt-autoridade.pt/media/1829/inquerito_mobilidade_funcionalidade_territorio_aml_amp_2017_ine.pdf",
+      "reference_year": 2017,
+      "unit": "percent of all person trips, principal mode, all days of week",
+      "printed_pages": [
+        33,
+        34,
+        35,
+        40
+      ],
+      "pdf_pages_1_based": [
+        35,
+        36,
+        37,
+        42
+      ],
+      "universe": "Mobile AMP residents aged6–84, all destinations; excludes non-AMPresidents and transport-profession journeys",
+      "raw_percent": {
+        "car": 67.6,
+        "car_driver": 50.7,
+        "car_passenger": 16.9,
+        "walk": 18.5,
+        "bicycle": 0.4,
+        "bus_including_school_employer": 8.2,
+        "metro": 2.0,
+        "train": 0.8,
+        "motorcycle_moped": 1.3,
+        "other": 1.2
+      },
+      "walk_status": "Derived18.9active minus0.4bicycle from p35",
+      "approx_person_trips_per_day": 3400000,
+      "approx_mobile_people": 1300000,
+      "trips_per_mobile_person_per_day": 2.72,
+      "car_occupancy_persons_per_driver_stage": 1.56,
+      "occupancy_warning": "Stage-level historical statistic; not a present corridor occupancy observation or exact multiplier for whole-person-trip modal shares"
+    },
+    "pmus_population": {
+      "source_url": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf",
+      "census2021": {
+        "AMP": 1736228,
+        "Porto": 231800,
+        "printed_page": 8,
+        "pdf_page_1_based": 19
+      },
+      "estimates": {
+        "AMP": 1861727,
+        "Porto": 273476,
+        "printed_page": 9,
+        "pdf_page_1_based": 20,
+        "year_status": "Conflicting source labels: table title2025; data column and variation header2026; sourceINE2026. Root has separate liveINE2025verification."
+      }
+    },
+    "pmus_commuting_reference2021": {
+      "source_url": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf",
+      "printed_pages": [
+        16,
+        17
+      ],
+      "pdf_pages_1_based": [
+        27,
+        28
+      ],
+      "AMP_percent": {
+        "car": 68,
+        "active": 14,
+        "public_transport": 16
+      },
+      "Porto_percent": {
+        "car": 54,
+        "active": 23,
+        "public_transport": 22
+      },
+      "warning": "Rounded commuting-only Census2021 figures, not all-purpose mode shares; remaining other share not explicitly labelled"
+    },
+    "pmus_targets2035_conflict": {
+      "source_url": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Medidas.pdf",
+      "unit": "percent, Porto commuting",
+      "narrative": {
+        "printed_page": 196,
+        "pdf_page_1_based": 204,
+        "walk": 22,
+        "bicycle": 5,
+        "public_transport": 27,
+        "car": 45
+      },
+      "table49": {
+        "printed_page": 197,
+        "pdf_page_1_based": 205,
+        "walk": 23,
+        "bicycle": 5,
+        "public_transport": 34,
+        "car": 37
+      },
+      "status": "Unresolved published source conflict; neither set is an observed outcome or a validated CostaCabralforecast"
+    },
+    "source_conflicts": [
+      {
+        "where": "Diagnostico p89 Fig53 vs narrative",
+        "field": "resident weekday escort percent",
+        "chart": 14.4,
+        "narrative": 14.6
+      },
+      {
+        "where": "Diagnostico p89 Fig53 vs p90 narrative",
+        "field": "resident nonworkday shopping percent",
+        "chart": 12.8,
+        "narrative": 12.4
+      },
+      {
+        "where": "Diagnostico p89 Fig53 vs p90 narrative",
+        "field": "resident nonworkday escort percent",
+        "chart": 13.4,
+        "narrative": 13.7
+      },
+      {
+        "where": "Diagnostico p89 Fig53 vs p90 narrative",
+        "field": "resident nonworkday personal percent",
+        "chart": 12.4,
+        "narrative": 12.5
+      },
+      {
+        "where": "Diagnostico p91 Fig55 vs narrative",
+        "field": "nonresident commuting bus percent",
+        "chart": 27.5,
+        "narrative": 25.5
+      }
+    ]
+  },
+  "presets": {
+    "amp2017": {
+      "label": {
+        "pt": "AMP · todas as deslocações · IMob 2017",
+        "en": "AMP · all person trips · IMob 2017"
+      },
+      "shares": {
+        "car": 67.6,
+        "bus": 8.2,
+        "metro": 2.0,
+        "train": 0.8,
+        "bicycle": 0.4,
+        "walk": 18.5,
+        "motorcycle": 1.3,
+        "other": 1.2
+      },
+      "source": "https://www.amt-autoridade.pt/media/1829/inquerito_mobilidade_funcionalidade_territorio_aml_amp_2017_ine.pdf#page=37",
+      "scope": {
+        "pt": "Residentes da AMP com 6–84 anos, todos os destinos; não inclui visitantes de fora da AMP. Autocarro inclui transporte escolar/empregador.",
+        "en": "AMP residents aged 6–84, all destinations; excludes visitors living outside AMP. Bus includes school/employer transport."
+      },
+      "unreportedModes": []
+    },
+    "resident_weekday": {
+      "label": {
+        "pt": "Porto · residentes · dia útil · PMUS",
+        "en": "Porto · residents · weekday · PMUS"
+      },
+      "shares": {
+        "car": 56.8,
+        "walk": 14.1,
+        "bicycle": 2.0,
+        "bus": 11.1,
+        "metro": 11.7,
+        "train": 0.7,
+        "other": 3.5,
+        "motorcycle": 0
+      },
+      "source": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf#page=102",
+      "scope": {
+        "pt": "Referência do inquérito PMUS, não uma repartição da população metropolitana. Não residentes: amostra orientada a trabalho/estudo no Porto; não representa necessariamente todos os visitantes. Motociclos não estão separados de outros.",
+        "en": "PMUS survey reference, not the metropolitan population mix. Non-resident sample focuses on working/studying in Porto; not necessarily representative of all visitors. Motorcycles are not separated from other modes."
+      },
+      "unreportedModes": [
+        "motorcycle"
+      ]
+    },
+    "nonresident_weekday": {
+      "label": {
+        "pt": "Porto · não residentes · dia útil · PMUS",
+        "en": "Porto · non-residents · weekday · PMUS"
+      },
+      "shares": {
+        "car": 36.5,
+        "walk": 4.4,
+        "bicycle": 0.7,
+        "bus": 25.5,
+        "metro": 24.2,
+        "train": 6.9,
+        "other": 1.9,
+        "motorcycle": 0
+      },
+      "source": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf#page=102",
+      "scope": {
+        "pt": "Referência do inquérito PMUS, não uma repartição da população metropolitana. Não residentes: amostra orientada a trabalho/estudo no Porto; não representa necessariamente todos os visitantes. Motociclos não estão separados de outros.",
+        "en": "PMUS survey reference, not the metropolitan population mix. Non-resident sample focuses on working/studying in Porto; not necessarily representative of all visitors. Motorcycles are not separated from other modes."
+      },
+      "unreportedModes": [
+        "motorcycle"
+      ]
+    },
+    "resident_nonworkday": {
+      "label": {
+        "pt": "Porto · residentes · dia não útil · PMUS",
+        "en": "Porto · residents · non-workday · PMUS"
+      },
+      "shares": {
+        "car": 65.5,
+        "walk": 12.3,
+        "bicycle": 2.1,
+        "bus": 5.9,
+        "metro": 8.3,
+        "train": 1.4,
+        "other": 4.6,
+        "motorcycle": 0
+      },
+      "source": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf#page=102",
+      "scope": {
+        "pt": "Referência do inquérito PMUS, não uma repartição da população metropolitana. Não residentes: amostra orientada a trabalho/estudo no Porto; não representa necessariamente todos os visitantes. Motociclos não estão separados de outros.",
+        "en": "PMUS survey reference, not the metropolitan population mix. Non-resident sample focuses on working/studying in Porto; not necessarily representative of all visitors. Motorcycles are not separated from other modes."
+      },
+      "unreportedModes": [
+        "motorcycle"
+      ]
+    },
+    "nonresident_nonworkday": {
+      "label": {
+        "pt": "Porto · não residentes · dia não útil · PMUS",
+        "en": "Porto · non-residents · non-workday · PMUS"
+      },
+      "shares": {
+        "car": 54.0,
+        "walk": 9.2,
+        "bicycle": 2.0,
+        "bus": 10.4,
+        "metro": 16.7,
+        "train": 4.5,
+        "other": 3.2,
+        "motorcycle": 0
+      },
+      "source": "https://mobilidade.cm-porto.pt/files/uploads/cms/PMUS%20Diagnostico.pdf#page=102",
+      "scope": {
+        "pt": "Referência do inquérito PMUS, não uma repartição da população metropolitana. Não residentes: amostra orientada a trabalho/estudo no Porto; não representa necessariamente todos os visitantes. Motociclos não estão separados de outros.",
+        "en": "PMUS survey reference, not the metropolitan population mix. Non-resident sample focuses on working/studying in Porto; not necessarily representative of all visitors. Motorcycles are not separated from other modes."
+      },
+      "unreportedModes": [
+        "motorcycle"
+      ]
+    }
+  },
+  "historicDailyTrips": 3400000,
+  "cross_year_warning": "2025 population combined with historical mobility references only as an explicit scenario; not observed 2025/2026 demand.",
+  "method": "Weighted person-trip accounting with assumed times, access penalties, capacity and mode shifts; separate from SUMO corridor simulation."
+}

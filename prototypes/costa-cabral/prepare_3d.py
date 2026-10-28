@@ -21,14 +21,19 @@ def shape(text): return [[round(float(v), 2) for v in p.split(',')[:2]] for p in
 def scene():
     result = json.loads((ROOT / 'results.json').read_text())
     net = ET.parse(ROOT / 'data/baseline.net.xml').getroot()
-    lanes = []
-    for edge in net.findall('edge'):
-        for lane in edge.findall('lane'):
-            lanes.append({'id': lane.get('id'), 'edge': edge.get('id'), 'shape': shape(lane.get('shape')),
-                          'length': float(lane.get('length')), 'width': float(lane.get('width', 3.2)),
-                          'internal': edge.get('function') == 'internal',
-                          'corridor': edge.get('name') == 'Rua de Costa Cabral'})
-    junctions = [shape(j.get('shape')) for j in net.findall('junction') if j.get('shape')]
+    lanes, junctions, hashes = [], {}, {}
+    for policy in ['baseline', 'restricted']:
+        file = ROOT / 'data' / f'{policy}.net.xml'
+        policy_net = ET.parse(file).getroot()
+        hashes[policy] = digest(file)
+        for edge in policy_net.findall('edge'):
+            for lane in edge.findall('lane'):
+                lanes.append({'id': policy + '|' + lane.get('id'), 'local_id': lane.get('id'), 'policy': policy,
+                              'edge': edge.get('id'), 'shape': shape(lane.get('shape')),
+                              'length': float(lane.get('length')), 'width': float(lane.get('width', 3.2)),
+                              'internal': edge.get('function') == 'internal',
+                              'corridor': edge.get('name') == 'Rua de Costa Cabral'})
+        junctions[policy] = [shape(j.get('shape')) for j in policy_net.findall('junction') if j.get('shape')]
     frozen = ROOT / 'data/buildings-3d.json.gz'
     if frozen.exists():
         buildings = json.loads(gzip.decompress(frozen.read_bytes()))
@@ -68,16 +73,15 @@ def scene():
                      'height_rule': 'OSM height when valid; otherwise levels × 3.2m; otherwise illustrative 9m. No terrain.'}
         with gzip.GzipFile(filename=str(frozen), mode='wb', mtime=0) as f:
             f.write(json.dumps(buildings, ensure_ascii=False, separators=(',', ':')).encode())
-    stop_ids, stops = set(), []
-    lookup = {l['id']: l for l in lanes}
-    for bus in result['buses']:
-        for stop in bus['stops']:
-            if stop['sid'] in stop_ids: continue
-            stop_ids.add(stop['sid'])
-            stops.append({'id': stop['sid'], 'name': stop['name'], 'lane': stop['lane'], 'pos': stop['pos']})
+    stops = []
+    for policy in ['baseline', 'restricted']:
+        add = ET.parse(ROOT / 'runs' / f'moderate-{policy}-17/additional.add.xml').getroot()
+        for stop in add.findall('busStop'):
+            stops.append({'id': stop.get('id'), 'name': stop.get('name'), 'policy': policy,
+                          'lane': policy + '|' + stop.get('lane'), 'pos': float(stop.get('endPos'))})
     value = {'lanes': lanes, 'junctions': junctions, 'buildings': buildings, 'stops': stops,
              'vehicle_dimensions': json.loads((ROOT / 'data/vehicle-dimensions-3d.json').read_text()),
-             'lane_ids': [l['id'] for l in lanes], 'network_sha256': digest(ROOT / 'data/baseline.net.xml'),
+             'lane_ids': [l['id'] for l in lanes], 'network_sha256': hashes, 'scene_schema': 2,
              'projection': dict(net.find('location').attrib),
              'bus_info': {b['id']: {'line': b['line'], 'trip': b['trip_id']} for b in result['buses']},
              'notes': 'Flat model. Lane widths/junctions are imported or generated, not surveyed. Building heights mostly estimated.'}
@@ -94,7 +98,7 @@ def capture(case, policy, scene_data):
     target = OUT / f'{key}.json.gz'
     if target.exists():
         cached = json.loads(gzip.decompress(target.read_bytes()))
-        if cached['input_hashes'] == hashes and cached.get('step') == 1: return
+        if cached['input_hashes'] == hashes and cached.get('step') == 1 and cached.get('scene_schema') == 2: return
     add = ET.parse(inputs[2])
     for element in list(add.getroot()):
         if element.tag == 'edgeData': add.getroot().remove(element)
@@ -119,10 +123,10 @@ def capture(case, policy, scene_data):
                         vehicles.append({'id': ident, 'group': v.get('type')})
                     rows.append([ids[ident], round(float(v.get('x')), 2), round(float(v.get('y')), 2),
                                  round(float(v.get('angle')), 2), round(float(v.get('speed')), 2),
-                                 lane_index.get(v.get('lane'), -1), round(float(v.get('pos')), 2)])
+                                 lane_index.get(policy + '|' + v.get('lane'), -1), round(float(v.get('pos')), 2)])
                 frames.append({'t': t, 'vehicles': rows})
             el.clear()
-    save(f'{key}.json.gz', {'case': case, 'policy': policy, 'seed': 17, 'start': START, 'end': END, 'step': 1,
+    save(f'{key}.json.gz', {'case': case, 'policy': policy, 'seed': 17, 'start': START, 'end': END, 'step': 1, 'scene_schema': 2,
                            'frames': frames, 'vehicles': vehicles, 'input_hashes': hashes,
                            'source': 'Native SUMO one-second FCD; front bumper coordinates; same original simulation step and inputs',
                            'captured_at': datetime.datetime.now(datetime.timezone.utc).isoformat()})

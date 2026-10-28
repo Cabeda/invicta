@@ -69,4 +69,8 @@ The script installs the pinned project dependencies, captures cached/native repl
 - A short browser recording produced a valid 1920 × 1080 VP9 WebM, using the selected language, resident-demand case and Conde Ferreira view.
 - The archive contains all relative website assets and matches the generated folder contents.
 
-The source-data/model limitations in `FINDINGS.md` and `README.md` still apply, including assumed demand, generated signals, 20-second dwell, local-origin/destination resident proxy, two-lane normalization, clipped diversion area and perfect compliance. Costs, safety and actual bus-reliability gains are not validated by this presentation.
+The source-data/model limitations in `FINDINGS.md` and `README.md` still apply, including assumed demand, generated signals, 20-second dwell, local-origin/destination resident proxy, proposal-only lane reduction, unvalidated imported baseline, clipped diversion area and perfect compliance. Costs, safety and actual bus-reliability gains are not validated by this presentation.
+
+## Population and transition explanation
+
+The site adds a separate conditional person-trip calculator and downloadable Markdown/JSON/CSV reports. INE population and IMob/PMUS mode-reference inputs are sourced; door-to-door times, residency/purpose allocation, adoption and capacity remain explicit assumptions. All native corridor replays, the two MP4s and 3D captures have been regenerated after preserving imported baseline lanes and applying lane reduction only to the proposal. The earlier large bus gains are superseded. See [TRANSITION.md](TRANSITION.md).
