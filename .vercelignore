@@ -1,0 +1,10 @@
+.git/
+.vercel/
+.venv/
+.cache/
+**/__pycache__/
+prototypes/costa-cabral/data/
+prototypes/costa-cabral/runs/
+prototypes/costa-cabral/media/
+prototypes/costa-cabral/costa-cabral-proposal-site.zip
+prototypes/line-701/

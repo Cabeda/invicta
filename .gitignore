@@ -1,5 +1,6 @@
 .venv/
 .cache/
+.vercel/
 __pycache__/
 prototypes/costa-cabral/data/raw/
 prototypes/costa-cabral/data/*.net.xml

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": "prototypes/costa-cabral/proposal",
+  "redirects": [
+    {
+      "source": "/proposal/:path*",
+      "destination": "/:path*",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/:path*",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/:path*.json.gz",
+      "headers": [
+        { "key": "Content-Type", "value": "application/gzip" }
+      ]
+    }
+  ]
+}
