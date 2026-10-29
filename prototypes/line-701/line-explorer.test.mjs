@@ -4,6 +4,8 @@ import {readFileSync} from 'node:fs';
 import {createLineExplorer} from './line-explorer.mjs';
 
 const data = JSON.parse(readFileSync(new URL('../costa-cabral/proposal/701-line-explorer.json', import.meta.url)));
+// The narrower prepared-study fixture tests geographic scope independently of any newer full-line study.
+data.native={direction:'1',from:'ARS3',to:'0BLRB',window:'08:10–08:40'};
 
 test('full geography and timetable retain each direction, including Ermesinde', () => {
   const explorer = createLineExplorer(data);

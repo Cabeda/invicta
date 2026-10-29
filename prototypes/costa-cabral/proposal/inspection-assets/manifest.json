@@ -1,0 +1,206 @@
+{
+  "schema": "invicta.native-replay.v1",
+  "study_id": "costa-cabral",
+  "scope": {
+    "route": null,
+    "direction": null,
+    "from": null,
+    "to": null,
+    "description": "Costa Cabral street study",
+    "reference_date": "2026-10-28"
+  },
+  "source_kind": "native_simulation",
+  "traffic": "synthetic; not observed or calibrated traffic",
+  "capture_signature": "9698bdc6b283e9d9d5f226406ab78cdfadae3a93ac424bcf03dacd8315894119",
+  "scene": {
+    "file": "scene.json.gz",
+    "sha256": "e5ee29fa59695438678e7817851b71ceaec0de4179c03557d05b075356c1e611",
+    "network_sha256": {
+      "baseline": "6f0129441528e27776c6c1f3c0c1d549e5d3abbef8312af3a7d42b94f586f9cc",
+      "restricted": "ce7686e245c6e845896b426f622a025e7a76a8677a79bef37874b3b33ffc85d0"
+    }
+  },
+  "clips": [
+    {
+      "case": "moderate",
+      "policy": "baseline",
+      "seed": 17,
+      "start": 720,
+      "end": 1440,
+      "step": 1,
+      "simulation_begin": 0,
+      "capture_signature": "9698bdc6b283e9d9d5f226406ab78cdfadae3a93ac424bcf03dacd8315894119",
+      "input_hashes": {
+        "data/baseline.net.xml": "6f0129441528e27776c6c1f3c0c1d549e5d3abbef8312af3a7d42b94f586f9cc",
+        "runs/moderate-baseline-17/routes.rou.xml": "e29e75ee67591e83f11aeee4a7a59a891137f631179c2d092168a1f8b19e04a6",
+        "runs/moderate-baseline-17/additional.add.xml": "9e3723afc1284c5021c3e5aa10a7bb88dad43bea5a2548dd47e9f2d853931fbc"
+      },
+      "captured_at": "2026-10-28T17:15:41.109204+00:00",
+      "file": "moderate-baseline.json.gz",
+      "sha256": "3f042ddbad0decde3151ad17f9421936f03eb363cea651c0b90c5e289cfc881a",
+      "frames": 721,
+      "vehicles": 594,
+      "peak_by_group": {
+        "background": 98,
+        "bicycle": 11,
+        "bus": 5,
+        "crossing": 5,
+        "motorcycle": 15,
+        "resident": 13,
+        "taxi": 14,
+        "through": 96
+      }
+    },
+    {
+      "case": "moderate",
+      "policy": "restricted",
+      "seed": 17,
+      "start": 720,
+      "end": 1440,
+      "step": 1,
+      "simulation_begin": 0,
+      "capture_signature": "9698bdc6b283e9d9d5f226406ab78cdfadae3a93ac424bcf03dacd8315894119",
+      "input_hashes": {
+        "data/restricted.net.xml": "ce7686e245c6e845896b426f622a025e7a76a8677a79bef37874b3b33ffc85d0",
+        "runs/moderate-restricted-17/routes.rou.xml": "db547ad6b1d03a7f7be77689253aea8e174fa616153d968e8c8f42b2d1ea6330",
+        "runs/moderate-restricted-17/additional.add.xml": "210ecdedd9e6e2dc08d59668c5105d79661f87baac54916a81210b079e1e8a64"
+      },
+      "captured_at": "2026-10-28T17:15:40.864274+00:00",
+      "file": "moderate-restricted.json.gz",
+      "sha256": "aa492d2d5e5e10f5c64db13bef2e574ce9d180c9cb6ab9f72881064a6077a78e",
+      "frames": 721,
+      "vehicles": 571,
+      "peak_by_group": {
+        "background": 95,
+        "bicycle": 11,
+        "bus": 4,
+        "motorcycle": 17,
+        "resident": 13,
+        "taxi": 13,
+        "through": 80,
+        "crossing": 5
+      }
+    },
+    {
+      "case": "busy",
+      "policy": "baseline",
+      "seed": 17,
+      "start": 720,
+      "end": 1440,
+      "step": 1,
+      "simulation_begin": 0,
+      "capture_signature": "9698bdc6b283e9d9d5f226406ab78cdfadae3a93ac424bcf03dacd8315894119",
+      "input_hashes": {
+        "data/baseline.net.xml": "6f0129441528e27776c6c1f3c0c1d549e5d3abbef8312af3a7d42b94f586f9cc",
+        "runs/busy-baseline-17/routes.rou.xml": "ad0b43ba0b050993a916e378683ce552607c1bcc273c76aa167403541fa19d31",
+        "runs/busy-baseline-17/additional.add.xml": "f72cc69c4cda6394bc8d5d95d39ee613fe0090d456510014b084359dabd4c829"
+      },
+      "captured_at": "2026-10-28T17:15:42.532936+00:00",
+      "file": "busy-baseline.json.gz",
+      "sha256": "200028bb974b957978b898ca630f2cd70f6f6faaf539be2090e8037dfbb4e105",
+      "frames": 721,
+      "vehicles": 999,
+      "peak_by_group": {
+        "background": 139,
+        "bicycle": 18,
+        "bus": 4,
+        "crossing": 6,
+        "motorcycle": 24,
+        "resident": 14,
+        "taxi": 15,
+        "through": 183
+      }
+    },
+    {
+      "case": "busy",
+      "policy": "restricted",
+      "seed": 17,
+      "start": 720,
+      "end": 1440,
+      "step": 1,
+      "simulation_begin": 0,
+      "capture_signature": "9698bdc6b283e9d9d5f226406ab78cdfadae3a93ac424bcf03dacd8315894119",
+      "input_hashes": {
+        "data/restricted.net.xml": "ce7686e245c6e845896b426f622a025e7a76a8677a79bef37874b3b33ffc85d0",
+        "runs/busy-restricted-17/routes.rou.xml": "f463982a3ac4abbb011b0bda34a3969d0767d2d1a514931d1084b8d1ebf4f407",
+        "runs/busy-restricted-17/additional.add.xml": "de9b4b2fc87edfceed3b89fb87347d1f3d7cc0acc1f6b450af51626d1c9e04de"
+      },
+      "captured_at": "2026-10-28T17:15:45.206027+00:00",
+      "file": "busy-restricted.json.gz",
+      "sha256": "8785db09334f02d5a19a01c5daa9e21ad67771f99706109dfa398f69bc561764",
+      "frames": 721,
+      "vehicles": 960,
+      "peak_by_group": {
+        "background": 139,
+        "bicycle": 18,
+        "bus": 4,
+        "crossing": 7,
+        "motorcycle": 25,
+        "resident": 15,
+        "taxi": 15,
+        "through": 147
+      }
+    },
+    {
+      "case": "residents",
+      "policy": "baseline",
+      "seed": 17,
+      "start": 720,
+      "end": 1440,
+      "step": 1,
+      "simulation_begin": 0,
+      "capture_signature": "9698bdc6b283e9d9d5f226406ab78cdfadae3a93ac424bcf03dacd8315894119",
+      "input_hashes": {
+        "data/baseline.net.xml": "6f0129441528e27776c6c1f3c0c1d549e5d3abbef8312af3a7d42b94f586f9cc",
+        "runs/residents-baseline-17/routes.rou.xml": "66227e2764dd2ebac1bed897f9bea5c4d5046ede5e25e2ed4d717ef177015df9",
+        "runs/residents-baseline-17/additional.add.xml": "2a3f4009cefa7c17185f2414b4d25894b2812c1175a603d55097fb92961eba67"
+      },
+      "captured_at": "2026-10-28T17:15:44.207753+00:00",
+      "file": "residents-baseline.json.gz",
+      "sha256": "055fc07c2b9bc6389116b4838287de9d881a04526104b876c9de184cc87e0f46",
+      "frames": 721,
+      "vehicles": 698,
+      "peak_by_group": {
+        "background": 97,
+        "bicycle": 14,
+        "bus": 4,
+        "crossing": 5,
+        "motorcycle": 15,
+        "resident": 38,
+        "taxi": 12,
+        "through": 101
+      }
+    },
+    {
+      "case": "residents",
+      "policy": "restricted",
+      "seed": 17,
+      "start": 720,
+      "end": 1440,
+      "step": 1,
+      "simulation_begin": 0,
+      "capture_signature": "9698bdc6b283e9d9d5f226406ab78cdfadae3a93ac424bcf03dacd8315894119",
+      "input_hashes": {
+        "data/restricted.net.xml": "ce7686e245c6e845896b426f622a025e7a76a8677a79bef37874b3b33ffc85d0",
+        "runs/residents-restricted-17/routes.rou.xml": "b97a53dc6a3a8b0ecd7ac6c6ca84b25b57a91227a9ef3da3101a44fbbae5cbac",
+        "runs/residents-restricted-17/additional.add.xml": "d48d9a4818f32d91ae764bb168ab123b00e079dab914426ca540760873679d20"
+      },
+      "captured_at": "2026-10-28T17:15:45.789873+00:00",
+      "file": "residents-restricted.json.gz",
+      "sha256": "d03ed05a21ea665cfc7a1b1b350bdf65dfef31b2fd6db3bf227d49c1ebaf9449",
+      "frames": 721,
+      "vehicles": 665,
+      "peak_by_group": {
+        "background": 99,
+        "bicycle": 15,
+        "bus": 4,
+        "motorcycle": 17,
+        "resident": 42,
+        "taxi": 12,
+        "through": 76,
+        "crossing": 5
+      }
+    }
+  ],
+  "id": "1dbd835f9b63b597e96ed75726eb44de7212479ef13eec75850fe4017ecd842f"
+}

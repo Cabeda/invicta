@@ -1,0 +1,7 @@
+{
+  "status": "superseded diagnostic inputs, excluded from published comparison",
+  "reason": "Several stop footprints were shorter than a12m bus. Corrected matching reserves at least15m on edges of at least16m, while retaining official geometry and source schedule.",
+  "old_bus_only_completed": 127,
+  "old_bus_only_planned": 127,
+  "traffic_demand_reduced": false
+}

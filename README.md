@@ -6,9 +6,9 @@ A bilingual, interactive Porto mobility demo: help buses meet their schedules wh
 
 Explore **the full 701 in both directions**, including Codiceira and Ermesinde, on an interactive street map. Each direction keeps its own selected section and trip. Shared links restore those selections, language, scenario and camera; the public summary expands into timetable and source detail. In 3D, camera movement defaults to **3×**, with **1× / 3× / 10×** controls and an additional **Shift boost**.
 
-The native street pilot follows **STCP 701 through the entire Porto municipal extent to Bolhão**, with 16 official stops and the boundary approach before Areosa. A separate whole-line service model uses all 56 stops and 63 inbound workings to test passenger/dwell feedback, bunching, capacity and schedule/headway controls. Compare scheduled references, timestamped GPS passages and native SUMO results; inspect the Porto baseline/candidate replay in 3D.
+The native traffic study runs **the complete 701 in both directions in the same regional simulation**: 56 inbound stops, 54 outbound stops and all 127 scheduled workings, including short trips and service after midnight. Baseline and priority policies use identical requested demand. Full-day results are paired with a 16:50–18:20 native 3D replay across the entire line. A separate inbound passenger/berth model explores dwell, capacity and bunching feedback.
 
-**Exploratory prototype:** traffic, passenger demand, signals, dwell and recovery are uncalibrated. The short GPS sample does not establish recurring delays or causes. Connectivity checks need field verification. Whole-line service dynamics are assumed; outside-Porto road traffic, the reverse direction, other routes and shared vehicle rotations are not modelled. The strict zero-lateness goal can be tested, but actual punctuality is not guaranteed.
+**Exploratory prototype:** traffic, passenger demand, signals, dwell and recovery are uncalibrated. The short GPS sample does not establish recurring delays or causes. Connectivity checks need field verification. Both directions and regional road traffic are simulated with synthetic demand. Other bus routes and shared physical vehicle rotations are not modelled. The strict zero-lateness goal can be tested, but actual punctuality is not guaranteed.
 
 ## Open locally
 
@@ -17,12 +17,14 @@ python3 -m http.server 8765 --directory prototypes/costa-cabral/proposal
 # http://127.0.0.1:8765/?lang=pt
 ```
 
-Switch between Portuguese and English, select journeys and scenarios, export a policy or explanation, and record the 3D replay as WebM. Browser uploads stay in memory. The earlier street study, films and metropolitan transition calculator are under `legacy.html`.
+Switch between Portuguese and English, select journeys and scenarios, export a policy or explanation, and record the 3D replay as WebM. Browser uploads stay in memory and are included only when you explicitly share or export the proposal. The earlier street study, films and metropolitan transition calculator are under `legacy.html`.
 
 ## Source and reproducibility
 
 - [701 pilot and commands](prototypes/line-701/README.md)
+- [Full traffic study and reproduction](prototypes/line-701/full/README.md)
 - [701 findings and limitations](prototypes/line-701/REPORT.md)
+- [Architecture and validation](docs/ARCHITECTURE.md)
 - [Official route and timetable research](docs/research/line-701-data-and-direction.md)
 - [Outbound route, timetable matching and source dates](docs/research/line-701-outbound.md)
 - [Project objectives](docs/PROJECT_BRIEF.md)
@@ -37,10 +39,12 @@ From this repository's root:
 ```sh
 vercel login
 vercel link
-vercel --prod
+node scripts/prepare-deployment.mjs
+# Commit and push the updated site and deployment manifest first.
+vercel deploy --prod --yes --scope jos-cabedas-projects --build-env INVICTA_ASSET_COMMIT="$(git rev-parse HEAD)"
 ```
 
-[`vercel.json`](vercel.json) serves the checked-in `prototypes/costa-cabral/proposal` folder, with no install step, simulation job or server. New proposals are generated locally, committed and deployed as static assets. Keep the asset folders and `vendor/` together. Compressed replay files are fetched and decompressed by the viewer; do not add a `Content-Encoding: gzip` header to those stored gzip payloads.
+[`vercel.json`](vercel.json) serves the checked-in `prototypes/costa-cabral/proposal` folder, with no install step, simulation job or server. The build restores large assets from the exact pushed public GitHub commit and checks their hashes. New proposals are generated locally, committed and deployed as static assets. Keep the asset folders and `vendor/` together. Compressed replay files are fetched and decompressed by the viewer; do not add a `Content-Encoding: gzip` header to those stored gzip payloads.
 
 The live project is `invicta` in `jos-cabedas-projects`. It uses direct CLI deployment; pushing to GitHub does not automatically publish a new website version. See [deployment details](docs/DEPLOYMENT.md).
 

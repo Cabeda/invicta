@@ -3,3 +3,5 @@
 @media(max-width:760px){.explorer-grid{grid-template-columns:1fr}#wholeLineMap{height:490px}.line-overview{width:112px}.line-overview svg{height:115px}.line-overview>span{font-size:8px}.explorer-focus{padding:18px}.explorer-evidence{padding:15px}.explorer-evidence aside{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.focus-fields{grid-template-columns:1fr}.line-map-legend{gap:10px}.explorer-heading label{min-width:0}#analysis{padding:14px}#analysis .controls label{min-width:0;max-width:100%}#analysis select{max-width:100%}}
 
 #status,#focusShareStatus{overflow-wrap:anywhere}
+
+.proposal-story{margin:18px 0 32px}.proposal-story h2{font-size:27px;margin:12px 0}.proposal-story-head{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.proposal-quick{display:flex;gap:25px;flex-wrap:wrap;margin:15px 0;font-size:13px}.proposal-quick b{font-size:22px;color:var(--green)}.proposal-story .actions button,.proposal-story .actions label{font-size:12px}.recording .proposal-story button,.recording .proposal-story label{pointer-events:none;opacity:.6}

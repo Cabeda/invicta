@@ -1,0 +1,25 @@
+{
+  "native": true,
+  "working_count": 127,
+  "completed_workings": 127,
+  "served_calls": 6024,
+  "planned_served_calls": 6024,
+  "ordinary_traffic_requests": 0,
+  "inputs": {
+    "network": "848f9f045a602906e8af3544bd8ce20f90e5d4c5f5f047ef3266d64d612d38b6",
+    "reference": "f14ceced3d68eea0805715d9e5ac76c5d0e59c2251940a3fe71ecd0d7096df1a",
+    "demand": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "case": "bus_only_validation",
+    "seed": 17,
+    "begin": 18000,
+    "end": 99300,
+    "origin_lead": 30,
+    "dwell": 20,
+    "schema": 1
+  },
+  "timing_points": {
+    "planned_calls": 714,
+    "late_arrivals": 154,
+    "missing_arrivals": 0
+  }
+}

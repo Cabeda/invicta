@@ -1,20 +1,707 @@
 {
   "route": "701",
   "direction_id": 1,
-  "start_stop": "ARS3",
+  "start_stop": "COD4",
   "end_stop": "0BLRB",
   "priority_segments": [
-    "leg_03",
-    "leg_04",
-    "leg_05",
-    "leg_06",
-    "leg_07",
-    "leg_08",
-    "leg_09",
-    "leg_10",
-    "leg_11",
-    "leg_12",
-    "leg_15"
+    "leg_01",
+    "leg_18",
+    "leg_21",
+    "leg_26",
+    "leg_27",
+    "leg_40",
+    "leg_41",
+    "leg_42",
+    "leg_44",
+    "leg_49",
+    "leg_50",
+    "leg_51",
+    "leg_52",
+    "leg_53",
+    "leg_54"
   ],
-  "note": "Draft lane permission policy; leaves mapped lane counts, signals and geometry unchanged. Not a street-design approval."
+  "note": "Draft lane permission policy; leaves mapped lane counts, signals and geometry unchanged. Not a street-design approval.",
+  "schema": "invicta.native-policy.v1",
+  "study_id": "line-701-full",
+  "priority_by_direction": {
+    "1": [
+      "leg_01",
+      "leg_18",
+      "leg_21",
+      "leg_26",
+      "leg_27",
+      "leg_40",
+      "leg_41",
+      "leg_42",
+      "leg_44",
+      "leg_49",
+      "leg_50",
+      "leg_51",
+      "leg_52",
+      "leg_53",
+      "leg_54"
+    ],
+    "0": [
+      "leg_03",
+      "leg_04",
+      "leg_05",
+      "leg_06",
+      "leg_07",
+      "leg_08",
+      "leg_09",
+      "leg_10",
+      "leg_11",
+      "leg_12",
+      "leg_17",
+      "leg_18",
+      "leg_19",
+      "leg_20",
+      "leg_21",
+      "leg_22",
+      "leg_23",
+      "leg_25",
+      "leg_26",
+      "leg_28",
+      "leg_29",
+      "leg_33",
+      "leg_36",
+      "leg_37",
+      "leg_47",
+      "leg_53"
+    ]
+  },
+  "applied_priority_edges": [
+    {
+      "edge": "-447541193#1",
+      "lane": "-447541193#1_0",
+      "street": "Largo de Nossa Senhora do Amparo",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1280586391#0",
+      "lane": "1280586391#0_0",
+      "street": "Avenida da Primavera",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-100199951#2",
+      "lane": "-100199951#2_0",
+      "street": "Rua Dom António Castro Meireles",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-100199951#1",
+      "lane": "-100199951#1_0",
+      "street": "Rua Dom António Castro Meireles",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-100199951#0",
+      "lane": "-100199951#0_0",
+      "street": "Rua Dom António Castro Meireles",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1101542084",
+      "lane": "1101542084_0",
+      "street": "Rua Rodrigues de Freitas",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "99958735#1",
+      "lane": "99958735#1_0",
+      "street": "Rua Rodrigues de Freitas",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "-99954513#3",
+      "lane": "-99954513#3_0",
+      "street": "Rua Júlio Dinis",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-99954513#2",
+      "lane": "-99954513#2_0",
+      "street": "Rua Júlio Dinis",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-99954513#1",
+      "lane": "-99954513#1_0",
+      "street": "Rua Júlio Dinis",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "482332561#0",
+      "lane": "482332561#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "482332563#0",
+      "lane": "482332563#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "482332563#1",
+      "lane": "482332563#1_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "482332563#2",
+      "lane": "482332563#2_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "477791560#0",
+      "lane": "477791560#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "477791560#1",
+      "lane": "477791560#1_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1267568114#0",
+      "lane": "1267568114#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-27292882#9",
+      "lane": "-27292882#9_0",
+      "street": "Rua da Alegria",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-27292882#6",
+      "lane": "-27292882#6_0",
+      "street": "Rua da Alegria",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-27292882#4",
+      "lane": "-27292882#4_0",
+      "street": "Rua da Alegria",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-27292882#3",
+      "lane": "-27292882#3_0",
+      "street": "Rua da Alegria",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-27292882#2",
+      "lane": "-27292882#2_0",
+      "street": "Rua da Alegria",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1165311280#0",
+      "lane": "1165311280#0_0",
+      "street": "Rua da Constituição",
+      "general_lanes_retained": 2
+    },
+    {
+      "edge": "1016548267",
+      "lane": "1016548267_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 2
+    },
+    {
+      "edge": "738994725",
+      "lane": "738994725_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 2
+    },
+    {
+      "edge": "453761690#0",
+      "lane": "453761690#0_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1165311279#0",
+      "lane": "1165311279#0_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "1165311279#2",
+      "lane": "1165311279#2_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "1165311278#0",
+      "lane": "1165311278#0_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 2
+    },
+    {
+      "edge": "1165311278#1",
+      "lane": "1165311278#1_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 2
+    },
+    {
+      "edge": "13716129#0",
+      "lane": "13716129#0_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "60461092#0",
+      "lane": "60461092#0_0",
+      "street": "Rua do Bonjardim",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "31573198#0",
+      "lane": "31573198#0_0",
+      "street": "Rua João de Oliveira Ramos",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "34597437#0",
+      "lane": "34597437#0_0",
+      "street": "Rua de Santa Catarina",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "34597437#1",
+      "lane": "34597437#1_0",
+      "street": "Rua de Santa Catarina",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "34597437#4",
+      "lane": "34597437#4_0",
+      "street": "Rua de Santa Catarina",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "34597437#6",
+      "lane": "34597437#6_0",
+      "street": "Rua de Santa Catarina",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "8367155#0",
+      "lane": "8367155#0_0",
+      "street": "Rua de Santa Catarina",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "13716160#0",
+      "lane": "13716160#0_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "1165311277#0",
+      "lane": "1165311277#0_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "738994726#0",
+      "lane": "738994726#0_0",
+      "street": "Praça do Marquês de Pombal",
+      "general_lanes_retained": 2
+    },
+    {
+      "edge": "1019391558#0",
+      "lane": "1019391558#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "1019391558#5",
+      "lane": "1019391558#5_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "482331424#0",
+      "lane": "482331424#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "482331424#2",
+      "lane": "482331424#2_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "482331424#6",
+      "lane": "482331424#6_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "482331424#8",
+      "lane": "482331424#8_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 1
+    },
+    {
+      "edge": "434879925#0",
+      "lane": "434879925#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1017121215#0",
+      "lane": "1017121215#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1017121215#2",
+      "lane": "1017121215#2_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-1316240061",
+      "lane": "-1316240061_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-29036514",
+      "lane": "-29036514_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "667433349#1",
+      "lane": "667433349#1_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1456291565",
+      "lane": "1456291565_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-966302095#2",
+      "lane": "-966302095#2_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-966302095#0",
+      "lane": "-966302095#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-1267568114#1",
+      "lane": "-1267568114#1_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1021969060",
+      "lane": "1021969060_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "667433348#0",
+      "lane": "667433348#0_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "667433348#1",
+      "lane": "667433348#1_0",
+      "street": "Rua de Costa Cabral",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1135289855#0",
+      "lane": "1135289855#0_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1135289855#1",
+      "lane": "1135289855#1_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1135289855#2",
+      "lane": "1135289855#2_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "210673562",
+      "lane": "210673562_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1536794513",
+      "lane": "1536794513_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1536794512",
+      "lane": "1536794512_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1536794511#0",
+      "lane": "1536794511#0_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1536794510",
+      "lane": "1536794510_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1536794509",
+      "lane": "1536794509_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1536794514#0",
+      "lane": "1536794514#0_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1536794514#1",
+      "lane": "1536794514#1_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1536794517",
+      "lane": "1536794517_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1536794518#0",
+      "lane": "1536794518#0_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972084#0",
+      "lane": "1082972084#0_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972084#1",
+      "lane": "1082972084#1_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972083#0",
+      "lane": "1082972083#0_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972083#1",
+      "lane": "1082972083#1_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972083#2",
+      "lane": "1082972083#2_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972083#3",
+      "lane": "1082972083#3_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972083#4",
+      "lane": "1082972083#4_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972083#5",
+      "lane": "1082972083#5_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972083#7",
+      "lane": "1082972083#7_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1082972083#8",
+      "lane": "1082972083#8_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1341382369#0",
+      "lane": "1341382369#0_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1341382369#1",
+      "lane": "1341382369#1_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1341382369#2",
+      "lane": "1341382369#2_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1341382369#3",
+      "lane": "1341382369#3_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "157417460#0",
+      "lane": "157417460#0_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "157417460#1",
+      "lane": "157417460#1_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "157417460#6",
+      "lane": "157417460#6_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "157417460#7",
+      "lane": "157417460#7_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "157417460#8",
+      "lane": "157417460#8_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1117207213#0",
+      "lane": "1117207213#0_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1117207213#3",
+      "lane": "1117207213#3_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1117207213#5",
+      "lane": "1117207213#5_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1117207213#6",
+      "lane": "1117207213#6_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1117207213#7",
+      "lane": "1117207213#7_0",
+      "street": "Rua Dom Afonso Henriques",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "99954513#1",
+      "lane": "99954513#1_0",
+      "street": "Rua Júlio Dinis",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "99954513#2",
+      "lane": "99954513#2_0",
+      "street": "Rua Júlio Dinis",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "99954513#3",
+      "lane": "99954513#3_0",
+      "street": "Rua Júlio Dinis",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "101625501#0",
+      "lane": "101625501#0_0",
+      "street": "Rua Vasco da Gama",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1280586392",
+      "lane": "1280586392_0",
+      "street": "Avenida da Primavera",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "103192998#0",
+      "lane": "103192998#0_0",
+      "street": "Rua Ermesinde Sport Club",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "1334828296#1",
+      "lane": "1334828296#1_0",
+      "street": "Avenida Padre Nuno Maria Cardoso",
+      "general_lanes_retained": 0
+    },
+    {
+      "edge": "-447541195#1",
+      "lane": "-447541195#1_0",
+      "street": "Largo de Nossa Senhora do Amparo",
+      "general_lanes_retained": 0
+    }
+  ],
+  "baseline_network_sha256": "848f9f045a602906e8af3544bd8ce20f90e5d4c5f5f047ef3266d64d612d38b6",
+  "reference_id": "9c124934c3b0cb68aecb6d3f0633ad24f5d5ad2f00e3bd97a6bbf745f2702740"
 }

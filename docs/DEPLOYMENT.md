@@ -10,16 +10,22 @@ Published through Vercel CLI on 28 October 2026. The stable production alias is 
 
 ## Update the demo
 
-Regenerate any changed experiment outputs locally, review the static export, commit and push source changes, then deploy from the repository root:
+Regenerate any changed experiment outputs locally and review the complete static export. Prepare the deployment manifest, commit and push the site and manifest, then deploy from the repository root:
 
 ```sh
+node scripts/prepare-deployment.mjs
+# Commit and push all changes before deployment.
 vercel whoami
 # If needed: vercel login
 vercel link --project invicta --scope jos-cabedas-projects --yes
-vercel deploy --prod --yes --scope jos-cabedas-projects
+vercel deploy --prod --yes --scope jos-cabedas-projects --build-env INVICTA_ASSET_COMMIT="$(git rev-parse HEAD)"
 ```
 
-The CLI deploys the checked-in `prototypes/costa-cabral/proposal` output. `vercel.json` skips installation and building. `.vercelignore` omits local simulation environments, source input caches and native run folders from CLI uploads. Local project IDs in `.vercel/` are ignored by Git.
+The CLI deploys the checked-in `prototypes/costa-cabral/proposal` output. `vercel.json` skips installation and restores large public assets during the build. `.vercelignore` omits local simulation environments, source input caches and native run folders from CLI uploads. Local project IDs in `.vercel/` are ignored by Git.
+
+The full native replay exceeds the Hobby CLI source-upload allowance. `deployment-assets.json` records every public file larger than 1 MB. The generated block in `.vercelignore` omits those bytes from the CLI upload; `scripts/stage-deployment-assets.mjs` retrieves them from `INVICTA_ASSET_COMMIT` in the public GitHub repository, verifies size and SHA-256, then puts them in the static output. Missing or mismatched files fail the build. The commit must already be pushed. No GitHub token, persistent Git integration or runtime GitHub request is needed.
+
+The downloadable website bundle retains all files and can be served directly over HTTP(S), independently of this deployment step.
 
 GitHub and Vercel are managed independently. Automatic GitHub deployment integration was not enabled: the automatic approval review rejected adding persistent repository access and webhooks. A new source push therefore needs a separate `vercel deploy --prod` command to publish.
 

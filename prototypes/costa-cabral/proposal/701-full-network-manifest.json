@@ -1,0 +1,2203 @@
+{
+  "source": "Official OpenStreetMap map API",
+  "licence": "ODbL © OpenStreetMap contributors",
+  "requested_bounds": [
+    -8.614,
+    41.145,
+    -8.506,
+    41.251
+  ],
+  "inputs": [
+    {
+      "file": "tile-0-2.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5601500,41.1450000,-8.5328500,41.1716500",
+      "bbox": [
+        -8.56015,
+        41.145,
+        -8.53285,
+        41.17165
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:05.454631+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:07.575342+00:00",
+      "status": 200,
+      "bytes": 8332599,
+      "sha256": "5fa7ad9debe84e1073509de96fe53d94886f8f98a654aebdbc69f68432274bab",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 32657,
+        "way": 4293,
+        "relation": 95
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 761,
+        "way": 3474,
+        "relation": 32
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10038174317",
+          "10077655284",
+          "10077655286",
+          "10077655287",
+          "10077655288",
+          "10234472030",
+          "10235476453",
+          "10249175033",
+          "10292957544",
+          "10292957545"
+        ],
+        "way": [
+          "1001166329",
+          "100426794",
+          "1005681287",
+          "1005681288",
+          "1005681289",
+          "1005681290",
+          "1005681291",
+          "100605285",
+          "100605291",
+          "1006229487"
+        ],
+        "relation": [
+          "3372413",
+          "3372460",
+          "3382093",
+          "3382115",
+          "3382145",
+          "3382149",
+          "3383100",
+          "3384812",
+          "3384814",
+          "3658971"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-0-3.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5331500,41.1450000,-8.5060000,41.1716500",
+      "bbox": [
+        -8.53315,
+        41.145,
+        -8.506,
+        41.17165
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:05.564224+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:07.706597+00:00",
+      "status": 200,
+      "bytes": 10347658,
+      "sha256": "27518c79bc22b86bc39b4e492ecb37ef850165d47aabf0c89c8800dd27fd04ca",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 42123,
+        "way": 5735,
+        "relation": 62
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 491,
+        "way": 1387,
+        "relation": 5
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10234472030",
+          "10235476453",
+          "10293382830",
+          "10293382832",
+          "10293382833",
+          "10293382834",
+          "10293382835",
+          "10293382836",
+          "10293382837",
+          "10294089647"
+        ],
+        "way": [
+          "1001166329",
+          "1005681287",
+          "1005681288",
+          "1005681289",
+          "1005681290",
+          "1005681291",
+          "100605291",
+          "1006229487",
+          "1007122850",
+          "100894233"
+        ],
+        "relation": [
+          "3383735",
+          "5919093",
+          "5919094",
+          "5919104",
+          "5919105"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-1-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5871500,41.1713500,-8.5598500,41.1981500",
+      "bbox": [
+        -8.58715,
+        41.17135,
+        -8.55985,
+        41.19815
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:07.732159+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:11.439537+00:00",
+      "status": 200,
+      "bytes": 13459444,
+      "sha256": "feed259c4d5e06637d4ca7ddf875fc0049098dccb7b6db644596bd66589b6fcf",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 47405,
+        "way": 7237,
+        "relation": 239
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1819,
+        "way": 7381,
+        "relation": 51
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10034301118",
+          "10077655283",
+          "10077655284",
+          "10077655286",
+          "10077655287",
+          "10077655288",
+          "10121898381",
+          "10121898382",
+          "10121898383",
+          "10121898384"
+        ],
+        "way": [
+          "1000515669",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515686",
+          "1000515690",
+          "1001166327",
+          "1001166329",
+          "100196799",
+          "100198169"
+        ],
+        "relation": [
+          "18804053",
+          "18804054",
+          "18804058",
+          "18804059",
+          "18804061",
+          "18805144",
+          "18805145",
+          "18805146",
+          "19301581",
+          "19807497"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-1-2.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5601500,41.1713500,-8.5328500,41.1981500",
+      "bbox": [
+        -8.56015,
+        41.17135,
+        -8.53285,
+        41.19815
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:10.065356+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:12.510595+00:00",
+      "status": 200,
+      "bytes": 11036350,
+      "sha256": "b983b15b71c4ab966a7e36e7c5c62bad40b7920fb68798ef32684bb63dc0a49c",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 40037,
+        "way": 5634,
+        "relation": 144
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1071,
+        "way": 6263,
+        "relation": 52
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10038174317",
+          "10077655284",
+          "10077655286",
+          "10077655287",
+          "10077655288",
+          "10126913793",
+          "10180578316",
+          "10180580417",
+          "1018972809",
+          "1018972812"
+        ],
+        "way": [
+          "1000515669",
+          "1000515690",
+          "100196799",
+          "100198169",
+          "100199245",
+          "100426794",
+          "1005681287",
+          "1005681288",
+          "1005681289",
+          "1005681290"
+        ],
+        "relation": [
+          "10107155",
+          "10107395",
+          "10107396",
+          "10107399",
+          "18804053",
+          "18804054",
+          "18804058",
+          "18804059",
+          "18804061",
+          "18805144"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-1-3.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5331500,41.1713500,-8.5060000,41.1981500",
+      "bbox": [
+        -8.53315,
+        41.17135,
+        -8.506,
+        41.19815
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:11.463301+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:13.030574+00:00",
+      "status": 200,
+      "bytes": 6533673,
+      "sha256": "fe9ea62f78d92fe2713aad2e2ea81a7167d27c55ea239ea9908f638f2985e91e",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 23969,
+        "way": 3011,
+        "relation": 92
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1156,
+        "way": 5002,
+        "relation": 276
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10034301118",
+          "10038029407",
+          "10077655283",
+          "10077655284",
+          "10077655286",
+          "10077655287",
+          "10077655288",
+          "10083428062",
+          "10083428064"
+        ],
+        "way": [
+          "1000515669",
+          "1000515686",
+          "1000515690",
+          "1001388540",
+          "1001407806",
+          "1001407807",
+          "100196781",
+          "100196789",
+          "100196798",
+          "100196799"
+        ],
+        "relation": [
+          "102595",
+          "103222",
+          "108203",
+          "108340",
+          "1084054",
+          "1086284",
+          "110270",
+          "1175648",
+          "1202486",
+          "125452"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-2-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5871500,41.1978500,-8.5598500,41.2246500",
+      "bbox": [
+        -8.58715,
+        41.19785,
+        -8.55985,
+        41.22465
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:13.041986+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:15.529053+00:00",
+      "status": 200,
+      "bytes": 8856049,
+      "sha256": "455a310144f8ae873f0a85991b172ce20d5052608675e9cc0de883a04c80c64c",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 31668,
+        "way": 4363,
+        "relation": 122
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1499,
+        "way": 7614,
+        "relation": 284
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10034301118",
+          "10077655283",
+          "10087257186",
+          "10087257187",
+          "10087257188",
+          "10087552819",
+          "10087552820",
+          "10087552821",
+          "10087552823"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515681",
+          "1000515685",
+          "1000515686",
+          "1000515690"
+        ],
+        "relation": [
+          "102595",
+          "103222",
+          "108203",
+          "108340",
+          "1084054",
+          "1086284",
+          "110270",
+          "1175648",
+          "1202486",
+          "125452"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-2-2.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5601500,41.1978500,-8.5328500,41.2246500",
+      "bbox": [
+        -8.56015,
+        41.19785,
+        -8.53285,
+        41.22465
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:14.630062+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:18.070079+00:00",
+      "status": 200,
+      "bytes": 10502847,
+      "sha256": "47e1eb84c2a7ca6761cb572cd01ebc5713366b64a5f70d333fbc17e04775497e",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 33480,
+        "way": 5457,
+        "relation": 218
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1719,
+        "way": 7650,
+        "relation": 295
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10034301118",
+          "10038029406",
+          "10038029407",
+          "10077655283",
+          "10077655284",
+          "10077655286",
+          "10083428062",
+          "10083428063",
+          "10083428064",
+          "10083428065"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515681",
+          "1000515685",
+          "1000515686",
+          "1000515690"
+        ],
+        "relation": [
+          "102595",
+          "103222",
+          "108203",
+          "108340",
+          "1084054",
+          "1086284",
+          "110270",
+          "1175648",
+          "1202486",
+          "125452"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-2-3.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5331500,41.1978500,-8.5060000,41.2246500",
+      "bbox": [
+        -8.53315,
+        41.19785,
+        -8.506,
+        41.22465
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:15.545992+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:17.237737+00:00",
+      "status": 200,
+      "bytes": 6890471,
+      "sha256": "de66603b0334b191aa2cabc42315513c7a39e9f9f6a3ec4f62715aacd1623182",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 22940,
+        "way": 4554,
+        "relation": 93
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1193,
+        "way": 4591,
+        "relation": 281
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10034301118",
+          "10038029406",
+          "10038029407",
+          "10038029408",
+          "10077655283",
+          "10077655284",
+          "10077655286",
+          "10083428062",
+          "10083428063"
+        ],
+        "way": [
+          "1000515669",
+          "1000515686",
+          "1000515690",
+          "1001388540",
+          "1001407806",
+          "1001407807",
+          "100196781",
+          "100196789",
+          "100196798",
+          "100196799"
+        ],
+        "relation": [
+          "102595",
+          "103222",
+          "108203",
+          "108340",
+          "1084054",
+          "1086284",
+          "110270",
+          "1175648",
+          "1202486",
+          "125452"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-3-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5871500,41.2243500,-8.5598500,41.2510000",
+      "bbox": [
+        -8.58715,
+        41.22435,
+        -8.55985,
+        41.251
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:18.092060+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:19.104658+00:00",
+      "status": 200,
+      "bytes": 3425027,
+      "sha256": "34d4a7f193b94aafd051f53b807b2481ce8927f1f1935ce5c90bda5482fce0ad",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 11380,
+        "way": 982,
+        "relation": 82
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 754,
+        "way": 7199,
+        "relation": 41
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10038029406",
+          "10038029407",
+          "10038029408",
+          "10038029409",
+          "10038029410",
+          "10083428062",
+          "10083428063",
+          "10083428064",
+          "10083428065",
+          "10083428066"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515681",
+          "1000515685",
+          "1000515686",
+          "1000515690"
+        ],
+        "relation": [
+          "16859214",
+          "17306263",
+          "17306264",
+          "17306265",
+          "2147150",
+          "2147151",
+          "2147156",
+          "2147160",
+          "2147161",
+          "3372453"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-3-2.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5601500,41.2243500,-8.5328500,41.2510000",
+      "bbox": [
+        -8.56015,
+        41.22435,
+        -8.53285,
+        41.251
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:19.112336+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:20.564921+00:00",
+      "status": 200,
+      "bytes": 4839766,
+      "sha256": "749ec9b82c51cf5c183a4c570c9faefcc8e5b934510b5ba44b98e5a22d764e6c",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 15338,
+        "way": 1927,
+        "relation": 172
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1004,
+        "way": 5218,
+        "relation": 43
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10038029406",
+          "10038029407",
+          "10038029408",
+          "10038029409",
+          "10038029410",
+          "10077655284",
+          "10077655286",
+          "10083428062",
+          "10083428063",
+          "10083428064"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515681",
+          "1000515685",
+          "1000515686",
+          "1000515690"
+        ],
+        "relation": [
+          "16747703",
+          "16859214",
+          "17306263",
+          "17306264",
+          "18804053",
+          "18804054",
+          "18804058",
+          "18804059",
+          "18804061",
+          "19807497"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-3-3.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5331500,41.2243500,-8.5060000,41.2510000",
+      "bbox": [
+        -8.53315,
+        41.22435,
+        -8.506,
+        41.251
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:16:19.666712+00:00",
+      "retrieved_end_utc": "2026-10-29T11:16:21.194859+00:00",
+      "status": 200,
+      "bytes": 6721223,
+      "sha256": "7a9abacc06de477e2e20fd16af87c6baa1d064906e934c3ee46d881be8a04b8c",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 26192,
+        "way": 3945,
+        "relation": 65
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 652,
+        "way": 2659,
+        "relation": 40
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10077655283",
+          "10077655284",
+          "10077655286",
+          "10077655287",
+          "10077655288",
+          "10077655289",
+          "10077655290",
+          "10077655291",
+          "10077655292",
+          "10077655293"
+        ],
+        "way": [
+          "1000515669",
+          "1000515686",
+          "1000515690",
+          "1001388540",
+          "1001407806",
+          "100196781",
+          "100196789",
+          "100196798",
+          "100196799",
+          "100196804"
+        ],
+        "relation": [
+          "17306265",
+          "3372453",
+          "3372460",
+          "3382115",
+          "3383115",
+          "3384812",
+          "3658971",
+          "3892763",
+          "3892769",
+          "3920250"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-0-0-sub0-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6140000,41.1450000,-8.6002750,41.1584750",
+      "bbox": [
+        -8.614,
+        41.145,
+        -8.600275,
+        41.158475
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:03.970094+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:08.533712+00:00",
+      "status": 200,
+      "bytes": 13151290,
+      "sha256": "f7bd26f71a5680ee59327247f42d9fb1e0694c122f410eb5aafcba5fa53604d9",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 35201,
+        "way": 8368,
+        "relation": 299
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 2195,
+        "way": 17106,
+        "relation": 108
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10087612864",
+          "10123860106",
+          "10123860108",
+          "10123860112",
+          "10123860918",
+          "10123860923",
+          "10126094341",
+          "1018972809",
+          "1018972812",
+          "10221307966"
+        ],
+        "way": [
+          "1000515669",
+          "1000515686",
+          "1000515690",
+          "1001077963",
+          "1001077964",
+          "100156658",
+          "100180636",
+          "100180642",
+          "100196799",
+          "100199951"
+        ],
+        "relation": [
+          "10395033",
+          "1106898",
+          "12336731",
+          "1247178",
+          "12692749",
+          "1278415",
+          "12899087",
+          "12915491",
+          "13018474",
+          "13106685"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-0-0-sub0-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6005750,41.1450000,-8.5868500,41.1584750",
+      "bbox": [
+        -8.600575,
+        41.145,
+        -8.58685,
+        41.158475
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:03.970409+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:06.229978+00:00",
+      "status": 200,
+      "bytes": 7060935,
+      "sha256": "2e59a5370d18a1f3c9d406c2e7b8b843e6847390c61da347e0997618a73d906a",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 21725,
+        "way": 5045,
+        "relation": 136
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1328,
+        "way": 6480,
+        "relation": 25
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10026641087",
+          "1018972809",
+          "10221739475",
+          "10292957544",
+          "10292957545",
+          "10292957546",
+          "10292957547",
+          "10292957548",
+          "10292957549",
+          "10292957550"
+        ],
+        "way": [
+          "1001166327",
+          "1001166329",
+          "1005681287",
+          "1005681288",
+          "1005681289",
+          "1005681290",
+          "1005681291",
+          "1006229487",
+          "100660033",
+          "1006963517"
+        ],
+        "relation": [
+          "1710380",
+          "17691166",
+          "18804051",
+          "18804055",
+          "18804056",
+          "18805144",
+          "18805145",
+          "18805146",
+          "19301577",
+          "19301578"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-0-0-sub1-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6140000,41.1581750,-8.6002750,41.1716500",
+      "bbox": [
+        -8.614,
+        41.158175,
+        -8.600275,
+        41.17165
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:06.244244+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:08.126449+00:00",
+      "status": 200,
+      "bytes": 5075478,
+      "sha256": "29784a4fcf7cbed9e8da6334b5c7d465d18aa75b36bb29fb1d8eaf979bdd4dd7",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 17103,
+        "way": 3281,
+        "relation": 90
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1007,
+        "way": 3578,
+        "relation": 5
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10907867882",
+          "10908323286",
+          "10914042016",
+          "10914042018",
+          "10918243145",
+          "10923121903",
+          "10923121904",
+          "1124036055",
+          "1129574620",
+          "11386661936"
+        ],
+        "way": [
+          "1000515669",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515682",
+          "1000515683",
+          "1000515686",
+          "1000515690",
+          "1001166327",
+          "1001166328"
+        ],
+        "relation": [
+          "3047226",
+          "3372413",
+          "3382093",
+          "3382145",
+          "3383117"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-0-0-sub1-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6005750,41.1581750,-8.5868500,41.1716500",
+      "bbox": [
+        -8.600575,
+        41.158175,
+        -8.58685,
+        41.17165
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:08.137014+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:09.691184+00:00",
+      "status": 200,
+      "bytes": 5682882,
+      "sha256": "6f63194983c770c0e1a674f9a7b337d97460885a96424cf6a3a44c94b52f595f",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 19001,
+        "way": 3738,
+        "relation": 118
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 652,
+        "way": 4600,
+        "relation": 9
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10582732338",
+          "10582732341",
+          "10584106017",
+          "10584106019",
+          "10908323286",
+          "10914042018",
+          "10918243146",
+          "10920228974",
+          "10920228975",
+          "10920228976"
+        ],
+        "way": [
+          "1001166327",
+          "1001166329",
+          "100196799",
+          "100199951",
+          "1005681287",
+          "1005681288",
+          "1005681289",
+          "1005681290",
+          "1005681291",
+          "1007352727"
+        ],
+        "relation": [
+          "2147150",
+          "2147151",
+          "2147156",
+          "2147160",
+          "2147161",
+          "3372413",
+          "3382093",
+          "3382145",
+          "3382149"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-0-1-sub0-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5871500,41.1450000,-8.5733500,41.1584750",
+      "bbox": [
+        -8.58715,
+        41.145,
+        -8.57335,
+        41.158475
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:08.559115+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:11.685309+00:00",
+      "status": 200,
+      "bytes": 7198294,
+      "sha256": "dac3008dbeb13d32838f8c6f0c6a6a95b5461391a9334690075690a7d7867ca9",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 19212,
+        "way": 3167,
+        "relation": 189
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1554,
+        "way": 11055,
+        "relation": 24
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10132681592",
+          "1018972809",
+          "1018972812",
+          "10221739475",
+          "10292957544",
+          "10292957545",
+          "10292957546",
+          "10292957547",
+          "10292957548",
+          "10292957549"
+        ],
+        "way": [
+          "1001166327",
+          "1001166329",
+          "1004360691",
+          "1004360692",
+          "1005681287",
+          "1005681288",
+          "1005681289",
+          "1005681290",
+          "1005681291",
+          "100660033"
+        ],
+        "relation": [
+          "1710380",
+          "18804053",
+          "18804054",
+          "18804058",
+          "18804059",
+          "18804061",
+          "18805144",
+          "18805145",
+          "18805146",
+          "19301581"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-0-1-sub0-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5736500,41.1450000,-8.5598500,41.1584750",
+      "bbox": [
+        -8.57365,
+        41.145,
+        -8.55985,
+        41.158475
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:09.703299+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:10.914512+00:00",
+      "status": 200,
+      "bytes": 4093679,
+      "sha256": "e27b0e2bac732ec7ea63c93dfcd11928bfda48833675746e3764375db35a77b6",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 16305,
+        "way": 2522,
+        "relation": 36
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 250,
+        "way": 1402,
+        "relation": 33
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10292957544",
+          "10292957545",
+          "10292957546",
+          "10292957547",
+          "10292957548",
+          "10292957549",
+          "10292957559",
+          "10292957560",
+          "10292957561",
+          "10292957562"
+        ],
+        "way": [
+          "1005681287",
+          "1005681288",
+          "1005681289",
+          "1005681290",
+          "1005681291",
+          "1006229487",
+          "1006963519",
+          "1007088655",
+          "1007088656",
+          "1007088657"
+        ],
+        "relation": [
+          "3372413",
+          "3372460",
+          "3382093",
+          "3382115",
+          "3382145",
+          "3382149",
+          "3383100",
+          "3383734",
+          "3384812",
+          "3384814"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-0-1-sub1-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5871500,41.1581750,-8.5733500,41.1716500",
+      "bbox": [
+        -8.58715,
+        41.158175,
+        -8.57335,
+        41.17165
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:10.922777+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:12.103306+00:00",
+      "status": 200,
+      "bytes": 5192699,
+      "sha256": "14f492ff8f825a66159bcde3618445040937f28cb89f36268293b762d1c2f6f8",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 13835,
+        "way": 2089,
+        "relation": 165
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1251,
+        "way": 8307,
+        "relation": 17
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10034301118",
+          "10038174317",
+          "1018972809",
+          "1018972812",
+          "10226403451",
+          "10226403453",
+          "10229396852",
+          "10234472026",
+          "10234472027",
+          "10234472030"
+        ],
+        "way": [
+          "1001166327",
+          "1001166329",
+          "100426794",
+          "1005681287",
+          "1005681288",
+          "1005681289",
+          "1005681290",
+          "1005681291",
+          "100605285",
+          "100605291"
+        ],
+        "relation": [
+          "1710380",
+          "18804053",
+          "18804054",
+          "18804058",
+          "18804059",
+          "18804061",
+          "18805144",
+          "18805145",
+          "18805146",
+          "19301581"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-0-1-sub1-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.5736500,41.1581750,-8.5598500,41.1716500",
+      "bbox": [
+        -8.57365,
+        41.158175,
+        -8.55985,
+        41.17165
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:11.699831+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:12.711084+00:00",
+      "status": 200,
+      "bytes": 5057044,
+      "sha256": "0e4ca834c5f2019718b323df151614d3d9686247e9aa997e4d64726c0ffb4c52",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 14859,
+        "way": 2247,
+        "relation": 147
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1097,
+        "way": 6442,
+        "relation": 45
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10034301118",
+          "10038174317",
+          "10077655284",
+          "10077655286",
+          "10077655287",
+          "10077655288",
+          "1018972809",
+          "1018972812",
+          "10226403451",
+          "10226403453"
+        ],
+        "way": [
+          "1001166329",
+          "100426794",
+          "1005681287",
+          "1005681288",
+          "1005681289",
+          "1005681290",
+          "1005681291",
+          "100605285",
+          "100605291",
+          "1006229487"
+        ],
+        "relation": [
+          "18804053",
+          "18804054",
+          "18804058",
+          "18804059",
+          "18804061",
+          "18805144",
+          "18805145",
+          "18805146",
+          "19301581",
+          "19807497"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-1-0-sub0-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6140000,41.1713500,-8.6002750,41.1849000",
+      "bbox": [
+        -8.614,
+        41.17135,
+        -8.600275,
+        41.1849
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:12.114514+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:13.979609+00:00",
+      "status": 200,
+      "bytes": 6164317,
+      "sha256": "7f9f169e45d71ac6de176cc9698833f1db5acf8a9e6a274f4b0bf19e811cdc83",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 19594,
+        "way": 2979,
+        "relation": 175
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 2461,
+        "way": 7572,
+        "relation": 38
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10034301118",
+          "10077655283",
+          "10087552836",
+          "10087552837",
+          "10087552838",
+          "10087552839",
+          "10087552840",
+          "10087722565",
+          "10087722566"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515682",
+          "1000515683",
+          "1000515685",
+          "1000515686"
+        ],
+        "relation": [
+          "3047226",
+          "3372413",
+          "3382093",
+          "3382115",
+          "3382145",
+          "3382149",
+          "3383100",
+          "3383115",
+          "3383117",
+          "3384812"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-1-0-sub0-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6005750,41.1713500,-8.5868500,41.1849000",
+      "bbox": [
+        -8.600575,
+        41.17135,
+        -8.58685,
+        41.1849
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:12.719773+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:14.707570+00:00",
+      "status": 200,
+      "bytes": 8863022,
+      "sha256": "134e0e88b9b509697a44ec22a31d83c6b54e11895c93c8985e9a126f2a3e3e83",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 24673,
+        "way": 6389,
+        "relation": 221
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 2352,
+        "way": 9107,
+        "relation": 54
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10034301118",
+          "10077655283",
+          "10087552836",
+          "10087552837",
+          "10087552838",
+          "10087552839",
+          "10087552840",
+          "10087722565",
+          "10087722566"
+        ],
+        "way": [
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515682",
+          "1000515683",
+          "1000515685",
+          "1000515686",
+          "1001166327"
+        ],
+        "relation": [
+          "10107393",
+          "14955726",
+          "2147150",
+          "2147151",
+          "2147156",
+          "2147160",
+          "2147161",
+          "3047226",
+          "3372413",
+          "3382093"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-1-0-sub1-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6140000,41.1846000,-8.6002750,41.1981500",
+      "bbox": [
+        -8.614,
+        41.1846,
+        -8.600275,
+        41.19815
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:13.991532+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:15.853400+00:00",
+      "status": 200,
+      "bytes": 3258173,
+      "sha256": "de9edc1d0687cf597a07e3c62ae60f820c96a802ea750bf235dfd431d3853bfe",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 10305,
+        "way": 1647,
+        "relation": 82
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1356,
+        "way": 4504,
+        "relation": 37
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10034301118",
+          "10087552836",
+          "10087552837",
+          "10087552838",
+          "10087552839",
+          "10087552840",
+          "10087722565",
+          "10087722566",
+          "10087722567"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515682",
+          "1000515683",
+          "1000515685",
+          "1000515686"
+        ],
+        "relation": [
+          "3372413",
+          "3382093",
+          "3382115",
+          "3382145",
+          "3382149",
+          "3383100",
+          "3383115",
+          "3383117",
+          "3384812",
+          "3658971"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-1-0-sub1-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6005750,41.1846000,-8.5868500,41.1981500",
+      "bbox": [
+        -8.600575,
+        41.1846,
+        -8.58685,
+        41.19815
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:14.723691+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:15.642255+00:00",
+      "status": 200,
+      "bytes": 4074731,
+      "sha256": "3d71ad6234353df25f0387d91e16d17dc53e3a29f4922dfd8f81ba0d1f7c3003",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 13259,
+        "way": 1816,
+        "relation": 72
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1353,
+        "way": 6926,
+        "relation": 44
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10034301118",
+          "10077655283",
+          "10087552836",
+          "10087552837",
+          "10087552838",
+          "10087552839",
+          "10087552840",
+          "10087722565",
+          "10087722566"
+        ],
+        "way": [
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515682",
+          "1000515683",
+          "1000515685",
+          "1000515686",
+          "100199245"
+        ],
+        "relation": [
+          "2147150",
+          "2147151",
+          "2147156",
+          "2147160",
+          "2147161",
+          "3372453",
+          "3382115",
+          "3383115",
+          "3658971",
+          "3892763"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-2-0-sub0-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6140000,41.1978500,-8.6002750,41.2114000",
+      "bbox": [
+        -8.614,
+        41.19785,
+        -8.600275,
+        41.2114
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:15.649364+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:16.605153+00:00",
+      "status": 200,
+      "bytes": 2524977,
+      "sha256": "a960937b358989f9805fa6b4e476b8468ab3eaad7dbc4c8a212de40823c75bf1",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 9850,
+        "way": 987,
+        "relation": 39
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 374,
+        "way": 2877,
+        "relation": 37
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10034301118",
+          "10121898391",
+          "10121898392",
+          "10124754582",
+          "10226403453",
+          "10234472026",
+          "10234472027",
+          "10234472031",
+          "10234472032",
+          "10234472033"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515685",
+          "1000515686",
+          "1000515690",
+          "1001166328",
+          "1001166329",
+          "1001166330",
+          "100199951"
+        ],
+        "relation": [
+          "3372453",
+          "3382115",
+          "3383115",
+          "3658971",
+          "3892763",
+          "3892769",
+          "3920250",
+          "3920278",
+          "3920309",
+          "3966517"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-2-0-sub0-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6005750,41.1978500,-8.5868500,41.2114000",
+      "bbox": [
+        -8.600575,
+        41.19785,
+        -8.58685,
+        41.2114
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:15.860070+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:16.919662+00:00",
+      "status": 200,
+      "bytes": 2664728,
+      "sha256": "b766ec9114f5ad76873d0ba6be13a6967391fa3a646f60f5b1f7172393ea8a32",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 8436,
+        "way": 642,
+        "relation": 69
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 1012,
+        "way": 6542,
+        "relation": 42
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10034301118",
+          "10087552836",
+          "10087552837",
+          "10087552838",
+          "10087552839",
+          "10087552840",
+          "10087722565",
+          "10087722566",
+          "10087722567"
+        ],
+        "way": [
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515682",
+          "1000515683",
+          "1000515686",
+          "1001166328",
+          "1001166329",
+          "1001166330",
+          "100199245"
+        ],
+        "relation": [
+          "2147150",
+          "2147151",
+          "2147156",
+          "2147160",
+          "2147161",
+          "3372453",
+          "3382115",
+          "3383115",
+          "3658971",
+          "3892763"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-2-0-sub1-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6140000,41.2111000,-8.6002750,41.2246500",
+      "bbox": [
+        -8.614,
+        41.2111,
+        -8.600275,
+        41.22465
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:16.610635+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:18.858806+00:00",
+      "status": 200,
+      "bytes": 10229844,
+      "sha256": "4899da96183e8fe5fa20ea5e0bf52abdeac3719bb6b1f817d136a3809f173612",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 37342,
+        "way": 9195,
+        "relation": 70
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 432,
+        "way": 1357,
+        "relation": 40
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10121898389",
+          "10124754593",
+          "10126913793",
+          "10126913794",
+          "10126913795",
+          "10126913796",
+          "10126913797",
+          "10126913798",
+          "10126913799"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515682",
+          "1000515683",
+          "1000515685",
+          "1000515686"
+        ],
+        "relation": [
+          "3372453",
+          "3382115",
+          "3383115",
+          "3658971",
+          "3892763",
+          "3892769",
+          "3920250",
+          "3920278",
+          "3920309",
+          "3966517"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-2-0-sub1-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6005750,41.2111000,-8.5868500,41.2246500",
+      "bbox": [
+        -8.600575,
+        41.2111,
+        -8.58685,
+        41.22465
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:16.926119+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:17.802550+00:00",
+      "status": 200,
+      "bytes": 3064511,
+      "sha256": "8245de629418dc71af67655f1a8971a2e7385ccadccdd45af9ccea145e2ce61e",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 12059,
+        "way": 1464,
+        "relation": 50
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 504,
+        "way": 1552,
+        "relation": 7
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10087552830",
+          "10087552831",
+          "10087552832",
+          "10087552833",
+          "10087552834",
+          "10087552836",
+          "10087552837",
+          "10087552838",
+          "10087552839"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515682",
+          "1000515683",
+          "1000515685",
+          "1000515686"
+        ],
+        "relation": [
+          "5923249",
+          "5923251",
+          "5923252",
+          "5923253",
+          "5923254",
+          "5923255",
+          "5923279"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-3-0-sub0-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6140000,41.2243500,-8.6002750,41.2378250",
+      "bbox": [
+        -8.614,
+        41.22435,
+        -8.600275,
+        41.237825
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:17.809253+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:20.268815+00:00",
+      "status": 200,
+      "bytes": 10973673,
+      "sha256": "6aa374d6f45e00758c67349e8a5be12285d4e9507b3d6aac8905a9ac4d51b3ac",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 38439,
+        "way": 9227,
+        "relation": 160
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 582,
+        "way": 1514,
+        "relation": 4
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10003073217",
+          "10087257186",
+          "10087257187",
+          "10087257188",
+          "10087552819",
+          "10087552820",
+          "10087552821",
+          "10087552823",
+          "10087552826",
+          "10087552827"
+        ],
+        "way": [
+          "1000515669",
+          "1000515672",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515678",
+          "1000515679",
+          "1000515680",
+          "1000515681",
+          "1000515685"
+        ],
+        "relation": [
+          "16763977",
+          "16859214",
+          "17306263",
+          "17306264"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-3-0-sub0-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6005750,41.2243500,-8.5868500,41.2378250",
+      "bbox": [
+        -8.600575,
+        41.22435,
+        -8.58685,
+        41.237825
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:18.874950+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:20.311957+00:00",
+      "status": 200,
+      "bytes": 3246697,
+      "sha256": "aff1665620e84ffad3612610d01091f58cfad1be509cf0a1da48a2fe0739e465",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 11314,
+        "way": 1647,
+        "relation": 84
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 565,
+        "way": 4069,
+        "relation": 12
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10038029407",
+          "10038029410",
+          "10083428062",
+          "10083428064",
+          "10083428065",
+          "10087257186",
+          "10087257187",
+          "10087257188",
+          "10087552819",
+          "10087552820"
+        ],
+        "way": [
+          "1000515669",
+          "1000515673",
+          "1000515674",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515681",
+          "1000515682",
+          "1000515683",
+          "1000515685"
+        ],
+        "relation": [
+          "11071476",
+          "14720588",
+          "17306263",
+          "17306264",
+          "17306265",
+          "5923249",
+          "5923251",
+          "5923252",
+          "5923253",
+          "5923254"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-3-0-sub1-0.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6140000,41.2375250,-8.6002750,41.2510000",
+      "bbox": [
+        -8.614,
+        41.237525,
+        -8.600275,
+        41.251
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:20.330100+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:21.317849+00:00",
+      "status": 200,
+      "bytes": 3513576,
+      "sha256": "23bcf9eb369be524e4c42948f2b853bc53c44c761dcb9070a3583aa9f712c9f8",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 12880,
+        "way": 1871,
+        "relation": 46
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 444,
+        "way": 4646,
+        "relation": 10
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10087257186",
+          "10087257187",
+          "10087257188",
+          "10087552819",
+          "10087552823",
+          "10087552826",
+          "10087552827",
+          "10087552829",
+          "10087552830",
+          "10087552831"
+        ],
+        "way": [
+          "1000515669",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515681",
+          "1000515682",
+          "1000515683",
+          "1000515685",
+          "1000515686",
+          "1000515690"
+        ],
+        "relation": [
+          "16848430",
+          "17306265",
+          "5923249",
+          "5923250",
+          "5923251",
+          "5923252",
+          "5923253",
+          "5923254",
+          "5923255",
+          "5923281"
+        ]
+      },
+      "attempts": []
+    },
+    {
+      "file": "tile-3-0-sub1-1.osm.xml",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-8.6005750,41.2375250,-8.5868500,41.2510000",
+      "bbox": [
+        -8.600575,
+        41.237525,
+        -8.58685,
+        41.251
+      ],
+      "requested_bbox_order": "west,south,east,north",
+      "retrieved_start_utc": "2026-10-29T11:17:20.330291+00:00",
+      "retrieved_end_utc": "2026-10-29T11:17:21.020360+00:00",
+      "status": 200,
+      "bytes": 1917081,
+      "sha256": "79e2591d4a2c39f9757678023167859c60b664fef39840a2beb3cded4ef23422",
+      "user_agent": "Invicta-Full701-Prototype/0.3",
+      "counts": {
+        "node": 6907,
+        "way": 638,
+        "relation": 34
+      },
+      "missing_way_node_ref_count": 0,
+      "missing_way_node_ref_examples": [],
+      "missing_relation_member_ref_counts": {
+        "node": 307,
+        "way": 4738,
+        "relation": 8
+      },
+      "missing_relation_member_ref_examples": {
+        "node": [
+          "10038029406",
+          "10038029407",
+          "10038029408",
+          "10038029409",
+          "10038029410",
+          "10083428062",
+          "10083428063",
+          "10083428064",
+          "10083428065",
+          "10083428066"
+        ],
+        "way": [
+          "1000515669",
+          "1000515677",
+          "1000515679",
+          "1000515680",
+          "1000515686",
+          "1000515690",
+          "1001166328",
+          "1001166329",
+          "1001166330",
+          "1001407806"
+        ],
+        "relation": [
+          "17306265",
+          "5923249",
+          "5923250",
+          "5923251",
+          "5923252",
+          "5923253",
+          "5923254",
+          "5923255"
+        ]
+      },
+      "attempts": []
+    }
+  ],
+  "validation": {
+    "validated_utc": "2026-10-29T11:18:42.183278+00:00",
+    "source_bounds": [
+      -8.7573799,
+      41.0665344,
+      -8.4046343,
+      41.4023826
+    ],
+    "source_bounds_note": "OSM map includes complete ways that intersect requested boxes; their nodes can extend far beyond requested bounds. These are raw node bounds, not imported road-network bounds.",
+    "unique_counts": {
+      "node": 597472,
+      "way": 109998,
+      "relation": 1523
+    },
+    "missing_way_node_ref_count": 0,
+    "missing_way_node_ref_examples": [],
+    "missing_relation_ref_counts": {
+      "node": 3711,
+      "way": 26398,
+      "relation": 381
+    },
+    "missing_relation_ref_examples": {
+      "node": [
+        "10034301118",
+        "10077655283",
+        "10077655284",
+        "10077655286",
+        "10087552823",
+        "10087552826",
+        "10087552827",
+        "10087552829",
+        "10087552830",
+        "10087552831"
+      ],
+      "way": [
+        "1000515669",
+        "1000515672",
+        "1000515673",
+        "1000515674",
+        "1000515677",
+        "1000515678",
+        "1000515679",
+        "1000515680",
+        "1000515681",
+        "1000515685"
+      ],
+      "relation": [
+        "102595",
+        "103222",
+        "10395033",
+        "108203",
+        "108340",
+        "1084054",
+        "1086284",
+        "110270",
+        "1106898",
+        "1175648"
+      ]
+    },
+    "duplicate_object_differing_version_count": 0,
+    "duplicate_object_differing_version_examples": [],
+    "same_version_duplicate_content_conflict_count": 0,
+    "same_version_duplicate_content_conflict_examples": [],
+    "all_hashes_match": true,
+    "geometry_coverage": [
+      {
+        "direction": 1,
+        "shape_count": 548,
+        "stop_count": 56,
+        "uncovered_source_points": []
+      },
+      {
+        "direction": 0,
+        "shape_count": 506,
+        "stop_count": 54,
+        "uncovered_source_points": []
+      }
+    ]
+  },
+  "archive_sha256": "b1fac2ec60f8183a5669326c33f8746a1bc93858e96bfd5258ec257f2fa7c726",
+  "network_sha256": "848f9f045a602906e8af3544bd8ce20f90e5d4c5f5f047ef3266d64d612d38b6",
+  "import_source_sha256": "b1fac2ec60f8183a5669326c33f8746a1bc93858e96bfd5258ec257f2fa7c726",
+  "projection": {
+    "netOffset": "-532362.31,-4555848.88",
+    "convBoundary": "-458.52,-1399.83,9651.25,11501.18",
+    "origBoundary": "-8.757380,41.074944,-8.469928,41.402383",
+    "projParameter": "+proj=utm +zone=29 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+  },
+  "route_overlay_sha256": "25952bcb0dfc7c0c44aeec2b480a1a4fa7f9a92e7eddbbef43a27b72482f0a26",
+  "route_overlay": {
+    "schema": "invicta.route-import-overlays.v1",
+    "reason": "Resolve an explicit conflict between the frozen official 701 outbound shape and imported OSM turn topology; this is a modelling assumption pending operator/street validation.",
+    "connections": [
+      {
+        "from": "966302094#2",
+        "to": "-477791560#1",
+        "allow": "bus",
+        "osm_node": "299608221",
+        "osm_restriction_relation": "16086845",
+        "osm_restriction": "only_right_turn without a bus exception",
+        "evidence": "The official outbound 701 shape and frozen OSM route relation 10107392 both continue from way 966302094 to 477791560. OSM way 477791560 has oneway:bus=no and already imports a bus-capable contraflow edge.",
+        "limits": "Bus-only connector in both baseline and proposal. Ordinary traffic retains the imported right-turn restriction. This does not establish legal current street permissions."
+      }
+    ]
+  }
+}

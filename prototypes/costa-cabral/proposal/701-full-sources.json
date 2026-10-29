@@ -1,0 +1,70 @@
+{
+  "reference_date": "2026-10-28",
+  "native_study": "line-701-full",
+  "traffic": "Synthetic regional OD requests with explicit hourly weights; not measured counts or calibrated population travel.",
+  "vehicle_blocks": "Unavailable; each scheduled working is a separate native bus, no invented vehicle rotation.",
+  "artifacts": {
+    "network": {
+      "file": "701-full-network-manifest.json",
+      "sha256": "37c040e8fb0e130a1e65a5682f89d44ec42a9d4807e4682d7876b39f658d0be8"
+    },
+    "mapping": {
+      "file": "701-full-routes.json",
+      "sha256": "f14ceced3d68eea0805715d9e5ac76c5d0e59c2251940a3fe71ecd0d7096df1a"
+    },
+    "native_results": {
+      "file": "701-full-experiments.json",
+      "sha256": "da88b08fd9f614efa1af6b5865a5d1afb6e6c2d2aaa5bdb3fd8ba3483b1c1ed8"
+    },
+    "replay": {
+      "file": "line-701-full-assets/manifest.json",
+      "sha256": "79da76aa6b1d2fad388ba8148cb93f12879694a9ef5c3309a2ba2e7b2f08e33d"
+    }
+  },
+  "official_metadata": [
+    "701-official/metadata.json",
+    "701-extension/metadata.json",
+    "701-outbound/metadata.json"
+  ],
+  "import_overlays": {
+    "schema": "invicta.route-import-overlays.v1",
+    "reason": "Resolve an explicit conflict between the frozen official 701 outbound shape and imported OSM turn topology; this is a modelling assumption pending operator/street validation.",
+    "connections": [
+      {
+        "from": "966302094#2",
+        "to": "-477791560#1",
+        "allow": "bus",
+        "osm_node": "299608221",
+        "osm_restriction_relation": "16086845",
+        "osm_restriction": "only_right_turn without a bus exception",
+        "evidence": "The official outbound 701 shape and frozen OSM route relation 10107392 both continue from way 966302094 to 477791560. OSM way 477791560 has oneway:bus=no and already imports a bus-capable contraflow edge.",
+        "limits": "Bus-only connector in both baseline and proposal. Ordinary traffic retains the imported right-turn restriction. This does not establish legal current street permissions."
+      }
+    ]
+  },
+  "geometry_control": {
+    "native": true,
+    "working_count": 127,
+    "completed_workings": 127,
+    "served_calls": 6024,
+    "planned_served_calls": 6024,
+    "ordinary_traffic_requests": 0,
+    "inputs": {
+      "network": "848f9f045a602906e8af3544bd8ce20f90e5d4c5f5f047ef3266d64d612d38b6",
+      "reference": "f14ceced3d68eea0805715d9e5ac76c5d0e59c2251940a3fe71ecd0d7096df1a",
+      "demand": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "case": "bus_only_validation",
+      "seed": 17,
+      "begin": 18000,
+      "end": 99300,
+      "origin_lead": 30,
+      "dwell": 20,
+      "schema": 1
+    },
+    "timing_points": {
+      "planned_calls": 714,
+      "late_arrivals": 154,
+      "missing_arrivals": 0
+    }
+  }
+}

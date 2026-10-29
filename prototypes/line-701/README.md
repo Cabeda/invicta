@@ -1,4 +1,10 @@
-# Line 701: Porto streets and whole-line reliability
+# Line 701: full traffic and service reliability
+
+The active native study covers **both complete directions and all 127 scheduled workings** in the same road-traffic simulation. See [full study, assumptions and commands](full/README.md). Its 16:50–18:20 replay covers the full line, including Ermesinde and Codiceira. Reports preserve failed/unfinished journeys and do not establish that zero tardiness has been achieved.
+
+The material below documents the earlier Porto-only native experiment and the separate inbound passenger/berth model. Their results and coverage remain distinct from the full native study.
+
+# Earlier Porto street and inbound service studies
 
 **Question:** can the 701 meet its schedule throughout its inbound service without bunching, while keeping everyday access and passenger capacity workable? This is a throwaway investigation with two explicitly different layers.
 
@@ -84,7 +90,7 @@ All 72 native runs completed with zero collision records; incomplete journeys ar
 
 `line-explorer.mjs` owns direction identity, continuous focus, trip selection, geometry matching and coverage decisions. Its model interface is used by the browser and `node --test prototypes/line-701/line-explorer.test.mjs`. `build_site.py` publishes `701-line-explorer.json` from the frozen source bundles independently of the native route clip.
 
-Direction 0 uses its own 506-point shape and 64 trips, including 22 Ermesinde terminators and one Areosa (Maia) starter. The timetable reference is 28 October; its shape was retrieved on 29 October and is not verified historical geometry. Rebuild/validate the outbound bundle offline with `python3 prototypes/line-701/fetch_outbound.py --compile-only`; see [outbound evidence](../../docs/research/line-701-outbound.md). The native SUMO network and prepared replays remain unchanged in scope.
+Direction 0 uses its own 506-point shape and 64 trips, including 22 Ermesinde terminators and one Areosa (Maia) starter. The timetable reference is 28 October; its shape was retrieved on 29 October and is not verified historical geometry. Rebuild/validate the outbound bundle offline with `python3 prototypes/line-701/fetch_outbound.py --compile-only`; see [outbound evidence](../../docs/research/line-701-outbound.md). This source bundle is now also used by the full native traffic study; the earlier Porto-only experiment remains a separate reference.
 
 The public view retains a whole-line overview when zoomed into a focus. Shared links restore both direction selections, the chosen trips, language, scenario, camera movement speed and any 3D pose. Technical detail can be expanded before sharing. The exported static site includes [Leaflet 1.9.4](https://leafletjs.com/reference.html); background OpenStreetMap tiles require internet, while official line geometry and timetables are bundled.
 

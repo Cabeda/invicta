@@ -928,7 +928,7 @@
       }
     ],
     "calendar_caveat": "services API selected_date20261028 resolves active service. Nested route service_days all false and dates null; do not interpret as no service. Current full calendar_dates export not verified.",
-    "intermediate_timepoint_caveat": "Only MPL4 is listed as timing point within this segment. Non-timingpoint seconds are operator scheduled references; interpolation algorithm and current raw GTFS timepoint0 values not exposed by inspected API.",
+    "intermediate_timepoint_caveat": "Designated timing points in this Porto section: MPL4, 0BLRB. Other published stop seconds are intermediate references; none is an observed passage.",
     "trip_count": 63,
     "all_trip_stop_times_file": "joined_stop_times.json",
     "per_stop_raw_count": 17,

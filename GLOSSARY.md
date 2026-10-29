@@ -23,3 +23,19 @@ _Avoid_: Simulation coverage
 **Simulation coverage**:
 The geographic extent, direction, time period and conditions represented by a particular simulation. Showing a section of the line on a map does not establish simulation coverage there.
 _Avoid_: Whole line, focus section
+
+**Proposal**:
+A versioned selection of direction, focus, policy, assumptions and evidence that can be shared, reviewed and reproduced. Its reports and recordings refer to the same selection and sources.
+_Avoid_: Simulation result
+
+**Native replay**:
+Recorded vehicle positions from an identified native traffic run, shown over a declared geographic and time window. Visual interpolation does not add simulated observations.
+_Avoid_: Live traffic, forecast
+
+**Demand request**:
+One intended vehicle journey supplied to a traffic experiment. It remains part of requested demand if it cannot start, cannot find a route or does not finish.
+_Avoid_: Completed trip
+
+**Vehicle block**:
+A sequence of scheduled trips assigned to the same physical bus, including turnaround and recovery time. A list of independent scheduled trips does not establish these assignments.
+_Avoid_: Trip, timetable

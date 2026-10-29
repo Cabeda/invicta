@@ -16,3 +16,12 @@ prototypes/line-701/data/raw/
 prototypes/line-701/data/*.net.xml
 prototypes/line-701/data/*-network.log
 prototypes/line-701/invicta-line-701-site.zip
+
+# Full bidirectional native study: frozen source archive and public results remain tracked.
+prototypes/line-701/full/data/raw/
+prototypes/line-701/full/data/*.net.xml
+prototypes/line-701/full/data/*-import.log
+prototypes/line-701/full/runs/
+prototypes/line-701/full/diagnostics/stop-footprints-v1/
+prototypes/line-701/full/diagnostics/route-mapping-v2/
+prototypes/line-701/full/replay-inputs.json

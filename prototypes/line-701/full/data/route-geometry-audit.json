@@ -1,0 +1,1452 @@
+{
+  "schema": "invicta.full701.route-geometry-audit.v1",
+  "routes_sha256": "f14ceced3d68eea0805715d9e5ac76c5d0e59c2251940a3fe71ecd0d7096df1a",
+  "network_sha256": "848f9f045a602906e8af3544bd8ce20f90e5d4c5f5f047ef3266d64d612d38b6",
+  "directions": {
+    "1": {
+      "edge_count": 231,
+      "official_m": 16191.347283069,
+      "normal_m": 13138.15,
+      "internal_m": 2861.83,
+      "combined_m": 15999.98,
+      "combined_stop_to_stop_m": 15983.98,
+      "missing_bus_connections": [],
+      "internal_edge_ids_in_vehicle_path": [],
+      "repeated_normal_edges": [],
+      "intervals": [
+        {
+          "from": "COD4",
+          "to": "VGM6",
+          "official_m": 204.94,
+          "normal_m": 155.4,
+          "internal_m": 45.99,
+          "combined_m": 201.39,
+          "difference_m": -3.55,
+          "ratio": 0.983,
+          "edge_count": 5
+        },
+        {
+          "from": "VGM6",
+          "to": "COD",
+          "official_m": 385.26,
+          "normal_m": 300.09,
+          "internal_m": 88.59,
+          "combined_m": 388.68,
+          "difference_m": 3.42,
+          "ratio": 1.009,
+          "edge_count": 6
+        },
+        {
+          "from": "COD",
+          "to": "ALXH2",
+          "official_m": 408.68,
+          "normal_m": 332.64,
+          "internal_m": 56.99,
+          "combined_m": 389.63,
+          "difference_m": -19.06,
+          "ratio": 0.953,
+          "edge_count": 5
+        },
+        {
+          "from": "ALXH2",
+          "to": "ALF",
+          "official_m": 309.53,
+          "normal_m": 201.16,
+          "internal_m": 105.26,
+          "combined_m": 306.42,
+          "difference_m": -3.11,
+          "ratio": 0.99,
+          "edge_count": 11
+        },
+        {
+          "from": "ALF",
+          "to": "TCT2",
+          "official_m": 267.79,
+          "normal_m": 202.35,
+          "internal_m": 68.26,
+          "combined_m": 270.61,
+          "difference_m": 2.82,
+          "ratio": 1.011,
+          "edge_count": 8
+        },
+        {
+          "from": "TCT2",
+          "to": "IGRA2",
+          "official_m": 190.65,
+          "normal_m": 172.81,
+          "internal_m": 14.3,
+          "combined_m": 187.11,
+          "difference_m": -3.54,
+          "ratio": 0.981,
+          "edge_count": 2
+        },
+        {
+          "from": "IGRA2",
+          "to": "BARR2",
+          "official_m": 407.47,
+          "normal_m": 303.58,
+          "internal_m": 99.56,
+          "combined_m": 403.14,
+          "difference_m": -4.33,
+          "ratio": 0.989,
+          "edge_count": 12
+        },
+        {
+          "from": "BARR2",
+          "to": "ADNV2",
+          "official_m": 447.88,
+          "normal_m": 364.42,
+          "internal_m": 81.06,
+          "combined_m": 445.48,
+          "difference_m": -2.4,
+          "ratio": 0.995,
+          "edge_count": 7
+        },
+        {
+          "from": "ADNV2",
+          "to": "OLVR2",
+          "official_m": 242.14,
+          "normal_m": 214.93,
+          "internal_m": 24.69,
+          "combined_m": 239.62,
+          "difference_m": -2.51,
+          "ratio": 0.99,
+          "edge_count": 2
+        },
+        {
+          "from": "OLVR2",
+          "to": "VSV2",
+          "official_m": 223.37,
+          "normal_m": 206.97,
+          "internal_m": 14.97,
+          "combined_m": 221.94,
+          "difference_m": -1.43,
+          "ratio": 0.994,
+          "edge_count": 2
+        },
+        {
+          "from": "VSV2",
+          "to": "CBD2",
+          "official_m": 319.96,
+          "normal_m": 271.18,
+          "internal_m": 45.6,
+          "combined_m": 316.78,
+          "difference_m": -3.18,
+          "ratio": 0.99,
+          "edge_count": 4
+        },
+        {
+          "from": "CBD2",
+          "to": "SPAZ2",
+          "official_m": 269.49,
+          "normal_m": 230.83,
+          "internal_m": 30.03,
+          "combined_m": 260.86,
+          "difference_m": -8.63,
+          "ratio": 0.968,
+          "edge_count": 5
+        },
+        {
+          "from": "SPAZ2",
+          "to": "RGNG2",
+          "official_m": 198.42,
+          "normal_m": 173.46,
+          "internal_m": 19.23,
+          "combined_m": 192.69,
+          "difference_m": -5.73,
+          "ratio": 0.971,
+          "edge_count": 3
+        },
+        {
+          "from": "RGNG2",
+          "to": "ERMD2",
+          "official_m": 282.13,
+          "normal_m": 184.68,
+          "internal_m": 90.11,
+          "combined_m": 274.79,
+          "difference_m": -7.34,
+          "ratio": 0.974,
+          "edge_count": 6
+        },
+        {
+          "from": "ERMD2",
+          "to": "STNH2",
+          "official_m": 226.5,
+          "normal_m": 162.44,
+          "internal_m": 62.32,
+          "combined_m": 224.76,
+          "difference_m": -1.74,
+          "ratio": 0.992,
+          "edge_count": 5
+        },
+        {
+          "from": "STNH2",
+          "to": "FNTE2",
+          "official_m": 294.32,
+          "normal_m": 236.87,
+          "internal_m": 56.01,
+          "combined_m": 292.88,
+          "difference_m": -1.44,
+          "ratio": 0.995,
+          "edge_count": 4
+        },
+        {
+          "from": "FNTE2",
+          "to": "5OTR2",
+          "official_m": 352.41,
+          "normal_m": 239.28,
+          "internal_m": 104.63,
+          "combined_m": 343.91,
+          "difference_m": -8.5,
+          "ratio": 0.976,
+          "edge_count": 12
+        },
+        {
+          "from": "5OTR2",
+          "to": "VASG1",
+          "official_m": 491.68,
+          "normal_m": 384.88,
+          "internal_m": 98.68,
+          "combined_m": 483.56,
+          "difference_m": -8.12,
+          "ratio": 0.983,
+          "edge_count": 10
+        },
+        {
+          "from": "VASG1",
+          "to": "1BVE4",
+          "official_m": 140.2,
+          "normal_m": 94.22,
+          "internal_m": 45.12,
+          "combined_m": 139.34,
+          "difference_m": -0.86,
+          "ratio": 0.994,
+          "edge_count": 4
+        },
+        {
+          "from": "1BVE4",
+          "to": "ERMI2",
+          "official_m": 154.01,
+          "normal_m": 124.52,
+          "internal_m": 29.19,
+          "combined_m": 153.71,
+          "difference_m": -0.3,
+          "ratio": 0.998,
+          "edge_count": 4
+        },
+        {
+          "from": "ERMI2",
+          "to": "ERM3",
+          "official_m": 543.8,
+          "normal_m": 426.15,
+          "internal_m": 97.93,
+          "combined_m": 524.08,
+          "difference_m": -19.72,
+          "ratio": 0.964,
+          "edge_count": 7
+        },
+        {
+          "from": "ERM3",
+          "to": "CRZ2",
+          "official_m": 380.67,
+          "normal_m": 325.76,
+          "internal_m": 50.4,
+          "combined_m": 376.16,
+          "difference_m": -4.52,
+          "ratio": 0.988,
+          "edge_count": 5
+        },
+        {
+          "from": "CRZ2",
+          "to": "PTCR2",
+          "official_m": 475.91,
+          "normal_m": 399.8,
+          "internal_m": 74.63,
+          "combined_m": 474.43,
+          "difference_m": -1.48,
+          "ratio": 0.997,
+          "edge_count": 6
+        },
+        {
+          "from": "PTCR2",
+          "to": "SBR2",
+          "official_m": 326.19,
+          "normal_m": 289.82,
+          "internal_m": 28.92,
+          "combined_m": 318.74,
+          "difference_m": -7.45,
+          "ratio": 0.977,
+          "edge_count": 3
+        },
+        {
+          "from": "SBR2",
+          "to": "CGK2",
+          "official_m": 159.54,
+          "normal_m": 108.23,
+          "internal_m": 52.65,
+          "combined_m": 160.88,
+          "difference_m": 1.35,
+          "ratio": 1.008,
+          "edge_count": 4
+        },
+        {
+          "from": "CGK2",
+          "to": "CNSL2",
+          "official_m": 278.8,
+          "normal_m": 250.11,
+          "internal_m": 23.12,
+          "combined_m": 273.23,
+          "difference_m": -5.57,
+          "ratio": 0.98,
+          "edge_count": 4
+        },
+        {
+          "from": "CNSL2",
+          "to": "AM2",
+          "official_m": 273.83,
+          "normal_m": 206.25,
+          "internal_m": 57.66,
+          "combined_m": 263.91,
+          "difference_m": -9.93,
+          "ratio": 0.964,
+          "edge_count": 4
+        },
+        {
+          "from": "AM2",
+          "to": "PCUA2",
+          "official_m": 459.42,
+          "normal_m": 402.01,
+          "internal_m": 52.05,
+          "combined_m": 454.06,
+          "difference_m": -5.35,
+          "ratio": 0.988,
+          "edge_count": 6
+        },
+        {
+          "from": "PCUA2",
+          "to": "CORI2",
+          "official_m": 192.23,
+          "normal_m": 157.18,
+          "internal_m": 23.83,
+          "combined_m": 181.01,
+          "difference_m": -11.21,
+          "ratio": 0.942,
+          "edge_count": 3
+        },
+        {
+          "from": "CORI2",
+          "to": "CCOR",
+          "official_m": 206.01,
+          "normal_m": 169.47,
+          "internal_m": 39.68,
+          "combined_m": 209.15,
+          "difference_m": 3.14,
+          "ratio": 1.015,
+          "edge_count": 5
+        },
+        {
+          "from": "CCOR",
+          "to": "CORM2",
+          "official_m": 213.96,
+          "normal_m": 184.6,
+          "internal_m": 23.68,
+          "combined_m": 208.28,
+          "difference_m": -5.67,
+          "ratio": 0.973,
+          "edge_count": 3
+        },
+        {
+          "from": "CORM2",
+          "to": "BRO2",
+          "official_m": 305.23,
+          "normal_m": 250.7,
+          "internal_m": 58.95,
+          "combined_m": 309.65,
+          "difference_m": 4.42,
+          "ratio": 1.014,
+          "edge_count": 6
+        },
+        {
+          "from": "BRO2",
+          "to": "SGM",
+          "official_m": 149.35,
+          "normal_m": 89.21,
+          "internal_m": 53.64,
+          "combined_m": 142.85,
+          "difference_m": -6.51,
+          "ratio": 0.956,
+          "edge_count": 5
+        },
+        {
+          "from": "SGM",
+          "to": "FRN2",
+          "official_m": 243.21,
+          "normal_m": 183.43,
+          "internal_m": 55.76,
+          "combined_m": 239.19,
+          "difference_m": -4.02,
+          "ratio": 0.983,
+          "edge_count": 6
+        },
+        {
+          "from": "FRN2",
+          "to": "CRPO2",
+          "official_m": 301.06,
+          "normal_m": 267.16,
+          "internal_m": 31.51,
+          "combined_m": 298.67,
+          "difference_m": -2.39,
+          "ratio": 0.992,
+          "edge_count": 4
+        },
+        {
+          "from": "CRPO2",
+          "to": "GIT2",
+          "official_m": 195.74,
+          "normal_m": 154.59,
+          "internal_m": 42.19,
+          "combined_m": 196.78,
+          "difference_m": 1.03,
+          "ratio": 1.005,
+          "edge_count": 3
+        },
+        {
+          "from": "GIT2",
+          "to": "TRI2",
+          "official_m": 213.72,
+          "normal_m": 165.44,
+          "internal_m": 46.47,
+          "combined_m": 211.91,
+          "difference_m": -1.81,
+          "ratio": 0.992,
+          "edge_count": 4
+        },
+        {
+          "from": "TRI2",
+          "to": "AFEI2",
+          "official_m": 336.14,
+          "normal_m": 284.08,
+          "internal_m": 35.03,
+          "combined_m": 319.11,
+          "difference_m": -17.04,
+          "ratio": 0.949,
+          "edge_count": 4
+        },
+        {
+          "from": "AFEI2",
+          "to": "ARSM2",
+          "official_m": 433.28,
+          "normal_m": 353.58,
+          "internal_m": 87.43,
+          "combined_m": 441.01,
+          "difference_m": 7.73,
+          "ratio": 1.018,
+          "edge_count": 8
+        },
+        {
+          "from": "ARSM2",
+          "to": "ARS3",
+          "official_m": 202.73,
+          "normal_m": 155.97,
+          "internal_m": 44.58,
+          "combined_m": 200.55,
+          "difference_m": -2.17,
+          "ratio": 0.989,
+          "edge_count": 4
+        },
+        {
+          "from": "ARS3",
+          "to": "AA2",
+          "official_m": 220.03,
+          "normal_m": 201.71,
+          "internal_m": 11.21,
+          "combined_m": 212.92,
+          "difference_m": -7.11,
+          "ratio": 0.968,
+          "edge_count": 2
+        },
+        {
+          "from": "AA2",
+          "to": "ACO2",
+          "official_m": 214.98,
+          "normal_m": 182.0,
+          "internal_m": 40.04,
+          "combined_m": 222.04,
+          "difference_m": 7.06,
+          "ratio": 1.033,
+          "edge_count": 4
+        },
+        {
+          "from": "ACO2",
+          "to": "STJ3",
+          "official_m": 295.86,
+          "normal_m": 238.81,
+          "internal_m": 57.4,
+          "combined_m": 296.21,
+          "difference_m": 0.35,
+          "ratio": 1.001,
+          "edge_count": 6
+        },
+        {
+          "from": "STJ3",
+          "to": "BRRS2",
+          "official_m": 313.33,
+          "normal_m": 241.94,
+          "internal_m": 69.75,
+          "combined_m": 311.69,
+          "difference_m": -1.63,
+          "ratio": 0.995,
+          "edge_count": 7
+        },
+        {
+          "from": "BRRS2",
+          "to": "CF2",
+          "official_m": 253.08,
+          "normal_m": 201.92,
+          "internal_m": 39.71,
+          "combined_m": 241.63,
+          "difference_m": -11.44,
+          "ratio": 0.955,
+          "edge_count": 3
+        },
+        {
+          "from": "CF2",
+          "to": "LW2",
+          "official_m": 279.54,
+          "normal_m": 247.33,
+          "internal_m": 42.28,
+          "combined_m": 289.61,
+          "difference_m": 10.07,
+          "ratio": 1.036,
+          "edge_count": 7
+        },
+        {
+          "from": "LW2",
+          "to": "SVT4",
+          "official_m": 144.76,
+          "normal_m": 133.37,
+          "internal_m": 11.25,
+          "combined_m": 144.62,
+          "difference_m": -0.13,
+          "ratio": 0.999,
+          "edge_count": 2
+        },
+        {
+          "from": "SVT4",
+          "to": "PLIM2",
+          "official_m": 364.4,
+          "normal_m": 311.8,
+          "internal_m": 52.1,
+          "combined_m": 363.9,
+          "difference_m": -0.5,
+          "ratio": 0.999,
+          "edge_count": 3
+        },
+        {
+          "from": "PLIM2",
+          "to": "COMB4",
+          "official_m": 194.83,
+          "normal_m": 130.81,
+          "internal_m": 73.15,
+          "combined_m": 203.96,
+          "difference_m": 9.13,
+          "ratio": 1.047,
+          "edge_count": 6
+        },
+        {
+          "from": "COMB4",
+          "to": "LIMA2",
+          "official_m": 356.3,
+          "normal_m": 314.71,
+          "internal_m": 27.0,
+          "combined_m": 341.71,
+          "difference_m": -14.59,
+          "ratio": 0.959,
+          "edge_count": 3
+        },
+        {
+          "from": "LIMA2",
+          "to": "MPL7",
+          "official_m": 327.5,
+          "normal_m": 278.18,
+          "internal_m": 39.63,
+          "combined_m": 317.81,
+          "difference_m": -9.7,
+          "ratio": 0.97,
+          "edge_count": 6
+        },
+        {
+          "from": "MPL7",
+          "to": "MPL4",
+          "official_m": 179.48,
+          "normal_m": 121.93,
+          "internal_m": 46.67,
+          "combined_m": 168.6,
+          "difference_m": -10.88,
+          "ratio": 0.939,
+          "edge_count": 5
+        },
+        {
+          "from": "MPL4",
+          "to": "DCAS2",
+          "official_m": 471.77,
+          "normal_m": 393.36,
+          "internal_m": 76.53,
+          "combined_m": 469.89,
+          "difference_m": -1.87,
+          "ratio": 0.996,
+          "edge_count": 8
+        },
+        {
+          "from": "DCAS2",
+          "to": "FTNH2",
+          "official_m": 286.16,
+          "normal_m": 256.3,
+          "internal_m": 27.3,
+          "combined_m": 283.6,
+          "difference_m": -2.56,
+          "ratio": 0.991,
+          "edge_count": 4
+        },
+        {
+          "from": "FTNH2",
+          "to": "0BLRB",
+          "official_m": 581.68,
+          "normal_m": 487.71,
+          "internal_m": 87.11,
+          "combined_m": 574.82,
+          "difference_m": -6.86,
+          "ratio": 0.988,
+          "edge_count": 8
+        }
+      ],
+      "max_anchor_snaps": [
+        {
+          "progress": 14749.21018555023,
+          "edge": "1165311280#0",
+          "distance": 17.32849758312981
+        },
+        {
+          "progress": 16191.347283069,
+          "edge": "207724051#0",
+          "distance": 14.571770609916646
+        },
+        {
+          "progress": 10573.658231978005,
+          "edge": "-1536794514#0",
+          "distance": 13.850095639102607
+        },
+        {
+          "progress": 13988.45637736288,
+          "edge": "-27292882#6",
+          "distance": 13.117233796191579
+        },
+        {
+          "progress": 10438.367456578135,
+          "edge": "-1536794517",
+          "distance": 12.954591658462922
+        },
+        {
+          "progress": 4406.627595800402,
+          "edge": "-1287009008#3",
+          "distance": 12.896317838100718
+        },
+        {
+          "progress": 11646.472497384797,
+          "edge": "743539878#3",
+          "distance": 12.3012763673045
+        },
+        {
+          "progress": 5978.294784836555,
+          "edge": "-100199951#0",
+          "distance": 11.933121823196041
+        },
+        {
+          "progress": 590.1993323933057,
+          "edge": "1124001683#0",
+          "distance": 11.926698323450207
+        },
+        {
+          "progress": 204.93800245036317,
+          "edge": "655751777#3",
+          "distance": 11.780629885492115
+        }
+      ],
+      "key_stops": [
+        {
+          "stop_id": "ALXH2",
+          "edge": "-102890697#3",
+          "lane": "-102890697#3_0",
+          "pos": 128.3951963598262,
+          "snap_distance": 2.8828564922231776,
+          "street": "Rua 1º de Maio"
+        }
+      ],
+      "lateral": {
+        "native_sample_count": 2300,
+        "max_native_to_official_m": 14.029713121712879,
+        "max_native_to_official_edge": "-447541193#1",
+        "max_native_to_official_xy": [
+          8444.15,
+          10303.62
+        ],
+        "samples_over_20m": 0,
+        "samples_over_30m": 0,
+        "max_official_vertex_to_native": {
+          "distance_m": 13.65993639968717,
+          "progress_m": 16191.347283069
+        },
+        "conservative_continuous_lateral_bound_m": 19.02971312171288
+      }
+    },
+    "0": {
+      "edge_count": 221,
+      "official_m": 15359.328367344779,
+      "normal_m": 12517.88,
+      "internal_m": 2693.4800000000005,
+      "combined_m": 15211.36,
+      "combined_stop_to_stop_m": 15190.59392840341,
+      "missing_bus_connections": [],
+      "internal_edge_ids_in_vehicle_path": [],
+      "repeated_normal_edges": [],
+      "intervals": [
+        {
+          "from": "BLRB3",
+          "to": "GCRT",
+          "official_m": 275.4,
+          "normal_m": 198.96,
+          "internal_m": 63.89,
+          "combined_m": 262.85,
+          "difference_m": -12.56,
+          "ratio": 0.954,
+          "edge_count": 8
+        },
+        {
+          "from": "GCRT",
+          "to": "FTNH1",
+          "official_m": 458.17,
+          "normal_m": 405.32,
+          "internal_m": 50.97,
+          "combined_m": 456.29,
+          "difference_m": -1.87,
+          "ratio": 0.996,
+          "edge_count": 7
+        },
+        {
+          "from": "FTNH1",
+          "to": "DCAS1",
+          "official_m": 330.67,
+          "normal_m": 292.92,
+          "internal_m": 37.16,
+          "combined_m": 330.08,
+          "difference_m": -0.59,
+          "ratio": 0.998,
+          "edge_count": 5
+        },
+        {
+          "from": "DCAS1",
+          "to": "MPL2",
+          "official_m": 199.78,
+          "normal_m": 140.97,
+          "internal_m": 56.42,
+          "combined_m": 197.39,
+          "difference_m": -2.4,
+          "ratio": 0.988,
+          "edge_count": 3
+        },
+        {
+          "from": "MPL2",
+          "to": "PSOC1",
+          "official_m": 347.62,
+          "normal_m": 307.15,
+          "internal_m": 40.78,
+          "combined_m": 347.93,
+          "difference_m": 0.3,
+          "ratio": 1.001,
+          "edge_count": 5
+        },
+        {
+          "from": "PSOC1",
+          "to": "COMB1",
+          "official_m": 212.83,
+          "normal_m": 191.15,
+          "internal_m": 20.28,
+          "combined_m": 211.43,
+          "difference_m": -1.39,
+          "ratio": 0.993,
+          "edge_count": 3
+        },
+        {
+          "from": "COMB1",
+          "to": "PLIM1",
+          "official_m": 354.52,
+          "normal_m": 264.05,
+          "internal_m": 83.18,
+          "combined_m": 347.23,
+          "difference_m": -7.29,
+          "ratio": 0.979,
+          "edge_count": 7
+        },
+        {
+          "from": "PLIM1",
+          "to": "SVT3",
+          "official_m": 334.65,
+          "normal_m": 279.4,
+          "internal_m": 52.92,
+          "combined_m": 332.32,
+          "difference_m": -2.33,
+          "ratio": 0.993,
+          "edge_count": 3
+        },
+        {
+          "from": "SVT3",
+          "to": "LW1",
+          "official_m": 207.08,
+          "normal_m": 184.38,
+          "internal_m": 20.96,
+          "combined_m": 205.34,
+          "difference_m": -1.74,
+          "ratio": 0.992,
+          "edge_count": 3
+        },
+        {
+          "from": "LW1",
+          "to": "CF1",
+          "official_m": 195.9,
+          "normal_m": 182.13,
+          "internal_m": 9.78,
+          "combined_m": 191.91,
+          "difference_m": -3.99,
+          "ratio": 0.98,
+          "edge_count": 3
+        },
+        {
+          "from": "CF1",
+          "to": "BRRS1",
+          "official_m": 358.98,
+          "normal_m": 274.32,
+          "internal_m": 83.45,
+          "combined_m": 357.77,
+          "difference_m": -1.21,
+          "ratio": 0.997,
+          "edge_count": 8
+        },
+        {
+          "from": "BRRS1",
+          "to": "STJ2",
+          "official_m": 329.75,
+          "normal_m": 257.7,
+          "internal_m": 70.82,
+          "combined_m": 328.52,
+          "difference_m": -1.23,
+          "ratio": 0.996,
+          "edge_count": 7
+        },
+        {
+          "from": "STJ2",
+          "to": "ACO1",
+          "official_m": 266.0,
+          "normal_m": 228.58,
+          "internal_m": 36.36,
+          "combined_m": 264.94,
+          "difference_m": -1.06,
+          "ratio": 0.996,
+          "edge_count": 4
+        },
+        {
+          "from": "ACO1",
+          "to": "AA1",
+          "official_m": 171.1,
+          "normal_m": 137.03,
+          "internal_m": 40.1,
+          "combined_m": 177.13,
+          "difference_m": 6.02,
+          "ratio": 1.035,
+          "edge_count": 4
+        },
+        {
+          "from": "AA1",
+          "to": "ARS2",
+          "official_m": 167.59,
+          "normal_m": 148.62,
+          "internal_m": 11.2,
+          "combined_m": 159.82,
+          "difference_m": -7.77,
+          "ratio": 0.954,
+          "edge_count": 2
+        },
+        {
+          "from": "ARS2",
+          "to": "ARSM1",
+          "official_m": 295.49,
+          "normal_m": 236.28,
+          "internal_m": 58.91,
+          "combined_m": 295.19,
+          "difference_m": -0.3,
+          "ratio": 0.999,
+          "edge_count": 5
+        },
+        {
+          "from": "ARSM1",
+          "to": "AFEI1",
+          "official_m": 317.72,
+          "normal_m": 266.59,
+          "internal_m": 48.9,
+          "combined_m": 315.49,
+          "difference_m": -2.22,
+          "ratio": 0.993,
+          "edge_count": 5
+        },
+        {
+          "from": "AFEI1",
+          "to": "TRI1",
+          "official_m": 265.94,
+          "normal_m": 231.75,
+          "internal_m": 33.46,
+          "combined_m": 265.21,
+          "difference_m": -0.73,
+          "ratio": 0.997,
+          "edge_count": 4
+        },
+        {
+          "from": "TRI1",
+          "to": "GIT1",
+          "official_m": 369.23,
+          "normal_m": 294.69,
+          "internal_m": 81.31,
+          "combined_m": 376.0,
+          "difference_m": 6.77,
+          "ratio": 1.018,
+          "edge_count": 7
+        },
+        {
+          "from": "GIT1",
+          "to": "CRPO1",
+          "official_m": 184.38,
+          "normal_m": 143.26,
+          "internal_m": 32.46,
+          "combined_m": 175.72,
+          "difference_m": -8.66,
+          "ratio": 0.953,
+          "edge_count": 2
+        },
+        {
+          "from": "CRPO1",
+          "to": "FRN1",
+          "official_m": 249.35,
+          "normal_m": 216.04,
+          "internal_m": 31.35,
+          "combined_m": 247.39,
+          "difference_m": -1.97,
+          "ratio": 0.992,
+          "edge_count": 4
+        },
+        {
+          "from": "FRN1",
+          "to": "BRO1",
+          "official_m": 342.93,
+          "normal_m": 259.43,
+          "internal_m": 95.13,
+          "combined_m": 354.56,
+          "difference_m": 11.63,
+          "ratio": 1.034,
+          "edge_count": 9
+        },
+        {
+          "from": "BRO1",
+          "to": "CORM1",
+          "official_m": 415.92,
+          "normal_m": 327.24,
+          "internal_m": 73.89,
+          "combined_m": 401.13,
+          "difference_m": -14.79,
+          "ratio": 0.964,
+          "edge_count": 7
+        },
+        {
+          "from": "CORM1",
+          "to": "CORI1",
+          "official_m": 273.92,
+          "normal_m": 247.88,
+          "internal_m": 23.1,
+          "combined_m": 270.98,
+          "difference_m": -2.94,
+          "ratio": 0.989,
+          "edge_count": 3
+        },
+        {
+          "from": "CORI1",
+          "to": "PCUA1",
+          "official_m": 347.26,
+          "normal_m": 286.3,
+          "internal_m": 63.05,
+          "combined_m": 349.35,
+          "difference_m": 2.09,
+          "ratio": 1.006,
+          "edge_count": 7
+        },
+        {
+          "from": "PCUA1",
+          "to": "AM1",
+          "official_m": 270.8,
+          "normal_m": 242.95,
+          "internal_m": 28.24,
+          "combined_m": 271.19,
+          "difference_m": 0.39,
+          "ratio": 1.001,
+          "edge_count": 4
+        },
+        {
+          "from": "AM1",
+          "to": "JLD1",
+          "official_m": 251.03,
+          "normal_m": 188.26,
+          "internal_m": 55.04,
+          "combined_m": 243.3,
+          "difference_m": -7.73,
+          "ratio": 0.969,
+          "edge_count": 4
+        },
+        {
+          "from": "JLD1",
+          "to": "CNSL1",
+          "official_m": 195.07,
+          "normal_m": 165.53,
+          "internal_m": 25.05,
+          "combined_m": 190.58,
+          "difference_m": -4.49,
+          "ratio": 0.977,
+          "edge_count": 3
+        },
+        {
+          "from": "CNSL1",
+          "to": "CGK1",
+          "official_m": 242.26,
+          "normal_m": 217.25,
+          "internal_m": 21.06,
+          "combined_m": 238.31,
+          "difference_m": -3.96,
+          "ratio": 0.984,
+          "edge_count": 4
+        },
+        {
+          "from": "CGK1",
+          "to": "SBR1",
+          "official_m": 199.86,
+          "normal_m": 137.84,
+          "internal_m": 52.96,
+          "combined_m": 190.8,
+          "difference_m": -9.06,
+          "ratio": 0.955,
+          "edge_count": 4
+        },
+        {
+          "from": "SBR1",
+          "to": "PTCR1",
+          "official_m": 315.88,
+          "normal_m": 281.74,
+          "internal_m": 42.46,
+          "combined_m": 324.2,
+          "difference_m": 8.31,
+          "ratio": 1.026,
+          "edge_count": 4
+        },
+        {
+          "from": "PTCR1",
+          "to": "CRZ1",
+          "official_m": 470.09,
+          "normal_m": 394.02,
+          "internal_m": 60.21,
+          "combined_m": 454.23,
+          "difference_m": -15.86,
+          "ratio": 0.966,
+          "edge_count": 5
+        },
+        {
+          "from": "CRZ1",
+          "to": "ERM4",
+          "official_m": 338.98,
+          "normal_m": 287.32,
+          "internal_m": 41.58,
+          "combined_m": 328.9,
+          "difference_m": -10.08,
+          "ratio": 0.97,
+          "edge_count": 4
+        },
+        {
+          "from": "ERM4",
+          "to": "1BVE3",
+          "official_m": 132.25,
+          "normal_m": 123.47,
+          "internal_m": 0,
+          "combined_m": 123.47,
+          "difference_m": -8.79,
+          "ratio": 0.934,
+          "edge_count": 1
+        },
+        {
+          "from": "1BVE3",
+          "to": "VASG2",
+          "official_m": 105.87,
+          "normal_m": 69.56,
+          "internal_m": 23.79,
+          "combined_m": 93.35,
+          "difference_m": -12.52,
+          "ratio": 0.882,
+          "edge_count": 3
+        },
+        {
+          "from": "VASG2",
+          "to": "5OTR1",
+          "official_m": 462.02,
+          "normal_m": 352.24,
+          "internal_m": 100.88,
+          "combined_m": 453.12,
+          "difference_m": -8.9,
+          "ratio": 0.981,
+          "edge_count": 9
+        },
+        {
+          "from": "5OTR1",
+          "to": "FNTE1",
+          "official_m": 387.49,
+          "normal_m": 255.07,
+          "internal_m": 113.76,
+          "combined_m": 368.83,
+          "difference_m": -18.66,
+          "ratio": 0.952,
+          "edge_count": 15
+        },
+        {
+          "from": "FNTE1",
+          "to": "STNH1",
+          "official_m": 241.28,
+          "normal_m": 204.39,
+          "internal_m": 28.71,
+          "combined_m": 233.1,
+          "difference_m": -8.18,
+          "ratio": 0.966,
+          "edge_count": 3
+        },
+        {
+          "from": "STNH1",
+          "to": "ERMD1",
+          "official_m": 261.05,
+          "normal_m": 175.28,
+          "internal_m": 79.58,
+          "combined_m": 254.86,
+          "difference_m": -6.19,
+          "ratio": 0.976,
+          "edge_count": 5
+        },
+        {
+          "from": "ERMD1",
+          "to": "RGNG1",
+          "official_m": 231.94,
+          "normal_m": 161.46,
+          "internal_m": 65.0,
+          "combined_m": 226.46,
+          "difference_m": -5.48,
+          "ratio": 0.976,
+          "edge_count": 6
+        },
+        {
+          "from": "RGNG1",
+          "to": "SPAZ1",
+          "official_m": 255.69,
+          "normal_m": 198.59,
+          "internal_m": 53.68,
+          "combined_m": 252.27,
+          "difference_m": -3.43,
+          "ratio": 0.987,
+          "edge_count": 4
+        },
+        {
+          "from": "SPAZ1",
+          "to": "CBD1",
+          "official_m": 269.14,
+          "normal_m": 238.21,
+          "internal_m": 31.86,
+          "combined_m": 270.07,
+          "difference_m": 0.93,
+          "ratio": 1.003,
+          "edge_count": 5
+        },
+        {
+          "from": "CBD1",
+          "to": "VSV1",
+          "official_m": 355.75,
+          "normal_m": 306.38,
+          "internal_m": 45.49,
+          "combined_m": 351.87,
+          "difference_m": -3.88,
+          "ratio": 0.989,
+          "edge_count": 4
+        },
+        {
+          "from": "VSV1",
+          "to": "OLVR1",
+          "official_m": 231.38,
+          "normal_m": 215.39,
+          "internal_m": 14.97,
+          "combined_m": 230.36,
+          "difference_m": -1.02,
+          "ratio": 0.996,
+          "edge_count": 2
+        },
+        {
+          "from": "OLVR1",
+          "to": "ADNV1",
+          "official_m": 234.55,
+          "normal_m": 209.06,
+          "internal_m": 24.64,
+          "combined_m": 233.7,
+          "difference_m": -0.86,
+          "ratio": 0.996,
+          "edge_count": 2
+        },
+        {
+          "from": "ADNV1",
+          "to": "BARR1",
+          "official_m": 435.37,
+          "normal_m": 353.7,
+          "internal_m": 80.81,
+          "combined_m": 434.51,
+          "difference_m": -0.86,
+          "ratio": 0.998,
+          "edge_count": 7
+        },
+        {
+          "from": "BARR1",
+          "to": "IGRA1",
+          "official_m": 386.7,
+          "normal_m": 287.96,
+          "internal_m": 95.71,
+          "combined_m": 383.67,
+          "difference_m": -3.03,
+          "ratio": 0.992,
+          "edge_count": 13
+        },
+        {
+          "from": "IGRA1",
+          "to": "TCT1",
+          "official_m": 255.36,
+          "normal_m": 221.32,
+          "internal_m": 28.8,
+          "combined_m": 250.12,
+          "difference_m": -5.24,
+          "ratio": 0.979,
+          "edge_count": 3
+        },
+        {
+          "from": "TCT1",
+          "to": "ALFN1",
+          "official_m": 204.46,
+          "normal_m": 152.02,
+          "internal_m": 53.93,
+          "combined_m": 205.95,
+          "difference_m": 1.5,
+          "ratio": 1.007,
+          "edge_count": 7
+        },
+        {
+          "from": "ALFN1",
+          "to": "ALXH1",
+          "official_m": 272.88,
+          "normal_m": 196.88,
+          "internal_m": 83.23,
+          "combined_m": 280.11,
+          "difference_m": 7.23,
+          "ratio": 1.027,
+          "edge_count": 8
+        },
+        {
+          "from": "ALXH1",
+          "to": "COD3",
+          "official_m": 408.34,
+          "normal_m": 341.45,
+          "internal_m": 48.18,
+          "combined_m": 389.63,
+          "difference_m": -18.71,
+          "ratio": 0.954,
+          "edge_count": 4
+        },
+        {
+          "from": "COD3",
+          "to": "VGM5",
+          "official_m": 388.09,
+          "normal_m": 312.55,
+          "internal_m": 102.0,
+          "combined_m": 414.55,
+          "difference_m": 26.45,
+          "ratio": 1.068,
+          "edge_count": 8
+        },
+        {
+          "from": "VGM5",
+          "to": "COD4",
+          "official_m": 283.54,
+          "normal_m": 205.13,
+          "internal_m": 72.03,
+          "combined_m": 277.16,
+          "difference_m": -6.38,
+          "ratio": 0.977,
+          "edge_count": 7
+        }
+      ],
+      "max_anchor_snaps": [
+        {
+          "progress": 14741.843355546805,
+          "edge": "-151268557#10",
+          "distance": 15.307706836050896
+        },
+        {
+          "progress": 8747.098333405782,
+          "edge": "99955841#7",
+          "distance": 13.787050739986583
+        },
+        {
+          "progress": 10919.78125590132,
+          "edge": "1287009008#3",
+          "distance": 13.59572499697793
+        },
+        {
+          "progress": 14687.693242667327,
+          "edge": "1124001684",
+          "distance": 13.001116904187926
+        },
+        {
+          "progress": 6235.089572347125,
+          "edge": "1082972083#8",
+          "distance": 12.880503204065233
+        },
+        {
+          "progress": 5511.8735716222845,
+          "edge": "1536794517",
+          "distance": 12.695404421186586
+        },
+        {
+          "progress": 2015.4824871404296,
+          "edge": "1083211594",
+          "distance": 12.435838276264485
+        },
+        {
+          "progress": 10588.625695773486,
+          "edge": "103192998#0",
+          "distance": 11.070563443853223
+        },
+        {
+          "progress": 14692.030174495587,
+          "edge": "1124001684",
+          "distance": 11.042997132792395
+        },
+        {
+          "progress": 1232.5648019644239,
+          "edge": "13716160#0",
+          "distance": 10.912269197033558
+        }
+      ],
+      "key_stops": [
+        {
+          "stop_id": "ACO1",
+          "edge": "966302094#2",
+          "lane": "966302094#2_0",
+          "pos": 137.71491364666474,
+          "snap_distance": 6.312000933710993,
+          "street": "Rua de Costa Cabral"
+        },
+        {
+          "stop_id": "AA1",
+          "edge": "-482332563#2",
+          "lane": "-482332563#2_0",
+          "pos": 15,
+          "snap_distance": 7.098206663431468,
+          "street": "Rua de Costa Cabral"
+        },
+        {
+          "stop_id": "SBR1",
+          "edge": "99955841#4",
+          "lane": "99955841#4_0",
+          "pos": 54.162593250301484,
+          "snap_distance": 3.884189615531153,
+          "street": "Rua Rodrigues de Freitas"
+        }
+      ],
+      "lateral": {
+        "native_sample_count": 2194,
+        "max_native_to_official_m": 18.835973483682114,
+        "max_native_to_official_edge": "1187716778",
+        "max_native_to_official_xy": [
+          597.0999999999999,
+          -192.26500000000001
+        ],
+        "samples_over_20m": 0,
+        "samples_over_30m": 0,
+        "max_official_vertex_to_native": {
+          "distance_m": 12.515355822121183,
+          "progress_m": 14687.693242667327
+        },
+        "conservative_continuous_lateral_bound_m": 23.835973483682114
+      }
+    }
+  },
+  "connector": {
+    "bus": [
+      "-27292621#1",
+      "-477791560#1"
+    ],
+    "passenger": [
+      "-27292621#1"
+    ],
+    "taxi": [
+      "-27292621#1"
+    ],
+    "motorcycle": [
+      "-27292621#1"
+    ],
+    "bicycle": [
+      "-27292621#1"
+    ],
+    "custom1": [
+      "-27292621#1"
+    ],
+    "emergency": [
+      "-27292621#1"
+    ]
+  },
+  "audited_at_utc": "2026-10-29T13:51:35.593304+00:00",
+  "reference_date": "2026-10-28",
+  "working_count": 127,
+  "served_call_count": 6024,
+  "reference_network_hash_match": true,
+  "mapper_source_sha256": "1d6300c85b057225963eb7c3a9b41ab195796ba6c95b4f7731ef0b6644efc224",
+  "bus_only_overlay": {
+    "schema": "invicta.route-import-overlays.v1",
+    "reason": "Resolve an explicit conflict between the frozen official 701 outbound shape and imported OSM turn topology; this is a modelling assumption pending operator/street validation.",
+    "connections": [
+      {
+        "from": "966302094#2",
+        "to": "-477791560#1",
+        "allow": "bus",
+        "osm_node": "299608221",
+        "osm_restriction_relation": "16086845",
+        "osm_restriction": "only_right_turn without a bus exception",
+        "evidence": "The official outbound 701 shape and frozen OSM route relation 10107392 both continue from way 966302094 to 477791560. OSM way 477791560 has oneway:bus=no and already imports a bus-capable contraflow edge.",
+        "limits": "Bus-only connector in both baseline and proposal. Ordinary traffic retains the imported right-turn restriction. This does not establish legal current street permissions."
+      }
+    ]
+  },
+  "audit_method": "Native normal and shortest permitted internal connector shapes sampled at <=10m; distances to the official polyline; continuous bound sample maximum +5m. Geometric screen, not a field survey.",
+  "limits": [
+    "Geometry screen, not a street survey.",
+    "Internal connection minima and sampled lateral distances are geometric estimates.",
+    "A source-supported bus-only exception still needs operator/legal validation."
+  ],
+  "source_reference_hashes": {
+    "prototypes/line-701/data/official-extension/full-line-service-facts.json": "76ebfd2ae3990e35ce5d2f58ad3182c192f76ec7c6c87c16b304be6909856736",
+    "prototypes/line-701/data/official-outbound/full-line-service-facts.json": "3b70d4781d56f17219b5a769f5bcde5276b11129489865a686123896378c6604",
+    "prototypes/line-701/data/official/inbound_shape.json": "a7123c79d83a9f53138ddcabc5a33bde4af06d2a48af81ed821be6af3f76b7fd",
+    "prototypes/line-701/data/official-outbound/outbound_shape.json": "6df71488885a9ae66b4caf30e4f2fd3949f2e16b01a6ee49e7e0dc36aa6da014"
+  },
+  "status": "geometry_audit_passed"
+}

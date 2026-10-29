@@ -2,18 +2,29 @@
 import * as T from './vendor/three.module.js';
 import { OrbitControls } from './vendor/OrbitControls.js';
 
-async function readAsset(name, assetBase = './inspection-assets/') {
+async function readAsset(name, assetBase = './inspection-assets/', expectedHash) {
   const response = await fetch(new URL(`${assetBase}${name}.json.gz`, import.meta.url));
   if (!response.ok) throw new Error(`Missing inspection asset: ${name}`);
-  const stream = response.body.pipeThrough(new DecompressionStream('gzip'));
+  const bytes = await response.arrayBuffer();
+  if (expectedHash) {
+    const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(v => v.toString(16).padStart(2, '0')).join('');
+    if (hash !== expectedHash) throw Error('Replay asset hash does not match the prepared manifest: ' + name);
+  }
+  const stream = new Response(bytes).body.pipeThrough(new DecompressionStream('gzip'));
   return new Response(stream).json();
 }
 
 export async function createInspection({ data, getState, label, changed, assetBase = './inspection-assets/' }) {
-  const source = await readAsset('scene', assetBase);
+  const manifestResponse = await fetch(new URL(assetBase + 'manifest.json', import.meta.url));
+  if (!manifestResponse.ok) throw Error('Missing prepared replay manifest');
+  const manifest = await manifestResponse.json();
+  if (data.replay_manifest && data.replay_manifest.id !== manifest.id) throw Error('Replay manifest does not match proposal data');
+  const source = await readAsset('scene', assetBase, manifest.scene.sha256);
+  if (source.capture_signature !== manifest.capture_signature || source.study_id !== manifest.study_id) throw Error('Scene does not match replay scope');
   const mid = data.cameras.corridor;
-  const origin = [(mid[0] + mid[2]) / 2, (mid[1] + mid[3]) / 2];
+  const origin = source.origin || [(mid[0] + mid[2]) / 2, (mid[1] + mid[3]) / 2];
   const world = (x, y, h = 0) => new T.Vector3(x - origin[0], h, origin[1] - y);
+  const capacity=Object.fromEntries(Object.keys(source.vehicle_dimensions.types).map(group=>[group,Math.max(1,...manifest.clips.map(clip=>clip.peak_by_group?.[group]??2500))]));
   const cache = new Map(), panels = {}, unit = new T.BoxGeometry(1, 1, 1);
   const dummy = new T.Object3D(), frustum = new T.Frustum(), viewMatrix = new T.Matrix4();
   const laneMap = new Map(source.lanes.map(l => [l.id, l]));
@@ -44,9 +55,9 @@ export async function createInspection({ data, getState, label, changed, assetBa
 
   // Interpolate distance on a lane when possible; use native positions at changes.
   function positions(replay, time) {
-    const i = Math.max(0, Math.min(replay.frames.length - 1, Math.floor(time - replay.start)));
+    const i = Math.max(0, Math.min(replay.frames.length - 1, Math.floor((time - replay.start) / (replay.step || 1))));
     const a = replay.frames[i], b = replay.frames[Math.min(i + 1, replay.frames.length - 1)];
-    const f = Math.max(0, Math.min(1, time - a.t)), next = new Map(b.vehicles.map(v => [v[0], v]));
+    const f = Math.max(0, Math.min(1, (time - a.t) / (replay.step || 1))), next = new Map(b.vehicles.map(v => [v[0], v]));
     return a.vehicles.map(row => {
       const n = next.get(row[0]) || row;
       const onLane = row[5] === n[5] ? atLane(row[5], row[6] + (n[6] - row[6]) * f) : null;
@@ -155,24 +166,24 @@ export async function createInspection({ data, getState, label, changed, assetBa
       sign.position.copy(pos); sign.position.y = 2.35;
       scene.add(pole, sign);
     }
-    const camera = new T.PerspectiveCamera(48, 1, .15, 16000);
+    const camera = new T.PerspectiveCamera(48, 1, .15, Math.max(16000, Math.max(mid[2]-mid[0],mid[3]-mid[1])*4));
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = false; controls.minDistance = 5; controls.maxDistance = 6000;
+    controls.enableDamping = false; controls.minDistance = 5; controls.maxDistance = Math.max(6000, Math.max(mid[2]-mid[0],mid[3]-mid[1])*2);
     controls.maxPolarAngle = Math.PI / 2 - .01;
     const marker = new T.Mesh(new T.TorusGeometry(4.2, .16, 6, 40), new T.MeshBasicMaterial({ color: '#f5bb44' }));
     marker.rotation.x = Math.PI / 2; marker.visible = false; scene.add(marker);
     const models = {};
     for (const [group, dim] of Object.entries(source.vehicle_dimensions.types)) {
       const material = new T.MeshLambertMaterial({ color: data.colors[group] || '#929b96' });
-      const body = new T.InstancedMesh(unit, material, 2500);
-      const window = new T.InstancedMesh(unit, new T.MeshLambertMaterial({ color: '#263e49' }), 2500);
+      const body = new T.InstancedMesh(unit, material, capacity[group]);
+      const window = new T.InstancedMesh(unit, new T.MeshLambertMaterial({ color: '#263e49' }), capacity[group]);
       const wheelVertices = [], wheelNormals = [], radius = Math.min(.38, dim.height * .23);
       for (const side of [-1, 1]) for (const end of [-1, 1]) {
         const g = new T.CylinderGeometry(radius, radius, .16, 10).toNonIndexed();
         g.rotateZ(Math.PI / 2); g.translate(side * (dim.width / 2 - .06), radius, end * dim.length * .32);
         wheelVertices.push(...g.attributes.position.array); wheelNormals.push(...g.attributes.normal.array); g.dispose();
       }
-      const wheels = new T.InstancedMesh(geometry(wheelVertices, wheelNormals), new T.MeshLambertMaterial({ color: '#172b2b' }), 2500);
+      const wheels = new T.InstancedMesh(geometry(wheelVertices, wheelNormals), new T.MeshLambertMaterial({ color: '#172b2b' }), capacity[group]);
       for (const mesh of [body, window, wheels]) { mesh.instanceMatrix.setUsage(T.DynamicDrawUsage); mesh.frustumCulled = false; }
       scene.add(body, window, wheels); models[group] = { body, window, wheels, dim };
     }
@@ -214,7 +225,7 @@ export async function createInspection({ data, getState, label, changed, assetBa
   }
 
   function resetCamera() {
-    const state = getState(), box = data.cameras[state.camera];
+    const state = getState(), cameras=data.direction_cameras?.[String(state.direction)]||data.cameras, box = cameras[state.camera];
     const centre = world((box[0] + box[2]) / 2, (box[1] + box[3]) / 2);
     const width = state.camera === 'corridor' ? Math.max(box[2] - box[0], box[3] - box[1]) : 280;
     // Put street-level inspection on the nearest modelled corridor lane.
@@ -300,22 +311,41 @@ export async function createInspection({ data, getState, label, changed, assetBa
   }
 
   async function loadCase() {
-    const current = getState().case;
-    if (caseKey === current && !loading) return;
+    const current = getState().case, currentKey=current+'|'+(getState().direction||'');
+    if (caseKey === currentKey && !loading) return;
     const token = ++generation;
     loading = true;
     document.getElementById('threeState').textContent = label('threeLoading');
     await Promise.all(['baseline', 'restricted'].map(async policy => {
       const key = `${current}-${policy}`;
-      if (!cache.has(key)) cache.set(key, await readAsset(key, assetBase));
+      if (!cache.has(key)) {
+        const clip = manifest.clips.find(c => c.case === current && c.policy === policy);
+        if (!clip) throw Error('No prepared capture for ' + key);
+        const replay = await readAsset(key, assetBase, clip.sha256);
+        if (replay.capture_signature !== source.capture_signature || replay.study_id !== source.study_id || replay.case !== current || replay.policy !== policy || replay.start !== clip.start || replay.end !== clip.end || replay.step !== clip.step || replay.seed !== clip.seed || replay.simulation_begin !== clip.simulation_begin || JSON.stringify(replay.input_hashes) !== JSON.stringify(clip.input_hashes) || JSON.stringify(replay.scope) !== JSON.stringify(manifest.scope)) throw Error('Capture does not match scene, policy or time window');
+        if ((replay.encoding||'frames-v1')!==(clip.encoding||'frames-v1'))throw Error('Capture encoding does not match manifest');
+        if(replay.encoding==='vehicle-deltas-v1'){
+          const active=new Map();let order=[];
+          replay.frames=replay.frames.map(frame=>{
+            for(const id of frame.removed||[]){if(!active.delete(id))throw Error('Invalid removed vehicle');}
+            for(const row of frame.vehicles)active.set(row[0],row);
+            order=frame.order||order;
+            if(order.length!==active.size||new Set(order).size!==order.length||order.some(id=>!active.has(id)))throw Error('Invalid native vehicle order');
+            return {t:frame.t,vehicles:order.map(id=>active.get(id))};
+          });
+        }else if(replay.encoding&&replay.encoding!=='frames-v1')throw Error('Unsupported capture encoding');
+        cache.set(key, replay);
+      }
     }));
+    // Keep only the active pair: complete-line captures can contain many rows.
+    for (const key of cache.keys()) if (!key.startsWith(getState().case+'-')) cache.delete(key);
     if (token !== generation) return;
-    caseKey = current; loading = false;
+    caseKey = currentKey; loading = false;
     const select = document.getElementById('followBus');
-    const ids = new Set(['baseline', 'restricted'].flatMap(policy => cache.get(`${current}-${policy}`).vehicles.filter(v => v.group === 'bus').map(v => v.id)));
-    select.replaceChildren(...[...ids].sort((a, b) => Number(a.split('_')[1]) - Number(b.split('_')[1])).map(id => {
+    const ids = new Set(['baseline', 'restricted'].flatMap(policy => cache.get(`${current}-${policy}`).vehicles.filter(v => v.group === 'bus' && (source.bus_info[v.id]?.direction == null || !getState().direction || String(source.bus_info[v.id].direction)===String(getState().direction))).map(v => v.id)));
+    select.replaceChildren(...[...ids].sort((a, b) => a.localeCompare(b,undefined,{numeric:true})).map(id => {
       const option = document.createElement('option'); option.value = id;
-      option.textContent = `${source.bus_info[id]?.line || ''} · ${id}`; return option;
+      option.textContent = source.bus_info[id]?.label || `${source.bus_info[id]?.line || ''} · ${id}`; return option;
     }));
     if (!ids.has(getState().follow)) chooseBus();
     select.value = getState().follow;
@@ -325,11 +355,11 @@ export async function createInspection({ data, getState, label, changed, assetBa
   function chooseBus() {
     const state = getState(), replay = cache.get(`${state.case}-restricted`);
     if (!replay) return;
-    const box = data.cameras[state.camera], x = (box[0] + box[2]) / 2, y = (box[1] + box[3]) / 2;
-    const available = positions(replay, state.time).filter(v => v.group === 'bus');
+    const box = (data.direction_cameras?.[String(state.direction)]||data.cameras)[state.camera], x = (box[0] + box[2]) / 2, y = (box[1] + box[3]) / 2;
+    const available = positions(replay, state.time).filter(v => v.group === 'bus' && (source.bus_info[v.id]?.direction == null || !state.direction || String(source.bus_info[v.id].direction)===String(state.direction)));
     available.sort((a, b) => Math.hypot(a.x - x, a.y - y) - Math.hypot(b.x - x, b.y - y));
     if (available.length) state.follow = available[0].id;
-    else state.follow = replay.vehicles.find(v => v.group === 'bus')?.id || '';
+    else state.follow = replay.vehicles.find(v => v.group === 'bus' && (source.bus_info[v.id]?.direction == null || !state.direction || String(source.bus_info[v.id].direction)===String(state.direction)))?.id || '';
   }
 
   const canMove = () => active && ['orbit', 'street'].includes(getState().perspective);
@@ -394,7 +424,7 @@ export async function createInspection({ data, getState, label, changed, assetBa
       for (const panel of Object.values(panels)) panel.controls.panSpeed = getState().cameraSpeed ?? 1;
       for (const button of document.querySelectorAll('[data-walk]')) button.disabled = !canMove();
       if (!active) { keys.clear(); return; }
-      const state = getState(), key = `${state.camera}-${state.perspective}`;
+      const state = getState(), key = `${state.direction||''}-${state.camera}-${state.perspective}`;
       if (key !== cameraKey) { keys.clear(); cameraKey = key; resetCamera(); }
       await loadCase(); render();
     },
@@ -420,7 +450,7 @@ export async function createInspection({ data, getState, label, changed, assetBa
       }
       steering = false; render();
     },
-    debug() { return { loaded: !loading, case: caseKey, buildings: source.buildings.features.length, lanes: source.lanes.length, vehicles: Object.fromEntries(Object.entries(panels).map(([k, p]) => [k, p.rows.length])), network: source.network_sha256,
+    debug() { return { loaded: !loading, manifest: manifest.id, study: manifest.study_id, origin:[...origin], case: caseKey.split('|')[0], buildings: source.buildings.features.length, lanes: source.lanes.length, vehicles: Object.fromEntries(Object.entries(panels).map(([k, p]) => [k, p.rows.length])), network: source.network_sha256,
       cameras: Object.fromEntries(Object.entries(panels).map(([k,p]) => [k,{position:p.camera.position.toArray(),target:p.controls.target.toArray()}])) }; }
   };
 }

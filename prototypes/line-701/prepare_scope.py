@@ -6,6 +6,8 @@ def prepare():
     extension=json.loads((DATA/'official-extension/extension-facts.json').read_text())
     facts=json.loads((DATA/'source-facts.json').read_text());b=extension['boundary'];entry=b['municipal_entry']
     facts['segment']=extension['segment'];facts['schedule'].update(extension['schedule'])
+    timing=[s['stop_id'] for s in extension['segment']['stops'] if s.get('designated_timing_point')]
+    facts['schedule']['intermediate_timepoint_caveat']=('Designated timing points in this Porto section: '+', '.join(timing)+'. Other published stop seconds are intermediate references; none is an observed passage.')
     facts['municipality']={**b,'entry_lonlat':[entry['lon'],entry['lat']],
                            'approach_metres':b['municipal_entry_to_ars3_shape_length_m_epsg3763'],
                            'shape_metres':b['municipal_entry_to_final_shape_length_m_epsg3763']}

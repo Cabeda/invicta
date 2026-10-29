@@ -10,3 +10,32 @@ prototypes/costa-cabral/inspection-assets/
 prototypes/costa-cabral/vendor/
 prototypes/costa-cabral/costa-cabral-proposal-site.zip
 prototypes/line-701/
+# BEGIN verified public deployment assets
+prototypes/costa-cabral/proposal/701-experiments.json
+prototypes/costa-cabral/proposal/701-extension/dgt_municipios_near_areosa.geojson
+prototypes/costa-cabral/proposal/701-full-experiments.json
+prototypes/costa-cabral/proposal/701-full-routes.json
+prototypes/costa-cabral/proposal/701-official/municipal_latest_gtfs.zip
+prototypes/costa-cabral/proposal/costa-cabral-en.mp4
+prototypes/costa-cabral/proposal/costa-cabral-pt.mp4
+prototypes/costa-cabral/proposal/experiment.html
+prototypes/costa-cabral/proposal/index.html
+prototypes/costa-cabral/proposal/inspection-assets/busy-baseline.json.gz
+prototypes/costa-cabral/proposal/inspection-assets/busy-restricted.json.gz
+prototypes/costa-cabral/proposal/inspection-assets/moderate-baseline.json.gz
+prototypes/costa-cabral/proposal/inspection-assets/moderate-restricted.json.gz
+prototypes/costa-cabral/proposal/inspection-assets/residents-baseline.json.gz
+prototypes/costa-cabral/proposal/inspection-assets/residents-restricted.json.gz
+prototypes/costa-cabral/proposal/inspection-assets/scene.json.gz
+prototypes/costa-cabral/proposal/legacy.html
+prototypes/costa-cabral/proposal/line-701-assets/busy-baseline.json.gz
+prototypes/costa-cabral/proposal/line-701-assets/busy-restricted.json.gz
+prototypes/costa-cabral/proposal/line-701-assets/late-baseline.json.gz
+prototypes/costa-cabral/proposal/line-701-assets/late-restricted.json.gz
+prototypes/costa-cabral/proposal/line-701-assets/moderate-baseline.json.gz
+prototypes/costa-cabral/proposal/line-701-assets/moderate-restricted.json.gz
+prototypes/costa-cabral/proposal/line-701-assets/scene.json.gz
+prototypes/costa-cabral/proposal/line-701-full-assets/moderate-restricted.json.gz
+prototypes/costa-cabral/proposal/line-701-full-assets/scene.json.gz
+prototypes/costa-cabral/proposal/vendor/three.core.js
+# END verified public deployment assets

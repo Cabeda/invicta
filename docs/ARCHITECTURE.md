@@ -1,0 +1,34 @@
+# Proposal, line exploration and native replay
+
+This implementation follows the three boundaries recommended in the 29 October architecture review. The browser consumes precomputed native results; SUMO remains the vehicle movement authority.
+
+## Line exploration
+
+`prototypes/line-701/line-explorer.mjs` owns official direction identity, ordered geometry and stops, independent selected trips, continuous focus sections and coverage decisions. `createLineExplorer(reference, state)` is usable without a DOM. The mounted view receives an existing model and reports explicit change types so a detail-panel toggle cannot silently select a different simulated journey.
+
+The full official map and timetable reference remain independent of native coverage. The current full native study covers both complete directions; the earlier Porto study retains its narrower declared coverage.
+
+## Proposal
+
+`prototypes/line-701/proposal.mjs` owns the selection, versioned source reference, prepared policy masks for both directions, evidence, service settings, camera/replay state and eligibility. Its public operations are `restore`, `review`, `shareURL`, `dataFor`, `importArrivals` and `observations`. Rendering code collects controls into this model; reports and recording metadata do not reconstruct meaning from rendered text.
+
+`proposal-views.mjs` adapts one reviewed snapshot to a plain-language citizen story and a detailed Markdown report. Both expose completion and unfinished demand. A faster mean among completed journeys cannot produce an overall-benefit claim while requested journeys remain unfinished. The independent passenger/berth service model retains its own assumptions and inbound coverage.
+
+Shared links contain the canonical `invicta.proposal.v1` selection in the URL fragment. Importing a proposal or recording sidecar restores the same selection. A source-version mismatch suppresses current native claims and evidence interpretation while preserving the original raw uploaded arrivals, including rows whose trip IDs no longer exist. Imported arrivals remain user-supplied evidence.
+
+The renderer never substitutes a prepared policy for a draft. A recording freezes one reviewed snapshot and locks incompatible controls. Its WebM and JSON sidecar share the same proposal ID and include actual capture sources, camera pose, time window and selected focus. Finalizing one recording prevents a new session from mixing its buffers.
+
+## Native replay preparation
+
+`prototypes/native_replay.py` owns scene construction, inherited-footprint projection checks, source-based cache invalidation, capture/scene compatibility and publication of `invicta.native-replay.v1`. `ReplayStudy` is its explicit adapter input and `prepare(study)` is the public operation.
+
+Concrete adapters are `costa-cabral/prepare_3d.py`, `line-701/prepare_replay.py` and `line-701/full/prepare_replay.py`. They provide scope, source paths, time window, seed and sampling. They do not monkey-patch a previously imported study's globals. Cache compatibility includes native network/routes/additional hashes, seed, simulation start, frame sampling, lane references, capture edges and declared scope.
+
+Full-day captures are extracted from the numerical run’s own native FCD. Recorded edge-selection bytes and coverage are checked before extraction or cache reuse; widening the visual vehicle scope requires an execution that recorded those roads. The full native publisher additionally validates the complete numeric case/policy/seed matrix and binds each clip to the exact numeric run's input hashes. It rejects an old seed-17 clip beside seed-42-only numbers, partial capture matrices and changed source files. Browser loading verifies compressed bytes against the manifest before rendering. Full-line assets use `line-701-full-assets/`; the earlier Porto assets retain `line-701-assets/`, so an existing viewer cannot fetch a different study through the same path. Full-line frames use lossless vehicle deltas, round-tripped against every original native row before saving. The scene supplies one shared coordinate origin, so a camera pose saved after switching direction reopens in the same frame.
+
+## Verification
+
+- `node --test prototypes/line-701/line-explorer.test.mjs prototypes/line-701/proposal.test.mjs`: direction/focus identity, source-version gates, draft policy/replay behavior, share/import, uploaded evidence and public-claim eligibility.
+- `.venv/bin/python -m unittest discover -s prototypes -p test_native_replay.py`: preparation through its public interface, matched captures, footprint invalidation, projection/lane rejection and two-second sampling.
+- `.venv/bin/python -m unittest discover -s prototypes/line-701/full -p 'test_*.py'`: native publication contracts and full-route preparation invariants.
+- Actual native full-day runs and a separate bus-only geometry control establish execution coverage, rather than a website assertion that a map is simulated.

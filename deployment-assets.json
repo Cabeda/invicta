@@ -1,0 +1,142 @@
+{
+  "schema": "invicta.deployment-assets.v1",
+  "repository": "Cabeda/invicta",
+  "output_directory": "prototypes/costa-cabral/proposal",
+  "files": [
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-experiments.json",
+      "bytes": 2326404,
+      "sha256": "7ad24ce72b7e2fdaaf0e9987a69e1bd2b461dfdef75e97a90657baadc10ca25d"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-extension/dgt_municipios_near_areosa.geojson",
+      "bytes": 1145428,
+      "sha256": "699cf105ddd197dcf9156628a2abc6283a79428714788e9a813605a64f603cbf"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-full-experiments.json",
+      "bytes": 35847927,
+      "sha256": "da88b08fd9f614efa1af6b5865a5d1afb6e6c2d2aaa5bdb3fd8ba3483b1c1ed8"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-full-routes.json",
+      "bytes": 6355234,
+      "sha256": "f14ceced3d68eea0805715d9e5ac76c5d0e59c2251940a3fe71ecd0d7096df1a"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-official/municipal_latest_gtfs.zip",
+      "bytes": 4512116,
+      "sha256": "6bf73d93cf943de9f51254020ef7d089acc40403666a7b878f12150b4559f7e1"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/costa-cabral-en.mp4",
+      "bytes": 7773104,
+      "sha256": "baebbcb7ece531e10867192745ae0b8fb73ad8ae7848c5b8fd48af33ec6908dd"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/costa-cabral-pt.mp4",
+      "bytes": 7764512,
+      "sha256": "41c732e42232da65bd82d3b58d3635b52fd6924c0c2d0372330653206746b075"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/experiment.html",
+      "bytes": 3101533,
+      "sha256": "3d8587309e8bdd5190f56a8d265c8a0150b03797cfd2b1c94a10d66b86b9d4b2"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/index.html",
+      "bytes": 28037121,
+      "sha256": "67a08e9e89210656b84548516f36fdd3a2c198fec219606be92f8bafe95a54c7"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/inspection-assets/busy-baseline.json.gz",
+      "bytes": 3667858,
+      "sha256": "200028bb974b957978b898ca630f2cd70f6f6faaf539be2090e8037dfbb4e105"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/inspection-assets/busy-restricted.json.gz",
+      "bytes": 3396155,
+      "sha256": "8785db09334f02d5a19a01c5daa9e21ad67771f99706109dfa398f69bc561764"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/inspection-assets/moderate-baseline.json.gz",
+      "bytes": 2175711,
+      "sha256": "3f042ddbad0decde3151ad17f9421936f03eb363cea651c0b90c5e289cfc881a"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/inspection-assets/moderate-restricted.json.gz",
+      "bytes": 1991212,
+      "sha256": "aa492d2d5e5e10f5c64db13bef2e574ce9d180c9cb6ab9f72881064a6077a78e"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/inspection-assets/residents-baseline.json.gz",
+      "bytes": 2419807,
+      "sha256": "055fc07c2b9bc6389116b4838287de9d881a04526104b876c9de184cc87e0f46"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/inspection-assets/residents-restricted.json.gz",
+      "bytes": 2278751,
+      "sha256": "d03ed05a21ea665cfc7a1b1b350bdf65dfef31b2fd6db3bf227d49c1ebaf9449"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/inspection-assets/scene.json.gz",
+      "bytes": 2190173,
+      "sha256": "e5ee29fa59695438678e7817851b71ceaec0de4179c03557d05b075356c1e611"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/legacy.html",
+      "bytes": 8736977,
+      "sha256": "420a0b1f604388c095bdd0749de6fc396b884e8f78f677419eb5c2cd25e58f92"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/line-701-assets/busy-baseline.json.gz",
+      "bytes": 2366743,
+      "sha256": "d9a3587c79e708c65d66d07f9fa4c632b4554e0778fb9ef49299498c7bc8a57f"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/line-701-assets/busy-restricted.json.gz",
+      "bytes": 2306768,
+      "sha256": "cc30fb27db97e7c520a4340abb66319b352a60eae73ebb212faa1c9c65b52d83"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/line-701-assets/late-baseline.json.gz",
+      "bytes": 2386829,
+      "sha256": "dc8b14b3b075609b968b11da7556ccf1eedec4b32452d321e518b5075ba240eb"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/line-701-assets/late-restricted.json.gz",
+      "bytes": 2334448,
+      "sha256": "cd086e55277f0c51d62de7acf0ac01b48019ff98b06582b6866a959aeb38c46b"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/line-701-assets/moderate-baseline.json.gz",
+      "bytes": 1431921,
+      "sha256": "0c1482f0a554caf34000f6f57ca6cf99e7ce3561052e101206edf614ed9b142e"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/line-701-assets/moderate-restricted.json.gz",
+      "bytes": 1419802,
+      "sha256": "47656321681e070ac8abea74141cb0a6e0a1f06a87e1ce7a17acf743c8617572"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/line-701-assets/scene.json.gz",
+      "bytes": 2658640,
+      "sha256": "164b182da037c2e628a9857ec6deb2b5de13a83ccc0c2f0804727c180a7b8046"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/line-701-full-assets/moderate-restricted.json.gz",
+      "bytes": 1851828,
+      "sha256": "659aa0c9e663bfa007157d9f96ad982956cc00eaae7fc6e7ad4388c40644cc76"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/line-701-full-assets/scene.json.gz",
+      "bytes": 1290827,
+      "sha256": "a7dd2f72d3b707a8ad61bc69f7c4555132e6ec06bd70c6a2d99ce2b47e344c0c"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/vendor/three.core.js",
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    }
+  ]
+}
