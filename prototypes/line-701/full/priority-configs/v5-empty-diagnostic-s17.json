@@ -1,0 +1,11 @@
+{
+  "traffic": "none",
+  "seed": 17,
+  "dwell": 0,
+  "passengers_per_minute": 0,
+  "crossing_persons_per_minute": 0,
+  "request_stops": true,
+  "diagnostic_all_green": true,
+  "holding_bays": true,
+  "id": "v5-empty-diagnostic-s17"
+}

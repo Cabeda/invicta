@@ -3,11 +3,30 @@ import unittest
 from pathlib import Path
 import tempfile
 import json
+import gzip
+import sumolib
+from prepare import map_direction, PILOT
 from priority_search import assess_trial, run_trial, ExistingTrialError
 from priority_ledger import verify_ledger
 
 
 class PrioritySearchTests(unittest.TestCase):
+    def test_crossing_fragments_do_not_force_alfena_onto_a_side_street(self):
+        root = Path(__file__).parent
+        archive = root / 'priority-evidence/v3-moderate-baseline-mapped-s17/network.net.xml.gz'
+        facts = json.loads((PILOT / 'data/official-extension/full-line-service-facts.json').read_text())
+        shape = json.loads((PILOT / 'data/official/inbound_shape.json').read_text())['coordinates']
+        with tempfile.TemporaryDirectory() as temporary:
+            network = Path(temporary) / 'network.net.xml'
+            network.write_bytes(gzip.decompress(archive.read_bytes()))
+            direction = map_direction(sumolib.net.readNet(str(network), withInternal=True, maxcache=0), facts, shape)
+        stop = next(s for s in direction['stops'] if s['stop_id'] == 'ALF')
+        # The official shape and stop are on São Vicente. The crossing import
+        # split this road into short edges; Rua Coroa is an erroneous detour.
+        self.assertEqual(stop['street'], 'Rua de São Vicente')
+        self.assertLess(stop['snap_distance'], 15)
+        self.assertTrue('169771420' not in direction['path'], 'Unexpected Rua da Várzea spur')
+
     def test_failed_native_trial_cannot_be_overwritten(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary)
@@ -89,7 +108,8 @@ class PrioritySearchTests(unittest.TestCase):
         for trial in pair:
             self.assertEqual(trial['vehicle_requests'], 26035)
             self.assertEqual(trial['unroutable_requests'], 0)
-            self.assertTrue(trial['eligible_for_comparison'])
+            self.assertFalse(trial['eligible_for_comparison'])
+            self.assertIn('Alfena', trial['invalid_reasons'][0])
         self.assertEqual(pair[0]['demand_mapping']['mapped_requests_sha256'],
                          pair[1]['demand_mapping']['mapped_requests_sha256'])
         invalid = next(t for t in ledger['trials'] if t['id'] == 'priority-package-moderate-s17')

@@ -73,10 +73,13 @@ def map_direction(net,facts,coordinates):
     def snap(point,heading,is_stop=False):
         candidates=[];norm=math.hypot(*heading)
         for edge,_ in net.getNeighboringEdges(*point,55,includeJunctions=False):
-            if edge.getFunction() or not edge.allows('bus') or edge.getLength()<(16 if is_stop else .5) or any(t in edge.getType() for t in ['motorway','trunk']):continue
+            # Crossings can split the correct road into 12–16 m fragments.
+            # Keep enough room for the study's 12 m bus rather than forcing
+            # a nominal 15 m stop onto a nearby, unrelated street.
+            if edge.getFunction() or not edge.allows('bus') or edge.getLength()<(12.2 if is_stop else .05) or any(t in edge.getType() for t in ['motorway','trunk']):continue
             off,distance=sumolib.geomhelper.polygonOffsetAndDistanceToPoint(point,edge.getShape())
             if is_stop:
-                off=min(max(15,off),edge.getLength()-1);mapped=sumolib.geomhelper.positionAtShapeOffset(edge.getShape(),off);distance=math.dist(point,mapped)
+                off=min(max(12,off),edge.getLength()-.2);mapped=sumolib.geomhelper.positionAtShapeOffset(edge.getShape(),off);distance=math.dist(point,mapped)
                 if distance>55:continue
             shape=edge.getShape();dx,dy=shape[-1][0]-shape[0][0],shape[-1][1]-shape[0][1];den=math.hypot(dx,dy)*norm;cosine=(dx*heading[0]+dy*heading[1])/den if den else -1
             if cosine<.05:continue

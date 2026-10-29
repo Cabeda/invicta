@@ -37,6 +37,7 @@ Switch between Portuguese and English, select journeys and scenarios, export a p
 - [Architecture and validation](docs/ARCHITECTURE.md)
 - [Official route and timetable research](docs/research/line-701-data-and-direction.md)
 - [Outbound route, timetable matching and source dates](docs/research/line-701-outbound.md)
+- [First checkpoint, route-matching corrections and public-data calibration audit](docs/research/701-first-checkpoint-audit.md)
 - [Project objectives](docs/PROJECT_BRIEF.md)
 - [Earlier Costa Cabral experiment](prototypes/costa-cabral/README.md)
 

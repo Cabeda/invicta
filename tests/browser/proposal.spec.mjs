@@ -12,7 +12,7 @@ test('street evidence and priority experiments remain distinct from the publishe
  const checkbox=page.locator('.leaflet-control-layers-overlays input');await checkbox.check();
  await expect(markers).toHaveCount(before+141);
  const downloadEvent=page.waitForEvent('download');await page.locator('#reportBtn').click();const report=await downloadEvent,text=await readFile(await report.path(),'utf8');
- expect(text).toContain('Supplementary priority search');expect(text).toContain('No package meets every timetable checkpoint yet.');expect(text).toContain('street-detail-v3');
+ expect(text).toContain('Supplementary priority search');expect(text).toContain('No package meets every timetable checkpoint yet.');expect(text).toContain('street-detail-v5');expect(text).not.toContain('street-detail-v3');
  await page.locator('#pt').click();await expect(page.locator('#priorityResearch')).toContainText('Ainda nenhum pacote testado cumpre todos os pontos de horário.');
  await page.route('**/701-priority/priority-search.json',route=>route.fulfill({json:{trials:[],winner:'tampered'}}));
  await page.reload();await expect(page.locator('#priorityResearch')).toHaveText('Resultados de iteração indisponíveis / Iteration results unavailable');

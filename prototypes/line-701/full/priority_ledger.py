@@ -10,6 +10,15 @@ from sumolib.net.lane import get_allowed
 from prepare import DATA, digest, write_json
 from priority_search import assess_trial
 
+MODEL_CATALOG = {
+    'model': {'id': 'street-detail-v2-superseded', 'current': False, 'defect': None},
+    'model-v3': {'id': 'street-detail-v3', 'current': False,
+        'defect': 'Superseded route matching: Alfena was placed on Rua Coroa instead of São Vicente; this is a model defect, not a street intervention.'},
+    'model-v4': {'id': 'street-detail-v4', 'current': False,
+        'defect': 'Superseded route matching: a short shape-anchor filter still forced a spur onto Rua da Várzea; this is a model defect, not a street intervention.'},
+    'model-v5': {'id': 'street-detail-v5', 'current': True, 'defect': None},
+}
+
 
 def verify_ledger(path):
     """Re-evaluate the public timetable claim from frozen native bus calls."""
@@ -24,11 +33,16 @@ def verify_ledger(path):
             raise ValueError('Changed native evidence')
         return raw
     for ident, model in ledger['models'].items():
-        references[ident] = json.loads(payload(model['evidence']['routes.json']))
+        reference_bytes = payload(model['evidence']['routes.json'])
+        if hashlib.sha256(reference_bytes).hexdigest() != model['reference_sha256']:
+            raise ValueError('Model route reference changed')
+        references[ident] = json.loads(reference_bytes)
         payload(model['evidence']['model.json'])
     matched_inputs = {}
     for trial in ledger['trials']:
         ref = references[trial['model_id']]
+        if trial.get('reference_sha256') and trial['reference_sha256'] != ledger['models'][trial['model_id']]['reference_sha256']:
+            raise ValueError('Trial belongs to a different route reference')
         buses = [t for d in ref['directions'].values() for t in d['trips']]
         files = {name: payload(item) for name, item in trial['evidence'].items()}
         if 'result.json' in files:
@@ -57,7 +71,7 @@ def verify_ledger(path):
         ordinary_completed = len(completed - {b['id'] for b in buses})
         if trial['vehicle_requests'] - ordinary_completed != trial['unserved_vehicle_requests']:
             raise ValueError('Unserved ordinary vehicle denominator changed')
-        if 'network.net.xml' in files and trial.get('eligible_for_comparison'):
+        if 'network.net.xml' in files:
             permissions = []
             for _, element in ET.iterparse(io.BytesIO(files['network.net.xml']), events=['end']):
                 if element.tag == 'lane':
@@ -79,7 +93,7 @@ def verify_ledger(path):
             if len([t for t in rows if t.tag == 'tripinfo']) != len(cars) + len(buses):
                 raise ValueError('Native outputs omitted requested vehicles')
             config = trial['config']
-            key = (trial['network_model'], trial['traffic'], trial['seed'],
+            key = (trial['network_model'], trial['reference_sha256'], trial['traffic'], trial['seed'],
                    config.get('passengers_per_minute'), config.get('crossing_persons_per_minute'))
             signatures = [hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
                           for value in [cars, persons, sorted(permissions)]]
@@ -102,10 +116,15 @@ def verify_ledger(path):
 def export_ledger(cache, destination):
     destination.mkdir(exist_ok=True, parents=True)
     models = {}
-    for folder in [cache / 'model', cache / 'model-v3']:
+    for name, registration in MODEL_CATALOG.items():
+        folder = cache / name
         model = json.loads((folder / 'model.json').read_text())
-        ident = 'street-detail-v3' if folder.name == 'model-v3' else 'street-detail-v2-superseded'
-        models[model['network_sha256']] = (ident, folder, model)
+        # A stop/path rematch changes the model even when the road network is
+        # byte-identical. Never let a network hash alias two route references.
+        identity = (model['network_sha256'], model['reference_sha256'])
+        if identity in models:
+            raise ValueError('Two model registrations alias the same network and route reference')
+        models[identity] = (registration, folder, model)
     trials = []
     evidence = destination / 'priority-evidence'
     evidence.mkdir(exist_ok=True)
@@ -116,7 +135,7 @@ def export_ledger(cache, destination):
         files = {}
         target = evidence / ident
         target.mkdir(exist_ok=True)
-        names = ['stops.xml', 'trips.xml', 'collisions.xml', 'priority-events.json', 'endpoint-mapping.json', 'result.json']
+        names = ['stops.xml', 'trips.xml', 'collisions.xml', 'priority-events.json', 'endpoint-mapping.json', 'result.json', 'final-state.xml']
         if '-mapped-' in ident:
             names += ['network.net.xml', 'routes.rou.xml', 'additional.add.xml']
         for name in names:
@@ -132,7 +151,8 @@ def export_ledger(cache, destination):
 
     for path in sorted((cache / 'trials').glob('*/result.json')):
         result = json.loads(path.read_text())
-        ident, model_folder, model = models[result['network_model']]
+        registration, model_folder, model = models[(result['network_model'], result['reference_sha256'])]
+        ident = registration['id']
         reference = json.loads((model_folder / 'routes.json').read_text())
         if digest(model_folder / 'routes.json') != result['reference_sha256']:
             raise ValueError('Changed trial reference')
@@ -167,19 +187,26 @@ def export_ledger(cache, destination):
         labels.update({
             'v3-moderate-baseline-mapped-s17': ('Matched traffic · baseline', 'Tráfego com origens e destinos preservados · referência'),
             'v3-moderate-priority-mapped-s17': ('Matched traffic · lanes, boarding, signals & holding', 'Tráfego com origens e destinos preservados · vias, embarque, semáforos e regulação')})
+        labels.update({
+            'v4-bays-smart-s17': ('Intermediate rematch · boarding, signals & holding', 'Remapeamento intermédio · embarque, semáforos e regulação'),
+            'v5-bays-smart-s17': ('Current route · no ordinary traffic · boarding, signals & holding', 'Traçado atual · sem tráfego automóvel · embarque, semáforos e regulação'),
+            'v5-moderate-baseline-mapped-s17': ('Current route · traffic baseline', 'Traçado atual · referência com tráfego'),
+            'v5-moderate-priority-mapped-s17': ('Current route · lanes, boarding, signals & holding', 'Traçado atual · vias, embarque, semáforos e regulação')})
         en, pt = labels.get(config['id'], (config['id'], config['id']))
         defects = []
         if config['id'] in ['baseline-moderate-s17', 'priority-package-moderate-s17']:
             defects.append('8,581 requests used obsolete endpoint edge IDs and were unroutable; excluded from proposal comparisons.')
         if config['id'] == 'priority-package-moderate-s17':
             defects.append('Lane conversion added pedestrian permission to 88 lanes; excluded from proposal comparisons.')
+        if registration['defect']:
+            defects.append(registration['defect'])
         mapping = json.loads((path.parent / 'endpoint-mapping.json').read_text()) if (path.parent / 'endpoint-mapping.json').exists() else None
         trials.append({**result, 'id': config['id'], 'model_id': ident,
             'grading_schema': 2, 'execution_grading_schema': result.get('grading_schema', 1),
             'grading_note': 'Observed calls retain their observed status even when the vehicle never exits; incomplete trips still fail the overall goal. Original execution metadata is archived unchanged.',
             'output_binding': 'recorded_at_completion' if result.get('output_hashes') else 'first_archive_only',
             'label': {'en': en, 'pt': pt},
-            'invalid_reasons': defects, 'eligible_for_comparison': not defects and not ident.endswith('superseded'),
+            'invalid_reasons': defects, 'eligible_for_comparison': not defects and registration['current'],
             'demand_mapping': ({**{k:v for k,v in mapping.items() if k != 'mappings'},
                 'endpoint_count': len(mapping['mappings']),
                 'max_snap_metres': max((m['distance_metres'] for m in mapping['mappings']), default=0)} if mapping else None),
@@ -187,7 +214,7 @@ def export_ledger(cache, destination):
             'arrived_passengers': arrived('passenger_'), 'arrived_walkers': arrived('walking_'),
             'diagnostic_only': bool(config.get('diagnostic_all_green')) or
                 config.get('passengers_per_minute', 0) == 0,
-            'superseded_model': ident.endswith('superseded'),
+            'superseded_model': not registration['current'],
             'evidence': freeze(path.parent, config['id'])})
     # Retain the eight earlier bus-only controls rather than selecting favourable
     # runs. They cannot be used to qualify a traffic proposal.
@@ -204,7 +231,8 @@ def export_ledger(cache, destination):
             'vehicle_requests': 0, 'unserved_vehicle_requests': 0,
             'evidence': freeze(folder, bound['id']), 'qualified': False})
     published_models = {}
-    for ident, folder, model in models.values():
+    for registration, folder, model in models.values():
+        ident = registration['id']
         target = evidence / ident
         target.mkdir(exist_ok=True)
         sources = {}

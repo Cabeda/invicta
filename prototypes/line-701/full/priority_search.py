@@ -267,7 +267,10 @@ def _execute_trial(model, folder, config):
         '--tripinfo-output.write-undeparted', 'true', '--stop-output', str(folder / 'stops.xml'),
         '--stop-output.write-unfinished', 'true', '--collision-output', str(folder / 'collisions.xml'),
         '--time-to-teleport', '-1', '--time-to-teleport.ride', '-1', '--no-step-log', 'true',
-        '--duration-log.disable', 'true', '--xml-validation', 'never', '--device.rerouting.period', '60']
+        '--duration-log.disable', 'true', '--xml-validation', 'never', '--device.rerouting.period', '60',
+        '--routing-algorithm', config.get('routing_algorithm', 'dijkstra'),
+        '--save-state.times', str(end - 1), '--save-state.files', str(folder / 'final-state.xml'),
+        '--save-state.rng', 'true', '--save-state.transportables', 'true']
     if config.get('diagnostic_all_green'):
         command += ['--tls.all-off', 'true']
     if config.get('signal_priority'):
@@ -296,7 +299,7 @@ def _execute_trial(model, folder, config):
     result = {'config': config, 'metrics': metrics, 'grading_schema': 2, 'native': True,
         'network_model': json.loads((model / 'model.json').read_text())['network_sha256'],
         'input_hashes': native_hashes,
-        'output_hashes': {name: digest(folder / name) for name in ['trips.xml', 'stops.xml', 'collisions.xml', 'priority-events.json'] if (folder / name).exists()},
+        'output_hashes': {name: digest(folder / name) for name in ['trips.xml', 'stops.xml', 'collisions.xml', 'priority-events.json', 'final-state.xml'] if (folder / name).exists()},
         'demand_mapping_sha256': digest(folder / 'endpoint-mapping.json'),
         'reference_sha256': digest(model / 'routes.json'), 'command': command,
         'passenger_requests': passengers, 'arrived_passengers': arrived_people,

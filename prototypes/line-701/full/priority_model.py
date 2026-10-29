@@ -80,7 +80,7 @@ def prepare_priority_model(destination):
     xml = ET.parse(adjusted)
     corrections = []
     for edge in xml.getroot().findall('edge'):
-        # Conservative study assumption, not a claim about posted limits.
+        # Unverified study cap, not a claim about actual posted limits.
         if any(t in edge.get('type', '') for t in ['motorway', 'trunk']):
             continue
         for lane in edge.findall('lane'):
@@ -101,7 +101,10 @@ def prepare_priority_model(destination):
         'served_calls': sum(len(t['stops']) for d in directions.values() for t in d['trips'])}
     write_json(destination / 'routes.json', reference)
     root = xml.getroot()
-    report = {'schema': 1, 'osm_sha256': digest(archive), 'network_sha256': digest(network),
+    report = {'schema': 1, 'model_version': 5, 'shape_mapping_minimum_metres': .05,
+        'stop_mapping_minimum_metres': 12.2,
+        'stop_mapping_footprint_metres': 12,
+        'osm_sha256': digest(archive), 'network_sha256': digest(network),
         'reference_sha256': digest(destination / 'routes.json'),
         'command': command, 'overlay_command': overlay_command, 'adapted_overlays': adapted_overlays,
         'crossings': sum(e.get('function') == 'crossing' for e in root.findall('edge')),
@@ -111,6 +114,7 @@ def prepare_priority_model(destination):
             'Crossings imported from frozen OSM; sidewalk guesses are inferred, not surveyed.',
             'Signal phases, yellow (3 s) and all-red (2 s) are generated assumptions, not municipal timing plans.',
             'Known Porto signal equipment points do not establish controlled movements.',
+            'Stop matching accepts road fragments long enough for the 12 m study bus; actual stopping footprints remain unsurveyed.',
             'Independent scheduled workings; no observed vehicle blocks.']}
     write_json(destination / 'model.json', report)
     return report
