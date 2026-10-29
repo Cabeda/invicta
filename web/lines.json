@@ -1,0 +1,15 @@
+{
+  "schema": "invicta.lines.v1",
+  "defaultLine": "701",
+  "lines": [{
+    "id": "701",
+    "operator": "STCP",
+    "name": {"pt": "701 · Codiceira ↔ Bolhão", "en": "701 · Codiceira ↔ Bolhão"},
+    "description": {"pt": "De Codiceira e Ermesinde ao centro do Porto, passando pela Areosa e Costa Cabral.", "en": "From Codiceira and Ermesinde to central Porto, via Areosa and Costa Cabral."},
+    "data": "701-data.json",
+    "reference": "701-line-explorer.json",
+    "report": "701-report.md",
+    "sourceUrl": "https://stcp.pt/pt/linhas/701",
+    "capabilities": {"serviceModel": true}
+  }]
+}

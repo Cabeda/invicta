@@ -120,7 +120,8 @@ def build():
     identity['replay_manifest']=public['replay_manifest']['id']
     public['source_summary']['sha256']=identity
     public['reference_id']=hashlib.sha256(json.dumps(identity,sort_keys=True).encode()).hexdigest()
-    page=(ROOT/'pilot.template.html').read_text().replace('__LINE701_DATA__',json.dumps(public,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
+    (SITE/'701-data.json').write_text(json.dumps(public,ensure_ascii=False,separators=(',',':')))
+    page=(ROOT/'pilot.template.html').read_text()
     SITE.mkdir(exist_ok=True)
     current=SITE/'index.html'
     if current.exists() and 'data-line701="true"' not in current.read_text():
@@ -129,9 +130,11 @@ def build():
         (SITE/'legacy.html').write_text(legacy)
     current.write_text(page)
     shutil.copy2(ROOT/'pilot.js',SITE/'line-701.js')
-    for name in ['service-model.mjs','service-panel.mjs','proposal.mjs','proposal-views.mjs']:shutil.copy2(ROOT/name,SITE/name)
+    for name in ['line-registry.mjs','proposal-page.mjs','punctuality.mjs','lines.json']:shutil.copy2(ROOT.parent.parent/'web'/name,SITE/name)
+    for name in ['service-model.mjs','service-panel.mjs','proposal.mjs','proposal-views.mjs','inspection-2d.mjs']:shutil.copy2(ROOT/name,SITE/name)
     shutil.copy2(ROOT/'data/official-extension/full-line-service-facts.json',SITE/'701-full-service-facts.json')
     shutil.copy2(LEGACY/'inspection-3d.js',SITE/'inspection-3d.js')
+    shutil.copy2(LEGACY/'native-replay.mjs',SITE/'native-replay.mjs')
     shutil.copytree(LEGACY/'vendor',SITE/'vendor',dirs_exist_ok=True)
     shutil.copytree(LEGACY/'inspection-assets',SITE/'inspection-assets',dirs_exist_ok=True)
     shutil.copytree(ROOT/'inspection-assets',SITE/'line-701-assets',dirs_exist_ok=True)
@@ -187,7 +190,7 @@ def build():
              '- Source/API/hash detail: `701-source-facts.json`. Native per-run data: `701-experiments.json`. Observation windows: `701-observations.json`.','']
     if full_report: report=[full_report]
     (ROOT/'REPORT.md').write_text('\n'.join(report));shutil.copy2(ROOT/'REPORT.md',SITE/'701-report.md')
-    (SITE/'README.txt').write_text('INVICTA — LINE 701, CODICEIRA ↔ BOLHÃO\n\nServe this whole folder over HTTP(S). index.html is the bilingual full-line explorer with independent directions and focus sections.\nlegacy.html preserves the earlier Costa Cabral study, population calculator and MP4 films.\nKeep all files, vendor/, inspection-assets/, line-701-assets/ and line-701-full-assets/ together.\n3D needs WebGL2 and DecompressionStream. New policies require a local SUMO rerun.\nCurrent official schedules, synthetic native experiments and GPS passage windows are distinct.\nNo calibrated traffic forecast or approved street design is established.\n')
+    (SITE/'README.txt').write_text('INVICTA — LINE 701, CODICEIRA ↔ BOLHÃO\n\nServe this whole folder over HTTP(S). index.html is the bilingual full-line explorer with independent directions and focus sections.\nlegacy.html preserves the earlier Costa Cabral study, population calculator and MP4 films.\nKeep all files, vendor/, inspection-assets/, line-701-assets/ and line-701-full-assets/ together.\n2D and 3D share native traffic trajectories; 2D needs Canvas and DecompressionStream, 3D also needs WebGL2. New policies require a local SUMO rerun.\nCurrent official schedules, synthetic native experiments and GPS passage windows are distinct.\nNo calibrated traffic forecast or approved street design is established.\n')
     archive=ROOT/'invicta-line-701-site.zip'
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
         for p in sorted(SITE.rglob('*')):

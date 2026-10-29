@@ -4,6 +4,11 @@
   "output_directory": "prototypes/costa-cabral/proposal",
   "files": [
     {
+      "repository_path": "prototypes/costa-cabral/proposal/701-data.json",
+      "bytes": 28030595,
+      "sha256": "b950b3e318ef0fe9c950436df04d66700be7687e933bc19d4e727882c887aa85"
+    },
+    {
       "repository_path": "prototypes/costa-cabral/proposal/701-experiments.json",
       "bytes": 2326404,
       "sha256": "7ad24ce72b7e2fdaaf0e9987a69e1bd2b461dfdef75e97a90657baadc10ca25d"
@@ -42,11 +47,6 @@
       "repository_path": "prototypes/costa-cabral/proposal/experiment.html",
       "bytes": 3101533,
       "sha256": "3d8587309e8bdd5190f56a8d265c8a0150b03797cfd2b1c94a10d66b86b9d4b2"
-    },
-    {
-      "repository_path": "prototypes/costa-cabral/proposal/index.html",
-      "bytes": 28037534,
-      "sha256": "2c970c28b43ab90d193bc7d5e5f4bf89bb9d883191c9c9ebc39550361b639ac5"
     },
     {
       "repository_path": "prototypes/costa-cabral/proposal/inspection-assets/busy-baseline.json.gz",

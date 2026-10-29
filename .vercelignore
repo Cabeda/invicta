@@ -11,6 +11,7 @@ prototypes/costa-cabral/vendor/
 prototypes/costa-cabral/costa-cabral-proposal-site.zip
 prototypes/line-701/
 # BEGIN verified public deployment assets
+prototypes/costa-cabral/proposal/701-data.json
 prototypes/costa-cabral/proposal/701-experiments.json
 prototypes/costa-cabral/proposal/701-extension/dgt_municipios_near_areosa.geojson
 prototypes/costa-cabral/proposal/701-full-experiments.json
@@ -19,7 +20,6 @@ prototypes/costa-cabral/proposal/701-official/municipal_latest_gtfs.zip
 prototypes/costa-cabral/proposal/costa-cabral-en.mp4
 prototypes/costa-cabral/proposal/costa-cabral-pt.mp4
 prototypes/costa-cabral/proposal/experiment.html
-prototypes/costa-cabral/proposal/index.html
 prototypes/costa-cabral/proposal/inspection-assets/busy-baseline.json.gz
 prototypes/costa-cabral/proposal/inspection-assets/busy-restricted.json.gz
 prototypes/costa-cabral/proposal/inspection-assets/moderate-baseline.json.gz

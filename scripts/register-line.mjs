@@ -1,0 +1,12 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {validateRegistry} from '../web/line-registry.mjs';
+const file=process.argv[2];if(!file)throw Error('Usage: node scripts/register-line.mjs REGISTRATION.json');
+const registry=JSON.parse(await readFile('web/lines.json','utf8')),line=JSON.parse(await readFile(file,'utf8'));
+if(registry.lines.some(item=>item.id===line.id))throw Error('Line already registered; edit its existing registration explicitly');
+const next=validateRegistry({...registry,lines:[...registry.lines,line]});
+const site='prototypes/costa-cabral/proposal/';
+const data=JSON.parse(await readFile(site+line.data,'utf8')),reference=JSON.parse(await readFile(site+line.reference,'utf8'));
+if(String(data.meta.route)!==line.id||String(reference.route)!==line.id||String(data.replay_manifest?.scope.route)!==line.id)throw Error('Prepared data must belong to the registered line');
+await readFile(site+line.report);
+await writeFile('web/lines.json',JSON.stringify(next,null,2)+'\n');
+console.log('Registered line',line.id,'with prepared data. Rebuild and run npm run check before publishing.');

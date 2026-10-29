@@ -1,73 +1,22 @@
-// THROWAWAY inspection layer. SUMO owns movement; this module only displays it.
+// 3D view of verified native trajectories. SUMO owns movement.
 import * as T from './vendor/three.module.js';
 import { OrbitControls } from './vendor/OrbitControls.js';
 
-async function readAsset(name, assetBase = './inspection-assets/', expectedHash) {
-  const response = await fetch(new URL(`${assetBase}${name}.json.gz`, import.meta.url));
-  if (!response.ok) throw new Error(`Missing inspection asset: ${name}`);
-  const bytes = await response.arrayBuffer();
-  if (expectedHash) {
-    const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(v => v.toString(16).padStart(2, '0')).join('');
-    if (hash !== expectedHash) throw Error('Replay asset hash does not match the prepared manifest: ' + name);
-  }
-  const stream = new Response(bytes).body.pipeThrough(new DecompressionStream('gzip'));
-  return new Response(stream).json();
-}
+import {createNativeReplay,busChoices,locateBus,visibleReplays} from './native-replay.mjs';
 
-export async function createInspection({ data, getState, label, changed, assetBase = './inspection-assets/' }) {
-  const manifestResponse = await fetch(new URL(assetBase + 'manifest.json', import.meta.url));
-  if (!manifestResponse.ok) throw Error('Missing prepared replay manifest');
-  const manifest = await manifestResponse.json();
-  if (data.replay_manifest && data.replay_manifest.id !== manifest.id) throw Error('Replay manifest does not match proposal data');
-  const source = await readAsset('scene', assetBase, manifest.scene.sha256);
-  if (source.capture_signature !== manifest.capture_signature || source.study_id !== manifest.study_id) throw Error('Scene does not match replay scope');
+export async function createInspection({ data, getState, label, changed, assetBase = './inspection-assets/', replayModel }) {
+  const model = replayModel || await createNativeReplay({data,assetBase});
+  const {manifest,source,cache,atLane,positions} = model;
   const mid = data.cameras.corridor;
   const origin = source.origin || [(mid[0] + mid[2]) / 2, (mid[1] + mid[3]) / 2];
   const world = (x, y, h = 0) => new T.Vector3(x - origin[0], h, origin[1] - y);
   const capacity=Object.fromEntries(Object.keys(source.vehicle_dimensions.types).map(group=>[group,Math.max(1,...manifest.clips.map(clip=>clip.peak_by_group?.[group]??2500))]));
-  const cache = new Map(), panels = {}, unit = new T.BoxGeometry(1, 1, 1);
+  const panels = {}, unit = new T.BoxGeometry(1, 1, 1);
   const dummy = new T.Object3D(), frustum = new T.Frustum(), viewMatrix = new T.Matrix4();
   const laneMap = new Map(source.lanes.map(l => [l.id, l]));
-  const distance = new Map();
   let caseKey = '', loading = false, generation = 0, active = false, steering = false;
   let cameraKey = '', lastTime = 0, drag = null, movementSerial = 0;
   const keys = new Set();
-
-  for (const lane of source.lanes) {
-    const cumulative = [0];
-    for (let i = 1; i < lane.shape.length; i++) {
-      cumulative.push(cumulative[i - 1] + Math.hypot(lane.shape[i][0] - lane.shape[i - 1][0], lane.shape[i][1] - lane.shape[i - 1][1]));
-    }
-    distance.set(lane.id, cumulative);
-  }
-
-  function atLane(laneIndex, position) {
-    const lane = source.lanes[laneIndex], cumulative = lane && distance.get(lane.id);
-    if (!lane || !cumulative || !lane.length) return null;
-    const d = Math.max(0, Math.min(cumulative.at(-1), position * cumulative.at(-1) / lane.length));
-    let i = 1;
-    while (i < cumulative.length - 1 && cumulative[i] < d) i++;
-    const a = lane.shape[i - 1], b = lane.shape[i];
-    if (!b) return null;
-    const f = (d - cumulative[i - 1]) / (cumulative[i] - cumulative[i - 1] || 1);
-    return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, (Math.atan2(b[0] - a[0], b[1] - a[1]) * 180 / Math.PI + 360) % 360];
-  }
-
-  // Interpolate distance on a lane when possible; use native positions at changes.
-  function positions(replay, time) {
-    const i = Math.max(0, Math.min(replay.frames.length - 1, Math.floor((time - replay.start) / (replay.step || 1))));
-    const a = replay.frames[i], b = replay.frames[Math.min(i + 1, replay.frames.length - 1)];
-    const f = Math.max(0, Math.min(1, (time - a.t) / (replay.step || 1))), next = new Map(b.vehicles.map(v => [v[0], v]));
-    return a.vehicles.map(row => {
-      const n = next.get(row[0]) || row;
-      const onLane = row[5] === n[5] ? atLane(row[5], row[6] + (n[6] - row[6]) * f) : null;
-      return { index: row[0], id: replay.vehicles[row[0]].id, group: replay.vehicles[row[0]].group,
-        x: onLane ? onLane[0] : row[1] + (n[1] - row[1]) * f,
-        y: onLane ? onLane[1] : row[2] + (n[2] - row[2]) * f,
-        angle: onLane ? onLane[2] : row[3] + (((n[3] - row[3] + 540) % 360) - 180) * f,
-        speed: row[4], lane: row[5] };
-    });
-  }
 
   function geometry(vertices, normals) {
     const g = new T.BufferGeometry();
@@ -312,37 +261,14 @@ export async function createInspection({ data, getState, label, changed, assetBa
 
   async function loadCase() {
     const current = getState().case, currentKey=current+'|'+(getState().direction||'');
-    if (caseKey === currentKey && !loading) return;
     const token = ++generation;
     loading = true;
     document.getElementById('threeState').textContent = label('threeLoading');
-    await Promise.all(['baseline', 'restricted'].map(async policy => {
-      const key = `${current}-${policy}`;
-      if (!cache.has(key)) {
-        const clip = manifest.clips.find(c => c.case === current && c.policy === policy);
-        if (!clip) throw Error('No prepared capture for ' + key);
-        const replay = await readAsset(key, assetBase, clip.sha256);
-        if (replay.capture_signature !== source.capture_signature || replay.study_id !== source.study_id || replay.case !== current || replay.policy !== policy || replay.start !== clip.start || replay.end !== clip.end || replay.step !== clip.step || replay.seed !== clip.seed || replay.simulation_begin !== clip.simulation_begin || JSON.stringify(replay.input_hashes) !== JSON.stringify(clip.input_hashes) || JSON.stringify(replay.scope) !== JSON.stringify(manifest.scope)) throw Error('Capture does not match scene, policy or time window');
-        if ((replay.encoding||'frames-v1')!==(clip.encoding||'frames-v1'))throw Error('Capture encoding does not match manifest');
-        if(replay.encoding==='vehicle-deltas-v1'){
-          const active=new Map();let order=[];
-          replay.frames=replay.frames.map(frame=>{
-            for(const id of frame.removed||[]){if(!active.delete(id))throw Error('Invalid removed vehicle');}
-            for(const row of frame.vehicles)active.set(row[0],row);
-            order=frame.order||order;
-            if(order.length!==active.size||new Set(order).size!==order.length||order.some(id=>!active.has(id)))throw Error('Invalid native vehicle order');
-            return {t:frame.t,vehicles:order.map(id=>active.get(id))};
-          });
-        }else if(replay.encoding&&replay.encoding!=='frames-v1')throw Error('Unsupported capture encoding');
-        cache.set(key, replay);
-      }
-    }));
-    // Keep only the active pair: complete-line captures can contain many rows.
-    for (const key of cache.keys()) if (!key.startsWith(getState().case+'-')) cache.delete(key);
-    if (token !== generation) return;
+    await model.loadCase(current);
+    if (token !== generation || getState().case !== current) return;
     caseKey = currentKey; loading = false;
     const select = document.getElementById('followBus');
-    const ids = new Set(['baseline', 'restricted'].flatMap(policy => cache.get(`${current}-${policy}`).vehicles.filter(v => v.group === 'bus' && (source.bus_info[v.id]?.direction == null || !getState().direction || String(source.bus_info[v.id].direction)===String(getState().direction))).map(v => v.id)));
+    const ids = new Set(busChoices(source,cache,getState()).map(v=>v.id));
     select.replaceChildren(...[...ids].sort((a, b) => a.localeCompare(b,undefined,{numeric:true})).map(id => {
       const option = document.createElement('option'); option.value = id;
       option.textContent = source.bus_info[id]?.label || `${source.bus_info[id]?.line || ''} · ${id}`; return option;
@@ -353,13 +279,13 @@ export async function createInspection({ data, getState, label, changed, assetBa
   }
 
   function chooseBus() {
-    const state = getState(), replay = cache.get(`${state.case}-restricted`);
-    if (!replay) return;
+    const state = getState(), replays = visibleReplays(cache,state);
+    if (!replays.length) return;
     const box = (data.direction_cameras?.[String(state.direction)]||data.cameras)[state.camera], x = (box[0] + box[2]) / 2, y = (box[1] + box[3]) / 2;
-    const available = positions(replay, state.time).filter(v => v.group === 'bus' && (source.bus_info[v.id]?.direction == null || !state.direction || String(source.bus_info[v.id].direction)===String(state.direction)));
+    const ids=new Set(busChoices(source,cache,state).map(v=>v.id)),available = replays.flatMap(replay=>positions(replay,state.time)).filter(v=>ids.has(v.id));
     available.sort((a, b) => Math.hypot(a.x - x, a.y - y) - Math.hypot(b.x - x, b.y - y));
     if (available.length) state.follow = available[0].id;
-    else state.follow = replay.vehicles.find(v => v.group === 'bus' && (source.bus_info[v.id]?.direction == null || !state.direction || String(source.bus_info[v.id].direction)===String(state.direction)))?.id || '';
+    else state.follow = [...ids][0] || '';
   }
 
   const canMove = () => active && ['orbit', 'street'].includes(getState().perspective);
@@ -433,10 +359,7 @@ export async function createInspection({ data, getState, label, changed, assetBa
     reset() { resetCamera(); render(); },
     selectBus(id) {
       const state = getState(); state.follow = id;
-      const replay = cache.get(`${state.case}-restricted`), index = replay?.vehicles.findIndex(v => v.id === id);
-      if (index >= 0 && !positions(replay, state.time).some(v => v.id === id)) {
-        const first = replay.frames.find(f => f.vehicles.some(v => v[0] === index)); if (first) state.time = first.t;
-      }
+      const found=locateBus(cache,positions,state,id);if(found)state.time=found.time;
       changed(); render();
     },
     followNearest() { chooseBus(); document.getElementById('followBus').value = getState().follow; render(); },

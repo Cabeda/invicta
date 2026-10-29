@@ -1,14 +1,20 @@
 # Invicta
 
+The application explains bus-reliability proposals, compares their evidence and plays the same native traffic trajectories in 2D and 3D. Public goals, simulated outcomes and field validation remain distinct.
+
+Application modules live in `web/`; registered studies are listed in `web/lines.json`. See [adding a line](docs/product/add-a-line.md), the [production specification](docs/product/production-spec.md) and [retrospective](docs/product/retro-2026-10-29.md).
+
+Install development dependencies with `npm ci`. Use `npm run build`, `npm run prepare:deploy`, `npm run check` and `npm run test:browser` before publishing. Python native-check dependencies are pinned in the CI workflow; an existing `.venv` is used locally. CI runs these acceptance checks on pushes and pull requests.
+
 [Live demo](https://invicta-dusky.vercel.app/?lang=pt#route) · [Open in 3D](https://invicta-dusky.vercel.app/?lang=pt&dimension=3d&camera=combatentes&view=compare#replay)
 
 A bilingual, interactive Porto mobility demo: help buses meet their schedules while keeping everyday access workable for residents, shoppers and other travellers.
 
-Switch between **2D planning** (map, sections and timetables) and **3D inspection** (streets, queues and native vehicle replay), retaining the same direction and scenario.
+Switch between **2D traffic simulation** (animated vehicles and queues from above) and **3D inspection**, retaining the same direction, scenario and clock. Both views use the same verified SUMO trajectories and support baseline/proposal comparison and video export. Drag or use arrow keys to pan the 2D map; scroll or use + / − to zoom. The route and timetable explorer remains below the simulation.
 
 Explore **the full 701 in both directions**, including Codiceira and Ermesinde, on an interactive street map. Each direction keeps its own selected section and trip. Shared links restore those selections, language, scenario and camera; the public summary expands into timetable and source detail. In 3D, camera movement defaults to **3×**, with **1× / 3× / 10×** controls and an additional **Shift boost**.
 
-The native traffic study runs **the complete 701 in both directions in the same regional simulation**: 56 inbound stops, 54 outbound stops and all 127 scheduled workings, including short trips and service after midnight. Baseline and priority policies use identical requested demand. Full-day results are paired with a 16:50–18:20 native 3D replay across the entire line. A separate inbound passenger/berth model explores dwell, capacity and bunching feedback.
+The native traffic study runs **the complete 701 in both directions in the same regional simulation**: 56 inbound stops, 54 outbound stops and all 127 scheduled workings, including short trips and service after midnight. Baseline and priority policies use identical requested demand. Full-day results are paired with a 16:50–18:20 native replay across the entire line, viewable in 2D or 3D. A separate inbound passenger/berth model explores dwell, capacity and bunching feedback.
 
 **Exploratory prototype:** traffic, passenger demand, signals, dwell and recovery are uncalibrated. The short GPS sample does not establish recurring delays or causes. Connectivity checks need field verification. Both directions and regional road traffic are simulated with synthetic demand. Other bus routes and shared physical vehicle rotations are not modelled. The strict zero-lateness goal can be tested, but actual punctuality is not guaranteed.
 
@@ -19,7 +25,7 @@ python3 -m http.server 8765 --directory prototypes/costa-cabral/proposal
 # http://127.0.0.1:8765/?lang=pt
 ```
 
-Switch between Portuguese and English, select journeys and scenarios, export a policy or explanation, and record the 3D replay as WebM. Browser uploads stay in memory and are included only when you explicitly share or export the proposal. The earlier street study, films and metropolitan transition calculator are under `legacy.html`.
+Switch between Portuguese and English, select journeys and scenarios, export a policy or explanation, and record either replay view as WebM. Browser uploads stay in memory and are included only when you explicitly share or export the proposal. The earlier street study, films and metropolitan transition calculator are under `legacy.html`.
 
 ## Source and reproducibility
 

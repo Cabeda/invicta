@@ -1,6 +1,6 @@
 """Publish direction-specific views of the same bidirectional native traffic runs."""
 from pathlib import Path
-import json,statistics,shutil
+import json,statistics,shutil,subprocess
 import sys
 ROOT=Path(__file__).resolve().parent;PILOT=ROOT.parent
 sys.path.insert(0,str(ROOT))
@@ -17,6 +17,8 @@ def publish(site,original_observations):
     results_file=ROOT/'results.json';manifest_file=ROOT/'inspection-assets/manifest.json'
     if not results_file.exists() or not manifest_file.exists():return None
     raw=json.loads(results_file.read_text());reference=raw['route_reference'];manifest=json.loads(manifest_file.read_text());validate_publication(ROOT,raw,manifest)
+    subprocess.run(['node',str(PILOT.parent.parent/'scripts/build-reliability.mjs'),str(results_file),str(site/'701-reliability.json')],check=True)
+    reliability=json.loads((site/'701-reliability.json').read_text())
     directions={};screens=raw['access'];change_lookup={c['edge']:c for c in screens['changes']};potential_lookup={c['edge']:c for c in screens['changes']+screens['general_traffic_retained']}
     masks={};route_ui={}
     for direction,route in reference['directions'].items():
@@ -59,7 +61,7 @@ def publish(site,original_observations):
                         gaps+=sum(b['arrival']-a['arrival']<abs(b['scheduled']-a['scheduled'])*.5 for a,b in zip(calls,calls[1:]))
                 complete=all(b['completed'] for b in buses)
                 bycase[case][variant]={'trips':trips,'completed':sum(b['completed'] for b in buses),'planned':len(buses),'groups':groups,'final_lateness':avg([b['final_lateness'] for b in buses]),'generated_delay':avg([b['section_generated_delay'] for b in buses]),
-                    'timing':{'planned_calls':len(timed),'late_calls':late,'missing_calls':missing,'early_departures':early,'short_gap_events':gaps if complete else None,'zero_lateness_pass':late==0 and missing==0 and early==0 and gaps==0 and complete},'full_comparison':complete}
+                    'timing':{'planned_calls':len(timed),'late_calls':late,'missing_calls':missing,'early_departures':early,'short_gap_events':gaps if complete else None,'zero_lateness_pass':late==0 and missing==0 and early==0 and gaps==0 and complete},'full_comparison':complete,'punctuality':reliability['directions'][direction][case][variant]}
         cameras={'corridor':[min(p[0] for p in route['shape'])-200,min(p[1] for p in route['shape'])-200,max(p[0] for p in route['shape'])+200,max(p[1] for p in route['shape'])+200]};labels={'corridor':'Linha inteira / Whole line'}
         stops={s['stop_id']:s for s in route['stops']}
         locations=[('codiceira','COD4'),('ermesinde','ERM3' if direction=='1' else 'ERM4'),('alto','AM2' if direction=='1' else 'AM1'),('areosa','ARS3' if direction=='1' else 'ARS2'),('conde','CF2' if direction=='1' else 'CF1'),('combatentes','COMB4' if direction=='1' else 'COMB1'),('marques','MPL4' if direction=='1' else 'MPL2'),('fontinha','FTNH2' if direction=='1' else 'FTNH1'),('bolhao','0BLRB' if direction=='1' else 'BLRB3')]
@@ -73,6 +75,8 @@ def publish(site,original_observations):
         directions[direction]={'route':ui_route,'cases':bycase,'access':access,'cameras':cameras,'camera_labels':labels,'observations':observations,'meta':{**raw['meta'],'direction':int(direction),'full_line':True,'replay_window':{'start':manifest['clips'][0]['start'],'end':manifest['clips'][0]['end']}}}
     roi=set(raw['replay_edge_ids']);common={'native_directions':directions,'geometry':[e for e in raw['geometry'] if e['id'] in roi],'replay_manifest':manifest,'replay_assets':'./line-701-full-assets/','study_midnight':reference['reference_date']+'T00:00:00+00:00','direction_cameras':{d:v['cameras'] for d,v in directions.items()},'full_traffic_summary':{'runs':len(raw['runs']),'trip_count':reference['trip_count'],'served_calls':reference['served_calls'],'begin':raw['meta']['begin'],'end':raw['meta']['end'],'native':True,'geometry_validation':json.loads((ROOT/'data/geometry-validation.json').read_text()),'demand_source':raw['meta']['traffic'],'vehicle_blocks':raw['meta']['vehicle_blocks']}}
     common['full_report']=report(raw)
+    common['reliability_decision']=reliability['decision']
+    common['reliability_goal']=reliability['goal']
     shutil.copy2(ROOT/'data/network-manifest.json',site/'701-full-network-manifest.json')
     shutil.copy2(ROOT/'data/route-geometry-audit.json',site/'701-full-geometry-audit.json')
     shutil.copy2(results_file,site/'701-full-experiments.json');shutil.copy2(ROOT/'data/routes.json',site/'701-full-routes.json')

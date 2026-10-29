@@ -185,6 +185,7 @@ def export_site(data):
  for name in ['pmus-mode-shares.md','amp-population-demand.md']:
   shutil.copy2(ROOT.parent.parent/'docs/research'/name,SITE/name)
  shutil.copy2(ROOT/'inspection-3d.js',SITE/'inspection-3d.js')
+ shutil.copy2(ROOT/'native-replay.mjs',SITE/'native-replay.mjs')
  shutil.copytree(ROOT/'vendor',SITE/'vendor',dirs_exist_ok=True)
  shutil.copytree(ROOT/'inspection-assets',SITE/'inspection-assets',dirs_exist_ok=True)
  if (SITE/'video-info.json').exists():data['video_info']=json.loads((SITE/'video-info.json').read_text())

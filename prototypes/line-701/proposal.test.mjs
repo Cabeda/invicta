@@ -6,7 +6,7 @@ import {citizenStory,urbanistReport} from './proposal-views.mjs';
 import {createLineExplorer} from './line-explorer.mjs';
 const site=new URL('../costa-cabral/proposal/',import.meta.url);
 const html=readFileSync(new URL('index.html',site),'utf8');
-const bundle=JSON.parse(html.match(/<script type="application\/json" id="line-data">([\s\S]*?)<\/script>/)[1]);
+const bundle=JSON.parse(readFileSync(new URL('701-data.json',site),'utf8'));
 const data=createProposal(bundle).dataFor({line:{direction:'1'}});
 const defaultCase=Object.hasOwn(data.cases,'busy')?'busy':Object.keys(data.cases)[0];
 const reference=JSON.parse(readFileSync(new URL('701-line-explorer.json',site),'utf8'));
@@ -118,4 +118,11 @@ test('2D and 3D share direction, focus, policy and camera while retaining their 
  const map=model.review({...input,dimension:'2d'},{line:line.view()}),street=model.review({...input,dimension:'3d'},{line:line.view()});
  assert.deepEqual(map.focus,street.focus);assert.equal(map.native.case,street.native.case);assert.deepEqual(map.native.policy_by_direction,street.native.policy_by_direction);assert.deepEqual(map.selection.pose,street.selection.pose);
  for(const proposal of [map,street]){const restored=model.restore(model.shareURL(proposal,'https://example.test/'));assert.equal(restored.dimension,proposal.selection.dimension);assert.deepEqual(restored.line,line.settings())}
+});
+
+test('2D viewport is shared independently of the 3D camera and rejects invalid zoom',()=>{
+ const {model,selection,line}=setup(),mapPose={center:[2100,3400],span:250};
+ const reviewed=model.review({...selection,dimension:'2d',mapPose},{line:line.view()}),restored=model.restore(model.shareURL(reviewed,'https://example.test/'));
+ assert.deepEqual(restored.mapPose,mapPose);assert.equal(restored.pose,null);
+ for(const bad of [{center:[1],span:200},{center:[1,2],span:0},{center:[Infinity,2],span:200}])assert.equal(model.review({...selection,mapPose:bad},{line:line.view()}).selection.mapPose,null);
 });

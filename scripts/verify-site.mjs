@@ -1,0 +1,19 @@
+import {readFile,readdir} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {validateRegistry} from '../web/line-registry.mjs';
+const site='prototypes/costa-cabral/proposal';
+const pairs=[['prototypes/line-701/pilot.template.html','index.html'],['prototypes/line-701/pilot.js','line-701.js'],...['proposal.mjs','proposal-views.mjs','line-explorer.mjs','line-explorer.css','inspection-2d.mjs'].map(n=>['prototypes/line-701/'+n,n]),...['inspection-3d.js','native-replay.mjs'].map(n=>['prototypes/costa-cabral/'+n,n]),...['line-registry.mjs','proposal-page.mjs','punctuality.mjs','lines.json'].map(n=>['web/'+n,n])];
+for(const [source,name]of pairs)if(!(await readFile(source)).equals(await readFile(site+'/'+name)))throw Error('Generated public source differs: '+name);
+const html=await readFile(site+'/index.html','utf8');if(Buffer.byteLength(html)>100_000||html.includes('id="line-data"'))throw Error('Page shell must load line data separately');
+const registry=validateRegistry(JSON.parse(await readFile(site+'/lines.json','utf8')));
+for(const line of registry.lines){
+ const data=JSON.parse(await readFile(site+'/'+line.data,'utf8')),ref=JSON.parse(await readFile(site+'/'+line.reference,'utf8'));
+ if(String(data.meta.route)!==line.id||String(ref.route)!==line.id)throw Error('Line data identity mismatch');
+ await readFile(site+'/'+line.report);
+ const base=site+'/'+data.replay_assets.replace(/^\.\//,''),manifest=JSON.parse(await readFile(base+'manifest.json','utf8'));
+ for(const item of [{file:'scene.json.gz',sha256:manifest.scene.sha256},...manifest.clips]){const bytes=await readFile(base+item.file);if(createHash('sha256').update(bytes).digest('hex')!==item.sha256)throw Error('Native asset hash mismatch: '+item.file)}
+ if(data.reliability_decision?.winner&&!data.reliability_decision.assessed.find(p=>p.id===data.reliability_decision.winner)?.eligible)throw Error('Unqualified proposal published as winner');
+}
+const deployment=JSON.parse(await readFile('deployment-assets.json','utf8'));
+for(const file of deployment.files){const bytes=await readFile(file.repository_path);if(bytes.length!==file.bytes||createHash('sha256').update(bytes).digest('hex')!==file.sha256)throw Error('Prepare deployment manifest again: '+file.repository_path)}
+console.log('Public source parity, line registry, replay hashes and deployment assets verified.');

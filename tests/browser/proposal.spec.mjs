@@ -1,0 +1,32 @@
+import {test,expect} from '@playwright/test';
+import {readFile} from 'node:fs/promises';
+test('a new visitor sees the purpose and line explanation before the simulation tools',async({page})=>{
+ await page.goto('/?lang=en');await page.waitForFunction(()=>!!window.reviewedProposal701);
+ await expect(page.locator('#pageTitle')).toBeInViewport();expect(await page.evaluate(()=>scrollY)).toBeLessThan(50);
+ await expect(page.locator('#proposalStory')).toContainText('Give buses priority');
+});
+test('public story, 2D/3D simulation, sharing, drafts and 2D video retain one proposal',async({page,context})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/?lineId=701&lang=en&case=moderate&view=compare#replay');
+ await page.waitForFunction(()=>window.inspection2D701?.debug().loaded);
+ await expect(page.locator('#pageTitle')).toHaveText('A bus you can plan your day around.');
+ await expect(page.locator('#proposalStory')).toContainText('Every departure on time. Every arrival within the schedule.');
+ await expect(page.locator('#punctualityProof')).not.toHaveAttribute('open');
+ const before=Number(await page.locator('#timeline').inputValue());await page.locator('#playBtn').click();
+ await expect.poll(async()=>Number(await page.locator('#timeline').inputValue())).toBeGreaterThan(before);await page.locator('#playBtn').click();
+ const time=await page.locator('#timeline').inputValue();
+ await page.locator('#view3d').click();await page.waitForFunction(()=>window.inspection701?.debug().loaded);
+ expect(await page.locator('#timeline').inputValue()).toBe(time);await page.locator('#view2d').click();await page.waitForFunction(()=>window.reviewedProposal701.selection.dimension==='2d'&&window.inspection2D701.debug().loaded);
+ await page.locator('#viewDirection').selectOption('0');await page.waitForFunction(()=>window.reviewedProposal701.focus.direction==='0'&&window.inspection2D701.debug().loaded);
+ await page.locator('#zoom2dIn').click();await page.locator('#shareBtn').click();const shared=page.url(),pose=await page.evaluate(()=>window.inspection2D701.pose());
+ const reopened=await context.newPage();await reopened.goto(shared);await reopened.waitForFunction(()=>window.inspection2D701?.debug().loaded);
+ expect(await reopened.evaluate(()=>window.reviewedProposal701.focus.direction)).toBe('0');expect(await reopened.evaluate(()=>window.inspection2D701.pose())).toEqual(pose);await reopened.close();
+ await page.locator('#variant').selectOption('all_priority');await expect(page.locator('#replayArea')).toBeHidden();await expect(page.locator('#view3d')).toBeDisabled();
+ await page.locator('#variant').selectOption('restricted');await page.waitForFunction(()=>window.inspection2D701.debug().loaded);await expect(page.locator('#recordBtn')).toBeEnabled();
+ const downloads=[];page.on('download',d=>downloads.push(d));await page.locator('#recordBtn').click();await expect(page.locator('#recordBtn')).toHaveText('Finish recording');await page.waitForTimeout(700);await page.locator('#recordBtn').click();
+ await expect.poll(()=>downloads.length).toBe(2);
+ const video=downloads.find(d=>d.suggestedFilename().endsWith('.webm')),json=downloads.find(d=>d.suggestedFilename().endsWith('.json'));
+ const movie=await readFile(await video.path()),sidecar=JSON.parse(await readFile(await json.path(),'utf8'));
+ expect(movie.subarray(0,4).toString('hex')).toBe('1a45dfa3');expect(movie.length).toBeGreaterThan(1000);expect(sidecar.review.selection.dimension).toBe('2d');expect(sidecar.recording.end).toBeGreaterThan(sidecar.recording.start);expect(video.suggestedFilename()).toContain(sidecar.review.id);
+ await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(390);expect(errors).toEqual([]);
+});

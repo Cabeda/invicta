@@ -9,6 +9,7 @@ const displayId = value => { let hash = 2166136261; for (const char of JSON.stri
 
 export function createProposal(data) {
   if(data.native_directions)return multiDirectionProposal(data);
+  const routeId=String(data.meta.route??data.replay_manifest?.scope.route??'701');
   const imports = new Map(), rawUploads = new Map(), legs = data.route.segments.map(s => s.id);
   const serviceStart=Date.parse(data.study_midnight),serviceEnd=serviceStart+(Math.max(86400,...Object.values(data.observations.timetables).flatMap(t=>Object.values(t.stops)).filter(finite))+7200)*1000;
   const cases = Object.keys(data.cases), tripIds = data.route.morning.map(t => t.id);
@@ -16,7 +17,7 @@ export function createProposal(data) {
   const samePolicy = (a, b) => Array.isArray(a) && Array.isArray(b) && [...a].sort().join('|') === [...b].sort().join('|');
   const validPriority = values => [...new Set((Array.isArray(values) ? values : []).filter(id => legs.includes(id)))];
   function normalize(input = {}) {
-    const selection = {};
+    const selection = {lineId:routeId};
     selection.lang = pick(input.lang, ['pt', 'en'], 'pt');
     selection.case = pick(input.case, cases, cases.includes('busy')?'busy':cases[0]);
     selection.variant = pick(input.variant, ['baseline', 'restricted', 'all_priority', 'custom', 'draft', ...legs], 'restricted');
@@ -43,11 +44,12 @@ export function createProposal(data) {
     selection.buildings = input.buildings !== false;
     selection.follow = typeof input.follow === 'string' ? input.follow.slice(0, 100) : '';
     selection.pose = input.pose && ['position', 'target'].every(k => Array.isArray(input.pose[k]) && input.pose[k].length === 3) && [...input.pose.position, ...input.pose.target, input.pose.yaw, input.pose.pitch].every(n => finite(n) && Math.abs(n) <= 1e6) ? clone(input.pose) : null;
+    selection.mapPose = input.mapPose && Array.isArray(input.mapPose.center) && input.mapPose.center.length === 2 && input.mapPose.center.every(n=>finite(n)&&Math.abs(n)<=1e6) && finite(input.mapPose.span) && input.mapPose.span>=40 && input.mapPose.span<=24000 ? clone(input.mapPose) : null;
     selection.reference = typeof input.reference === 'string' ? input.reference : data.reference_id;
     selection.line = input.line && typeof input.line === 'object' ? clone(input.line) : {direction: '1'};
     selection.service = input.service && typeof input.service === 'object' ? clone(input.service) : null;
     selection.audience = pick(input.audience, ['citizen', 'urbanist'], 'citizen');
-    selection.anchor = pick(input.anchor, ['route', 'replay', 'service', 'access', 'observations', 'native-route'], 'route');
+    selection.anchor = pick(input.anchor, ['top','proposalStory','delivery','route', 'replay', 'service', 'access', 'observations', 'native-route'], 'top');
     selection.observation = typeof input.observation === 'string' ? input.observation : data.observations.trips.filter(t => t.passages.length).sort((a,b) => b.passages.length-a.passages.length)[0]?.trip_id;
     selection.analysis_open = input.analysis_open === true || ['service','access','observations','native-route'].includes(selection.anchor);
     selection.playing = false;
@@ -67,7 +69,7 @@ export function createProposal(data) {
     } else {
       input = {lang:q.get('lang'),case:q.get('case'),variant:q.get('variant'),trip:q.get('trip'),camera:q.get('camera'),dimension:q.get('dimension'),perspective:q.get('perspective'),view:q.get('view'),
         time:q.has('t') ? Number(q.get('t')) : undefined,speed:Number(q.get('speed')),cameraSpeed:Number(q.get('cameraSpeed')),buildings:q.get('buildings')!=='0',follow:q.get('follow'),
-        pose:json(q.get('pose')),service:json(q.get('service')),line:json(q.get('line')) || {direction:q.get('direction') || '1'},
+        pose:json(q.get('pose')),mapPose:json(q.get('mapPose')),service:json(q.get('service')),line:json(q.get('line')) || {direction:q.get('direction') || '1'},
         selectedLeg:q.get('leg'),observation:q.get('observation'),anchor:parsed.hash.slice(1),audience:['#service','#access','#observations'].includes(parsed.hash)?'urbanist':'citizen'};
       if (q.has('priority')) input.priority = q.get('priority').split(',');
     }
@@ -129,25 +131,25 @@ export function createProposal(data) {
     else if (!inbound || coverage==='none') replayReason='outside_coverage';
     else if (!nativeAvailable || !['baseline','restricted'].includes(selection.variant)) replayReason='unprepared_policy';
     else if (!demandComparable) replayReason='different_demand';
-    else if (!manifest || manifest.scope.route!=='701' || !(String(manifest.scope.direction)===nativeDirection || own(manifest.scope.directions,nativeDirection)) || (manifest.scope.directions?.[nativeDirection]||manifest.scope).from!==data.route.start || (manifest.scope.directions?.[nativeDirection]||manifest.scope).to!==data.route.end || clips.length!==policies.length || clips.some(c=>c.capture_signature!==manifest.capture_signature || selection.time<c.start || selection.time>c.end)) replayReason='unmatched_capture';
+    else if (!manifest || String(manifest.scope.route)!==routeId || !(String(manifest.scope.direction)===nativeDirection || own(manifest.scope.directions,nativeDirection)) || (manifest.scope.directions?.[nativeDirection]||manifest.scope).from!==data.route.start || (manifest.scope.directions?.[nativeDirection]||manifest.scope).to!==data.route.end || clips.length!==policies.length || clips.some(c=>c.capture_signature!==manifest.capture_signature || selection.time<c.start || selection.time>c.end)) replayReason='unmatched_capture';
     if (selection.variant==='baseline') selection.view='baseline';
     const service=context.service && referenceValid && operationalDirection ? clone(context.service) : null;
     selection.service=service?.settings || selection.service;
     const serial={schema:'invicta.proposal.v1',selection:clone(selection)};
     if(rawUploads.has(selection.observation))serial.upload=clone(rawUploads.get(selection.observation));
-    const snapshot={id:`701-${displayId(serial)}`,selection,serial,
+    const snapshot={id:`${routeId}-${displayId(serial)}`,selection,serial,
       reference:{expected:selection.reference,actual:data.reference_id,valid:referenceValid,date:data.route.study_date,sources:clone(data.source_summary || {})},
       focus:line ? {direction,from:line.stops[0].stop_id,to:line.stops.at(-1).stop_id,from_name:line.stops[0].stop_name,to_name:line.stops.at(-1).stop_name,stops:line.stops.length,metres:line.metres,scheduled_seconds:line.seconds,trip:line.trip?.trip_id,coverage} : {direction,coverage},
-      native:{available:nativeAvailable,case:selection.case,variant:selection.variant,trip:clone(data.route.morning.find(t=>t.id===selection.trip)),priority:selection.priority,selected_leg:selection.selectedLeg,
+      native:{line:routeId,decision:data.reliability_decision||null,control:data.full_traffic_summary?.geometry_validation||null,available:nativeAvailable,case:selection.case,variant:selection.variant,trip:clone(data.route.morning.find(t=>t.id===selection.trip)),priority:selection.priority,selected_leg:selection.selectedLeg,
         scope:{direction:nativeDirection,simulated_directions:data.meta.directions||[nativeDirection],from:data.route.start,to:data.route.end,stops:clone(data.route.stops)},policy_by_direction:selection.policy_by_direction||null,applied_priority_edges:selection.variant==='restricted'?clone(data.access.applied_edges||[]):[],baseline:referenceValid && inbound?clone(baseline):null,alternative:nativeAvailable?clone(alternative):null,
         demand_comparable:demandComparable,complete,no_extra_unserved:noExtraUnserved,can_claim_gain:nativeAvailable && demandComparable && complete && noExtraUnserved && allServed},
       evidence:!referenceValid?{kind:'reference_changed',trip_id:selectedEvidence.trip_id,passages:[],finding:null}:inbound?selectedEvidence:{kind:'outside_coverage',trip_id:null,passages:[],finding:null},
-      service,replay:{eligible:!replayReason,reason:replayReason,study_id:manifest?.study_id,assets:data.replay_assets||'./line-701-assets/',scope:clone(manifest?.scope.directions?.[nativeDirection] ? {...manifest.scope.directions[nativeDirection],direction:nativeDirection,route:'701',both_directions_in_simulation:true} : manifest?.scope || {}),follow:selection.follow,follow_trip_id:data.route.morning.find(t=>t.id===selection.follow)?.trip_id||null,scene_sha256:manifest?.scene.sha256,capture_signature:manifest?.capture_signature,clips:clone(clips),seed:clips[0]?.seed,window:clips.length?[Math.max(...clips.map(c=>c.start)),Math.min(...clips.map(c=>c.end))]:null}};
+      service,replay:{eligible:!replayReason,reason:replayReason,study_id:manifest?.study_id,assets:data.replay_assets||'./line-701-assets/',scope:clone(manifest?.scope.directions?.[nativeDirection] ? {...manifest.scope.directions[nativeDirection],direction:nativeDirection,route:routeId,both_directions_in_simulation:true} : manifest?.scope || {}),follow:selection.follow,follow_trip_id:data.route.morning.find(t=>t.id===selection.follow)?.trip_id||null,scene_sha256:manifest?.scene.sha256,capture_signature:manifest?.capture_signature,clips:clone(clips),seed:clips[0]?.seed,window:clips.length?[Math.max(...clips.map(c=>c.start)),Math.min(...clips.map(c=>c.end))]:null}};
     return snapshot;
   }
 
   function shareURL(snapshot, base) {
-    const url=new URL(base);url.search=new URLSearchParams({lang:snapshot.selection.lang,direction:snapshot.focus.direction}).toString();
+    const url=new URL(base);url.search=new URLSearchParams({lineId:routeId,lang:snapshot.selection.lang,direction:snapshot.focus.direction}).toString();
     // Fragment payloads keep portable uploaded evidence out of request URLs and logs.
     url.hash='proposal='+encodeURIComponent(JSON.stringify(snapshot.serial));return url;
   }
