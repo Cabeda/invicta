@@ -3,6 +3,32 @@ from pathlib import Path
 import csv, gzip, hashlib, json, math, shutil, statistics, subprocess, zipfile
 ROOT=Path(__file__).resolve().parent;LEGACY=ROOT.parent/'costa-cabral';SITE=LEGACY/'proposal'
 
+def publish_line_reference():
+    """Publish full geography independently of the native simulation extent."""
+    inbound=json.loads((ROOT/'data/official-extension/full-line-service-facts.json').read_text())
+    outbound=json.loads((ROOT/'data/official-outbound/full-line-service-facts.json').read_text())
+    inbound_shape=json.loads((ROOT/'data/official/inbound_shape.json').read_text())['coordinates']
+    metadata=json.loads((ROOT/'data/official/metadata.json').read_text())
+    inbound_date=next(row['retrieved_at'] for row in metadata if row['file']=='inbound_shape.json')[:10]
+    outbound_date=outbound['geometry_provenance']['retrieved_end_utc'][:10]
+    directions={}
+    for facts,shape,bundle,retrieved in [(inbound,inbound_shape,'701-extension',inbound_date),(outbound,outbound['shape'],'701-outbound',outbound_date)]:
+        direction=str(facts['direction_id'])
+        note={'en':f'Official shape retrieved {retrieved}.', 'pt':f'Percurso oficial recolhido em {retrieved}.'}
+        if direction=='0':
+            note['en']+=' Historical geometry for the 28 October timetable is not verified.'
+            note['pt']+=' A geometria histórica para o horário de 28 de outubro não está verificada.'
+        directions[direction]={'origin':'Codiceira' if direction=='1' else 'Bolhão', 'destination':facts['destination'],
+            'reference_date':facts['reference_date'],'geometry_note':note,'geometry_retrieved':retrieved,'bundle':bundle,
+            'stops':facts['stoplist'],'shape':[[p['lng'],p['lat']] for p in sorted(shape,key=lambda p:p['sequence'])],
+            'trips':[{k:v for k,v in trip.items() if k in ['trip_id','headsign','stops','originstatus','terminalstatus','stop_time_status','pattern_id']} for trip in facts['trips']],
+            'shortcuts':{'areosa':'ARS3' if direction=='1' else 'ARS2','ermesinde':'ERM3' if direction=='1' else 'ERM4'}}
+    reference={'schema':'invicta.line-explorer.v1','route':'701','reference_date':inbound['reference_date'],
+        'directions':directions,'native':{'direction':'1','from':'ARS3','to':'0BLRB','window':'08:10–08:40'},'operational_direction':'1'}
+    (SITE/'701-line-explorer.json').write_text(json.dumps(reference,ensure_ascii=False,separators=(',',':')))
+    for name in ['line-explorer.mjs','line-explorer.css']:shutil.copy2(ROOT/name,SITE/name)
+    shutil.copytree(ROOT/'data/official-outbound',SITE/'701-outbound',dirs_exist_ok=True)
+
 def avg(values):
     values=[v for v in values if v is not None]
     return {'mean':statistics.mean(values),'min':min(values),'max':max(values),'n':len(values)} if values else {'mean':None,'min':None,'max':None,'n':0}
@@ -74,6 +100,7 @@ def build():
     shutil.copy2(ROOT/'data/official-extension/full-line-service-facts.json',SITE/'701-full-service-facts.json')
     shutil.copy2(LEGACY/'inspection-3d.js',SITE/'inspection-3d.js')
     shutil.copytree(LEGACY/'vendor',SITE/'vendor',dirs_exist_ok=True)
+    publish_line_reference()
     shutil.copytree(ROOT/'inspection-assets',SITE/'line-701-assets',dirs_exist_ok=True)
     shutil.copytree(ROOT/'data/official',SITE/'701-official',dirs_exist_ok=True)
     shutil.copytree(ROOT/'data/official-extension',SITE/'701-extension',dirs_exist_ok=True)
@@ -87,7 +114,7 @@ def build():
             'note':'Draft lane permission policy; leaves mapped lane counts, signals and geometry unchanged. Not a street-design approval.'}
     (SITE/'701-policy-template.json').write_text(json.dumps(policy,ensure_ascii=False,indent=2))
     (SITE/'701-observations-template.csv').write_text('trip_id,stop_id,observed_arrival\n')
-    report=['# Line 701: Porto municipal extent to Bolhão, with whole-line service checks','',f"Study date: {route['study_date']}. {len(route['stops'])} Porto stops, {route['municipality']['shape_metres']/1000:.3f}km inside the CAOP2025 municipality. Areosa ARS3 is the first stop inside Porto; the municipal entry is about 60m before it. Bolhão 0BLRB is the final stop.",'',
+    report=['# Line 701: full-line exploration and prepared inbound models','', '## Whole-line reference','', 'The explorer shows each direction independently: 56 stops / 63 trips towards Bolhão; 54 stops / 64 trips towards Codiceira or Ermesinde. A continuous focus range and selected trip are retained for each direction in shared links. Short workings retain their unserved stops; no missing departure is invented.', '', 'Timetables refer to 28 October 2026, Europe/Lisbon. Inbound geometry was retrieved on 28 October; outbound geometry was retrieved on 29 October, and its historical applicability to 28 October is not established. The two shapes are independent official references, not one reversed polyline.', '', 'Full-line geography and timetables do not extend native traffic simulation. SUMO and 3D remain inbound Areosa–Bolhão; the separate whole-line delay/queue model remains inbound only. Selecting outbound hides these inbound results. The background map needs internet; route geometry and timetable data are exported with the site.', '', 'Source bundles: `701-extension/metadata.json`, `701-official/metadata.json`, `701-outbound/metadata.json`; combined explorer reference: `701-line-explorer.json`. Outbound: 3,000 uniquely resolved published references, 456 unserved cells and no unresolved matching. See `docs/research/line-701-outbound.md` in the repository for the derivation.', '', '## Prepared Porto street model','',f"Study date: {route['study_date']}. {len(route['stops'])} Porto stops, {route['municipality']['shape_metres']/1000:.3f}km inside the CAOP2025 municipality. Areosa ARS3 is the first stop inside Porto; the municipal entry is about 60m before it. Bolhão 0BLRB is the final stop.",'',
             '## What is known','', 'Current STCP shape, ordered stops and scheduled seconds are frozen with URLs, timestamps and hashes. MPL4 and 0BLRB are designated timing points in Porto. Other calls are intermediate published references. DGT CAOP2025 locates the municipal entry; these are cartographic source positions, not a survey.',
             '',f"Native vehicles start at the mapped municipal entry using an assumed {route['approach_lead_seconds']}s lead before the Areosa reference. There is no official boundary timetable. Reported entry lateness remains measured at Areosa, so it also includes the modeled approach delay. The boundary-crossing edge is excluded from new permission policies to avoid extending restrictions into another municipality.",'',
             '## Observed sample','',f"A bounded evening collection has {observations['counts']['accepted']} unique accepted timestamped positions from {observations['counts']['polls']} polls. Duplicate records are excluded. GPS-derived passage brackets are not door-open arrivals, and this short evening sample does not calibrate morning traffic.",'']
@@ -123,7 +150,7 @@ def build():
              '## Primary sources','', '- [Official line 701](https://stcp.pt/pt/linhas/701)', '- [STCP route stops API](https://stcp.pt/api/route/701/stops/direction?direction_id=1)', '- [DGT CAOP2025 Porto municipality](https://ogcapi.dgterritorio.gov.pt/collections/municipios/items/1312?f=json)', '- [Porto Digital public bus broker](https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType%3D%3Dbus&limit=1000)',
              '- Source/API/hash detail: `701-source-facts.json`. Native per-run data: `701-experiments.json`. Observation windows: `701-observations.json`.','']
     (ROOT/'REPORT.md').write_text('\n'.join(report));shutil.copy2(ROOT/'REPORT.md',SITE/'701-report.md')
-    (SITE/'README.txt').write_text('INVICTA — LINE 701, AREOSA → BOLHÃO\n\nServe this whole folder over HTTP(S). index.html is the route-first bilingual pilot.\nlegacy.html preserves the earlier Costa Cabral study, population calculator and MP4 films.\nKeep all files, vendor/, inspection-assets/ and line-701-assets/ together.\n3D needs WebGL2 and DecompressionStream. New policies require a local SUMO rerun.\nCurrent official schedules, synthetic native experiments and GPS passage windows are distinct.\nNo calibrated traffic forecast or approved street design is established.\n')
+    (SITE/'README.txt').write_text('INVICTA — LINE 701, CODICEIRA ↔ BOLHÃO\n\nServe this whole folder over HTTP(S). index.html is the bilingual full-line explorer with independent directions and focus sections.\nlegacy.html preserves the earlier Costa Cabral study, population calculator and MP4 films.\nKeep all files, vendor/, inspection-assets/ and line-701-assets/ together.\n3D needs WebGL2 and DecompressionStream. New policies require a local SUMO rerun.\nCurrent official schedules, synthetic native experiments and GPS passage windows are distinct.\nNo calibrated traffic forecast or approved street design is established.\n')
     archive=ROOT/'invicta-line-701-site.zip'
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
         for p in sorted(SITE.rglob('*')):

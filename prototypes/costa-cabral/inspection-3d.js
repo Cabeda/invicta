@@ -336,7 +336,8 @@ export async function createInspection({ data, getState, label, changed, assetBa
   const isCanvas = target => Object.values(panels).some(p => p.renderer.domElement === target);
   function movementSpeed() {
     const p = panels.restricted;
-    return getState().perspective === 'orbit' ? T.MathUtils.clamp(p.camera.position.distanceTo(p.controls.target) * .12, 12, 180) : 5;
+    const base = getState().perspective === 'orbit' ? T.MathUtils.clamp(p.camera.position.distanceTo(p.controls.target) * .12, 12, 180) : 5;
+    return base * (getState().cameraSpeed ?? 1);
   }
   function movement(forward, right, metres = movementSpeed() * .25) {
     if (!canMove() || (!forward && !right) || !metres) return;
@@ -390,6 +391,7 @@ export async function createInspection({ data, getState, label, changed, assetBa
   return {
     async update() {
       active = getState().dimension === '3d';
+      for (const panel of Object.values(panels)) panel.controls.panSpeed = getState().cameraSpeed ?? 1;
       for (const button of document.querySelectorAll('[data-walk]')) button.disabled = !canMove();
       if (!active) { keys.clear(); return; }
       const state = getState(), key = `${state.camera}-${state.perspective}`;

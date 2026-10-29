@@ -4,6 +4,8 @@
 
 A bilingual, interactive Porto mobility demo: help buses meet their schedules while keeping everyday access workable for residents, shoppers and other travellers.
 
+Explore **the full 701 in both directions**, including Codiceira and Ermesinde, on an interactive street map. Each direction keeps its own selected section and trip. Shared links restore those selections, language, scenario and camera; the public summary expands into timetable and source detail. In 3D, camera movement defaults to **3×**, with **1× / 3× / 10×** controls and an additional **Shift boost**.
+
 The native street pilot follows **STCP 701 through the entire Porto municipal extent to Bolhão**, with 16 official stops and the boundary approach before Areosa. A separate whole-line service model uses all 56 stops and 63 inbound workings to test passenger/dwell feedback, bunching, capacity and schedule/headway controls. Compare scheduled references, timestamped GPS passages and native SUMO results; inspect the Porto baseline/candidate replay in 3D.
 
 **Exploratory prototype:** traffic, passenger demand, signals, dwell and recovery are uncalibrated. The short GPS sample does not establish recurring delays or causes. Connectivity checks need field verification. Whole-line service dynamics are assumed; outside-Porto road traffic, the reverse direction, other routes and shared vehicle rotations are not modelled. The strict zero-lateness goal can be tested, but actual punctuality is not guaranteed.
@@ -22,6 +24,7 @@ Switch between Portuguese and English, select journeys and scenarios, export a p
 - [701 pilot and commands](prototypes/line-701/README.md)
 - [701 findings and limitations](prototypes/line-701/REPORT.md)
 - [Official route and timetable research](docs/research/line-701-data-and-direction.md)
+- [Outbound route, timetable matching and source dates](docs/research/line-701-outbound.md)
 - [Project objectives](docs/PROJECT_BRIEF.md)
 - [Earlier Costa Cabral experiment](prototypes/costa-cabral/README.md)
 

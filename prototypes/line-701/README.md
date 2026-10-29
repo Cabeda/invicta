@@ -14,7 +14,7 @@ python3 -m http.server 8765 --directory prototypes/costa-cabral/proposal
 # http://127.0.0.1:8765/?lang=pt
 ```
 
-The bilingual website has the official map, five morning native journeys, stop profiles, fifteen interval policies, visible unserved demand, a whole-line delay/bunching explorer, CSV arrival import, 3D bus following, WebM recording and JSON/Markdown exports. The earlier street study and metropolitan what-if calculator remain in `legacy.html`.
+The bilingual website now opens with the entire official line on an interactive street map, independent directions (56 inbound / 54 outbound stops), a continuous focus range, published timetables for both directions and shareable selections. Timetable/coverage details are expandable; native analysis is separately labelled and available only inbound. The existing prepared views include five morning native journeys, stop profiles, fifteen interval policies, visible unserved demand, a whole-line delay/bunching explorer, CSV arrival import, 3D bus following, WebM recording and JSON/Markdown exports. The earlier street study and metropolitan what-if calculator remain in `legacy.html`.
 
 ## Verified reference, not a traffic forecast
 
@@ -79,3 +79,13 @@ Six native baseline/candidate clips cover 08:10–08:40 at one-second resolution
 ## Verification
 
 All 72 native runs completed with zero collision records; incomplete journeys are retained. Geometry, connections and signals match across variants after removing only lane permission attributes. `leg_08` remains an unchanged-permission neutral control. The service model preserves 3,024 calls, all 63 origin patterns, fixed demand between reference/shock cases, passenger accounting and capacity bounds. An exact no-demand/no-dwell timetable control passes; overload cannot claim the goal is met. Review prompted corrections for berth-access lateness, overtaken bus gap detection and boarding-denial accounting.
+
+## Whole-line explorer and camera movement
+
+`line-explorer.mjs` owns direction identity, continuous focus, trip selection, geometry matching and coverage decisions. Its model interface is used by the browser and `node --test prototypes/line-701/line-explorer.test.mjs`. `build_site.py` publishes `701-line-explorer.json` from the frozen source bundles independently of the native route clip.
+
+Direction 0 uses its own 506-point shape and 64 trips, including 22 Ermesinde terminators and one Areosa (Maia) starter. The timetable reference is 28 October; its shape was retrieved on 29 October and is not verified historical geometry. Rebuild/validate the outbound bundle offline with `python3 prototypes/line-701/fetch_outbound.py --compile-only`; see [outbound evidence](../../docs/research/line-701-outbound.md). The native SUMO network and prepared replays remain unchanged in scope.
+
+The public view retains a whole-line overview when zoomed into a focus. Shared links restore both direction selections, the chosen trips, language, scenario, camera movement speed and any 3D pose. Technical detail can be expanded before sharing. The exported static site includes [Leaflet 1.9.4](https://leafletjs.com/reference.html); background OpenStreetMap tiles require internet, while official line geometry and timetables are bundled.
+
+In 3D, **Camera movement / Velocidade da câmara** offers 1×, 3× and 10×, defaulting to 3×. It affects WASD/arrows, on-screen movement buttons and mouse panning. Hold Shift for an additional 4× keyboard boost. This setting is independent of replay playback speed; comparison cameras stay synchronized.

@@ -1,4 +1,16 @@
-# Line 701: Porto municipal extent to Bolhão, with whole-line service checks
+# Line 701: full-line exploration and prepared inbound models
+
+## Whole-line reference
+
+The explorer shows each direction independently: 56 stops / 63 trips towards Bolhão; 54 stops / 64 trips towards Codiceira or Ermesinde. A continuous focus range and selected trip are retained for each direction in shared links. Short workings retain their unserved stops; no missing departure is invented.
+
+Timetables refer to 28 October 2026, Europe/Lisbon. Inbound geometry was retrieved on 28 October; outbound geometry was retrieved on 29 October, and its historical applicability to 28 October is not established. The two shapes are independent official references, not one reversed polyline.
+
+Full-line geography and timetables do not extend native traffic simulation. SUMO and 3D remain inbound Areosa–Bolhão; the separate whole-line delay/queue model remains inbound only. Selecting outbound hides these inbound results. The background map needs internet; route geometry and timetable data are exported with the site.
+
+Source bundles: `701-extension/metadata.json`, `701-official/metadata.json`, `701-outbound/metadata.json`; combined explorer reference: `701-line-explorer.json`. Outbound: 3,000 uniquely resolved published references, 456 unserved cells and no unresolved matching. See `docs/research/line-701-outbound.md` in the repository for the derivation.
+
+## Prepared Porto street model
 
 Study date: 2026-10-28. 16 Porto stops, 4.545km inside the CAOP2025 municipality. Areosa ARS3 is the first stop inside Porto; the municipal entry is about 60m before it. Bolhão 0BLRB is the final stop.
 
