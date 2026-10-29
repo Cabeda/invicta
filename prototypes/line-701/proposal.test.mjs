@@ -126,3 +126,17 @@ test('2D viewport is shared independently of the 3D camera and rejects invalid z
  assert.deepEqual(restored.mapPose,mapPose);assert.equal(restored.pose,null);
  for(const bad of [{center:[1],span:200},{center:[1,2],span:0},{center:[Infinity,2],span:200}])assert.equal(model.review({...selection,mapPose:bad},{line:line.view()}).selection.mapPose,null);
 });
+test('exported report leads with scheduled departure and arrival punctuality, including missing trips',()=>{
+ const {model,selection,line}=setup(),review=model.review({...selection,case:'moderate'},{line:line.view()}),text=urbanistReport(review,'en');
+ assert.match(text,/On-time departures \| 56\/63 \| 63\/63/);assert.match(text,/Arrivals within schedule \| 13\/63 \| 36\/63/);assert.ok(text.indexOf('On-time departures')<text.indexOf('Completed buses'));
+ assert.match(text,/Missing arrivals count as failures/);assert.match(text,/no_qualifying_proposal/);
+});
+test('stale-source exports cannot publish a current package qualification',()=>{
+ const {model,selection,line}=setup(),review=model.review({...selection,reference:'earlier-version'},{line:line.view()}),text=urbanistReport(review,'en');
+ assert.equal(review.native.decision,null);assert.equal(text.includes('Selection result:'),false);
+});
+test('report distinguishes repeated native runs from unique scheduled departures',()=>{
+ const {model,selection,line}=setup(),review=model.review({...selection,case:'moderate'},{line:line.view()});
+ for(const scenario of [review.native.baseline,review.native.alternative]){const p=scenario.punctuality;p.runs=2;p.scheduledTripsPerRun=63;p.planned*=2;p.bothOnTime*=2;p.completed*=2;for(const kind of ['starts','finishes'])for(const key of Object.keys(p[kind]))p[kind][key]*=2}
+ const text=urbanistReport(review,'en');assert.match(text,/Native runs: baseline 2; selected 2/);assert.match(text,/Scheduled departures per run: baseline 63; selected 63/);
+});

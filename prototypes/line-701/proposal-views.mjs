@@ -26,11 +26,24 @@ export function observationFinding(evidence,lang='en') {
  return scope+(f?`${f.from} → ${f.to}: +${number(f.low/60,lang)} … +${number(f.high/60,lang)} min. `:(pt?'Não foi identificado um aumento positivo inequívoco entre paragens adjacentes nesta secção. ':'No unambiguous positive increase was identified between adjacent stops in this section. '))+source;
 }
 
-export function urbanistReport(proposal,lang='en',focusText='') {
+export function urbanistReport(proposal,lang='en',focusText='',deliveryText='') {
  const pt=lang==='pt',n=proposal.native,story=citizenStory(proposal,lang);
  const lines=[focusText || `# ${story.title}`,'',`## ${pt?'Proposta revista':'Reviewed proposal'} ${proposal.id}`,'',
   `Reference: ${proposal.reference.date} · ${proposal.reference.actual}`,`Expected reference: ${proposal.reference.expected}`,`Direction / focus: ${proposal.focus.direction} · ${proposal.focus.from} → ${proposal.focus.to}`,
-  `Policy / case: ${n.variant} / ${n.case}`,`Selected interval: ${n.selected_leg}`,`Selected observation: ${proposal.evidence.trip_id || '—'}`,'',story.summary,'',story.warning || '',
+  `Policy / case: ${n.variant} / ${n.case}`,`Selected interval: ${n.selected_leg}`,`Selected observation: ${proposal.evidence.trip_id || '—'}`,'',
+  `## ${pt?'O objetivo: partidas e chegadas a horas':'The goal: departures and arrivals on time'}`,'',
+  pt?'Cada partida prevista sai da sua própria origem à hora publicada e chega ao destino dentro do horário. Terminar a viagem não prova pontualidade. Chegadas em falta contam como falha; partidas antecipadas falham.':'Every scheduled departure leaves its own origin at the published time and reaches its destination within schedule. Completing the journey does not establish punctuality. Missing arrivals count as failures; early departures fail.',
+  pt?`Contagens de todo o sentido preparado ${n.scope.from} → ${n.scope.to}; a secção destacada no mapa não reduz estas partidas previstas.`:`Counts cover the complete prepared direction ${n.scope.from} → ${n.scope.to}; the highlighted map section does not reduce these scheduled departures.`,
+  '',...(n.available&&n.alternative.punctuality?[`${pt?'Execuções nativas':'Native runs'}: baseline ${n.baseline.punctuality.runs??'—'}; selected ${n.alternative.punctuality.runs??'—'}. ${pt?'Partidas previstas por execução':'Scheduled departures per run'}: baseline ${n.baseline.punctuality.scheduledTripsPerRun??'—'}; selected ${n.alternative.punctuality.scheduledTripsPerRun??'—'}.`,'',`| ${pt?'Medida':'Measure'} | ${pt?'Referência':'Baseline'} | ${pt?'Plano selecionado':'Selected plan'} |`,'|---|---:|---:|',
+    `| ${pt?'Partidas à hora':'On-time departures'} | ${n.baseline.punctuality.starts.onTime}/${n.baseline.punctuality.planned} | ${n.alternative.punctuality.starts.onTime}/${n.alternative.punctuality.planned} |`,
+    `| ${pt?'Chegadas dentro do horário':'Arrivals within schedule'} | ${n.baseline.punctuality.finishes.onTime}/${n.baseline.punctuality.planned} | ${n.alternative.punctuality.finishes.onTime}/${n.alternative.punctuality.planned} |`,
+    `| ${pt?'Partida e chegada pontuais':'Both departure and arrival on time'} | ${n.baseline.punctuality.bothOnTime}/${n.baseline.punctuality.planned} | ${n.alternative.punctuality.bothOnTime}/${n.alternative.punctuality.planned} |`,
+    `| ${pt?'Chegadas em falta':'Missing arrivals'} | ${n.baseline.punctuality.finishes.missing} | ${n.alternative.punctuality.finishes.missing} |`,
+    '',`${pt?'Objetivo no cenário selecionado':'Goal in the selected case'}: ${n.alternative.punctuality.passes?'pass':'not met'}. ${pt?'Tolerância de atraso':'Late tolerance'}: ${n.alternative.punctuality.toleranceSeconds}s.`]:[pt?'Não há resultados de pontualidade correspondentes.':'No matching punctuality results are available.']),
+  '',`## ${pt?'Escolher as menores alterações suficientes':'Choose the smallest sufficient changes'}`,'',
+  pt?'Primeiro exigir pontualidade e acesso em todos os sentidos e cenários declarados; só depois comparar o comprimento de via alterado e o número de alterações. Um vencedor entre pacotes testados não prova um mínimo global.':'First require punctuality and access across every declared direction and case, then compare changed lane length and change count. A winner among tested packages does not prove a global minimum.',
+  n.decision?`${pt?'Resultado da seleção':'Selection result'}: ${n.decision.winner?(pt?'Plano qualificado entre os testados':'Qualifying plan among those tested'):(pt?'Nenhum pacote testado cumpre ainda todos os critérios':'No tested package meets all required criteria yet')} (${n.decision.status}). ${pt?'Plano qualificado':'Qualified plan'}: ${n.decision.winner||'—'}.`:'No matching decision available.',
+  '',deliveryText,'',story.summary,'',story.warning || '',
   '',`## ${pt?'Âmbito do modelo de ruas preparado':'Prepared street-model scope'}`,'',`${n.scope.from} → ${n.scope.to} · direction ${n.scope.direction}. Synthetic traffic; uncalibrated signals and dwell.`,
   `Selected focus overlap: ${proposal.focus.coverage}. Native numeric summaries span the prepared street section, not arbitrary focus endpoints.`,''];
  if(n.available){

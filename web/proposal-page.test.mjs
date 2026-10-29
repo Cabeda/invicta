@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {publicProposal,proposalPageHTML} from './proposal-page.mjs';
+import {publicProposal,proposalPageHTML,deliveryMarkdown} from './proposal-page.mjs';
 const line={id:'702',name:{en:'702 · Example',pt:'702 · Exemplo'},description:{en:'An example route',pt:'Um percurso de exemplo'}};
 const metrics={planned:2,starts:{onTime:2},finishes:{onTime:1,missing:1},bothOnTime:1,passes:false};
 const proposal={reference:{valid:true},focus:{direction:'1'},native:{available:true,case:'busy',baseline:{punctuality:metrics},alternative:{punctuality:metrics},applied_priority_edges:[],decision:{winner:null}}};
@@ -18,4 +18,7 @@ test('unprepared requested restrictions are described as a draft, not a tested b
 test('a prepared study cannot inherit another line’s access rules or bidirectional comparison claims',()=>{
  const value=structuredClone(proposal);value.native.variant='restricted';value.native.scope={simulated_directions:['1']};
  const html=proposalPageHTML(value,line,'en');assert.equal(html.includes('both directions'),false);assert.equal(html.includes('signals are the same'),false);assert.equal(html.includes('admitting residents'),false);
+});
+test('report rollout phases retain the same reversible pilot and unknown-cost conditions',()=>{
+ const text=deliveryMarkdown('en');assert.match(text,/Run a reversible pilot/);assert.match(text,/Measure and adapt/);assert.match(text,/Costs: not yet estimated/);assert.equal((text.match(/^### /gm)||[]).length,4);
 });
