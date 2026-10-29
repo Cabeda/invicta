@@ -1,0 +1,15 @@
+{
+  "id": "v3-moderate-priority-mapped-s17",
+  "traffic": "moderate",
+  "seed": 17,
+  "dwell": 5,
+  "passengers_per_minute": 0.25,
+  "crossing_persons_per_minute": 0.3,
+  "request_stops": true,
+  "boarding": 0.8,
+  "signal_priority": true,
+  "lanes": true,
+  "rerouting": true,
+  "early_green": true,
+  "holding_bays": true
+}

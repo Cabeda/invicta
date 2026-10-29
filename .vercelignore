@@ -33,6 +33,12 @@ prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-articulated-s
 prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-bays-smart-s17/trips.xml.gz
 prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-clearance-aware-smart-r2-s17/trips.xml.gz
 prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-fixed20-s17/trips.xml.gz
+prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-baseline-mapped-s17/network.net.xml.gz
+prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-baseline-mapped-s17/routes.rou.xml.gz
+prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-baseline-mapped-s17/trips.xml.gz
+prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-priority-mapped-s17/network.net.xml.gz
+prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-priority-mapped-s17/routes.rou.xml.gz
+prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-priority-mapped-s17/trips.xml.gz
 prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-request5-s17/trips.xml.gz
 prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-smart-s17/trips.xml.gz
 prototypes/costa-cabral/proposal/701-priority/priority-search.json

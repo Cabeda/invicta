@@ -3,8 +3,10 @@ from pathlib import Path
 import argparse
 import gzip
 import hashlib
+import io
 import json
 import xml.etree.ElementTree as ET
+from sumolib.net.lane import get_allowed
 from prepare import DATA, digest, write_json
 from priority_search import assess_trial
 
@@ -24,16 +26,66 @@ def verify_ledger(path):
     for ident, model in ledger['models'].items():
         references[ident] = json.loads(payload(model['evidence']['routes.json']))
         payload(model['evidence']['model.json'])
+    matched_inputs = {}
     for trial in ledger['trials']:
         ref = references[trial['model_id']]
         buses = [t for d in ref['directions'].values() for t in d['trips']]
         files = {name: payload(item) for name, item in trial['evidence'].items()}
+        if 'result.json' in files:
+            original = json.loads(files['result.json'])
+            for name in ['config', 'network_model', 'reference_sha256', 'input_hashes', 'output_hashes', 'command']:
+                if original.get(name) != trial.get(name):
+                    raise ValueError('Archived execution metadata disagrees with original execution binding')
+        for name, fingerprint in trial.get('output_hashes', {}).items():
+            if name not in files or hashlib.sha256(files[name]).hexdigest() != fingerprint:
+                raise ValueError('Archived output disagrees with original execution binding')
+        for name, fingerprint in trial.get('input_hashes', {}).items():
+            if name in files and hashlib.sha256(files[name]).hexdigest() != fingerprint:
+                raise ValueError('Archived input disagrees with original execution binding')
+        if trial.get('demand_mapping_sha256') and hashlib.sha256(files['endpoint-mapping.json']).hexdigest() != trial['demand_mapping_sha256']:
+            raise ValueError('Archived physical demand mapping changed')
         rows = ET.fromstring(files['trips.xml'])
         completed = {t.get('id') for t in rows if t.tag == 'tripinfo' and float(t.get('arrival', -1)) >= 0}
         measured = assess_trial(buses, [c.attrib for c in ET.fromstring(files['stops.xml'])],
                                 completed & {t['id'] for t in buses})
         if measured != trial['metrics']:
             raise ValueError('Stale public timetable result: ' + trial['id'])
+        arrived = lambda prefix: sum(p.tag == 'personinfo' and p.get('id').startswith(prefix)
+            and len(p) > 0 and all(float(stage.get('arrival', -1)) >= 0 for stage in p) for p in rows)
+        if arrived('passenger_') != trial.get('arrived_passengers', 0) or arrived('walking_') != trial.get('arrived_walkers', 0):
+            raise ValueError('Stale passenger or pedestrian outcome')
+        ordinary_completed = len(completed - {b['id'] for b in buses})
+        if trial['vehicle_requests'] - ordinary_completed != trial['unserved_vehicle_requests']:
+            raise ValueError('Unserved ordinary vehicle denominator changed')
+        if 'network.net.xml' in files and trial.get('eligible_for_comparison'):
+            permissions = []
+            for _, element in ET.iterparse(io.BytesIO(files['network.net.xml']), events=['end']):
+                if element.tag == 'lane':
+                    permissions.append((element.get('id'), 'pedestrian' in get_allowed(element.get('allow'), element.get('disallow'))))
+                elif element.tag == 'edge':
+                    element.clear()
+            cars, persons = [], []
+            for _, element in ET.iterparse(io.BytesIO(files['routes.rou.xml']), events=['end']):
+                if element.tag == 'vehicle':
+                    if element.get('type') != 'bus':
+                        edges = element.find('route').get('edges').split()
+                        cars.append([dict(element.attrib), edges[0], edges[-1]])
+                    element.clear()
+                elif element.tag == 'person':
+                    persons.append([dict(element.attrib), [(c.tag, dict(c.attrib)) for c in element]])
+                    element.clear()
+            if len(cars) != trial['vehicle_requests'] or trial['unroutable_requests']:
+                raise ValueError('Physical OD workload was dropped or disconnected')
+            if len([t for t in rows if t.tag == 'tripinfo']) != len(cars) + len(buses):
+                raise ValueError('Native outputs omitted requested vehicles')
+            config = trial['config']
+            key = (trial['network_model'], trial['traffic'], trial['seed'],
+                   config.get('passengers_per_minute'), config.get('crossing_persons_per_minute'))
+            signatures = [hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
+                          for value in [cars, persons, sorted(permissions)]]
+            if key in matched_inputs and signatures != matched_inputs[key]:
+                raise ValueError('Paired physical demand or pedestrian permissions differ')
+            matched_inputs[key] = signatures
         if 'priority-events.json' in files:
             for event in json.loads(files['priority-events.json']):
                 if event.get('kind', 'extend_green') == 'extend_green' and event['after_switch'] > event['bound']:
@@ -64,7 +116,10 @@ def export_ledger(cache, destination):
         files = {}
         target = evidence / ident
         target.mkdir(exist_ok=True)
-        for name in ['stops.xml', 'trips.xml', 'collisions.xml', 'priority-events.json']:
+        names = ['stops.xml', 'trips.xml', 'collisions.xml', 'priority-events.json', 'endpoint-mapping.json', 'result.json']
+        if '-mapped-' in ident:
+            names += ['network.net.xml', 'routes.rou.xml', 'additional.add.xml']
+        for name in names:
             source = folder / name
             if not source.exists():
                 continue
@@ -84,11 +139,14 @@ def export_ledger(cache, destination):
         for name, fingerprint in result['input_hashes'].items():
             if digest(path.parent / name) != fingerprint:
                 raise ValueError('Changed native trial input: ' + str(path.parent / name))
+        for name, fingerprint in result.get('output_hashes', {}).items():
+            if digest(path.parent / name) != fingerprint:
+                raise ValueError('Changed native trial output: ' + str(path.parent / name))
         buses = [t for d in reference['directions'].values() for t in d['trips']]
         trip_rows = list(ET.parse(path.parent / 'trips.xml').getroot())
         completed = {t.get('id') for t in trip_rows if t.tag == 'tripinfo' and float(t.get('arrival', -1)) >= 0}
         metrics = assess_trial(buses, [c.attrib for c in ET.parse(path.parent / 'stops.xml').getroot()], completed & {t['id'] for t in buses})
-        if metrics != result['metrics']:
+        if result.get('grading_schema', 1) >= 2 and metrics != result['metrics']:
             raise ValueError('Trial metrics disagree with native output')
         # Earlier experimental parser looked for arrival on personinfo rather
         # than its child ride. Recompute all passenger totals from frozen output.
@@ -106,9 +164,25 @@ def export_ledger(cache, destination):
             'v3-clearance-aware-smart-r2-s17': ('Priority + crossing-clearance sensitivity', 'Prioridade + teste de tempos de travessia'),
             'baseline-moderate-s17': ('Earlier network · traffic baseline', 'Rede anterior · referência com tráfego'),
             'priority-package-moderate-s17': ('Earlier network · lanes, boarding & signal priority', 'Rede anterior · vias, embarque e prioridade semafórica')}
+        labels.update({
+            'v3-moderate-baseline-mapped-s17': ('Matched traffic · baseline', 'Tráfego com origens e destinos preservados · referência'),
+            'v3-moderate-priority-mapped-s17': ('Matched traffic · lanes, boarding, signals & holding', 'Tráfego com origens e destinos preservados · vias, embarque, semáforos e regulação')})
         en, pt = labels.get(config['id'], (config['id'], config['id']))
+        defects = []
+        if config['id'] in ['baseline-moderate-s17', 'priority-package-moderate-s17']:
+            defects.append('8,581 requests used obsolete endpoint edge IDs and were unroutable; excluded from proposal comparisons.')
+        if config['id'] == 'priority-package-moderate-s17':
+            defects.append('Lane conversion added pedestrian permission to 88 lanes; excluded from proposal comparisons.')
+        mapping = json.loads((path.parent / 'endpoint-mapping.json').read_text()) if (path.parent / 'endpoint-mapping.json').exists() else None
         trials.append({**result, 'id': config['id'], 'model_id': ident,
+            'grading_schema': 2, 'execution_grading_schema': result.get('grading_schema', 1),
+            'grading_note': 'Observed calls retain their observed status even when the vehicle never exits; incomplete trips still fail the overall goal. Original execution metadata is archived unchanged.',
+            'output_binding': 'recorded_at_completion' if result.get('output_hashes') else 'first_archive_only',
             'label': {'en': en, 'pt': pt},
+            'invalid_reasons': defects, 'eligible_for_comparison': not defects and not ident.endswith('superseded'),
+            'demand_mapping': ({**{k:v for k,v in mapping.items() if k != 'mappings'},
+                'endpoint_count': len(mapping['mappings']),
+                'max_snap_metres': max((m['distance_metres'] for m in mapping['mappings']), default=0)} if mapping else None),
             'traffic': config['traffic'], 'seed': config['seed'], 'metrics': metrics,
             'arrived_passengers': arrived('passenger_'), 'arrived_walkers': arrived('walking_'),
             'diagnostic_only': bool(config.get('diagnostic_all_green')) or

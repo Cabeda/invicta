@@ -1,4 +1,4 @@
-/** @typedef {{stop_id:string,scheduled:number,arrival:number|null,departure:number|null}} StopCall */
+/** @typedef {{stop_id:string,scheduled:number,arrival:number|null,departure:number|null,designated_timing_point?:boolean}} StopCall */
 /** @typedef {{id:string,trip_id:string,direction:string,completed:boolean,stops:StopCall[]}} ScheduledTrip */
 /** @typedef {{planned:number,starts:{onTime:number,late:number,early:number,missing:number},finishes:{onTime:number,late:number,missing:number},bothOnTime:number,completed:number,passes:boolean,toleranceSeconds:number}} Reliability */
 /** @param {unknown} value @returns {value is number} */
@@ -11,18 +11,24 @@ export function evaluatePunctuality(trips,toleranceSeconds=0,expectedTrips=trips
   const expectedIds=new Set(expectedTrips.map(t=>t.id)),actual=new Map(trips.map(t=>[t.id,t]));
   if(expectedIds.size!==expectedTrips.length||actual.size!==trips.length||trips.some(t=>!expectedIds.has(t.id)))throw Error('Unexpected or duplicate scheduled trip');
   const result={planned:expectedTrips.length,starts:{onTime:0,late:0,early:0,missing:0},finishes:{onTime:0,late:0,missing:0},bothOnTime:0,completed:0,passes:false,toleranceSeconds};
+  let checkpointsPass=true;
   for(const expected of expectedTrips){
     const trip=actual.get(expected.id);
     if(!trip){result.starts.missing++;result.finishes.missing++;continue}
     const origin=expected.stops[0],destination=expected.stops.at(-1);
     if(!origin||!destination||!Number.isFinite(origin.scheduled)||!Number.isFinite(destination.scheduled))throw Error('A scheduled trip must retain its own origin and destination');
     const first=trip.stops.find(c=>c.stop_id===origin.stop_id),last=trip.stops.find(c=>c.stop_id===destination.stop_id);
+    for(const checkpoint of expected.stops.slice(1,-1).filter(c=>c.designated_timing_point)){
+      if(!Number.isFinite(checkpoint.scheduled))throw Error('Published timing point has no schedule');
+      const call=trip.stops.find(c=>c.stop_id===checkpoint.stop_id);
+      if(!observed(call?.departure)||call.departure<checkpoint.scheduled||call.departure>checkpoint.scheduled+toleranceSeconds)checkpointsPass=false;
+    }
     const start=!observed(first?.departure)?'missing':first.departure<origin.scheduled?'early':first.departure>origin.scheduled+toleranceSeconds?'late':'onTime';
     const finish=!observed(last?.arrival)?'missing':last.arrival>destination.scheduled+toleranceSeconds?'late':'onTime';
     result.starts[start]++;result.finishes[finish]++;if(trip.completed)result.completed++;
     if(start==='onTime'&&finish==='onTime'&&trip.completed)result.bothOnTime++;
   }
-  result.passes=result.planned>0&&result.bothOnTime===result.planned;
+  result.passes=result.planned>0&&result.bothOnTime===result.planned&&checkpointsPass;
   return result;
 }
 

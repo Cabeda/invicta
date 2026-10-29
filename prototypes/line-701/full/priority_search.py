@@ -16,6 +16,11 @@ import sumo
 import sumolib
 from prepare import DATA, digest, write_json
 from experiment import ALLOWED, CLASSES, BEGIN, demand, route
+from priority_demand import migrate_requests
+
+
+class ExistingTrialError(FileExistsError):
+    """An existing trial must never be overwritten, including a failed one."""
 
 
 def assess_trial(scheduled, calls, completed):
@@ -34,8 +39,8 @@ def assess_trial(scheduled, calls, completed):
             result['checkpoints'] += 1
             call = indexed.get((trip['id'], stop['native_stop_id']), {})
             arrival, departure = float(call.get('started', -1)), float(call.get('ended', -1))
-            missing = arrival < 0 or departure < 0 or trip['id'] not in completed
             terminal = index == len(trip['stops']) - 1
+            missing = arrival < 0 or (not terminal and departure < 0)
             late = not missing and (arrival if terminal else departure) > stop['scheduled']
             early = not missing and not terminal and departure < stop['scheduled']
             result['missing_checkpoints'] += missing
@@ -51,7 +56,7 @@ def assess_trial(scheduled, calls, completed):
                     'scheduled': stop['scheduled'], 'arrival': arrival if arrival >= 0 else None,
                     'departure': departure if departure >= 0 else None,
                     'missing': missing, 'late': late, 'early': early})
-    result['passes'] = not failures and result['completed'] == result['planned']
+    result['passes'] = bool(scheduled) and not failures and result['completed'] == result['planned']
     result['failures'] = failures
     return result
 
@@ -59,6 +64,7 @@ def assess_trial(scheduled, calls, completed):
 def make_inputs(model, folder, config):
     reference = json.loads((model / 'routes.json').read_text())
     net = sumolib.net.readNet(str(model / 'baseline.net.xml'), maxcache=0)
+    baseline = net
     root = ET.parse(model / 'baseline.net.xml')
     changes = []
     if config.get('lanes'):
@@ -75,7 +81,8 @@ def make_inputs(model, folder, config):
             if lane:
                 element = next(l for l in edge.findall('lane') if l.get('id') == lane.getID())
                 element.attrib.pop('disallow', None)
-                element.set('allow', ALLOWED)
+                element.set('allow', ' '.join(c for c in ALLOWED.split()
+                    if c != 'pedestrian' or lane.allows('pedestrian')))
                 changes.append({'edge': edge.get('id'), 'lane': lane.getID(), 'metres': lane.getLength()})
     root.write(folder / 'network.net.xml', encoding='utf-8', xml_declaration=True)
     net = sumolib.net.readNet(str(folder / 'network.net.xml'), maxcache=0)
@@ -83,6 +90,27 @@ def make_inputs(model, folder, config):
     last = max(t['depart'] for t in buses)
     od = json.loads((DATA / 'od-pools.json').read_text())['pools']
     requests = [] if config['traffic'] == 'none' else demand(config['traffic'], config['seed'], od, last)
+    requests, endpoint_mapping = migrate_requests(baseline, requests)
+    write_json(folder / 'endpoint-mapping.json', endpoint_mapping)
+    retained = set()
+    for a, b, kind in dict.fromkeys((r['from'], r['to'], r['kind']) for r in requests):
+        if route(net, a, b, kind)[0]:
+            continue
+        path, _ = route(baseline, a, b, kind)
+        retained.update(path)
+    if retained and changes:
+        original = {l.get('id'): l.attrib for e in ET.parse(model / 'baseline.net.xml').getroot().findall('edge') for l in e.findall('lane')}
+        for edge in root.getroot().findall('edge'):
+            if edge.get('id') in retained:
+                for lane in edge.findall('lane'):
+                    ident = lane.get('id')
+                    lane.attrib.clear(); lane.attrib.update(original[ident])
+        changes = [c for c in changes if c['edge'] not in retained]
+        root.write(folder / 'network.net.xml', encoding='utf-8', xml_declaration=True)
+        net = sumolib.net.readNet(str(folder / 'network.net.xml'), maxcache=0)
+    for a, b, kind in dict.fromkeys((r['from'], r['to'], r['kind']) for r in requests):
+        if not route(net, a, b, kind)[0]:
+            raise ValueError(f'Priority policy disconnects an OD request: {a} -> {b} ({kind})')
     routes, additional = ET.Element('routes'), ET.Element('additional')
     for group, kind in list(CLASSES.items()) + [('bus', 'bus')]:
         attributes = dict(id=group, vClass=kind, sigma='.5', speedFactor='1', speedDev='0')
@@ -103,7 +131,8 @@ def make_inputs(model, folder, config):
             unroutable.append(request['id'])
             continue
         element = ET.Element('vehicle', id=request['id'], type=request['group'],
-            depart=str(request['depart']), departLane='best', departSpeed='max')
+            depart=str(request['depart']), departLane='best', departSpeed='max',
+            departPos=str(request['depart_pos']), arrivalPos=str(request['arrival_pos']))
         ET.SubElement(element, 'route', edges=' '.join(path))
         if config.get('rerouting'):
             ET.SubElement(element, 'param', key='has.rerouting.device', value='true')
@@ -210,15 +239,26 @@ def run_trial(model, output, config):
     folder = output / config['id']
     if folder.resolve().parent != output.resolve():
         raise ValueError('Trial id must name one directory')
-    folder.mkdir(parents=True, exist_ok=True)
-    if (folder / 'result.json').exists():
-        raise ValueError('Use a fresh trial id; native evidence is immutable')
+    if folder.exists():
+        raise ExistingTrialError('Use a fresh trial id; every trial folder is immutable')
+    try:
+        folder.mkdir(parents=True)
+    except FileExistsError as error:
+        raise ExistingTrialError('A concurrent process already created this trial') from error
+    try:
+        return _execute_trial(model, folder, config)
+    except Exception as error:
+        write_json(folder / 'error.json', {'config': config, 'status': 'failed', 'reason': str(error)})
+        raise
+
+
+def _execute_trial(model, folder, config):
     started = time.monotonic()
     source_hashes = {name: digest(model / name) for name in ['baseline.net.xml', 'routes.json', 'model.json']}
     if source_hashes['baseline.net.xml'] != json.loads((model / 'model.json').read_text())['network_sha256']:
         raise ValueError('Model network bytes changed')
     reference, buses, requests, passengers, unroutable, changes, shock, pedestrian_requests = make_inputs(model, folder, config)
-    native_hashes = {name: digest(folder / name) for name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml']}
+    native_hashes = {name: digest(folder / name) for name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml', 'endpoint-mapping.json']}
     end = max(s['scheduled'] for t in buses for s in t['stops']) + 7200
     command = [str(Path(sumo.SUMO_HOME) / 'bin/sumo'), '--net-file', str(folder / 'network.net.xml'),
         '--route-files', str(folder / 'routes.rou.xml'), '--additional-files', str(folder / 'additional.add.xml'),
@@ -253,10 +293,11 @@ def run_trial(model, output, config):
     if any(digest(model / name) != value for name, value in source_hashes.items()) or any(
             digest(folder / name) != value for name, value in native_hashes.items()):
         raise ValueError('Simulation inputs changed during execution')
-    result = {'config': config, 'metrics': metrics, 'native': True,
+    result = {'config': config, 'metrics': metrics, 'grading_schema': 2, 'native': True,
         'network_model': json.loads((model / 'model.json').read_text())['network_sha256'],
         'input_hashes': native_hashes,
-        'output_hashes': {name: digest(folder / name) for name in ['trips.xml', 'stops.xml', 'collisions.xml']},
+        'output_hashes': {name: digest(folder / name) for name in ['trips.xml', 'stops.xml', 'collisions.xml', 'priority-events.json'] if (folder / name).exists()},
+        'demand_mapping_sha256': digest(folder / 'endpoint-mapping.json'),
         'reference_sha256': digest(model / 'routes.json'), 'command': command,
         'passenger_requests': passengers, 'arrived_passengers': arrived_people,
         'walking_requests': pedestrian_requests,
@@ -283,10 +324,4 @@ if __name__ == '__main__':
     parser.add_argument('--config', type=Path, required=True)
     args = parser.parse_args()
     config = json.loads(args.config.read_text())
-    try:
-        run_trial(args.model.resolve(), args.output.resolve(), config)
-    except Exception as error:
-        folder = args.output.resolve() / config['id']
-        if folder.resolve().parent == args.output.resolve() and folder.exists() and not (folder / 'result.json').exists():
-            write_json(folder / 'error.json', {'config': config, 'status': 'failed', 'reason': str(error)})
-        raise
+    run_trial(args.model.resolve(), args.output.resolve(), config)

@@ -6,7 +6,7 @@
     {
       "repository_path": "prototypes/costa-cabral/proposal/701-data.json",
       "bytes": 28031561,
-      "sha256": "0b97b4356461f1ff89f324195e304c13a9bd65ac0d33a5459ece6aef83a2a027"
+      "sha256": "43064573f6b25725badb76f7bad8266baf2a49bce07f2320a36299df367df85d"
     },
     {
       "repository_path": "prototypes/costa-cabral/proposal/701-experiments.json",
@@ -99,6 +99,36 @@
       "sha256": "d4b975ece4e07ee1987eec62c9363e939c75db97ddf9b0209178a5953749181c"
     },
     {
+      "repository_path": "prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-baseline-mapped-s17/network.net.xml.gz",
+      "bytes": 18102304,
+      "sha256": "65f5f8a263a69f3724f0ee26dc3fabb4eb707398e474d8bf9fc40262c36417f9"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-baseline-mapped-s17/routes.rou.xml.gz",
+      "bytes": 7868390,
+      "sha256": "d33dfd9b3486c44f32d8ff5c72607c77613cf8721cc51afd39ac9923f9243113"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-baseline-mapped-s17/trips.xml.gz",
+      "bytes": 4227640,
+      "sha256": "c975f312bfb1de59dcf081c8fbb4584e2c0b54f0209103a87f32f8d14357311f"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-priority-mapped-s17/network.net.xml.gz",
+      "bytes": 18103988,
+      "sha256": "5e2193f8aaff83a932add146c2e6573229ddd36da1ccb2079f60435e78812788"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-priority-mapped-s17/routes.rou.xml.gz",
+      "bytes": 8039712,
+      "sha256": "54aa3dd3cc6706f2e4468e63b20668fc68abfe4182497b33b4a3119504b16eb1"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-moderate-priority-mapped-s17/trips.xml.gz",
+      "bytes": 4191497,
+      "sha256": "7f3fc7b3b4146fec6efe037cbd004796d84ca5588362daa98874e5a27101c34b"
+    },
+    {
       "repository_path": "prototypes/costa-cabral/proposal/701-priority/priority-evidence/v3-request5-s17/trips.xml.gz",
       "bytes": 2639118,
       "sha256": "62324261dc7040d94bc08edbfd85bad3506dd6cb0102fd4530338e0e6eca7465"
@@ -110,8 +140,8 @@
     },
     {
       "repository_path": "prototypes/costa-cabral/proposal/701-priority/priority-search.json",
-      "bytes": 1162431,
-      "sha256": "65f7d3246f69d6276ecfdcf89f27b7ccbd3a322f1ec770f940e9f2901001262e"
+      "bytes": 1383523,
+      "sha256": "4be83efd3f854e790e9389c7ca47865fde8e89d0423703e6401aeb2bb08e0e32"
     },
     {
       "repository_path": "prototypes/costa-cabral/proposal/costa-cabral-en.mp4",

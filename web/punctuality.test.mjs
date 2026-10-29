@@ -34,3 +34,11 @@ test('unknown change counts cannot win an equal-distance tie',()=>{
  const cases=[{id:'busy',metrics:evaluatePunctuality([trip()]),demandComparable:true,extraUnserved:0}];
  const value=minimumChangeProposal([{id:'aaa',changedLaneMetres:10,cases},{id:'valid',changedLaneMetres:10,changeCount:0,cases}],['busy']);assert.equal(value.winner,'valid');
 });
+test('punctual endpoints cannot qualify a trip that misses a published intermediate checkpoint',()=>{
+ const expected=trip();expected.stops.splice(1,0,{stop_id:'checkpoint',scheduled:150,designated_timing_point:true});
+ const actual=trip();actual.stops.splice(1,0,{stop_id:'checkpoint',scheduled:151,departure:151,arrival:140,designated_timing_point:false});
+ assert.equal(evaluatePunctuality([actual],0,[expected]).passes,false);
+ actual.stops[1].departure=149;assert.equal(evaluatePunctuality([actual],0,[expected]).passes,false);
+ actual.stops[1].departure=150;assert.equal(evaluatePunctuality([actual],0,[expected]).passes,true);
+ actual.stops.splice(1,1);assert.equal(evaluatePunctuality([actual],0,[expected]).passes,false);
+});

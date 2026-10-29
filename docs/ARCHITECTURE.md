@@ -40,6 +40,8 @@ The supplementary street-detail search is independent of the published native re
 
 The line registry optionally registers `streetAssets`, `prioritySearch` and `priorityReport`. `priority-panel.mjs` verifies supplementary JSON hashes against the proposal's source identity before displaying or exporting it. Porto equipment locations are a review layer, not live signal states or surveyed controller assignments. The public bundle is namespaced under `701-priority/`, so another line can register its own ledger independently.
 
+`priority_demand.py` preserves generated physical OD positions when a new import splits road edges. Both policies receive identical endpoint mappings; no missing edge ID is silently discarded. A policy is checked for connectivity again on the new topology, retaining ordinary access when necessary. Lane restrictions preserve original pedestrian permission. Invalidated historical comparisons remain in the ledger with explicit reasons and are excluded from both HTML and Markdown presentation.
+
 `native-replay.mjs` owns browser-side asset verification, lossless decoding, lane interpolation and policy-specific bus selection. The Canvas2D and Three.js renderers receive the same model. A plan-view viewport is serialized separately from the 3D pose; switching dimensions preserves the native time and scenario. Both renderers can supply the recording canvas.
 
 - `node --test prototypes/line-701/line-explorer.test.mjs prototypes/line-701/proposal.test.mjs`: direction/focus identity, source-version gates, draft policy/replay behavior, share/import, uploaded evidence and public-claim eligibility.
