@@ -2,6 +2,9 @@
 .vercel/
 .venv/
 .cache/
+node_modules/
+test-results/
+playwright-report/
 **/__pycache__/
 prototypes/costa-cabral/data/
 prototypes/costa-cabral/runs/

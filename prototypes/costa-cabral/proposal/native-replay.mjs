@@ -77,6 +77,7 @@ export async function createNativeReplay({data,assetBase = './inspection-assets/
   if (!response.ok) throw Error('Missing prepared replay manifest');
   const manifest = await response.json();
   if (data.replay_manifest && data.replay_manifest.id !== manifest.id) throw Error('Replay manifest does not match proposal data');
+  if(data.replay_manifest&&JSON.stringify(data.replay_manifest.scope)!==JSON.stringify(manifest.scope))throw Error('Replay coverage does not match proposal data');
   const source = await readAsset('scene',assetBase,manifest.scene.sha256);
   if (source.capture_signature !== manifest.capture_signature || source.study_id !== manifest.study_id) throw Error('Scene does not match replay scope');
   const trajectory = createTrajectoryModel(source), cache = new Map(), pending = new Map();

@@ -27,7 +27,9 @@
           "bothOnTime": 15,
           "completed": 23,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 64
         },
         "restricted": {
           "planned": 64,
@@ -45,7 +47,9 @@
           "bothOnTime": 45,
           "completed": 64,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 64
         }
       },
       "busy": {
@@ -65,7 +69,9 @@
           "bothOnTime": 0,
           "completed": 4,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 64
         },
         "restricted": {
           "planned": 64,
@@ -83,7 +89,9 @@
           "bothOnTime": 0,
           "completed": 4,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 64
         }
       },
       "late": {
@@ -103,7 +111,9 @@
           "bothOnTime": 0,
           "completed": 4,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 64
         },
         "restricted": {
           "planned": 64,
@@ -121,7 +131,9 @@
           "bothOnTime": 0,
           "completed": 4,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 64
         }
       }
     },
@@ -143,7 +155,9 @@
           "bothOnTime": 13,
           "completed": 28,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 63
         },
         "restricted": {
           "planned": 63,
@@ -161,7 +175,9 @@
           "bothOnTime": 36,
           "completed": 63,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 63
         }
       },
       "busy": {
@@ -181,7 +197,9 @@
           "bothOnTime": 3,
           "completed": 10,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 63
         },
         "restricted": {
           "planned": 63,
@@ -199,7 +217,9 @@
           "bothOnTime": 1,
           "completed": 7,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 63
         }
       },
       "late": {
@@ -219,7 +239,9 @@
           "bothOnTime": 3,
           "completed": 10,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 63
         },
         "restricted": {
           "planned": 63,
@@ -237,7 +259,9 @@
           "bothOnTime": 1,
           "completed": 7,
           "passes": false,
-          "toleranceSeconds": 0
+          "toleranceSeconds": 0,
+          "runs": 1,
+          "scheduledTripsPerRun": 63
         }
       }
     }

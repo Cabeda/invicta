@@ -26,3 +26,11 @@ test('the smallest qualifying tested package wins only after every required case
  result=minimumChangeProposal([{...plan('fails',0),cases:[{...cases[0],metrics:evaluatePunctuality([trip('late',100,201)])}]}],['moderate','busy']);
  assert.equal(result.status,'no_qualifying_proposal');assert.equal(result.winner,null);
 });
+test('simulated trips cannot pass by moving their published timetable references',()=>{
+ const actual=trip('one',101,201);actual.stops[0].scheduled=101;actual.stops[1].scheduled=201;
+ const metrics=evaluatePunctuality([actual],0,[trip()]);assert.equal(metrics.passes,false);assert.equal(metrics.starts.late,1);assert.equal(metrics.finishes.late,1);
+});
+test('unknown change counts cannot win an equal-distance tie',()=>{
+ const cases=[{id:'busy',metrics:evaluatePunctuality([trip()]),demandComparable:true,extraUnserved:0}];
+ const value=minimumChangeProposal([{id:'aaa',changedLaneMetres:10,cases},{id:'valid',changedLaneMetres:10,changeCount:0,cases}],['busy']);assert.equal(value.winner,'valid');
+});

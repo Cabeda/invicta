@@ -11,3 +11,11 @@ test('public explanation leads with an explicit goal and explains punctuality ra
 test('a passing selected case cannot be described as validated for all scenarios',()=>{
  const value=structuredClone(proposal);value.native.alternative.punctuality.passes=true;assert.match(publicProposal(value,line,'en').status,/Other required cases and field validation/);
 });
+test('unprepared requested restrictions are described as a draft, not a tested baseline',()=>{
+ const value=structuredClone(proposal);value.native.variant='all_priority';value.native.available=false;value.native.alternative=null;
+ const html=proposalPageHTML(value,line,'en');assert.match(html,/not been simulated/);assert.equal(html.includes('The baseline is selected'),false);assert.equal(html.includes('This package was tested jointly'),false);
+});
+test('a prepared study cannot inherit another line’s access rules or bidirectional comparison claims',()=>{
+ const value=structuredClone(proposal);value.native.variant='restricted';value.native.scope={simulated_directions:['1']};
+ const html=proposalPageHTML(value,line,'en');assert.equal(html.includes('both directions'),false);assert.equal(html.includes('signals are the same'),false);assert.equal(html.includes('admitting residents'),false);
+});

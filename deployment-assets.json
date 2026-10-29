@@ -5,8 +5,8 @@
   "files": [
     {
       "repository_path": "prototypes/costa-cabral/proposal/701-data.json",
-      "bytes": 28030595,
-      "sha256": "b950b3e318ef0fe9c950436df04d66700be7687e933bc19d4e727882c887aa85"
+      "bytes": 28031308,
+      "sha256": "fddb269c04324d16d9cd2e2bd4d533e603e9117729048ccf0f1cda7baf2b02e3"
     },
     {
       "repository_path": "prototypes/costa-cabral/proposal/701-experiments.json",

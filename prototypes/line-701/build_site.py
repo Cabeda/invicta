@@ -116,6 +116,7 @@ def build():
         public['source_summary'].update(full_traffic=public['full_traffic_summary'],timing_points=[s['stop_id'] for s in public['route']['stops'] if s['designated_timing_point']],timing_points_by_direction={d:[s['stop_id'] for s in v['route']['stops'] if s['designated_timing_point']] for d,v in public['native_directions'].items()},schedule_caveat='Only designated timing points are exact published schedule checkpoints; no published second is an observed passage.')
     identity['compiled_native']=hashlib.sha256(json.dumps(public.get('native_directions') or public['cases'],sort_keys=True,separators=(',',':')).encode()).hexdigest()
     identity['proposal_model']=hashlib.sha256((ROOT/'proposal.mjs').read_bytes()).hexdigest()
+    identity['line_registry']=hashlib.sha256((ROOT.parent.parent/'web/lines.json').read_bytes()).hexdigest()
     identity['service_model']=hashlib.sha256((ROOT/'service-model.mjs').read_bytes()).hexdigest()
     identity['replay_manifest']=public['replay_manifest']['id']
     public['source_summary']['sha256']=identity
@@ -130,7 +131,7 @@ def build():
         (SITE/'legacy.html').write_text(legacy)
     current.write_text(page)
     shutil.copy2(ROOT/'pilot.js',SITE/'line-701.js')
-    for name in ['line-registry.mjs','proposal-page.mjs','punctuality.mjs','lines.json']:shutil.copy2(ROOT.parent.parent/'web'/name,SITE/name)
+    for name in ['line-registry.mjs','proposal-page.mjs','punctuality.mjs','study-labels.mjs','lines.json']:shutil.copy2(ROOT.parent.parent/'web'/name,SITE/name)
     for name in ['service-model.mjs','service-panel.mjs','proposal.mjs','proposal-views.mjs','inspection-2d.mjs']:shutil.copy2(ROOT/name,SITE/name)
     shutil.copy2(ROOT/'data/official-extension/full-line-service-facts.json',SITE/'701-full-service-facts.json')
     shutil.copy2(LEGACY/'inspection-3d.js',SITE/'inspection-3d.js')

@@ -45,6 +45,6 @@ export function urbanistReport(proposal,lang='en',focusText='') {
   `## ${pt?'Modelo operacional distinto':'Separate operational model'}`,'',proposal.service?'Assumed whole-line inbound passenger/berth model; not observed or microscopic street traffic.':'Not available for this direction, data version or loading state.',proposal.service?JSON.stringify(proposal.service,null,2):'',
   '',`## ${pt?'Compatibilidade do replay':'Replay compatibility'}`,'',JSON.stringify(proposal.replay,null,2),'',
   `## ${pt?'Política revista':'Reviewed policy'}`,'',JSON.stringify({route:n.line||'701',direction_id:Number(n.scope.direction),priority_by_direction:n.policy_by_direction,applied_priority_edges:n.applied_priority_edges,start_stop:n.scope.from,end_stop:n.scope.to,priority_segments:n.priority},null,2),'',
-  'Source: https://stcp.pt/pt/linhas/'+(n.line||'701'),'Source and capture hashes are retained in the proposal JSON and replay manifest. Uploaded observations remain user-supplied; neither GPS windows nor a replay establishes calibrated recurring delays.','');
+  'Source: '+(proposal.reference.sources.official_url||'https://stcp.pt/pt/linhas/'+(n.line||'701')),'Source and capture hashes are retained in the proposal JSON and replay manifest. Uploaded observations remain user-supplied; neither GPS windows nor a replay establishes calibrated recurring delays.','');
  return lines.join('\n');
 }

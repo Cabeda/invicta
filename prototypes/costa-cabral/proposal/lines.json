@@ -1,15 +1,51 @@
 {
   "schema": "invicta.lines.v1",
   "defaultLine": "701",
-  "lines": [{
-    "id": "701",
-    "operator": "STCP",
-    "name": {"pt": "701 · Codiceira ↔ Bolhão", "en": "701 · Codiceira ↔ Bolhão"},
-    "description": {"pt": "De Codiceira e Ermesinde ao centro do Porto, passando pela Areosa e Costa Cabral.", "en": "From Codiceira and Ermesinde to central Porto, via Areosa and Costa Cabral."},
-    "data": "701-data.json",
-    "reference": "701-line-explorer.json",
-    "report": "701-report.md",
-    "sourceUrl": "https://stcp.pt/pt/linhas/701",
-    "capabilities": {"serviceModel": true}
-  }]
+  "lines": [
+    {
+      "id": "701",
+      "operator": "STCP",
+      "name": {
+        "pt": "701 · Codiceira ↔ Bolhão",
+        "en": "701 · Codiceira ↔ Bolhão"
+      },
+      "description": {
+        "pt": "De Codiceira e Ermesinde ao centro do Porto, passando pela Areosa e Costa Cabral.",
+        "en": "From Codiceira and Ermesinde to central Porto, via Areosa and Costa Cabral."
+      },
+      "data": "701-data.json",
+      "reference": "701-line-explorer.json",
+      "report": "701-report.md",
+      "sourceUrl": "https://stcp.pt/pt/linhas/701",
+      "capabilities": {
+        "serviceModel": true
+      },
+      "assets": {
+        "experiments": "701-full-experiments.json",
+        "sources": "701-full-sources.json",
+        "reliability": "701-reliability.json",
+        "observations": "701-observations.json",
+        "arrivalTemplate": "701-observations-template.csv",
+        "policyTemplate": "701-policy-template.json"
+      },
+      "caseLabels": {
+        "moderate": {
+          "en": "Moderate regional demand",
+          "pt": "Procura regional moderada"
+        },
+        "busy": {
+          "en": "Busy regional demand",
+          "pt": "Procura regional intensa"
+        },
+        "late": {
+          "en": "Busy traffic · one inbound bus starts 3 min late",
+          "pt": "Tráfego intenso · um autocarro de entrada começa 3 min atrasado"
+        }
+      },
+      "policyDescription": {
+        "en": "The tested package reserves an existing mapped lane on selected links for buses, residents, taxis, bikes and motorcycles under the assumed access permissions. General traffic is retained where the generated connectivity screen requires it.",
+        "pt": "O pacote testado reserva uma via existente nos troços selecionados para autocarros, moradores, táxis, bicicletas e motociclos segundo as permissões de acesso assumidas. Mantém tráfego geral onde o teste de ligações geradas indica que é necessário."
+      }
+    }
+  ]
 }

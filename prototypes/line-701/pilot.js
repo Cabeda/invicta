@@ -3,6 +3,7 @@ import {citizenStory,urbanistReport,observationFinding} from './proposal-views.m
 import {createLineExplorer,mountLineExplorer} from './line-explorer.mjs';
 import {loadLine} from './line-registry.mjs';
 import {proposalPageHTML,deliveryHTML} from './proposal-page.mjs';
+import {studyLabels} from './study-labels.mjs';
 const $=id=>document.getElementById(id);
 let registration;try{registration=await loadLine(location.href)}catch(error){$('status').textContent='Não foi possível carregar esta linha / Unable to load this line: '+error.message;throw error}
 const {data:BASE,line:lineRegistration,registry}=registration;document.body.classList.remove('loading');
@@ -17,7 +18,7 @@ Object.assign(I.pt,{viewMode:'Vista',viewDirection:'Sentido',view2d:'2D · simul
 Object.assign(I.en,{navProposal:'The proposal',navImplementation:'Implementation',navEvidence:'Evidence & method',nav3d:'Traffic simulation',twoCanvas:'701 traffic simulation in two dimensions',twoTitle:'Watch the traffic simulation in 2D',twoHelp:'Drag to pan; scroll or use + / − to zoom. Both panels share the same map and simulation clock. Select a bus to locate it. Red outlines: stopped vehicles below 0.5 m/s. Symbols are enlarged when zoomed out.',stopped:'stopped',busLegend:'701 buses',carLegend:'General cars',residentLegend:'Residents (assumed)',taxiLegend:'Taxis',cycleLegend:'Bikes',motoLegend:'Motorcycles',priorityLegend:'Bus priority lane',twoLoading:'Loading native traffic replay…'});
 Object.assign(I.pt,{navProposal:'A proposta',navImplementation:'Implementação',navEvidence:'Dados e método',nav3d:'Simulação de tráfego',twoCanvas:'Simulação de tráfego 701 em duas dimensões',twoTitle:'Ver a simulação de tráfego em 2D',twoHelp:'Arraste para deslocar; use a roda ou + / − para ampliar. Os dois painéis partilham o mapa e o relógio. Selecione um autocarro para o localizar. Contorno vermelho: veículos parados, abaixo de 0,5 m/s. Símbolos ampliados à distância.',stopped:'parados',busLegend:'Autocarros 701',carLegend:'Automóveis gerais',residentLegend:'Moradores (hipótese)',taxiLegend:'Táxis',cycleLegend:'Bicicletas',motoLegend:'Motociclos',priorityLegend:'Via prioritária BUS',twoLoading:'A carregar o replay nativo de tráfego…'});
 let state=proposal.restore(location.href);D=proposal.dataFor(state);N=D.route.stops.length;state.direction=String(D.route.direction??D.meta.direction??'1');applyNativeLabels();
-const reference={...registration.reference,source_url:lineRegistration.sourceUrl,data_file:lineRegistration.reference};lineExplorer=createLineExplorer(reference,state.line);
+const reference={...registration.reference,operator:lineRegistration.operator,operational_direction:lineRegistration.capabilities.serviceModel?registration.reference.operational_direction:null,source_url:lineRegistration.sourceUrl,data_file:lineRegistration.reference};lineExplorer=createLineExplorer(reference,state.line);
 let mapInspection=null,mapInspectionPromise=null,replayModelPromise=null,pendingMapPose=state.mapPose,replayUpdateSerial=0;
 let draft=[...state.priority],selectedLeg=state.selectedLeg,observedTrip=state.observation,inspection=null,inspectionPromise=null,lastFrame=0,recorder=null,chunks=[],captureCanvas,pendingPose=state.pose,pendingService=state.service;
 const recordingDisabled=new Map();let recordingFingerprint='';
@@ -159,7 +160,7 @@ $('arrivalFile').onchange=async e=>{const file=e.target.files[0];if(!file)return
 
 function tick(now){const dt=lastFrame?Math.min(.15,(now-lastFrame)/1000):0;lastFrame=now;if(state.playing){state.time=Math.min(D.meta.replay_window?.end??2400,state.time+dt*state.speed);replayDraw();if(state.time>=(D.meta.replay_window?.end??2400)){state.playing=false;$('playBtn').textContent=tr('play');if(recorder?.state==='recording')stopRecording()}}requestAnimationFrame(tick)}window.addEventListener('resize',replayDraw);render();requestAnimationFrame(tick);
 
-(lineRegistration.capabilities.serviceModel?import('./service-panel.mjs'):Promise.reject(Error('No operational model registered'))).then(m=>m.mountService({getLang:()=>state.lang,initial:pendingService,share:()=>$('shareBtn').click(),onChange:value=>{serviceReview=value;if(!_rendering&&!_initializing)refreshProposal()}})).then(panel=>{servicePanel=panel;window.service701=panel;refreshProposal()}).catch(e=>{console.error(e);$('lineService').textContent='Whole-line service model unavailable / Modelo de serviço indisponível'});
+if(lineRegistration.capabilities.serviceModel)import('./service-panel.mjs').then(m=>m.mountService({getLang:()=>state.lang,initial:pendingService,share:()=>$('shareBtn').click(),onChange:value=>{serviceReview=value;if(!_rendering&&!_initializing)refreshProposal()}})).then(panel=>{servicePanel=panel;window.service701=panel;refreshProposal()}).catch(e=>{console.error(e);$('lineService').textContent='Whole-line service model unavailable / Modelo de serviço indisponível'});
 
 function refreshProposal(sync=true){
  if(recorder?.state==='recording'&&recordingFingerprint!==proposalFingerprint())stopRecording();
@@ -216,35 +217,22 @@ function lockRecording(locked){
 document.addEventListener('click',event=>{if(recorder?.state==='recording'&&(event.target.closest('a')||event.target.closest('#lineExplorer,#map'))){event.preventDefault();event.stopImmediatePropagation()}},true);
 
 function applyNativeLabels(){
- if(!D.meta?.full_line)return;
- I.en.badge='Study in progress · full-line traffic simulation · synthetic demand';I.pt.badge='Estudo em curso · simulação de tráfego na linha inteira · procura sintética';
- I.en.analysisTitle='Detailed analysis · full-line native traffic';I.pt.analysisTitle='Análise detalhada · tráfego nativo na linha inteira';
- I.en.analysisScope='The native SUMO runs cover both complete directions and all 127 scheduled workings, including short trips and service after midnight. Selected bus profiles refer to the current direction; traffic group totals cover the entire regional experiment. The passenger/berth model is separate.';
- I.pt.analysisScope='As execuções nativas SUMO abrangem os dois sentidos completos e todas as 127 viagens previstas, incluindo serviços parciais e após a meia-noite. Os perfis de autocarro referem-se ao sentido escolhido; os totais de tráfego abrangem a experiência regional. O modelo de passageiros é distinto.';
- I.en.limits='Native full-day traffic simulation of both complete directions, with synthetic regional demand, fixed 20-second dwell and imported/unverified signals. Scheduled, observed and simulated times remain distinct. Vehicle blocks, driver duties and other bus lines are unavailable; scheduled workings use separate buses.';
- I.pt.limits='Simulação nativa de tráfego durante o serviço completo nos dois sentidos, com procura regional sintética, paragens fixas de 20 segundos e sinais importados/não verificados. Horas previstas, observadas e simuladas são distintas. Faltam blocos de veículos, turnos e outras linhas; cada viagem prevista usa um autocarro independente.';
- I.en.limits+=' One bus-only turn exception is assumed to match the official route; the source report documents it.';I.pt.limits+=' Foi assumida uma exceção de viragem BUS para corresponder ao percurso oficial; está documentada no relatório de fontes.';
+ for(const lang of ['en','pt']){
+  Object.assign(I[lang],studyLabels(D,lang));
+  for(const scenario of Object.keys(D.cases||{}))I[lang][scenario]=lineRegistration.caseLabels?.[scenario]?.[lang]||scenario;
+ }
+ I.en.badge='Study in progress · native traffic simulation · '+lineRegistration.id;I.pt.badge='Estudo em curso · simulação de tráfego nativa · '+lineRegistration.id;
  I.en.baseline='Mapped baseline';I.pt.baseline='Referência mapeada';
- I.en.scope='Entire '+lineRegistration.id+' · '+D.route.start+' → '+D.route.end;I.pt.scope=lineRegistration.id+' completo · '+D.route.start+' → '+D.route.end;
- I.en.routeTitle=D.route.start+' → '+D.route.end+' · complete direction';I.pt.routeTitle=D.route.start+' → '+D.route.end+' · sentido completo';
- I.en.profileNote='Grey: baseline. Green: proposal. Arrival deviation from each published reference; missing/unserved calls remain empty. Ranges span the available native seeds, not a confidence interval.';
- I.pt.profileNote='Cinzento: base. Verde: proposta. Desvio da chegada face à referência publicada; passagens em falta/não servidas permanecem vazias. Intervalos entre as sementes nativas disponíveis, não intervalos de confiança.';
- I.en.replayNote='Native replay across the complete route in both directions during 16:50–18:20, sampled every 5 seconds with visual interpolation. It comes from the same full-day execution as the results for all 127 scheduled workings. Visible traffic covers route roads and roads meeting their junctions.';
- I.pt.replayNote='Replay nativo ao longo da linha completa nos dois sentidos, entre 16:50 e 18:20, com amostras a cada 5 segundos e interpolação visual. Vem da mesma execução do dia completo que os resultados das 127 viagens previstas. O tráfego visível abrange as ruas do percurso e as que chegam aos seus cruzamentos.';
- I.en.generated='Delay added after journey origin';I.pt.generated='Atraso acrescentado após a origem';I.en.showMatched='Overlay the official source shape';I.pt.showMatched='Sobrepor a geometria oficial';
- I.en.mapNote='Colours follow matched native road edges: applied/requested priority, retained general traffic and existing bus priority. The official geographic route is shown in the explorer above. Lane geometry still needs field validation.';
- I.pt.mapNote='As cores seguem os troços nativos: prioridade aplicada/solicitada, tráfego geral mantido e prioridade existente. O percurso geográfico oficial está no explorador acima. A geometria das faixas continua por validar no local.';
- I.en.accessIntro='The prepared policy changes lane permissions in both directions together. It retains general traffic where needed to keep the generated regional OD pairs connected. Individual interval tests are not inferred from that combined screen; missing values stay empty.';
- I.pt.accessIntro='A política preparada altera permissões nos dois sentidos em conjunto. Mantém tráfego geral onde é necessário para ligar os pares OD regionais gerados. Não são deduzidos testes de intervalos individuais a partir deste teste combinado; os valores em falta permanecem vazios.';
- I.en.notRun='This draft needs a new native experiment. Export it to configure that run; no additive benefit is shown.';I.pt.notRun='Este rascunho requer uma nova experiência nativa. Exporte-o para configurar essa execução; não é apresentado um benefício aditivo.';
- I.en.trip='Scheduled working';I.pt.trip='Viagem prevista';I.en.moderate='Moderate regional demand';I.pt.moderate='Procura regional moderada';I.en.busy='Busier regional demand';I.pt.busy='Procura regional intensa';
- I.en.nativeCheck='Complete service-day native check';I.pt.nativeCheck='Verificação nativa do serviço completo';I.en.entry='Simulated origin lateness';I.pt.entry='Atraso simulado na origem';
- I.en.travellerNote='Network duration and waiting before network entry are shown separately for completed vehicle journeys. Unfinished requests stay visible. These are not door-to-door person travel times; trip purpose and residency are unknown outside the explicit synthetic resident group.';
- I.pt.travellerNote='A duração na rede e a espera antes da entrada são apresentadas separadamente para viagens de veículos concluídas. Os pedidos por concluir continuam visíveis. Não são tempos pessoais porta a porta; a finalidade e residência são desconhecidas fora do grupo sintético explícito de moradores.';
- I.en.observedNote=state.direction==='0'?'No matched outbound GPS series is bundled. Full-route traffic results are synthetic simulation; imported arrivals remain user-supplied.':'A short evening inbound GPS sample on 28 October 2026; geofence passage windows are not door-open arrivals and do not calibrate recurring or morning delays.';
- I.pt.observedNote=state.direction==='0'?'Não existe uma série GPS de saída correspondente neste pacote. Os resultados de tráfego da linha inteira são simulados; as chegadas importadas são fornecidas pelo utilizador.':'Amostra GPS curta ao fim do dia 28 de outubro de 2026 no sentido Bolhão; as janelas de passagem não são chegadas com abertura de portas e não calibram atrasos recorrentes ou da manhã.';
- I.en.open3d='Open this proposal in 3D';I.pt.open3d='Abrir esta proposta em 3D';I.en.late='Busy traffic · one inbound bus starts 3 minutes late';I.pt.late='Tráfego intenso · um autocarro começa 3 minutos atrasado';
- const link=document.querySelector('[data-t="nativeExport"]');if(link)link.href='701-full-experiments.json';const sources=document.querySelector('[data-t="sourceExport"]');if(sources)sources.href='701-full-sources.json';
+ I.en.mapNote='Colours identify applied/requested priority, general traffic and existing bus priority. Geometry and property access need field review.';
+ I.pt.mapNote='As cores identificam prioridade aplicada/solicitada, tráfego geral e prioridade BUS existente. A geometria e os acessos requerem verificação no local.';
+ I.en.accessIntro='The prepared package uses its declared directional scope and retains general traffic under its stated connectivity screen. Individual interval changes require their own tests.';
+ I.pt.accessIntro='O pacote preparado usa os sentidos declarados e mantém tráfego geral segundo o teste de ligações indicado. Alterações de intervalos individuais requerem testes próprios.';
+ I.en.travellerNote='Network duration and waiting before entry are separate, completed-only measures. Unfinished requests remain visible. Trip purpose and residency are not inferred from ordinary vehicle types.';
+ I.pt.travellerNote='Duração na rede e espera antes da entrada são medidas distintas, só de viagens concluídas. Pedidos por concluir mantêm-se visíveis. Finalidade e residência não são deduzidas do tipo de veículo comum.';
+ const assets=lineRegistration.assets||{};
+ for(const [key,selector]of Object.entries({experiments:'[data-t="nativeExport"]',sources:'[data-t="sourceExport"]',observations:'[data-t="observedExport"]',arrivalTemplate:'[data-t="csvTemplate"]',policyTemplate:'[data-t="policyTemplate"]'})){
+  const link=document.querySelector(selector);if(link){link.hidden=!assets[key];if(assets[key])link.href=assets[key]}
+ }
 }
 
 function stopRecording(){if(recorder?.state==='recording'){recordingFinishing=true;recorder.stop();$('recordBtn').disabled=true;$('recordBtn').textContent=state.lang==='pt'?'A guardar…':'Saving…'}}
