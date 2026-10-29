@@ -4,7 +4,9 @@ The application explains bus-reliability proposals, compares their evidence and 
 
 Application modules live in `web/`; registered studies are listed in `web/lines.json`. See [adding a line](docs/product/add-a-line.md), the [production specification](docs/product/production-spec.md) and [retrospective](docs/product/retro-2026-10-29.md).
 
-Install development dependencies with `npm ci`. Use `npm run build`, `npm run prepare:deploy`, `npm run check` and `npm run test:browser` before publishing. Python native-check dependencies are pinned in the CI workflow; an existing `.venv` is used locally. CI runs these acceptance checks on pushes and pull requests.
+When changing the experiment workflow or investigating slow preparation, read the [simulation-loop retrospective](docs/product/simulation-loop-retro-2026-10-29.md). It identifies the missing model audit, diagnostic and search interfaces and the measured spatial-index dependency issue.
+
+Install development dependencies with `npm ci` and Python simulation dependencies with `python -m pip install -r requirements-simulation.txt` in your virtual environment. Use `npm run build`, `npm run prepare:deploy`, `npm run check` and `npm run test:browser` before publishing. CI uses the same pinned Python requirements and checks that the native spatial index loads; an existing `.venv` is used locally. CI runs these acceptance checks on pushes and pull requests.
 
 [Live demo](https://invicta-dusky.vercel.app/?lang=pt#route) · [Open in 3D](https://invicta-dusky.vercel.app/?lang=pt&dimension=3d&camera=combatentes&view=compare#replay)
 

@@ -72,7 +72,8 @@ def map_direction(net,facts,coordinates):
     if any(b['shape_progress']<=a['shape_progress'] for a,b in zip(stops,stops[1:])):raise RuntimeError('Official shape order mismatch')
     def snap(point,heading,is_stop=False):
         candidates=[];norm=math.hypot(*heading)
-        for edge,_ in net.getNeighboringEdges(*point,55,includeJunctions=False):
+        # Regional matching requires the index, rather than a silent network scan.
+        for edge,_ in net.getNeighboringEdges(*point,55,includeJunctions=False,allowFallback=False):
             # Crossings can split the correct road into 12–16 m fragments.
             # Keep enough room for the study's 12 m bus rather than forcing
             # a nominal 15 m stop onto a nearby, unrelated street.

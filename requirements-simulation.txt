@@ -1,0 +1,3 @@
+# Shared native study pins, including the required spatial index.
+-r prototypes/costa-cabral/requirements.txt
+libsumo==1.28.0

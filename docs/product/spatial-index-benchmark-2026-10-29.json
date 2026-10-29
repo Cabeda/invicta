@@ -1,0 +1,17 @@
+{
+  "network_sha256": "799d2b05097f8a7b761b654cc871be72f65fedd2efa9d511361aa0782226bd15",
+  "reference_sha256": "e8d0a8ae3f05151ddbf7ce5093110f74d95db4f0f44a39380aa5480c55fac394",
+  "sumolib_version": "1.28.0",
+  "rtree_version": "1.4.1",
+  "direction": "1",
+  "shape_start_index": 20,
+  "queries": 10,
+  "edges": 175415,
+  "brute_force_s": 5.8337,
+  "index_build_and_first_query_s": 4.6765,
+  "indexed_queries_s": 0.0023,
+  "same_results": true,
+  "fallback_warning": "Module 'rtree' not available. Using brute-force fallback.",
+  "measurement_date": "2026-10-29",
+  "scope": "One local bounded spatial-query benchmark; not an end-to-end traffic simulation speedup."
+}

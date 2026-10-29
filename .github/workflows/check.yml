@@ -15,7 +15,9 @@ jobs:
         with:
           python-version: '3.13'
       - run: npm ci
-      - run: python -m pip install numpy==2.5.4 pyproj==3.8.0 eclipse-sumo==1.28.0 sumo-data==1.28.0 sumolib==1.28.0 traci==1.28.0 libsumo==1.28.0
+      - run: python -m pip install -r requirements-simulation.txt
+      - name: Check native spatial index
+        run: python -c "from rtree import index; index.Index()"
       - run: npm run check
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser

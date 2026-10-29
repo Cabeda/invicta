@@ -25,7 +25,7 @@ def migrate_requests(baseline, requests):
         behind = sumolib.geomhelper.positionAtShapeOffset(edge.getShape(), max(0, offset - 3))
         heading = ahead[0] - behind[0], ahead[1] - behind[1]
         candidates = []
-        for candidate, _ in baseline.getNeighboringEdges(*point, 55, includeJunctions=False):
+        for candidate, _ in baseline.getNeighboringEdges(*point, 55, includeJunctions=False, allowFallback=False):
             if candidate.getFunction() or not candidate.allows(kind):
                 continue
             shape = candidate.getShape()
