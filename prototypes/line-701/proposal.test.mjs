@@ -111,3 +111,11 @@ test('evidence findings follow the chosen section while raw arrivals remain port
  line.select({from:stops.at(-2).stop_id,to:stops.at(-1).stop_id});review=model.review({...selection,observation},{line:line.view()});
  assert.equal(review.evidence.finding,null);assert.equal(review.evidence.focus.captured_stops,0);assert.equal(review.evidence.passages.length,2);assert.equal(review.serial.upload.arrivals.length,2);
 });
+
+test('2D and 3D share direction, focus, policy and camera while retaining their view choice',()=>{
+ const {model,selection,line}=setup();line.select({from:'ERM3',to:'ARS3'});
+ const input={...selection,line:line.settings(),camera:'ermesinde',pose:{position:[10,20,30],target:[1,2,3],yaw:0,pitch:0}};
+ const map=model.review({...input,dimension:'2d'},{line:line.view()}),street=model.review({...input,dimension:'3d'},{line:line.view()});
+ assert.deepEqual(map.focus,street.focus);assert.equal(map.native.case,street.native.case);assert.deepEqual(map.native.policy_by_direction,street.native.policy_by_direction);assert.deepEqual(map.selection.pose,street.selection.pose);
+ for(const proposal of [map,street]){const restored=model.restore(model.shareURL(proposal,'https://example.test/'));assert.equal(restored.dimension,proposal.selection.dimension);assert.deepEqual(restored.line,line.settings())}
+});

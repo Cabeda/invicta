@@ -5,3 +5,9 @@
 #status,#focusShareStatus{overflow-wrap:anywhere}
 
 .proposal-story{margin:18px 0 32px}.proposal-story h2{font-size:27px;margin:12px 0}.proposal-story-head{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.proposal-quick{display:flex;gap:25px;flex-wrap:wrap;margin:15px 0;font-size:13px}.proposal-quick b{font-size:22px;color:var(--green)}.proposal-story .actions button,.proposal-story .actions label{font-size:12px}.recording .proposal-story button,.recording .proposal-story label{pointer-events:none;opacity:.6}
+
+.dimension-switch{position:sticky;top:0;z-index:1200;display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--paper,#f5f5ef);padding:12px 0;border-bottom:1px solid var(--line,#d7e0d5)}
+.dimension-switch button{font-weight:650}.dimension-switch button[aria-pressed=true]{background:var(--green,#177455);color:white}.dimension-switch .fine{flex:1;min-width:180px}
+@media(max-width:650px){.dimension-switch .fine{flex-basis:100%}}
+
+main .section{scroll-margin-top:140px}@media(max-width:650px){main .section{scroll-margin-top:200px}}

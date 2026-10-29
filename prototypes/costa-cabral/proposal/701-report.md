@@ -40,7 +40,7 @@ The bus-only control still has 154 late timing-point arrivals out of 714 planned
 ## Reproduce and inspect
 
 `./prototypes/line-701/full/run.sh --cases moderate,busy,late --seeds 17` (use `--seeds 17,42,73` for repeated seeds).
-Raw results: 701-full-experiments.json. Route mapping:701-full-routes.json. Street provenance:701-full-network-manifest.json. Replay provenance:line-701-full-assets/manifest.json. Timetable bundles:701-extension/ and 701-outbound/. [Source code and frozen input archive](https://github.com/Cabeda/invicta/tree/prototype/costa-cabral-access/prototypes/line-701/full).
+Raw results: 701-full-experiments.json. Route mapping:701-full-routes.json. Street provenance:701-full-network-manifest.json. Replay provenance:line-701-full-assets/manifest.json. Timetable bundles:701-extension/ and 701-outbound/. [Source code and frozen input archive](https://github.com/Cabeda/invicta/tree/main/prototypes/line-701/full).
 
 ## Transition interpretation
 

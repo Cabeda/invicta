@@ -4,7 +4,7 @@
 - Source repository: <https://github.com/Cabeda/invicta>
 - Vercel project: `invicta`, workspace `jos-cabedas-projects`.
 - Dashboard: <https://vercel.com/jos-cabedas-projects/invicta>
-- Repository default branch: `prototype/costa-cabral-access`.
+- Repository default branch: `main`.
 
 Published through Vercel CLI on 28 October 2026. The stable production alias is public; Vercel's individual deployment URLs may require the account's authentication. Share the public alias above.
 
