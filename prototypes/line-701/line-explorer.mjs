@@ -103,7 +103,7 @@ const words = {
   pt: {title:'Uma linha. Escolha o sentido.', intro:'Veja a linha completa, depois escolha o sentido e a secção que quer compreender.', direction:'Sentido', from:'Da paragem', to:'À paragem', whole:'Linha inteira', focus:'Aproximar à secção', overview:'Vista geral da linha', section:'A SUA SECÇÃO', stops:'paragens', distance:'distância aproximada no percurso', through:'viagens com referência em todas as paragens selecionadas', day:'horário de dia útil', trip:'Viagem prevista', journey:'Tempo previsto na secção', notServed:'Não servida nesta viagem', unresolved:'Referência indisponível', timing:'Ponto de horário', intermediate:'Referência intermédia', scheduled:'Hora publicada', stop:'Paragem', detail:'Consultar horário, cobertura e fontes', source:'Percurso e horário oficiais', tableNote:'Horas previstas no fuso de Lisboa. Apenas os pontos de horário designados são referências exatas do horário; nenhum destes valores mede atraso real.', coverage:'O QUE PODEMOS TESTAR AQUI?', full:'Esta secção está dentro do modelo de tráfego preparado.', partial:'Só uma parte desta seleção tem um modelo de tráfego preparado.', none:'Esta secção tem percurso e horário oficiais; ainda não tem simulação de tráfego nem 3D preparados.', replay:'Ver esta secção na simulação', model:'Está disponível um modelo operacional distinto neste sentido, com os pressupostos declarados.', noModel:'Não está registado um modelo operacional distinto para esta seleção. A cobertura de tráfego nativo é declarada em separado.', simulation:'Replay de tráfego nativo', fullRoute:'Percurso completo', chosen:'Secção selecionada', startHere:'Começar aqui', endHere:'Terminar aqui', pick:'Clique numa paragem para definir o início ou o fim da secção, ou use os seletores.', tripCount:'viagens por dia', reference:'Horário de referência', narrative:'O objetivo: autocarros a cumprir o horário, com acessos que funcionem para moradores, trabalhadores e clientes do comércio.', share:'Partilhar esta secção', export:'Exportar secção JSON', mapOffline:'O mapa de fundo precisa de internet; o percurso oficial e a seleção de paragens continuam disponíveis.', focusNote:'Ao mudar de sentido, a secção e a viagem selecionadas de cada sentido são preservadas.', towards:'Sentido', scheduledOnly:'Referência do horário · não é tempo medido', shape:'Geometria do percurso', generated:'Fontes guardadas', sourceNote:'Os percursos e horários têm datas de recolha próprias. Mostrar a linha completa não significa simular o tráfego em toda a linha.'}
 };
 
-export async function mountLineExplorer({host, getLang, initial, onChange, onReplay, onShare, reference, existingModel, replayStatus}) {
+export async function mountLineExplorer({host, getLang, initial, onChange, onReplay, onShare, reference, existingModel, replayStatus, streetAssets}) {
   let data = reference;
   if (!data) { const response = await fetch('./701-line-explorer.json'); if (!response.ok) throw Error('Full-line reference unavailable'); data = await response.json(); }
   const model = existingModel || createLineExplorer(data, initial);
@@ -119,6 +119,19 @@ export async function mountLineExplorer({host, getLang, initial, onChange, onRep
     map = L.map($('wholeLineMap'), {scrollWheelZoom: false, minZoom: 10, maxZoom: 19});
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).on('tileerror', () => { tileFailed = true; $('tileStatus').textContent = text('mapOffline'); }).addTo(map);
     layers = L.layerGroup().addTo(map); L.control.scale({imperial: false}).addTo(map);
+    if (streetAssets?.features?.length) {
+      const assetsLayer = L.geoJSON(streetAssets, {
+        pointToLayer: (feature, point) => L.circleMarker(point, {radius: 4,
+          color: feature.properties.kind === 'signal_equipment' ? '#956625' : '#2b6e9b',
+          fillOpacity: .8, weight: 1}),
+        onEachFeature: (feature, layer) => {
+          const p = feature.properties, popup = document.createElement('div');
+          popup.textContent = `${p.kind === 'signal_equipment' ? 'Equipamento semafórico / Signal equipment' : 'Passadeira LED / LED crossing'} · ${p.objectid} · ${p.numero_instalacao ?? p.toponimo ?? ''}. Localização / Location: CMP · CCZero. Fases e tempos desconhecidos / Phases and timings unknown.`;
+          layer.bindPopup(popup);
+        }
+      });
+      L.control.layers(null, {'CMP · semáforos e passadeiras / signals & crossings': assetsLayer}, {collapsed: false}).addTo(map);
+    }
   }
   function notify(change = {}) { onChange?.(model.settings(), model.view(), change); }
   function update(change, fit = true) { model.select(change); render(fit); notify(change); }

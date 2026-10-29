@@ -26,7 +26,10 @@
         "reliability": "701-reliability.json",
         "observations": "701-observations.json",
         "arrivalTemplate": "701-observations-template.csv",
-        "policyTemplate": "701-policy-template.json"
+        "policyTemplate": "701-policy-template.json",
+        "streetAssets": "701-street-assets.geojson",
+        "prioritySearch": "701-priority/priority-search.json",
+        "priorityReport": "701-priority/PRIORITY_SEARCH.md"
       },
       "caseLabels": {
         "moderate": {

@@ -1,0 +1,4048 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "signal_equipment:153",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604639015178158,
+          41.15487725233899
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "30",
+        "wifi": null,
+        "objectid": 153,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.61,
+          "0": 3.12
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:154",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604569334423928,
+          41.15481292773462
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "30",
+        "wifi": null,
+        "objectid": 154,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.37,
+          "0": 9.39
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:155",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604631659203116,
+          41.15474849140809
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "30",
+        "wifi": null,
+        "objectid": 155,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.35,
+          "0": 4.42
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:156",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604757805623626,
+          41.15488019486072
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "30",
+        "wifi": null,
+        "objectid": 156,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 6.34,
+          "0": 6.85
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:157",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604754730055703,
+          41.15492580639025
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "30",
+        "wifi": null,
+        "objectid": 157,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 5.87,
+          "0": 6.97
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:158",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604646252931795,
+          41.15468560830548
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "30",
+        "wifi": null,
+        "objectid": 158,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.32,
+          "0": 3.45
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:338",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.600280893517064,
+          41.16126240996731
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "71",
+        "wifi": null,
+        "objectid": 338,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 11.98,
+          "0": 274.42
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:339",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.600406595935615,
+          41.161278051160174
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "71",
+        "wifi": null,
+        "objectid": 339,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 11.77,
+          "0": 266.49
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:340",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.600228289400302,
+          41.16128578067625
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "71",
+        "wifi": null,
+        "objectid": 340,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.99,
+          "0": 275.14
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:341",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.600133808694286,
+          41.16137812513972
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "71",
+        "wifi": null,
+        "objectid": 341,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 10.75,
+          "0": 272.05
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:342",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.600210787478913,
+          41.16143070000312
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "71",
+        "wifi": null,
+        "objectid": 342,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 2.94,
+          "0": 263.46
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:343",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.600338615635085,
+          41.161448500894544
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "71",
+        "wifi": null,
+        "objectid": 343,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 7.79,
+          "0": 255.23
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:344",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.600320001913651,
+          41.16149069690769
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "71",
+        "wifi": null,
+        "objectid": 344,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 7.69,
+          "0": 252.54
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:487",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.603871651937666,
+          41.161701574188115
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 487,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 15.56,
+          "0": 6.29
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:488",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604016397536009,
+          41.16169997943662
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 488,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 17.27,
+          "0": 5.48
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:489",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.603852885844043,
+          41.161757302213516
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 489,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.22,
+          "0": 9.64
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:490",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60380087749063,
+          41.161845997708994
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 490,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 1.11,
+          "0": 17.97
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:491",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.603983604314623,
+          41.1618897062001
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 491,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.98,
+          "0": 4.46
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:492",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604090185542612,
+          41.16194228800611
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 492,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 8.4,
+          "0": 5.74
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:493",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604013576003133,
+          41.16200273311746
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 493,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 16.11,
+          "0": 4.5
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:494",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604428679880634,
+          41.16173257180352
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 494,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 8.4,
+          "0": 34.79
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:495",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604450148608603,
+          41.161824800959245
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 495,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 2.73,
+          "0": 33.81
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:496",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60452470218289,
+          41.16184665013911
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 496,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.88,
+          "0": 39.87
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:497",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604447529888716,
+          41.161920940215495
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 497,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 2.61,
+          "0": 34.04
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:502",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605176977850093,
+          41.16070167356409
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 502,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.81,
+          "0": 68.7
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:503",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605132523657732,
+          41.16062199893127
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 503,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.76,
+          "0": 62.52
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:504",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605051756850049,
+          41.1606476789054
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 504,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 8.29,
+          "0": 56.89
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:505",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604937582483435,
+          41.16062165677298
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 505,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 18.07,
+          "0": 46.88
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:506",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605278291150869,
+          41.16065521730103
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 506,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 8.72,
+          "0": 75.3
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:507",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605390423694228,
+          41.16057703120745
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 507,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 13.34,
+          "0": 81.73
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:508",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605306272273534,
+          41.160524547734305
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 508,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.46,
+          "0": 73.34
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:509",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605256845110508,
+          41.160445894816306
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 509,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.03,
+          "0": 67.56
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:510",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604607469940538,
+          41.160522953166435
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 510,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 47.61,
+          "0": 17.17
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:511",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604499057363377,
+          41.160482898056344
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 511,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 57.73,
+          "0": 7.16
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:512",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60446002566674,
+          41.160490920376624
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 512,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 60.16,
+          "0": 4.3
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:513",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60439417082974,
+          41.16041595585581
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 513,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 69.04,
+          "0": 3.44
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:514",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604506865615013,
+          41.16041149047597
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 514,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 61.01,
+          "0": 5.45
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:516",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604509840557231,
+          41.160264151940886
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 516,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 68.33,
+          "0": 3.22
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:517",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604413540385119,
+          41.160207417955746
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 517,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 78.33,
+          "0": 5.38
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:928",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.602843602403672,
+          41.16278851887098
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "278",
+        "wifi": null,
+        "objectid": 928,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 115.49,
+          "0": 4.55
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:929",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.602873405330275,
+          41.16287812827178
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "278",
+        "wifi": null,
+        "objectid": 929,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 124.76,
+          "0": 4.18
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1432",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60526879366873,
+          41.15358743107335
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1432,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.64,
+          "0": 16.88
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1433",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605324841570706,
+          41.15349190464491
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1433,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 6.05,
+          "0": 10.52
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1434",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60543823251834,
+          41.15342592316846
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1434,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 13.55,
+          "0": 14.13
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1435",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60543773696161,
+          41.153466425882755
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1435,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.05,
+          "0": 16.67
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1436",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605384461439888,
+          41.153399939171734
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1436,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 16.35,
+          "0": 8.78
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1437",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605314096385511,
+          41.15336747070765
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1437,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 19.85,
+          "0": 1.87
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1438",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60532544944348,
+          41.15341209296474
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1438,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 14.92,
+          "0": 5.49
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1439",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60526119830388,
+          41.153353394033495
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1439,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 21.34,
+          "0": 2.67
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1440",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605281305803876,
+          41.15340989227055
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1440,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 15.09,
+          "0": 2.31
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1441",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60684565972376,
+          41.1521812910803
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1441,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 5.18,
+          "0": 64.19
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1442",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606983409478332,
+          41.15227006029156
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1442,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.87,
+          "0": 78.68
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1443",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606747814830706,
+          41.15238062215872
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1443,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.43,
+          "0": 65.34
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1444",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606700054450819,
+          41.15231411246652
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1444,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.92,
+          "0": 58.66
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1445",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606647886741685,
+          41.15229169539014
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1445,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.47,
+          "0": 53.65
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1446",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606732623775565,
+          41.15224131611122
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1446,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.58,
+          "0": 58.04
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1447",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60620689970511,
+          41.15211245323922
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1447,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 47.01,
+          "0": 11.81
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1448",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60610006474531,
+          41.15215815956888
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1448,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 48.0,
+          "0": 5.87
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1449",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60587582204641,
+          41.1520947584172
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1449,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 64.57,
+          "0": 13.61
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1450",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605966932066544,
+          41.152053882852734
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1450,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 63.9,
+          "0": 9.28
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1451",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606135494440021,
+          41.15204485004264
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1451,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 56.6,
+          "0": 3.37
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1452",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606067232843213,
+          41.151976042617015
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 1452,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 66.15,
+          "0": 4.87
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1521",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598397525623737,
+          41.165809650908365
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1521,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.14,
+          "0": 3.41
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1522",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598446236776862,
+          41.16578801210198
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1522,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 2.98,
+          "0": 3.03
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1523",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598421933914823,
+          41.165695199044464
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1523,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 6.74,
+          "0": 6.78
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1524",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598381911929318,
+          41.16560840404486
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1524,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 16.54,
+          "0": 16.61
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1525",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598473071773753,
+          41.165571108093594
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1525,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.72,
+          "0": 15.66
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1526",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598554604732424,
+          41.16551002729966
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1526,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.51,
+          "0": 17.47
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1527",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598508454219166,
+          41.16544827295279
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1527,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.94,
+          "0": 25.35
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1528",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598580479420413,
+          41.165380082913195
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1528,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 6.26,
+          "0": 29.0
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1529",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598667015867953,
+          41.165579850942386
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1529,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 6.54,
+          "0": 6.09
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1530",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598800624229847,
+          41.1655268965942
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1530,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 15.97,
+          "0": 5.73
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1531",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.59879181656551,
+          41.16561865397111
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1531,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 17.48,
+          "0": 2.79
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1532",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598730932747962,
+          41.165479532795935
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1532,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.02,
+          "0": 13.18
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1533",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598844007132275,
+          41.16542070593461
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1533,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 16.21,
+          "0": 14.23
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1534",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598760297093252,
+          41.165397220707234
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1534,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 8.73,
+          "0": 19.95
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1535",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598652606830894,
+          41.16532618679881
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 1535,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 2.23,
+          "0": 31.25
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1550",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605335009906234,
+          41.153590732562144
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 1550,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.91,
+          "0": 19.32
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1649",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606605061167441,
+          41.153372277807186
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1649,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 14.76,
+          "0": 99.49
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1650",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606442972316014,
+          41.15340510842463
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1650,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.57,
+          "0": 88.63
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1651",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606354616452846,
+          41.15339117885041
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1651,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.54,
+          "0": 81.23
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1652",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60643373125232,
+          41.15343492649581
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1652,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.66,
+          "0": 89.29
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1653",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606437227310161,
+          41.153482559566854
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1653,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 7.71,
+          "0": 91.75
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1654",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606279450108016,
+          41.15367618188222
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1654,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 13.55,
+          "0": 88.73
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1655",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606178331123491,
+          41.15364086343523
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1655,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.07,
+          "0": 79.39
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1656",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606143732581131,
+          41.153432547537996
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1656,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 14.01,
+          "0": 67.03
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1657",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60607313188661,
+          41.15347691285394
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1657,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 8.96,
+          "0": 63.69
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1658",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.6061551846885,
+          41.15349086852866
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1658,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 7.55,
+          "0": 70.6
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1659",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606154415895375,
+          41.15360284352125
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1659,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.88,
+          "0": 75.71
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1660",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606067731270505,
+          41.153602009999396
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "141",
+        "wifi": null,
+        "objectid": 1660,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.94,
+          "0": 69.16
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1661",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606670674742475,
+          41.15110994474283
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "147",
+        "wifi": "Desconhecido",
+        "objectid": 1661,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 99.29,
+          "0": 4.25
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1662",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606604091238756,
+          41.15105542514193
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "147",
+        "wifi": "Desconhecido",
+        "objectid": 1662,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 107.03,
+          "0": 3.27
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1663",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606525031803667,
+          41.151018824122765
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "147",
+        "wifi": null,
+        "objectid": 1663,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 113.48,
+          "0": 10.96
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1664",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606615821634083,
+          41.15093387482757
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "147",
+        "wifi": "Desconhecido",
+        "objectid": 1664,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 119.19,
+          "0": 7.64
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1665",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606762767398223,
+          41.1507688853431
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "147",
+        "wifi": "Desconhecido",
+        "objectid": 1665,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 133.29,
+          "0": 21.8
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1666",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606845161128609,
+          41.150830486593335
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "147",
+        "wifi": null,
+        "objectid": 1666,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 125.21,
+          "0": 16.18
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1667",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60683076906097,
+          41.15101994523454
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "147",
+        "wifi": "Desconhecido",
+        "objectid": 1667,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 104.83,
+          "0": 4.78
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1668",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606973624683258,
+          41.150943119560395
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "147",
+        "wifi": null,
+        "objectid": 1668,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 111.3,
+          "0": 6.8
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1792",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.599954928056755,
+          41.164962686338484
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "171",
+        "wifi": null,
+        "objectid": 1792,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 87.04,
+          "0": 5.09
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1793",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.599985876410509,
+          41.16510312039299
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "171",
+        "wifi": null,
+        "objectid": 1793,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 92.97,
+          "0": 9.34
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1794",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.599888236331148,
+          41.165115428857
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "171",
+        "wifi": null,
+        "objectid": 1794,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 85.26,
+          "0": 5.93
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1795",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.599980640072388,
+          41.165031670596996
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "171",
+        "wifi": null,
+        "objectid": 1795,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 90.82,
+          "0": 2.49
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1796",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.59967917439486,
+          41.165197278899164
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "171",
+        "wifi": null,
+        "objectid": 1796,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 70.11,
+          "0": 3.78
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1797",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.599662293193653,
+          41.16504011175385
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "171",
+        "wifi": null,
+        "objectid": 1797,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 64.94,
+          "0": 11.54
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1798",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.599778831369642,
+          41.1650253434686
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "171",
+        "wifi": null,
+        "objectid": 1798,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 74.13,
+          "0": 7.48
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1799",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.601487694993473,
+          41.163948700114965
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "172",
+        "wifi": null,
+        "objectid": 1799,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 179.36,
+          "0": 3.7
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1800",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.601733214780834,
+          41.16389647670415
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "172",
+        "wifi": null,
+        "objectid": 1800,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 197.44,
+          "0": 14.69
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1801",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.601632253309877,
+          41.16388497738236
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "172",
+        "wifi": null,
+        "objectid": 1801,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 188.96,
+          "0": 7.55
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1802",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.601686781250756,
+          41.163795416329165
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "172",
+        "wifi": null,
+        "objectid": 1802,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 190.51,
+          "0": 4.59
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1803",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60168288802826,
+          41.16369179853667
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "172",
+        "wifi": null,
+        "objectid": 1803,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 186.91,
+          "0": 2.9
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1816",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.58318072779123,
+          41.18099746687092
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1816,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 12.85,
+          "0": 12.79
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1817",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583101219164057,
+          41.181128807423995
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1817,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 15.54,
+          "0": 15.46
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1818",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583177926148716,
+          41.18104869796145
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1818,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 11.61,
+          "0": 11.55
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1819",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583033196830609,
+          41.18109572118869
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1819,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 22.0,
+          "0": 21.92
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1820",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583195276854795,
+          41.181279718681104
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1820,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.59,
+          "0": 3.52
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1821",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.58328832234239,
+          41.18128292794768
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1821,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.04,
+          "0": 4.12
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1822",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583272859028641,
+          41.18132706180332
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1822,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.05,
+          "0": 4.13
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1823",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583416029449246,
+          41.181282427813215
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1823,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 14.38,
+          "0": 14.46
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1824",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583530959333046,
+          41.18125815299201
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1824,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 23.01,
+          "0": 23.08
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1825",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583445207731327,
+          41.18116915021059
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1825,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 13.51,
+          "0": 13.58
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1826",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583591399394278,
+          41.18110544565708
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1826,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 23.54,
+          "0": 23.59
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1827",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583542360670867,
+          41.181081814736686
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1827,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 18.89,
+          "0": 18.94
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1828",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.58341248160289,
+          41.18099536703728
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1828,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 5.88,
+          "0": 5.93
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1829",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583301186934802,
+          41.1808600080468
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1829,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 7.01,
+          "0": 6.99
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1830",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.58325122543432,
+          41.18093167507124
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1830,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 9.01,
+          "0": 8.97
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1831",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583295567540722,
+          41.18096008955761
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1831,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.6,
+          "0": 4.56
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:1832",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583320515662333,
+          41.18091949153323
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 1832,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.74,
+          "0": 3.71
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2266",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.603883713268067,
+          41.16173487787231
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "86/127",
+        "wifi": null,
+        "objectid": 2266,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 12.02,
+          "0": 6.21
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2267",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604380165732886,
+          41.16025467874006
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "87",
+        "wifi": null,
+        "objectid": 2267,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 78.61,
+          "0": 7.71
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2268",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.60526713207636,
+          41.15346593673908
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "96",
+        "wifi": null,
+        "objectid": 2268,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 8.85,
+          "0": 4.89
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2269",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.605958951509978,
+          41.15214921050953
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 2269,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 55.61,
+          "0": 4.43
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2270",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.606019386685839,
+          41.15222519778599
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "97/148",
+        "wifi": null,
+        "objectid": 2270,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 45.79,
+          "0": 4.55
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2281",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.598494739826721,
+          41.16562581463344
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "121",
+        "wifi": null,
+        "objectid": 2281,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 7.16,
+          "0": 9.63
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2326",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.601657085305796,
+          41.16372049227464
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "172",
+        "wifi": null,
+        "objectid": 2326,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 185.74,
+          "0": 2.58
+        },
+        "directions": [
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2329",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.583201890469116,
+          41.18120941326362
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "177",
+        "wifi": null,
+        "objectid": 2329,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 5.07,
+          "0": 4.99
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2512",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604612690255914,
+          41.15790182645176
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "298",
+        "wifi": null,
+        "objectid": 2512,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.5,
+          "0": 4.83
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2513",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604615457305409,
+          41.157848212248105
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "298",
+        "wifi": null,
+        "objectid": 2513,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 4.56,
+          "0": 4.87
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2514",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604514572913304,
+          41.157846243514
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "298",
+        "wifi": null,
+        "objectid": 2514,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.91,
+          "0": 3.6
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "signal_equipment:2515",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.604511805788102,
+          41.15789985861611
+        ]
+      },
+      "properties": {
+        "equipamento": "SEM",
+        "numero_instalacao": "298",
+        "wifi": null,
+        "objectid": 2515,
+        "kind": "signal_equipment",
+        "source_file": "porto-semaforos.geojson",
+        "distance_to_direction_metres": {
+          "1": 3.97,
+          "0": 3.64
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "led_crossing:29",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.592029416242395,
+          41.168086842129775
+        ]
+      },
+      "properties": {
+        "toponimo": "Rua de Costa Cabral",
+        "numero_travessias": 1,
+        "numero_sinais_h7": 2,
+        "objectid": 29,
+        "globalid": "{ACABEDE1-894F-4854-BF47-75BDCD0BB8D4}",
+        "kind": "led_crossing",
+        "source_file": "porto-led-crossings.geojson",
+        "distance_to_direction_metres": {
+          "1": 2.46,
+          "0": 2.01
+        },
+        "directions": [
+          "1",
+          "0"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "led_crossing:2433",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.601590841411761,
+          41.16150358255561
+        ]
+      },
+      "properties": {
+        "toponimo": "Rua da Constituição",
+        "numero_travessias": 1,
+        "numero_sinais_h7": 2,
+        "objectid": 2433,
+        "globalid": "{7358C0A7-5A99-4067-9C5C-C75CEA309601}",
+        "kind": "led_crossing",
+        "source_file": "porto-led-crossings.geojson",
+        "distance_to_direction_metres": {
+          "1": 1.54,
+          "0": 179.51
+        },
+        "directions": [
+          "1"
+        ],
+        "signal_timing": "unknown",
+        "controller_mapping": "unverified"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "filename": "porto-semaforos.geojson",
+      "url": "https://dadosabertos.cm-porto.pt/dataset/63c06501-9e19-11f1-84ed-6abdb6d5cf34/resource/4f67e2f7-f445-4f18-b3cb-211ea8c7c098/download/ext-sistema-de-gestao-de-trafego-semaforos-geojson.geojson",
+      "status": 200,
+      "bytes": 549795,
+      "sha256": "cda5d669a0e1b3a8562eaa8cb367edd16eb02d399e4aaafe181af78c755eebff",
+      "retrieved_at": "2026-10-29T16:26:59.916936+00:00",
+      "licence": "CCZero",
+      "publisher": "Câmara Municipal do Porto"
+    },
+    {
+      "filename": "porto-led-crossings.geojson",
+      "url": "https://dadosabertos.cm-porto.pt/dataset/63519d35-9e19-11f1-84ed-6abdb6d5cf34/resource/f1e9e386-88e6-42ab-9363-5dd5b4f6e3d7/download/ext-sinalizacao-led-em-travessias-de-peoes-geojson.geojson",
+      "status": 200,
+      "bytes": 10816,
+      "sha256": "db51e5377115decddf3623d5bd7fbb8c9ebcf247358ab2345d9c382282ea15f4",
+      "retrieved_at": "2026-10-29T16:26:59.733389+00:00",
+      "licence": "CCZero",
+      "publisher": "Câmara Municipal do Porto"
+    }
+  ],
+  "licence": "CCZero",
+  "screen_distance_metres": 40,
+  "note": "Location evidence only. Signal equipment points are not controllers; LED crossings are a subset, not a complete crossing inventory. Signal phases and timings remain unknown."
+}

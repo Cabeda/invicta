@@ -1,0 +1,7 @@
+{
+  "id": "corrected-fixed20-bus-only-s17",
+  "traffic": "none",
+  "seed": 17,
+  "dwell": 20,
+  "passengers_per_minute": 0
+}

@@ -5,6 +5,9 @@ import {evaluateStudy} from '../web/study-reliability.mjs';
 const site='prototypes/costa-cabral/proposal';
 const pairs=[['prototypes/line-701/pilot.template.html','index.html'],['prototypes/line-701/pilot.js','line-701.js'],...['proposal.mjs','proposal-views.mjs','line-explorer.mjs','line-explorer.css','inspection-2d.mjs'].map(n=>['prototypes/line-701/'+n,n]),...['inspection-3d.js','native-replay.mjs'].map(n=>['prototypes/costa-cabral/'+n,n]),...['line-registry.mjs','proposal-page.mjs','punctuality.mjs','study-labels.mjs','lines.json'].map(n=>['web/'+n,n])];
 for(const [source,name]of pairs)if(!(await readFile(source)).equals(await readFile(site+'/'+name)))throw Error('Generated public source differs: '+name);
+for(const [source,target]of [['prototypes/line-701/priority-panel.mjs','priority-panel.mjs'],['prototypes/line-701/data/porto-street-assets.geojson','701-street-assets.geojson'],['prototypes/line-701/full/priority-search.json','701-priority/priority-search.json'],['prototypes/line-701/full/PRIORITY_SEARCH.md','701-priority/PRIORITY_SEARCH.md']])if(!(await readFile(source)).equals(await readFile(site+'/'+target)))throw Error('Generated priority evidence differs: '+target);
+const search=JSON.parse(await readFile(site+'/701-priority/priority-search.json','utf8'));
+for(const item of [...Object.values(search.models).flatMap(m=>Object.values(m.evidence)),...search.trials.flatMap(t=>Object.values(t.evidence))])if(createHash('sha256').update(await readFile(site+'/701-priority/'+item.file)).digest('hex')!==item.gzip_sha256)throw Error('Priority native evidence hash mismatch: '+item.file);
 const html=await readFile(site+'/index.html','utf8');if(Buffer.byteLength(html)>100_000||html.includes('id="line-data"'))throw Error('Page shell must load line data separately');
 const registry=validateRegistry(JSON.parse(await readFile(site+'/lines.json','utf8')));
 for(const line of registry.lines){

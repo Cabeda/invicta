@@ -1,0 +1,14 @@
+{
+  "traffic": "none",
+  "seed": 17,
+  "dwell": 3,
+  "passengers_per_minute": 0.25,
+  "crossing_persons_per_minute": 0.3,
+  "id": "v3-articulated-smart-s17",
+  "boarding": 0.6,
+  "request_stops": true,
+  "signal_priority": true,
+  "early_green": true,
+  "capacity": 110,
+  "bus_length": 18
+}

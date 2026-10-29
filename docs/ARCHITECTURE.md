@@ -36,6 +36,10 @@ Full-day captures are extracted from the numerical run’s own native FCD. Recor
 
 ## Verification
 
+The supplementary street-detail search is independent of the published native replay. `full/priority_model.py` builds a separate OSM pedestrian/speed/route model; `priority_search.py` executes explicit trial configurations, retains every scheduled working and grades all designated checkpoints; `signal_priority.py` logs bounded interventions without skipping clearance phases. `priority_ledger.py` freezes native outputs and verifies every published timetable count against them. Failed controller attempts and superseded imports remain visible. These exploratory rows cannot qualify a production proposal or inherit an existing animation.
+
+The line registry optionally registers `streetAssets`, `prioritySearch` and `priorityReport`. `priority-panel.mjs` verifies supplementary JSON hashes against the proposal's source identity before displaying or exporting it. Porto equipment locations are a review layer, not live signal states or surveyed controller assignments. The public bundle is namespaced under `701-priority/`, so another line can register its own ledger independently.
+
 `native-replay.mjs` owns browser-side asset verification, lossless decoding, lane interpolation and policy-specific bus selection. The Canvas2D and Three.js renderers receive the same model. A plan-view viewport is serialized separately from the 3D pose; switching dimensions preserves the native time and scenario. Both renderers can supply the recording canvas.
 
 - `node --test prototypes/line-701/line-explorer.test.mjs prototypes/line-701/proposal.test.mjs`: direction/focus identity, source-version gates, draft policy/replay behavior, share/import, uploaded evidence and public-claim eligibility.

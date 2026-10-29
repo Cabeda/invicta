@@ -117,6 +117,9 @@ def build():
     identity['compiled_native']=hashlib.sha256(json.dumps(public.get('native_directions') or public['cases'],sort_keys=True,separators=(',',':')).encode()).hexdigest()
     identity['proposal_model']=hashlib.sha256((ROOT/'proposal.mjs').read_bytes()).hexdigest()
     identity['line_registry']=hashlib.sha256((ROOT.parent.parent/'web/lines.json').read_bytes()).hexdigest()
+    identity['priority_search']=hashlib.sha256((ROOT/'full/priority-search.json').read_bytes()).hexdigest()
+    identity['priority_report']=hashlib.sha256((ROOT/'full/PRIORITY_SEARCH.md').read_bytes()).hexdigest()
+    identity['street_assets']=hashlib.sha256((ROOT/'data/porto-street-assets.geojson').read_bytes()).hexdigest()
     identity['service_model']=hashlib.sha256((ROOT/'service-model.mjs').read_bytes()).hexdigest()
     identity['replay_manifest']=public['replay_manifest']['id']
     public['source_summary']['sha256']=identity
@@ -132,7 +135,12 @@ def build():
     current.write_text(page)
     shutil.copy2(ROOT/'pilot.js',SITE/'line-701.js')
     for name in ['line-registry.mjs','proposal-page.mjs','punctuality.mjs','study-labels.mjs','lines.json']:shutil.copy2(ROOT.parent.parent/'web'/name,SITE/name)
-    for name in ['service-model.mjs','service-panel.mjs','proposal.mjs','proposal-views.mjs','inspection-2d.mjs']:shutil.copy2(ROOT/name,SITE/name)
+    for name in ['service-model.mjs','service-panel.mjs','proposal.mjs','proposal-views.mjs','inspection-2d.mjs','priority-panel.mjs']:shutil.copy2(ROOT/name,SITE/name)
+    shutil.copy2(ROOT/'data/porto-street-assets.geojson',SITE/'701-street-assets.geojson')
+    priority_site=SITE/'701-priority';priority_site.mkdir(exist_ok=True)
+    shutil.copy2(ROOT/'full/priority-search.json',priority_site/'priority-search.json')
+    shutil.copy2(ROOT/'full/PRIORITY_SEARCH.md',priority_site/'PRIORITY_SEARCH.md')
+    shutil.copytree(ROOT/'full/priority-evidence',priority_site/'priority-evidence',dirs_exist_ok=True)
     shutil.copy2(ROOT/'data/official-extension/full-line-service-facts.json',SITE/'701-full-service-facts.json')
     shutil.copy2(LEGACY/'inspection-3d.js',SITE/'inspection-3d.js')
     shutil.copy2(LEGACY/'native-replay.mjs',SITE/'native-replay.mjs')

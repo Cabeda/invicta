@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-10-29T16:33:13.617326+00:00",
+  "scope": "Câmara Municipal do Porto CCZero exports; locations only. No controller timing data.",
+  "sources": [
+    {
+      "filename": "porto-semaforos.geojson",
+      "url": "https://dadosabertos.cm-porto.pt/dataset/63c06501-9e19-11f1-84ed-6abdb6d5cf34/resource/4f67e2f7-f445-4f18-b3cb-211ea8c7c098/download/ext-sistema-de-gestao-de-trafego-semaforos-geojson.geojson",
+      "status": 200,
+      "bytes": 549795,
+      "sha256": "cda5d669a0e1b3a8562eaa8cb367edd16eb02d399e4aaafe181af78c755eebff",
+      "retrieved_at": "2026-10-29T16:26:59.916936+00:00"
+    },
+    {
+      "filename": "porto-led-crossings.geojson",
+      "url": "https://dadosabertos.cm-porto.pt/dataset/63519d35-9e19-11f1-84ed-6abdb6d5cf34/resource/f1e9e386-88e6-42ab-9363-5dd5b4f6e3d7/download/ext-sinalizacao-led-em-travessias-de-peoes-geojson.geojson",
+      "status": 200,
+      "bytes": 10816,
+      "sha256": "db51e5377115decddf3623d5bd7fbb8c9ebcf247358ab2345d9c382282ea15f4",
+      "retrieved_at": "2026-10-29T16:26:59.733389+00:00"
+    }
+  ]
+}

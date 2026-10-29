@@ -1,0 +1,14 @@
+{
+  "traffic": "none",
+  "seed": 17,
+  "dwell": 5,
+  "passengers_per_minute": 0.25,
+  "crossing_persons_per_minute": 0.3,
+  "id": "v3-clearance-aware-smart-r2-s17",
+  "boarding": 0.8,
+  "request_stops": true,
+  "signal_priority": true,
+  "early_green": true,
+  "holding_bays": true,
+  "shorten_served_pedestrian_green": true
+}

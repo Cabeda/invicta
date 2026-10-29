@@ -1,0 +1,10 @@
+{
+  "id": "request-prepaid-tsp-p025-s17",
+  "traffic": "none",
+  "seed": 17,
+  "dwell": 5,
+  "passengers_per_minute": 0.25,
+  "boarding": 0.8,
+  "request_stops": true,
+  "signal_priority": true
+}

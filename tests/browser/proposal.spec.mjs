@@ -5,6 +5,18 @@ test('a new visitor sees the purpose and line explanation before the simulation 
  await expect(page.locator('#pageTitle')).toBeInViewport();expect(await page.evaluate(()=>scrollY)).toBeLessThan(50);
  await expect(page.locator('#proposalStory')).toContainText('Give buses priority');
 });
+test('street evidence and priority experiments remain distinct from the published replay and export in both languages',async({page})=>{
+ await page.goto('/?lang=en#route');await page.waitForFunction(()=>!!window.lineExplorer701?.map);
+ await expect(page.locator('#priorityResearch')).toContainText('No tested package meets every checkpoint yet.');
+ const markers=page.locator('.leaflet-overlay-pane path.leaflet-interactive'),before=await markers.count();
+ const checkbox=page.locator('.leaflet-control-layers-overlays input');await checkbox.check();
+ await expect(markers).toHaveCount(before+141);
+ const downloadEvent=page.waitForEvent('download');await page.locator('#reportBtn').click();const report=await downloadEvent,text=await readFile(await report.path(),'utf8');
+ expect(text).toContain('Supplementary priority search');expect(text).toContain('No package meets every timetable checkpoint yet.');expect(text).toContain('street-detail-v3');
+ await page.locator('#pt').click();await expect(page.locator('#priorityResearch')).toContainText('Ainda nenhum pacote testado cumpre todos os pontos de horário.');
+ await page.route('**/701-priority/priority-search.json',route=>route.fulfill({json:{trials:[],winner:'tampered'}}));
+ await page.reload();await expect(page.locator('#priorityResearch')).toHaveText('Resultados de iteração indisponíveis / Iteration results unavailable');
+});
 test('public story, 2D/3D simulation, sharing, drafts and 2D video retain one proposal',async({page,context})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('/?lineId=701&lang=en&case=moderate&view=compare#replay');

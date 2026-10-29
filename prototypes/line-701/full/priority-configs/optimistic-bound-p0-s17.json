@@ -1,0 +1,10 @@
+{
+  "id": "optimistic-bound-p0-s17",
+  "traffic": "none",
+  "seed": 17,
+  "dwell": 0,
+  "passengers_per_minute": 0,
+  "request_stops": true,
+  "diagnostic_all_green": true,
+  "holding_bays": true
+}

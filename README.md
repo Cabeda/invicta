@@ -31,6 +31,8 @@ Switch between Portuguese and English, select journeys and scenarios, export a p
 
 - [701 pilot and commands](prototypes/line-701/README.md)
 - [Full traffic study and reproduction](prototypes/line-701/full/README.md)
+- [Priority search: signals, crossings, boarding and every timetable checkpoint](prototypes/line-701/full/PRIORITY_SEARCH.md)
+- [Official Porto/AMP signal and crossing open-data audit](docs/research/701-signals-crossings-open-data.md)
 - [701 findings and limitations](prototypes/line-701/REPORT.md)
 - [Architecture and validation](docs/ARCHITECTURE.md)
 - [Official route and timetable research](docs/research/line-701-data-and-direction.md)
