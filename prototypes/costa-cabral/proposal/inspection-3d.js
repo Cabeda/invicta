@@ -19,7 +19,7 @@ export async function createInspection({ data, getState, label, changed, assetBa
   const laneMap = new Map(source.lanes.map(l => [l.id, l]));
   const distance = new Map();
   let caseKey = '', loading = false, generation = 0, active = false, steering = false;
-  let cameraKey = '', lastTime = 0, drag = null;
+  let cameraKey = '', lastTime = 0, drag = null, movementSerial = 0;
   const keys = new Set();
 
   for (const lane of source.lanes) {
@@ -332,31 +332,56 @@ export async function createInspection({ data, getState, label, changed, assetBa
     else state.follow = replay.vehicles.find(v => v.group === 'bus')?.id || '';
   }
 
-  function movement(forward, right, metres = 3) {
-    if (!active || getState().perspective !== 'street') return;
+  const canMove = () => active && ['orbit', 'street'].includes(getState().perspective);
+  const isCanvas = target => Object.values(panels).some(p => p.renderer.domElement === target);
+  function movementSpeed() {
+    const p = panels.restricted;
+    return getState().perspective === 'orbit' ? T.MathUtils.clamp(p.camera.position.distanceTo(p.controls.target) * .12, 12, 180) : 5;
+  }
+  function movement(forward, right, metres = movementSpeed() * .25) {
+    if (!canMove() || (!forward && !right) || !metres) return;
+    const reference = panels.restricted, heading = new T.Vector3();
+    if (getState().perspective === 'orbit') {
+      reference.camera.getWorldDirection(heading); heading.y = 0;
+      // At a top-down angle, use screen-up rather than an unstable horizontal heading.
+      if (heading.lengthSq() < 1e-6) { heading.set(0, 1, 0).applyQuaternion(reference.camera.quaternion); heading.y = 0; }
+      heading.normalize();
+    } else heading.set(Math.sin(reference.yaw), 0, -Math.cos(reference.yaw));
+    const delta = heading.clone().multiplyScalar(forward).add(new T.Vector3(-heading.z, 0, heading.x).multiplyScalar(right));
+    if (delta.lengthSq() > 1) delta.normalize();
+    delta.multiplyScalar(metres);
+    steering = true;
     for (const panel of Object.values(panels)) {
-      panel.camera.position.x += (Math.sin(panel.yaw) * forward + Math.cos(panel.yaw) * right) * metres;
-      panel.camera.position.z += (-Math.cos(panel.yaw) * forward + Math.sin(panel.yaw) * right) * metres;
+      panel.camera.position.add(delta);
+      if (getState().perspective === 'orbit') { panel.controls.target.add(delta); panel.controls.update(); }
     }
+    steering = false; movementSerial++;
     render();
   }
 
   const allowedKeys = new Set(['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright']);
   window.addEventListener('keydown', e => {
-    if (!active || getState().perspective !== 'street' || /INPUT|SELECT|TEXTAREA|BUTTON/.test(e.target.tagName) || !allowedKeys.has(e.key.toLowerCase())) return;
+    if (!canMove() || !isCanvas(e.target) || (!allowedKeys.has(e.key.toLowerCase()) && e.key !== 'Shift')) return;
     e.preventDefault(); keys.add(e.key.toLowerCase());
   });
   window.addEventListener('keyup', e => keys.delete(e.key.toLowerCase()));
   window.addEventListener('blur', () => keys.clear());
+  window.addEventListener('focusin', e => { if (!isCanvas(e.target)) keys.clear(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) keys.clear(); });
   for (const button of document.querySelectorAll('[data-walk]')) {
-    button.addEventListener('pointerdown', e => { e.preventDefault(); keys.add(button.dataset.walk); button.setPointerCapture(e.pointerId); });
+    let pressSerial = null;
+    const step = () => movement(button.dataset.walk === 'w' ? 1 : button.dataset.walk === 's' ? -1 : 0,
+      button.dataset.walk === 'd' ? 1 : button.dataset.walk === 'a' ? -1 : 0);
+    button.addEventListener('pointerdown', e => { if (!canMove()) return; e.preventDefault(); pressSerial = movementSerial; keys.add(button.dataset.walk); button.setPointerCapture(e.pointerId); });
     for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) button.addEventListener(event, () => keys.delete(button.dataset.walk));
+    // A quick tap can fall between animation frames; keyboard activation also needs a step.
+    button.addEventListener('click', e => { if (e.detail === 0 || movementSerial === pressSerial) step(); pressSerial = null; });
   }
   function animate(now) {
     const dt = lastTime ? Math.min((now - lastTime) / 1000, .1) : 0; lastTime = now;
     if (keys.size && active) {
       const pressed = (...options) => options.some(k => keys.has(k)) ? 1 : 0;
-      movement(pressed('w', 'arrowup') - pressed('s', 'arrowdown'), pressed('d', 'arrowright') - pressed('a', 'arrowleft'), dt * 5);
+      movement(pressed('w', 'arrowup') - pressed('s', 'arrowdown'), pressed('d', 'arrowright') - pressed('a', 'arrowleft'), dt * movementSpeed() * (keys.has('shift') ? 4 : 1));
     }
     requestAnimationFrame(animate);
   }
@@ -365,9 +390,10 @@ export async function createInspection({ data, getState, label, changed, assetBa
   return {
     async update() {
       active = getState().dimension === '3d';
+      for (const button of document.querySelectorAll('[data-walk]')) button.disabled = !canMove();
       if (!active) { keys.clear(); return; }
       const state = getState(), key = `${state.camera}-${state.perspective}`;
-      if (key !== cameraKey) { cameraKey = key; resetCamera(); }
+      if (key !== cameraKey) { keys.clear(); cameraKey = key; resetCamera(); }
       await loadCase(); render();
     },
     draw: render,
@@ -392,6 +418,7 @@ export async function createInspection({ data, getState, label, changed, assetBa
       }
       steering = false; render();
     },
-    debug() { return { loaded: !loading, case: caseKey, buildings: source.buildings.features.length, lanes: source.lanes.length, vehicles: Object.fromEntries(Object.entries(panels).map(([k, p]) => [k, p.rows.length])), network: source.network_sha256 }; }
+    debug() { return { loaded: !loading, case: caseKey, buildings: source.buildings.features.length, lanes: source.lanes.length, vehicles: Object.fromEntries(Object.entries(panels).map(([k, p]) => [k, p.rows.length])), network: source.network_sha256,
+      cameras: Object.fromEntries(Object.entries(panels).map(([k,p]) => [k,{position:p.camera.position.toArray(),target:p.controls.target.toArray()}])) }; }
   };
 }
