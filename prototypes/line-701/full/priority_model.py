@@ -14,7 +14,7 @@ import sumolib
 from prepare import DATA, PILOT, digest, map_direction, write_json
 
 
-def prepare_priority_model(destination):
+def prepare_priority_model(destination, junction_corrections=None):
     destination = Path(destination).resolve()
     destination.mkdir(parents=True, exist_ok=True)
     raw = DATA / 'raw/osm-tile-0.xml'
@@ -43,6 +43,14 @@ def prepare_priority_model(destination):
         '--osm.crossings', 'true', '--walkingareas', 'true',
         '--sidewalks.guess', 'true',
         '--keep-edges.by-vclass', 'passenger,bus,taxi,bicycle,motorcycle,pedestrian']
+    correction = None
+    if junction_corrections is not None:
+        source = Path(junction_corrections)
+        patch = destination / 'junction-corrections.nod.xml'
+        patch.write_bytes(source.read_bytes())
+        command += ['--node-files', str(patch)]
+        correction = {'source': str(source), 'sha256': digest(patch),
+                      'role': 'model_geometry_correction', 'field_validated': False}
     process = subprocess.run(command, capture_output=True, text=True)
     (destination / 'import.log').write_text(process.stdout + '\n' + process.stderr)
     if process.returncode:
@@ -101,7 +109,7 @@ def prepare_priority_model(destination):
         'served_calls': sum(len(t['stops']) for d in directions.values() for t in d['trips'])}
     write_json(destination / 'routes.json', reference)
     root = xml.getroot()
-    report = {'schema': 1, 'model_version': 5, 'shape_mapping_minimum_metres': .05,
+    report = {'schema': 1, 'model_version': 6 if correction else 5, 'shape_mapping_minimum_metres': .05,
         'stop_mapping_minimum_metres': 12.2,
         'stop_mapping_footprint_metres': 12,
         'osm_sha256': digest(archive), 'network_sha256': digest(network),
@@ -116,6 +124,8 @@ def prepare_priority_model(destination):
             'Known Porto signal equipment points do not establish controlled movements.',
             'Stop matching accepts road fragments long enough for the 12 m study bus; actual stopping footprints remain unsurveyed.',
             'Independent scheduled workings; no observed vehicle blocks.']}
+    if correction is not None:
+        report['junction_corrections'] = correction
     write_json(destination / 'model.json', report)
     return report
 
@@ -123,5 +133,7 @@ def prepare_priority_model(destination):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
-    print(json.dumps({k:v for k,v in prepare_priority_model(parser.parse_args().output).items()
+    parser.add_argument('--junction-corrections', type=Path)
+    args = parser.parse_args()
+    print(json.dumps({k:v for k,v in prepare_priority_model(args.output, args.junction_corrections).items()
                       if k not in ['speed_corrections', 'command', 'overlay_command']}, indent=2))

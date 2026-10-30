@@ -16,7 +16,7 @@ import sumolib
 from prepare import DATA, digest, write_json
 from experiment import ALLOWED, CLASSES, BEGIN, demand, route
 from priority_demand import migrate_requests
-from timetable import assess_trial
+from timetable import assess_trial, acceptance_criteria
 from model_audit import require_readiness, ModelNotReadyError
 from native_runner import freeze_implementation, run_native
 from scenario_audit import audit_scenario
@@ -224,6 +224,7 @@ def _execute_trial(model, folder, config, readiness):
     started = time.monotonic()
     implementations = freeze_implementation(folder)
     (folder / 'reference.json').write_bytes((model / 'routes.json').read_bytes())
+    (folder / 'model.json').write_bytes((model / 'model.json').read_bytes())
     source_hashes = {name: digest(model / name) for name in ['baseline.net.xml', 'routes.json', 'model.json']}
     if source_hashes['baseline.net.xml'] != json.loads((model / 'model.json').read_text())['network_sha256']:
         raise ValueError('Model network bytes changed')
@@ -231,6 +232,7 @@ def _execute_trial(model, folder, config, readiness):
     native_hashes = {name: digest(folder / name) for name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml', 'endpoint-mapping.json', 'crossing-requests.json', 'compiled-audit.json']}
     native_hashes.update(implementations)
     native_hashes['reference.json'] = digest(folder / 'reference.json')
+    native_hashes['model.json'] = digest(folder / 'model.json')
     preparation_seconds = time.monotonic() - started
     end = max(s['scheduled'] for t in buses for s in t['stops']) + 7200
     command = [str(Path(sumo.SUMO_HOME) / 'bin/sumo'), '--net-file', str(folder / 'network.net.xml'),
@@ -240,6 +242,7 @@ def _execute_trial(model, folder, config, readiness):
         '--tripinfo-output.write-undeparted', 'true', '--stop-output', str(folder / 'stops.xml'),
         '--stop-output.write-unfinished', 'true', '--collision-output', str(folder / 'collisions.xml'),
         '--time-to-teleport', '-1', '--time-to-teleport.ride', '-1', '--no-step-log', 'true',
+        '--collision.action', 'warn', '--collision.check-junctions', 'true',
         '--duration-log.disable', 'true', '--xml-validation', 'never', '--device.rerouting.period', '60',
         '--routing-algorithm', config.get('routing_algorithm', 'dijkstra'),
         '--save-state.times', str(end - 1), '--save-state.files', str(folder / 'final-state.xml'),
@@ -254,8 +257,12 @@ def _execute_trial(model, folder, config, readiness):
     evaluation_started = time.monotonic()
     trips = list(ET.parse(folder / 'trips.xml').getroot())
     completed = {t.get('id') for t in trips if t.tag == 'tripinfo' and float(t.get('arrival', -1)) >= 0}
-    metrics = assess_trial(buses, [c.attrib for c in ET.parse(folder / 'stops.xml').getroot()],
-                           completed & {b['id'] for b in buses})
+    calls = [c.attrib for c in ET.parse(folder / 'stops.xml').getroot()]
+    completed_buses = completed & {b['id'] for b in buses}
+    metrics = assess_trial(buses, calls, completed_buses)
+    criteria = acceptance_criteria(config.get('operational_lateness_seconds', 0))
+    operational = assess_trial(buses, calls, completed_buses,
+                                lateness_tolerance_seconds=criteria['lateness_tolerance_seconds'])
     person_results = [p for p in trips if p.tag == 'personinfo' and p.get('id').startswith('passenger_')]
     arrived_people = sum(len(p) > 0 and all(float(stage.get('arrival', -1)) >= 0
                          for stage in p) for p in person_results)
@@ -270,6 +277,7 @@ def _execute_trial(model, folder, config, readiness):
                'monitor.json', 'trace.jsonl', 'progress.json'] + [s['file'] for s in execution['diagnostics']['snapshots']]
     output_hashes = {name: digest(folder / name) for name in outputs if (folder / name).exists()}
     result = {'config': config, 'metrics': metrics, 'grading_schema': 2, 'native': True,
+        'acceptance_criteria': criteria, 'operational_metrics': operational,
         'readiness': readiness,
         'scenario_audit': json.loads((folder / 'compiled-audit.json').read_text()),
         'diagnostics': execution['diagnostics'], 'runtime': execution['runtime'],

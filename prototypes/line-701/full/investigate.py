@@ -19,13 +19,20 @@ def summary(report):
         coverage, metrics = report['coverage'], report['metrics']
         lines = [f"Execution: {report['source']['trial']} · {coverage['kind']}",
                  f"Reference: {coverage['scheduled_trips']} planned trips · {coverage['timing_checks']} timing checks"]
+        if 'operational_metrics' in report:
+            operational = report['operational_metrics']
+            tolerance = report['acceptance_criteria']['lateness_tolerance_seconds']
+            lines.append(f"Strict: {metrics['late_checkpoints']} late checks · "
+                         f"project target (no early departures, ≤{tolerance} s late): "
+                         f"{operational['late_checkpoints']} late checks · "
+                         f"full-service pass: {report['operational_compliance']}")
         observation = report.get('observation')
         if observation is not None:
             lines.append(f"Observed completions: {metrics['completed']} · checks due: {observation['due_checks']} · "
                          f"missing due: {observation['missing_due_checks']} · future checks: {observation['future_checks']}")
         first = report['first_failure']
         if first:
-            lines.append(f"First failure: {first['trip']} at {first['stop']} · cause: {first['cause']}")
+            lines.append(f"First strict failure: {first['trip']} at {first['stop']} · cause: {first['cause']}")
             interval = first['interval']
             if interval:
                 lines.append(f"Interval: {interval['scheduled_seconds']} s budget; "
@@ -76,6 +83,9 @@ def main(argv=None):
             command.add_argument('--trip')
         if name == 'audit':
             command.add_argument('--bus-length', type=float, default=12)
+        if name in ['audit', 'diagnose']:
+            command.add_argument('--lateness-tolerance', type=float,
+                                 help='Explicit project lateness target in seconds; strict score is always retained')
         if name == 'reproduce':
             command.add_argument('--output-dir', type=Path, required=True)
             command.add_argument('--stop')
@@ -98,9 +108,11 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         if args.operation == 'audit':
-            report = audit_model(args.model, args.source, args.trial, bus_length=args.bus_length)
+            report = audit_model(args.model, args.source, args.trial, bus_length=args.bus_length,
+                                 lateness_tolerance_seconds=args.lateness_tolerance)
         elif args.operation == 'diagnose':
-            report = diagnose_trial(args.source, args.trial, args.model, args.trip)
+            report = diagnose_trial(args.source, args.trial, args.model, args.trip,
+                                    lateness_tolerance_seconds=args.lateness_tolerance)
         elif args.operation == 'inspect':
             report = inspect_snapshot(args.source, args.trial, args.model, args.snapshot, args.trip, args.limit)
         elif args.operation == 'probe-state':

@@ -1,5 +1,5 @@
 """Explain recorded timetable failures without rerunning vehicle physics."""
-from timetable import assess_trial, observation_window
+from timetable import assess_trial, observation_window, acceptance_criteria
 from trial_evidence import load_trial
 
 
@@ -18,10 +18,14 @@ def execution_coverage(evidence):
     return {'kind': explicit, 'begin': begin, 'end': end, 'full_service_day': full}
 
 
-def explain(evidence, trip_id=None):
+def explain(evidence, trip_id=None, *, lateness_tolerance_seconds=None):
     scheduled, calls = evidence.buses, evidence.calls()
     completed = evidence.completed()
     metrics = assess_trial(scheduled, calls, completed)
+    tolerance = (evidence.result['config'].get('operational_lateness_seconds', 0)
+                 if lateness_tolerance_seconds is None else lateness_tolerance_seconds)
+    criteria = acceptance_criteria(tolerance)
+    operational = assess_trial(scheduled, calls, completed, lateness_tolerance_seconds=tolerance)
     indexed = {(call['id'], call['busStop']): call for call in calls}
     trips = {trip['id']: trip for trip in scheduled}
     if trip_id is not None and trip_id not in trips:
@@ -63,9 +67,11 @@ def explain(evidence, trip_id=None):
         'coverage': {'scheduled_trips': len(scheduled), 'timing_checks': metrics['checkpoints'],
                      'directions': sorted(evidence.reference['directions']), **coverage},
         'metrics': {key: value for key, value in metrics.items() if key != 'failures'},
+        'acceptance_criteria': criteria, 'operational_metrics': operational,
+        'operational_compliance': operational['passes'] and coverage['full_service_day'],
         'metrics_scope': 'whole_reference_goal', 'observation': observation,
         'simulation_compliance': metrics['passes'] and coverage['full_service_day'], 'field_validated': False,
-        'first_failure': first, 'unfinished_trips': unfinished,
+        'first_failure': first, 'first_failure_criterion': 'strict', 'unfinished_trips': unfinished,
         'next_step': ('Inspect the first failed interval and its native trace before changing a traffic package.'
                       if first else 'Verify the declared traffic/seed matrix and passenger/access constraints.'),
         'limitations': ['Recorded stop calls establish timing, not the physical cause of a delay.',
@@ -73,5 +79,6 @@ def explain(evidence, trip_id=None):
                        'Simulation compliance does not establish field validation.']}
 
 
-def diagnose_trial(source, trial_id=None, model=None, trip_id=None):
-    return explain(load_trial(source, trial_id, model), trip_id)
+def diagnose_trial(source, trial_id=None, model=None, trip_id=None, *, lateness_tolerance_seconds=None):
+    return explain(load_trial(source, trial_id, model), trip_id,
+                   lateness_tolerance_seconds=lateness_tolerance_seconds)

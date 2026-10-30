@@ -7,6 +7,7 @@ import sumolib
 
 from run_diagnostics import diagnose_trial, execution_coverage
 from trial_evidence import sha256, load_trial
+from timetable import acceptance_criteria
 
 
 class ModelNotReadyError(ValueError):
@@ -16,14 +17,20 @@ class ModelNotReadyError(ValueError):
 
 
 def is_empty_diagnostic(config):
-    return (config.get('traffic') == 'none' and config.get('diagnostic_all_green') is True
+    existing_signals = (config.get('diagnostic_control') == 'existing_signals'
+                        and not config.get('diagnostic_all_green'))
+    # Historical diagnostic_all_green means signals switched OFF, not all green.
+    control = existing_signals or (config.get('diagnostic_all_green') is True
+                                  and config.get('diagnostic_control') in [None, 'signals_off'])
+    return (config.get('traffic') == 'none' and control
             and config.get('dwell') == 0 and config.get('passengers_per_minute', 0) == 0
             and config.get('crossing_persons_per_minute', 0) == 0
             and config.get('request_stops') is True and config.get('holding_bays') is True
             and not config.get('lanes') and not config.get('signal_priority'))
 
 
-def audit_model(model, diagnostic_source=None, diagnostic_trial=None, *, bus_length=12):
+def audit_model(model, diagnostic_source=None, diagnostic_trial=None, *, bus_length=12,
+                lateness_tolerance_seconds=None):
     if not math.isfinite(bus_length) or bus_length <= 0:
         raise ValueError('Audit bus length must be positive and finite')
     folder = Path(model)
@@ -137,12 +144,18 @@ def audit_model(model, diagnostic_source=None, diagnostic_trial=None, *, bus_len
         elif not execution_coverage(evidence)['full_service_day']:
             issue('diagnostic_scope', 'A bounded diagnostic cannot establish full-service readiness.')
         else:
-            diagnosis = diagnose_trial(diagnostic_source, diagnostic_trial, folder)
-            if not diagnosis['simulation_compliance']:
+            diagnosis = diagnose_trial(diagnostic_source, diagnostic_trial, folder,
+                                       lateness_tolerance_seconds=lateness_tolerance_seconds)
+            if evidence.result['config'].get('diagnostic_control') != 'existing_signals':
+                issue('diagnostic_signals_disabled',
+                      'A signals-off pass is an optimistic bound; retain existing signals in the bus-only prerequisite.')
+            if not diagnosis['operational_compliance']:
                 issue('unresolved_empty_diagnostic', 'The optimistic diagnostic misses a checkpoint; diagnose before traffic-only packages.')
     blockers = sorted({finding['code'] for finding in findings})
-    identity = {**fingerprints, 'audit_version': 1,
+    identity = {**fingerprints, 'audit_version': 2,
                 'bus_length_metres': bus_length,
+                'acceptance_criteria': diagnosis['acceptance_criteria'] if diagnosis else acceptance_criteria(
+                    0 if lateness_tolerance_seconds is None else lateness_tolerance_seconds),
                 'implementation_sha256': sha256(Path(__file__).read_bytes()),
                 'diagnostic_execution_sha256': diagnosis['source']['execution_sha256'] if diagnosis else None}
     return {'schema': 'invicta.model-audit.v1', 'id': sha256(json.dumps(identity, sort_keys=True).encode()),
@@ -156,9 +169,10 @@ def audit_model(model, diagnostic_source=None, diagnostic_trial=None, *, bus_len
 
 
 def require_readiness(model, config):
+    criteria = acceptance_criteria(config.get('operational_lateness_seconds', 0))
     if is_empty_diagnostic(config):
-        return {'status': 'diagnostic_only', 'field_validated': False}
-    if config.get('diagnostic_all_green'):
+        return {'status': 'diagnostic_only', 'acceptance_criteria': criteria, 'field_validated': False}
+    if config.get('diagnostic_all_green') or config.get('diagnostic_control'):
         raise ModelNotReadyError({'status': 'blocked', 'blockers': ['invalid_empty_diagnostic_profile']})
     readiness = config.get('readiness')
     if not isinstance(readiness, dict) or not readiness.get('source'):
@@ -167,7 +181,8 @@ def require_readiness(model, config):
     if not isinstance(hypothesis, dict) or any(not isinstance(hypothesis.get(key), str) or not hypothesis[key].strip()
                                               for key in ['change', 'prediction', 'evidence']):
         raise ModelNotReadyError({'status': 'blocked', 'blockers': ['missing_testable_hypothesis']})
-    report = audit_model(model, readiness['source'], readiness.get('trial'), bus_length=config.get('bus_length', 12))
+    report = audit_model(model, readiness['source'], readiness.get('trial'), bus_length=config.get('bus_length', 12),
+                         lateness_tolerance_seconds=criteria['lateness_tolerance_seconds'])
     if report['status'] != 'ready_for_full_run':
         raise ModelNotReadyError(report)
     return report

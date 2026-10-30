@@ -76,6 +76,93 @@ def empty_config(ident='fixture-empty'):
 
 
 class InvestigationTests(unittest.TestCase):
+    def test_archived_bus_only_controls_retain_both_scores_and_complete_service(self):
+        source = ROOT.parents[2] / 'docs/research/701-bus-only-controls-2026-10-30/controls.json'
+        ledger = json.loads(source.read_text())
+        self.assertEqual(len(ledger['trials']), 6)
+        for trial in ledger['trials']:
+            self.assertEqual(trial['config']['traffic'], 'none')
+            self.assertEqual(trial['vehicle_requests'], 0)
+            self.assertEqual(trial['passenger_requests'], 0)
+            report = diagnose_trial(source, trial['id'])
+            self.assertEqual(report['coverage']['timing_checks'], 714)
+            self.assertTrue(report['coverage']['full_service_day'])
+            self.assertEqual(report['metrics']['completed'], 127)
+            self.assertEqual(report['metrics'], {k: v for k, v in trial['metrics'].items() if k != 'failures'})
+            self.assertEqual(report['operational_metrics'], trial['operational_metrics'])
+            self.assertFalse(report['simulation_compliance'])
+            self.assertEqual(report['operational_compliance'], trial['config'].get('diagnostic_all_green', False))
+
+    def test_operational_tolerance_is_reported_without_replacing_strict_or_early_failures(self):
+        from timetable import assess_trial
+        scheduled = [{'id': 'bus', 'stops': [
+            {'native_stop_id': 'A', 'scheduled': 100, 'designated_timing_point': True},
+            {'native_stop_id': 'B', 'scheduled': 200, 'designated_timing_point': True}]}]
+        calls = [{'id': 'bus', 'busStop': 'A', 'started': '99', 'ended': '100'},
+                 {'id': 'bus', 'busStop': 'B', 'started': '260', 'ended': '261'}]
+        self.assertFalse(assess_trial(scheduled, calls, {'bus'})['passes'])
+        self.assertTrue(assess_trial(scheduled, calls, {'bus'}, lateness_tolerance_seconds=60)['passes'])
+        calls[1]['started'] = '261'
+        self.assertFalse(assess_trial(scheduled, calls, {'bus'}, lateness_tolerance_seconds=60)['passes'])
+        calls[1]['started'] = '190'
+        calls[0]['ended'] = '99'
+        self.assertFalse(assess_trial(scheduled, calls, {'bus'}, lateness_tolerance_seconds=60)['passes'])
+        for invalid in [-1, float('nan'), float('inf'), True]:
+            with self.assertRaises(ValueError):
+                assess_trial(scheduled, calls, {'bus'}, lateness_tolerance_seconds=invalid)
+
+    def test_bus_only_control_keeps_existing_signals_and_blocks_traffic_when_late(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root, budget=1)
+            config = {**empty_config('bus-only-existing-signals'),
+                'diagnostic_all_green': False, 'diagnostic_control': 'existing_signals'}
+            result = run_trial(model, root, config)
+            self.assertNotIn('--tls.all-off', result['command'])
+            self.assertFalse(result['metrics']['passes'])
+            report = audit_model(model, root / config['id'])
+            self.assertIn('unresolved_empty_diagnostic', report['blockers'])
+            with self.assertRaises(ModelNotReadyError):
+                run_trial(model, root, {'id': 'traffic-too-early', 'traffic': 'moderate', 'seed': 17,
+                    'readiness': {'source': str(root / config['id'])},
+                    'hypothesis': {'change': 'Traffic', 'prediction': 'Still late', 'evidence': 'Control'}})
+            self.assertFalse((root / 'traffic-too-early').exists())
+
+    def test_readiness_rescores_the_frozen_control_at_the_explicit_target(self):
+        from model_audit import require_readiness
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root, budget=1)
+            config = {**empty_config(), 'operational_lateness_seconds': 60,
+                      'diagnostic_all_green': False, 'diagnostic_control': 'existing_signals'}
+            result = run_trial(model, root, config)
+            self.assertFalse(result['metrics']['passes'])
+            self.assertTrue(result['operational_metrics']['passes'])
+            raw_result = (root / config['id'] / 'result.json').read_bytes()
+            strict = audit_model(model, root / config['id'], lateness_tolerance_seconds=0)
+            operational = audit_model(model, root / config['id'], lateness_tolerance_seconds=60)
+            self.assertIn('unresolved_empty_diagnostic', strict['blockers'])
+            self.assertEqual(operational['status'], 'ready_for_full_run')
+            self.assertFalse(operational['diagnosis']['simulation_compliance'])
+            self.assertTrue(operational['diagnosis']['operational_compliance'])
+            self.assertNotEqual(strict['id'], operational['id'])
+            self.assertEqual((root / config['id'] / 'result.json').read_bytes(), raw_result)
+            candidate = {'traffic': 'none', 'readiness': {'source': str(root / config['id'])},
+                         'hypothesis': {'change': 'Control', 'prediction': 'Complete', 'evidence': 'Fixture'}}
+            with self.assertRaises(ModelNotReadyError):
+                require_readiness(model, candidate)
+            self.assertEqual(require_readiness(model, {**candidate, 'operational_lateness_seconds': 60})['status'],
+                             'ready_for_full_run')
+
+    def test_signals_off_pass_is_only_an_optimistic_bound(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root)
+            run_trial(model, root, empty_config())
+            report = audit_model(model, root / 'fixture-empty', lateness_tolerance_seconds=60)
+            self.assertTrue(report['diagnosis']['operational_compliance'])
+            self.assertIn('diagnostic_signals_disabled', report['blockers'])
+
     def test_native_onset_capture_stops_at_an_actual_red_signal_blockage(self):
         import xml.etree.ElementTree as ET
         from native_runner import run_native
@@ -467,7 +554,8 @@ class InvestigationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             model = native_fixture(root)
-            result = run_trial(model, root, empty_config())
+            result = run_trial(model, root, {**empty_config(), 'diagnostic_all_green': False,
+                                             'diagnostic_control': 'existing_signals'})
             self.assertTrue(result['metrics']['passes'])
             report = audit_model(model, root / 'fixture-empty')
             self.assertEqual(report['status'], 'ready_for_full_run')

@@ -1,4 +1,16 @@
 """Pure timetable evaluation shared by native execution and investigation."""
+import math
+
+
+def acceptance_criteria(lateness_tolerance_seconds=0):
+    """An explicit study threshold; never an assertion about the operator's contract."""
+    if (isinstance(lateness_tolerance_seconds, bool)
+            or not isinstance(lateness_tolerance_seconds, (int, float))
+            or not math.isfinite(lateness_tolerance_seconds) or lateness_tolerance_seconds < 0):
+        raise ValueError('Lateness tolerance must be a finite, nonnegative number of seconds')
+    return {'lateness_tolerance_seconds': lateness_tolerance_seconds,
+            'early_departures_allowed': False, 'terminal_measure': 'arrival',
+            'other_checkpoint_measure': 'departure', 'scope': 'project_target_not_operator_contract'}
 
 
 def observation_window(scheduled, metrics, completed, cutoff):
@@ -21,8 +33,9 @@ def observation_window(scheduled, metrics, completed, cutoff):
                                            <= trip['stops'][-1]['scheduled'] and trip['id'] not in completed],
             'future_trip_ids': [trip['id'] for trip in scheduled if trip['stops'][0]['scheduled'] >= cutoff]}
 
-def assess_trial(scheduled, calls, completed):
-    """Strict zero-tolerance timetable test, including missing scheduled trips."""
+def assess_trial(scheduled, calls, completed, *, lateness_tolerance_seconds=0):
+    """Evaluate every scheduled check; the default remains the strict historical test."""
+    acceptance_criteria(lateness_tolerance_seconds)
     indexed = {(c['id'], c['busStop']): c for c in calls}
     if len(indexed) != len(calls):
         raise ValueError('Duplicate native stop calls')
@@ -39,7 +52,7 @@ def assess_trial(scheduled, calls, completed):
             arrival, departure = float(call.get('started', -1)), float(call.get('ended', -1))
             terminal = index == len(trip['stops']) - 1
             missing = arrival < 0 or (not terminal and departure < 0)
-            late = not missing and (arrival if terminal else departure) > stop['scheduled']
+            late = not missing and (arrival if terminal else departure) > stop['scheduled'] + lateness_tolerance_seconds
             early = not missing and not terminal and departure < stop['scheduled']
             result['missing_checkpoints'] += missing
             result['late_checkpoints'] += late
