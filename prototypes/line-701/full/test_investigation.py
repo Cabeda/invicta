@@ -24,12 +24,17 @@ from investigate import main
 ROOT = Path(__file__).parent
 
 
-def native_fixture(root, budget=100):
+def native_fixture(root, budget=100, request_stop=False, connected=False):
     model = root / 'model'
     model.mkdir()
-    (model / 'nodes.xml').write_text('<nodes><node id="a" x="0" y="0"/><node id="b" x="300" y="0"/></nodes>')
-    (model / 'edges.xml').write_text('<edges><edge id="east" from="a" to="b" speed="13.88888888888889"/>'
-                                   '<edge id="west" from="b" to="a" speed="13.88888888888889"/></edges>')
+    (model / 'nodes.xml').write_text('<nodes><node id="a" x="0" y="0"/><node id="b" x="300" y="0"/>'
+                                   + ('<node id="c" x="600" y="0"/>' if connected else '') + '</nodes>')
+    edges = ('<edge id="east" from="a" to="b" speed="13.88888888888889"/>'
+             + ('<edge id="east2" from="b" to="c" speed="13.88888888888889"/>'
+                '<edge id="west" from="c" to="b" speed="13.88888888888889"/>'
+                '<edge id="west2" from="b" to="a" speed="13.88888888888889"/>' if connected else
+                '<edge id="west" from="b" to="a" speed="13.88888888888889"/>'))
+    (model / 'edges.xml').write_text('<edges>' + edges + '</edges>')
     subprocess.run([str(Path(sumo.SUMO_HOME) / 'bin/netconvert'),
                     '--node-files', str(model / 'nodes.xml'), '--edge-files', str(model / 'edges.xml'),
                     '--no-turnarounds', 'true', '--output-file', str(model / 'baseline.net.xml')],
@@ -43,10 +48,22 @@ def native_fixture(root, budget=100):
                   'point': sumolib.geomhelper.positionAtShapeOffset(edge.getShape(), position),
                   'designated_timing_point': True, 'scheduled': scheduled}
                  for name, position, scheduled in [('A', 15, 18100), ('B', 280, 18100 + budget)]]
-        directions[direction] = {'path': [road], 'shape': edge.getShape(), 'stops': stops,
+        if request_stop:
+            stops.insert(1, {**stops[0], 'native_stop_id': f'd{direction}_MID', 'stop_id': 'MID',
+                             'stop_name': 'MID', 'pos': 150, 'scheduled': 18100 + budget // 2,
+                             'point': sumolib.geomhelper.positionAtShapeOffset(edge.getShape(), 150),
+                             'designated_timing_point': False})
+        path, shape = [road], edge.getShape()
+        if connected:
+            path.append(road + '2')
+            last = net.getEdge(road + '2')
+            shape += last.getShape()
+            stops[-1].update(lane=road + '2_0', edge=road + '2', path_index=1,
+                             point=sumolib.geomhelper.positionAtShapeOffset(last.getShape(), 280))
+        directions[direction] = {'path': path, 'shape': shape, 'stops': stops,
                                  'trips': [{'id': f'd{direction}_bus_0', 'direction': direction,
-                                            'depart': 18100, 'stops': stops, 'path': [road]}]}
-    write_json(model / 'routes.json', {'directions': directions, 'trip_count': 2, 'served_calls': 4,
+                                            'depart': 18100, 'stops': stops, 'path': path}]}
+    write_json(model / 'routes.json', {'directions': directions, 'trip_count': 2, 'served_calls': 6 if request_stop else 4,
                                       'network_sha256': digest(model / 'baseline.net.xml')})
     write_json(model / 'model.json', {'network_sha256': digest(model / 'baseline.net.xml'),
                                      'reference_sha256': digest(model / 'routes.json'),
@@ -59,6 +76,121 @@ def empty_config(ident='fixture-empty'):
 
 
 class InvestigationTests(unittest.TestCase):
+    def test_published_followup_distinguishes_diagnostic_success_from_service_success(self):
+        folder = ROOT.parents[2] / 'docs/research/701-followup-2026-10-30'
+        manifest = json.loads((folder / 'manifest.json').read_text())
+        verified = set()
+        def payload(item):
+            path = (folder / item['file']).resolve()
+            self.assertTrue(path.is_relative_to(ROOT.parents[2].resolve()))
+            compressed = path.read_bytes()
+            self.assertEqual(hashlib.sha256(compressed).hexdigest(), item['gzip_sha256'])
+            raw = gzip.decompress(compressed)
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), item['sha256'])
+            return raw
+        for case in manifest['cases'].values():
+            for item in case['files'].values():
+                if item['gzip_sha256'] not in verified:
+                    payload(item)
+                    verified.add(item['gzip_sha256'])
+            if case['kind'] == 'prefix':
+                result = json.loads(payload(case['files']['reproduction.json']))
+                self.assertFalse(result['full_service_compliance'])
+                self.assertEqual(result['metrics']['planned'], 127)
+                self.assertEqual(result['metrics']['checkpoints'], 714)
+            if 'variant_network_delta' in case:
+                delta = case['variant_network_delta']
+                network = payload(case['files'][delta['source']])
+                for change in delta['replacements']:
+                    self.assertEqual(network.count(change['before'].encode()), 1)
+                    network = network.replace(change['before'].encode(), change['after'].encode(), 1)
+                self.assertEqual(hashlib.sha256(network).hexdigest(), delta['sha256'])
+        cases = manifest['cases']
+        def report(case, name):
+            return json.loads(payload(cases[case]['files'][name]))
+        passing = report('no-unused-stops-first-interval', 'reproduction.json')
+        self.assertTrue(passing['target']['passes'])
+        self.assertEqual(len(passing['sensitivity']['affected_stops']), 20)
+        self.assertEqual(passing['sensitivity']['parent_role'], 'uncertain_assumption_sensitivity')
+        original = report('original-driver-no-unused-stops', 'reproduction.json')
+        self.assertEqual(float(original['target']['call']['ended']) - original['target']['scheduled'], 14)
+        parked = report('in-lane-checkpoints', 'reproduction.json')
+        self.assertEqual(float(parked['target']['call']['ended']) - parked['target']['scheduled'], 5)
+        tail = report('baseline-one-step-tail-check', 'tail-check.json')
+        self.assertFalse(tail['matches_within_native_output_precision'])
+        onset = report('original-candidate-onset', 'failed-replay-audit.json')
+        self.assertEqual(onset['observed_through_seconds'], 28847)
+        self.assertEqual(onset['complete_bus_calls_compared'], 855)
+        self.assertTrue(onset['bus_call_prefix_matches'])
+        self.assertIsNone(onset['first_prolonged_wait'])
+
+    def test_computation_budget_preserves_partial_evidence_without_passing_the_target(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root)
+            run_trial(model, root, empty_config())
+            result = reproduce_prefix(root / 'fixture-empty', root / 'limited', trip_id='d1_bus_0',
+                                      stop_id='d1_B', wall_budget_seconds=.000001)
+            self.assertEqual(result['diagnostics']['stop_reason'], 'native_wall_budget')
+            self.assertFalse(result['target']['passes'])
+            self.assertFalse(result['full_service_compliance'])
+            self.assertEqual(result['prefix_equivalence']['matched'], None)
+            self.assertLess(result['execution_scope']['end'], 18100)
+            self.assertTrue((root / 'limited/reproduction.json').exists())
+            self.assertIn('trips.xml', result['output_hashes'])
+
+    def test_original_input_blockage_replay_cannot_qualify_even_when_fixture_service_finishes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root)
+            run_trial(model, root, empty_config())
+            report = reproduce_prefix(root / 'fixture-empty', root / 'onset', until_blockage=True)
+            self.assertEqual(report['role'], 'original_input_blockage_reproduction')
+            self.assertEqual(report['execution_scope']['kind'], 'diagnostic_onset')
+            self.assertTrue(report['prefix_equivalence']['matched'])
+            self.assertFalse(report['full_service_compliance'])
+
+    def test_paired_state_probe_is_bounded_and_cannot_be_read_as_a_service_execution(self):
+        from state_probe import probe_snapshot
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root, budget=1, connected=True)
+            original = run_trial(model, root, empty_config())
+            source = root / 'fixture-empty'
+            result = probe_snapshot(source, root / 'state-probe', 'd1_bus_0', seconds=2,
+                                    snapshot='first-deadline-state.xml.gz')
+            self.assertEqual(result['role'], 'snapshot_mechanism_probe')
+            self.assertEqual(result['control']['simulation_steps'], 2)
+            self.assertEqual(result['variant']['simulation_steps'], 2)
+            self.assertFalse(result['full_service_compliance'])
+            self.assertFalse(result['controller_state_restored'])
+            self.assertFalse((root / 'state-probe/result.json').exists())
+            self.assertEqual(digest(source / 'network.net.xml'), original['input_hashes']['network.net.xml'])
+            with self.assertRaisesRegex(ValueError, 'bounded'):
+                probe_snapshot(source, root / 'unbounded', 'd1_bus_0', seconds=301)
+
+    def test_empty_stop_semantics_probe_preserves_route_and_cannot_qualify_service(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root, request_stop=True)
+            run_trial(model, root, empty_config())
+            source = root / 'fixture-empty'
+            before = digest(source / 'routes.rou.xml')
+            result = reproduce_prefix(source, root / 'skip-probe', trip_id='d1_bus_0', stop_id='d1_B',
+                                      probe='omit_empty_request_stops')
+            self.assertEqual(result['role'], 'model_semantics_sensitivity')
+            self.assertEqual(result['sensitivity']['affected_stops'], ['d1_MID'])
+            self.assertEqual(result['sensitivity']['physical_intervention'], False)
+            self.assertEqual(result['metrics']['checkpoints'], 4)
+            self.assertEqual(result['metrics']['planned'], 2)
+            self.assertFalse(result['full_service_compliance'])
+            self.assertEqual(digest(source / 'routes.rou.xml'), before)
+            import xml.etree.ElementTree as ET
+            native = ET.parse(root / 'skip-probe/routes.rou.xml').getroot()
+            self.assertEqual(native.find("vehicle[@id='d1_bus_0']/route").get('edges'), 'east')
+            self.assertEqual([s.get('busStop') for s in native.find("vehicle[@id='d1_bus_0']").findall('stop')],
+                             ['d1_A', 'd1_B'])
+
     def test_traffic_prefix_counts_only_completed_scheduled_buses(self):
         import xml.etree.ElementTree as ET
         from prefix_reproduction import set_option

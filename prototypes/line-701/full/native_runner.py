@@ -22,7 +22,8 @@ def freeze_implementation(folder):
     here = Path(__file__).parent
     paths = [here / name for name in ['priority_search.py', 'native_runner.py', 'signal_priority.py',
              'model_audit.py', 'run_diagnostics.py', 'trial_evidence.py', 'timetable.py',
-             'priority_demand.py', 'prepare.py', 'experiment.py', 'prefix_reproduction.py', 'scenario_audit.py']]
+             'priority_demand.py', 'prepare.py', 'experiment.py', 'prefix_reproduction.py', 'scenario_audit.py',
+             'state_probe.py']]
     paths += [here.parents[2] / 'requirements-simulation.txt',
               here.parents[1] / 'costa-cabral/requirements.txt']
     files = {}
@@ -91,7 +92,7 @@ def atomic_json(path, data):
 
 class RunMonitor:
     def __init__(self, folder, buses, sample_seconds=30, stall_seconds=300, focus_trip=None, max_samples=20000,
-                 max_wall_seconds=None):
+                 max_wall_seconds=None, stop_on_first_blockage=False):
         if sample_seconds < 1 or stall_seconds < 1 or not 1 <= max_samples <= 20000:
             raise ValueError('Diagnostic sampling must be positive and bounded')
         self.folder, self.buses = folder, {bus['id'] for bus in buses}
@@ -99,6 +100,8 @@ class RunMonitor:
         self.sample_seconds, self.stall_seconds = sample_seconds, stall_seconds
         self.focus_trip, self.max_samples = focus_trip, max_samples
         self.max_wall_seconds, self.started = max_wall_seconds, time.monotonic()
+        self.stop_on_first_blockage, self.stop_requested, self.last_time = stop_on_first_blockage, False, None
+        self.stop_reason = None
         self.samples, self.first_deadline, self.first_stall, self.snapshots = 0, None, None, []
         self.deadlines = collections.defaultdict(list)
         for bus in buses:
@@ -126,8 +129,10 @@ class RunMonitor:
         return event
 
     def step(self, simulation, now):
+        self.last_time = now
         if self.max_wall_seconds is not None and time.monotonic() - self.started > self.max_wall_seconds:
-            raise TimeoutError('Diagnostic native-execution wall-time budget exceeded')
+            self.stop_requested, self.stop_reason = True, 'native_wall_budget'
+            return
         self.active.update(set(simulation.simulation.getDepartedIDList()) & self.buses)
         arrived = set(simulation.simulation.getArrivedIDList()) & self.buses
         self.arrived.update(arrived)
@@ -151,6 +156,9 @@ class RunMonitor:
             for bus in watched:
                 if simulation.vehicle.getWaitingTime(bus) >= self.stall_seconds and not simulation.vehicle.isStopped(bus):
                     self.first_stall = self.capture(simulation, 'prolonged_wait', bus)
+                    self.stop_requested = self.stop_on_first_blockage
+                    if self.stop_requested:
+                        self.stop_reason = 'first_blockage'
                     break
         if int(now) % self.sample_seconds == 0:
             for bus in watched:
@@ -165,6 +173,8 @@ class RunMonitor:
     def close(self):
         self.stream.close()
         data = {'first_deadline_pending': self.first_deadline, 'first_prolonged_wait': self.first_stall,
+                'simulation_time': self.last_time, 'stopped_on_first_blockage': self.stop_reason == 'first_blockage',
+                'stop_reason': self.stop_reason,
                 'sample_count': self.samples, 'sample_limit': self.max_samples,
                 'snapshots': self.snapshots, 'events_file': 'trace.jsonl',
                 'limitations': ['A pending-deadline snapshot is checked against native stop output after execution.',

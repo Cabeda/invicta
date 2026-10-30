@@ -37,6 +37,8 @@ def simulate_with_priority(command, bus_ids, folder, extension_limit=10, early_g
             active.difference_update(simulation.simulation.getArrivedIDList())
             if observer is not None:
                 observer.step(simulation, now)
+                if observer.stop_requested:
+                    break
             if not enabled:
                 continue
             if int(now) % 2:

@@ -263,7 +263,7 @@ def export_ledger(cache, destination):
         published_models[ident] = {k:v for k,v in model.items() if k != 'speed_corrections'}
         published_models[ident].update(speed_correction_count=len(model['speed_corrections']), evidence=sources)
     value = {'schema': 'invicta.priority-search.v1', 'line': '701', 'winner': None,
-        'target': 'Every origin departure and intermediate designated timing-point departure exactly on time; every terminal arrival no later than published; no missing trips. Zero tolerance.',
+        'target': 'Invicta strict research target, not the operator contract indicator: every origin departure and intermediate designated timing-point departure exactly on time; every terminal arrival no later than published; no missing trips. Zero tolerance.',
         'required_traffic_cases': ['moderate', 'busy', 'late'], 'required_seeds': [17, 29, 43],
         'qualification': 'No complete calibrated matrix. Diagnostic, superseded, bus-only and single-seed results cannot qualify a production proposal.',
         'models': published_models, 'trials': trials,

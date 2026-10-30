@@ -22,6 +22,30 @@ The supplementary street-detail search now has an audit gate and one code-first 
 
 `audit` requires the prepared model folder, returns exit code 2 when blocked, and identifies the specific findings. `diagnose` and `inspect` return success when evidence inspection succeeds, even if the transport goal fails. Use `--format json` or `--format markdown`; `--report new-path.json` saves a new report. `inspect --snapshot first-deadline-state.xml.gz` reads a new run's first-failure state. A selected `--stop` requires its `--trip`.
 
+Follow-up diagnostic controls:
+
+```sh
+# Empty passenger-free source only; one explicit stop-semantics change:
+.venv/bin/python prototypes/line-701/full/investigate.py reproduce \
+  --source .cache/701-investigation/sigma-zero-first-ermesinde \
+  --trip d1_bus_0 --stop d1_ERM3 --probe omit_empty_request_stops \
+  --output-dir .cache/701-followup/new-stop-probe
+# Paired snapshot analogue: control and one changed keep-clear connection:
+.venv/bin/python prototypes/line-701/full/investigate.py probe-state \
+  --source prototypes/line-701/full/priority-search.json \
+  --trial v5-moderate-priority-mapped-s17 --vehicle background_14_176 \
+  --seconds 60 --connections 1 --output-dir .cache/701-followup/new-state-probe
+# Unchanged original inputs, from original warmup, stopping at first prolonged bus wait:
+.venv/bin/python prototypes/line-701/full/investigate.py reproduce \
+  --source prototypes/line-701/full/priority-search.json \
+  --trial v5-moderate-priority-mapped-s17 --until-blockage \
+  --output-dir .cache/701-followup/new-onset-replay
+```
+
+`--probe in_lane_checkpoints` is the alternative empty-stop probe. Both retain the original complete reference and only alter the selected bus up to its target. A probe cannot be combined with `--bus-sigma`; an inherited sensitivity remains identified in its parent evidence. `probe-state` changes 1–5 route connections and advances 1–300 seconds per branch, with a 120-second native wall budget per branch. It does not restore Python controller memory or establish original continuation equivalence; disabling keep-clear rules is not a proposed street design. `inspect` still advances zero steps.
+
+`--until-blockage` permits at most 12 simulated hours and 180 native seconds, changes no input physics and cannot be combined with a selected trip, stop or assumption change. It is separate from the one-hour checkpoint-prefix mode. `--wall-budget` can lower the computation budget. A budget stop records partial outputs and the actual cutoff in `reproduction.json`; it never counts as full-service verification. No compared calls produces unknown equivalence, rather than a successful comparison.
+
 The current model remains blocked: three stop placements exceed the project's 25 m review trigger, and the empty control misses Ermesinde by 19 seconds. The unchanged prefix reproduces all 25 completed calls; the explicit `reproduce --bus-sigma 0` sensitivity reduces that miss to five seconds and still fails. This changes an uncertain vehicle-behaviour assumption, not the proposed streets. Prefixes preserve the original complete demand and warmup, are capped at one simulated hour and a 120-second native wall budget checked after each step, and cannot qualify a full-day proposal. Later failures can be inspected from saved states; resume equivalence has not been established.
 
 New `priority_search.py` configurations require `readiness: {"source": "...", "trial": "..."}` and `hypothesis: {"change": "...", "prediction": "...", "evidence": "..."}`. A matching complete-service empty diagnostic supplies readiness only after its checks pass. The existing explicit empty profile can run to bootstrap this process; there is no force flag. New native executions retain source copies, first-failure states, bounded traces, progress and phase timings. The gate applies to this supplementary search; the earlier `run.sh` replay pipeline below retains its separate publication checks.

@@ -7,6 +7,7 @@ from model_audit import audit_model
 from prefix_reproduction import reproduce_prefix
 from run_diagnostics import diagnose_trial
 from snapshot_inspection import inspect_snapshot
+from state_probe import probe_snapshot
 
 
 def summary(report):
@@ -35,6 +36,20 @@ def summary(report):
             bus = row['vehicles'][0]
             lines.append(f"{row['trip']}: {bus['lane']} · {bus['waiting_seconds']} s waiting · "
                          f"{bus['proximate_observation']} · cause unclassified")
+    elif schema == 'invicta.state-probe.v1':
+        count = len(report['changed_parameter']['affected_connections'])
+        lines = [f"State mechanism probe: {report['vehicle']} · {count} keep-clear connections changed"]
+        for name in ['control', 'variant']:
+            run = report[name]
+            distance = run['last'].get('distance_metres', 'vehicle exited')
+            lines.append(f"{name}: {run['simulation_steps']} steps · {distance} m · {run['collision_records']} collision records")
+        lines.append('Diagnostic continuation only; Python controller state is not restored; no service qualification.')
+    elif report.get('role') == 'original_input_blockage_reproduction':
+        target = report['target']
+        lines = ['Original-input blockage reproduction · ' +
+                 (f"{target['trip']} at {target['time']} s" if target else 'no prolonged bus wait captured'),
+                 f"Recorded bus-call prefix matches: {report['prefix_equivalence']['matched']}",
+                 'Diagnostic onset only; full-service compliance is not established.']
     else:
         target = report['target']
         lines = [f"Reproduction: {report['role']} · {target['trip']} at {target['stop']}",
@@ -47,7 +62,7 @@ def summary(report):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='operation', required=True)
-    for name in ['audit', 'diagnose', 'reproduce', 'inspect']:
+    for name in ['audit', 'diagnose', 'reproduce', 'inspect', 'probe-state']:
         command = commands.add_parser(name)
         command.add_argument('--source', type=Path, required=name != 'audit', help='Trial folder or frozen ledger JSON')
         command.add_argument('--trial', help='Required when source is a ledger')
@@ -62,9 +77,20 @@ def main(argv=None):
             command.add_argument('--output-dir', type=Path, required=True)
             command.add_argument('--stop')
             command.add_argument('--bus-sigma', type=float, help='Explicit uncertain-assumption sensitivity, 0 to 1')
-        if name == 'inspect':
+            command.add_argument('--probe', choices=['omit_empty_request_stops', 'in_lane_checkpoints'],
+                                 help='Empty-network stop-semantics diagnostic; never a passenger-service proposal')
+            command.add_argument('--until-blockage', action='store_true',
+                                 help='Replay unchanged inputs to the first 300-second bus blockage; 12 h simulated / 180 s native budget')
+            command.add_argument('--wall-budget', type=float, help='Lower the native computation budget; preserves partial evidence')
+        if name in ['inspect', 'probe-state']:
             command.add_argument('--snapshot', default='final-state.xml')
+        if name == 'inspect':
             command.add_argument('--limit', type=int, default=8)
+        if name == 'probe-state':
+            command.add_argument('--vehicle', required=True)
+            command.add_argument('--seconds', type=int, default=60)
+            command.add_argument('--connections', type=int, default=1)
+            command.add_argument('--output-dir', type=Path, required=True)
     args = parser.parse_args(argv)
     try:
         if args.operation == 'audit':
@@ -73,9 +99,12 @@ def main(argv=None):
             report = diagnose_trial(args.source, args.trial, args.model, args.trip)
         elif args.operation == 'inspect':
             report = inspect_snapshot(args.source, args.trial, args.model, args.snapshot, args.trip, args.limit)
+        elif args.operation == 'probe-state':
+            report = probe_snapshot(args.source, args.output_dir, args.vehicle, trial_id=args.trial, model=args.model,
+                                    snapshot=args.snapshot, seconds=args.seconds, connections=args.connections)
         else:
             report = reproduce_prefix(args.source, args.output_dir, args.trial, args.model,
-                                      args.trip, args.stop, args.bus_sigma)
+                                      args.trip, args.stop, args.bus_sigma, args.probe, args.until_blockage, args.wall_budget)
         if args.report:
             with args.report.open('x') as output:
                 output.write(json.dumps(report, ensure_ascii=False, indent=2) + '\n')

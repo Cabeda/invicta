@@ -2,7 +2,7 @@
   "schema": "invicta.priority-search.v1",
   "line": "701",
   "winner": null,
-  "target": "Every origin departure and intermediate designated timing-point departure exactly on time; every terminal arrival no later than published; no missing trips. Zero tolerance.",
+  "target": "Invicta strict research target, not the operator contract indicator: every origin departure and intermediate designated timing-point departure exactly on time; every terminal arrival no later than published; no missing trips. Zero tolerance.",
   "required_traffic_cases": [
     "moderate",
     "busy",

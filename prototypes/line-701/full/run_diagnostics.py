@@ -9,6 +9,9 @@ def execution_coverage(evidence):
     end = float(command[command.index('--end') + 1]) if '--end' in command else None
     buses = evidence.buses
     explicit = evidence.result.get('execution_scope', {}).get('kind', 'full_service_day')
+    if explicit != 'full_service_day':
+        begin = evidence.result.get('execution_scope', {}).get('begin', begin)
+        end = evidence.result.get('execution_scope', {}).get('end', end)
     full = (explicit == 'full_service_day' and begin is not None and end is not None
             and begin <= min(bus['depart'] for bus in buses) - 30
             and end >= max(stop['scheduled'] for bus in buses for stop in bus['stops']))
