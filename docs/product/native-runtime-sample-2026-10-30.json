@@ -1,0 +1,20 @@
+{
+  "schema": "invicta.native-stack-sample.v1",
+  "captured_utc": "2026-10-30T17:43:10Z",
+  "duration_seconds": 3,
+  "kind": "bounded_live_stack_sample",
+  "source_case": "v5-moderate-priority-mapped-s17 original-input onset replay",
+  "raw_local_sample_sha256": "5ac17734449c12170510da289d3236e14787fdbbe001596b931bd6f109d90535",
+  "samples": {
+    "main_thread": 2382,
+    "native_simulation_step": 2357,
+    "vehicle_rerouting": 1138
+  },
+  "native_step_fraction": 0.9895,
+  "vehicle_rerouting_fraction": 0.4777,
+  "limits": [
+    "A three-second hotspot snapshot, not a full-run phase profile or speedup benchmark.",
+    "Inclusive stack counts must not be added as independent costs.",
+    "No routing frequency, demand, seed or vehicle physics was changed in the measured replay."
+  ]
+}

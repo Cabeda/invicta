@@ -76,6 +76,64 @@ def empty_config(ident='fixture-empty'):
 
 
 class InvestigationTests(unittest.TestCase):
+    def test_native_onset_capture_stops_at_an_actual_red_signal_blockage(self):
+        import xml.etree.ElementTree as ET
+        from native_runner import run_native
+        from prefix_reproduction import set_option
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root, connected=True)
+            original = run_trial(model, root, empty_config())
+            folder = root / 'red-signal-control'
+            folder.mkdir()
+            subprocess.run([str(Path(sumo.SUMO_HOME) / 'bin/netconvert'),
+                '--sumo-net-file', str(root / 'fixture-empty/network.net.xml'), '--tls.set', 'b',
+                '--tls.default-type', 'static', '--output-file', str(folder / 'network.net.xml')],
+                check=True, capture_output=True)
+            network = ET.parse(folder / 'network.net.xml')
+            phases = network.getroot().findall('tlLogic/phase')
+            self.assertTrue(phases)
+            for phase in phases:
+                phase.set('state', 'r' * len(phase.get('state')))
+            network.write(folder / 'network.net.xml')
+            command = list(original['command'])
+            index = command.index('--tls.all-off')
+            del command[index:index + 2]
+            for flag, name in [('--net-file', 'network.net.xml'), ('--tripinfo-output', 'trips.xml'),
+                               ('--stop-output', 'stops.xml'), ('--collision-output', 'collisions.xml'),
+                               ('--save-state.files', 'final-state.xml')]:
+                set_option(command, flag, folder / name)
+            set_option(command, '--end', 18500)
+            reference = json.loads((model / 'routes.json').read_text())
+            buses = [trip for direction in reference['directions'].values() for trip in direction['trips']]
+            result = run_native(command, buses, folder, monitor_options={
+                'stall_seconds': 2, 'stop_on_first_blockage': True, 'max_wall_seconds': 10})
+            observed = result['diagnostics']
+            self.assertEqual(observed['stop_reason'], 'first_blockage')
+            self.assertIsNotNone(observed['first_prolonged_wait'])
+            self.assertLess(observed['simulation_time'], 18500)
+            self.assertTrue((folder / 'first-blockage-state.xml.gz').exists())
+
+    def test_partial_diagnosis_distinguishes_future_checks_from_observed_misses(self):
+        archive = ROOT.parents[2] / 'docs/research/701-followup-2026-10-30'
+        manifest = json.loads((archive / 'manifest.json').read_text())
+        case = manifest['cases']['original-driver-no-unused-stops']['files']
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary)
+            for name in ['reference.json', 'reproduction.json', 'stops.xml', 'trips.xml']:
+                item = case[name]
+                (source / name).write_bytes(gzip.decompress((archive / item['file']).read_bytes()))
+            report = diagnose_trial(source)
+        self.assertEqual(report['coverage']['scheduled_trips'], 127)
+        self.assertEqual(report['coverage']['timing_checks'], 714)
+        self.assertEqual(report['metrics']['missing_checkpoints'], 712)  # Whole-reference goal, not observed loss.
+        self.assertEqual(report['observation']['due_checks'], 2)
+        self.assertEqual(report['observation']['future_checks'], 712)
+        self.assertEqual(report['observation']['missing_due_checks'], 0)
+        self.assertEqual(report['observation']['late_observed_checks'], 1)
+        self.assertFalse(report['unfinished_trips'])
+        self.assertEqual(len(report['observation']['future_trip_ids']), 126)
+
     def test_published_followup_distinguishes_diagnostic_success_from_service_success(self):
         folder = ROOT.parents[2] / 'docs/research/701-followup-2026-10-30'
         manifest = json.loads((folder / 'manifest.json').read_text())
@@ -95,6 +153,8 @@ class InvestigationTests(unittest.TestCase):
                     verified.add(item['gzip_sha256'])
             if case['kind'] == 'prefix':
                 result = json.loads(payload(case['files']['reproduction.json']))
+                for name, expected in {**result['input_hashes'], **result['output_hashes']}.items():
+                    self.assertEqual(case['files'][name]['sha256'], expected)
                 self.assertFalse(result['full_service_compliance'])
                 self.assertEqual(result['metrics']['planned'], 127)
                 self.assertEqual(result['metrics']['checkpoints'], 714)
@@ -118,6 +178,8 @@ class InvestigationTests(unittest.TestCase):
         self.assertEqual(float(parked['target']['call']['ended']) - parked['target']['scheduled'], 5)
         tail = report('baseline-one-step-tail-check', 'tail-check.json')
         self.assertFalse(tail['matches_within_native_output_precision'])
+        self.assertEqual(cases['baseline-one-step-tail-check']['files']['original-trips.xml']['sha256'],
+                         tail['original_trip_output_sha256'])
         onset = report('original-candidate-onset', 'failed-replay-audit.json')
         self.assertEqual(onset['observed_through_seconds'], 28847)
         self.assertEqual(onset['complete_bus_calls_compared'], 855)
@@ -149,6 +211,10 @@ class InvestigationTests(unittest.TestCase):
             self.assertEqual(report['execution_scope']['kind'], 'diagnostic_onset')
             self.assertTrue(report['prefix_equivalence']['matched'])
             self.assertFalse(report['full_service_compliance'])
+            with self.assertRaisesRegex(ValueError, 'at most 900'):
+                reproduce_prefix(root / 'fixture-empty', root / 'unbounded-onset', until_blockage=True,
+                                 wall_budget_seconds=901)
+            self.assertFalse((root / 'unbounded-onset').exists())
 
     def test_paired_state_probe_is_bounded_and_cannot_be_read_as_a_service_execution(self):
         from state_probe import probe_snapshot
@@ -168,6 +234,22 @@ class InvestigationTests(unittest.TestCase):
             self.assertEqual(digest(source / 'network.net.xml'), original['input_hashes']['network.net.xml'])
             with self.assertRaisesRegex(ValueError, 'bounded'):
                 probe_snapshot(source, root / 'unbounded', 'd1_bus_0', seconds=301)
+
+    def test_state_probe_budget_preserves_zero_step_branch_observations(self):
+        from state_probe import probe_snapshot
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root, budget=1, connected=True)
+            run_trial(model, root, empty_config())
+            report = probe_snapshot(root / 'fixture-empty', root / 'limited-state', 'd1_bus_0', seconds=2,
+                                    snapshot='first-deadline-state.xml.gz', wall_budget_seconds=.000001)
+            for branch in ['control', 'variant']:
+                self.assertEqual(report[branch]['simulation_steps'], 0)
+                self.assertEqual(report[branch]['stop_reason'], 'native_wall_budget')
+                self.assertEqual(report[branch]['end'], report[branch]['begin'])
+                self.assertTrue((root / 'limited-state' / branch / 'trace.json').exists())
+            self.assertTrue((root / 'limited-state/state-probe.json').exists())
+            self.assertFalse(report['full_service_compliance'])
 
     def test_empty_stop_semantics_probe_preserves_route_and_cannot_qualify_service(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -190,6 +272,10 @@ class InvestigationTests(unittest.TestCase):
             self.assertEqual(native.find("vehicle[@id='d1_bus_0']/route").get('edges'), 'east')
             self.assertEqual([s.get('busStop') for s in native.find("vehicle[@id='d1_bus_0']").findall('stop')],
                              ['d1_A', 'd1_B'])
+            with self.assertRaisesRegex(ValueError, 'one diagnostic variable'):
+                reproduce_prefix(source, root / 'mixed-probe', trip_id='d1_bus_0', stop_id='d1_B',
+                                 probe='omit_empty_request_stops', bus_sigma=0)
+            self.assertFalse((root / 'mixed-probe').exists())
 
     def test_traffic_prefix_counts_only_completed_scheduled_buses(self):
         import xml.etree.ElementTree as ET
@@ -220,6 +306,10 @@ class InvestigationTests(unittest.TestCase):
             prefix = reproduce_prefix(source, root / 'traffic-control', trip_id='d1_bus_0', stop_id='d1_B')
             self.assertEqual(prefix['metrics']['completed'], 2)
             self.assertEqual(prefix['metrics']['completed'], diagnose_trial(root / 'traffic-control')['metrics']['completed'])
+            with self.assertRaisesRegex(ValueError, 'passenger-free'):
+                reproduce_prefix(source, root / 'invalid-stop-probe', trip_id='d1_bus_0', stop_id='d1_B',
+                                 probe='omit_empty_request_stops')
+            self.assertFalse((root / 'invalid-stop-probe').exists())
 
     def test_published_prefix_evidence_retains_original_bindings_and_full_day_rejection(self):
         folder = ROOT.parents[2] / 'docs/research/701-investigation-2026-10-30'

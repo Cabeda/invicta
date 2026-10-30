@@ -1,5 +1,5 @@
 """Explain recorded timetable failures without rerunning vehicle physics."""
-from timetable import assess_trial
+from timetable import assess_trial, observation_window
 from trial_evidence import load_trial
 
 
@@ -29,7 +29,8 @@ def explain(evidence, trip_id=None):
     coverage = execution_coverage(evidence)
     failures = sorted((failure for failure in metrics['failures']
                        if (trip_id is None or failure['trip'] == trip_id)
-                       and (coverage['end'] is None or failure['scheduled'] < coverage['end'])),
+                       and (coverage['end'] is None or failure['scheduled'] < coverage['end']
+                            or (failure['early'] and failure['departure'] < coverage['end']))),
                       key=lambda failure: (failure['scheduled'], failure['trip'], failure['stop']))
     first = None
     if failures:
@@ -55,11 +56,14 @@ def explain(evidence, trip_id=None):
                 'scheduled_seconds': budget, 'observed_seconds': observed,
                 'inherited_delay_seconds': max(0, departure - start['scheduled']) if departure >= 0 else None,
                 'added_delay_seconds': observed - budget if observed is not None else None}
-    unfinished = [trip['id'] for trip in scheduled if trip['id'] not in completed]
+    observation = observation_window(scheduled, metrics, completed, coverage['end']) if coverage['end'] is not None else None
+    unfinished = (observation['unfinished_due_trip_ids'] if observation is not None else
+                  [trip['id'] for trip in scheduled if trip['id'] not in completed])
     return {'schema': 'invicta.run-diagnosis.v1', 'source': evidence.verified_identity(),
         'coverage': {'scheduled_trips': len(scheduled), 'timing_checks': metrics['checkpoints'],
                      'directions': sorted(evidence.reference['directions']), **coverage},
         'metrics': {key: value for key, value in metrics.items() if key != 'failures'},
+        'metrics_scope': 'whole_reference_goal', 'observation': observation,
         'simulation_compliance': metrics['passes'] and coverage['full_service_day'], 'field_validated': False,
         'first_failure': first, 'unfinished_trips': unfinished,
         'next_step': ('Inspect the first failed interval and its native trace before changing a traffic package.'

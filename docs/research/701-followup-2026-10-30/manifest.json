@@ -140,6 +140,11 @@
           "file": "no-unused-stops-first-interval/reproduction.json.gz",
           "sha256": "b8c4e066c1e6c2fae2f4286ad8a2baf9ed5f4b72f722fb2f2f86147e789fe3a2",
           "gzip_sha256": "feb64749f7c0a5c4208a582ae0833b67d6dfe96f5901931d30e40cc63a0c8eda"
+        },
+        "diagnosis.json": {
+          "file": "no-unused-stops-first-interval/diagnosis.json.gz",
+          "sha256": "df838dcbfdc1e36c978b91ea28daf89cc7db3b096b0c15ee8548169a810d861f",
+          "gzip_sha256": "2015b1dc1b2836a614e2d6c5bc59e4b3327a1648bfca1f60d62e2d2c12a512b7"
         }
       }
     },
@@ -285,6 +290,11 @@
           "file": "original-driver-no-unused-stops/reproduction.json.gz",
           "sha256": "4ce075bc5197de44dfe49793cdf8a84d3e1a34696a884571a1fa10d93fce926e",
           "gzip_sha256": "2d6095fbd903671852ca348da9ad6c60bac10f25df43b435e20ab19b54f5ccac"
+        },
+        "diagnosis.json": {
+          "file": "original-driver-no-unused-stops/diagnosis.json.gz",
+          "sha256": "2ee4de73bd9e6d415d10ed4436cdc976213d1c7ca0408c219795946dcc671531",
+          "gzip_sha256": "f04e50c736c370ef472754d7645c2d1f12aae28e1dcd4efd7af0dc08f4057155"
         }
       }
     },
@@ -435,6 +445,11 @@
           "file": "in-lane-checkpoints/reproduction.json.gz",
           "sha256": "db219ca9c06f2b365cfa2db27081b553d288a2470da68409f49240d2ffcbd9e7",
           "gzip_sha256": "e6274c3db68414f5e2df141adc04b263fc3a682184107bedc0cef8498afad79c"
+        },
+        "diagnosis.json": {
+          "file": "in-lane-checkpoints/diagnosis.json.gz",
+          "sha256": "ce141bb90fb576f3f93b746377c90bb5de0a6c764ad2c4854aaa8bda0f039a7b",
+          "gzip_sha256": "148066676b97004f2cdc9e375ef4f6eb3d72659a310bea079243acfbdcd23b04"
         }
       }
     },
@@ -563,8 +578,13 @@
         },
         "tail-check.json": {
           "file": "baseline-one-step-tail-check/tail-check.json.gz",
-          "sha256": "a5b31a162470ba6efc544a1a1e5ab02d223225becab515f7f5917dcc92df55e7",
-          "gzip_sha256": "d2506367a7eb473b11b36ee35623b5cb7e4e3ca9b03a1c95eca890530c6ffb22"
+          "sha256": "8d1c0561ebda5027bc891cb95c7f1b4dde540834321cf55d61b5a27ba37d8077",
+          "gzip_sha256": "1530655b76c7350e4ee7ba1d92916d24ed8d3118587d4fefdece241dafd67db5"
+        },
+        "original-trips.xml": {
+          "file": "../../../prototypes/line-701/full/priority-evidence/v5-moderate-baseline-mapped-s17/trips.xml.gz",
+          "sha256": "6399dbc669f0ddd4cde969927b27f49c4eeecd5f754d95cdf3a9d928a159643e",
+          "gzip_sha256": "7dbdef615a1bf7550d2c84620323d0d5dc47366cab7f16b8d3c4707a68072958"
         }
       },
       "variant_network_delta": {

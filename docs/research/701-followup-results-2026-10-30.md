@@ -30,6 +30,8 @@ An unchanged proposed-layout replay was limited to 180 native computation second
 
 That first attempt terminated with a budget exception. Its original failure and partial outputs are retained unchanged; a separately labelled post-run audit verifies inputs and completed calls. The runner now closes a diagnostic budget stop normally, records its actual cutoff and preserves an evaluable `reproduction.json`. A native regression checks that a budget-limited run cannot pass its unobserved target or claim equivalence from zero compared calls. The long replay was not repeated merely to exercise this metadata fix.
 
+Short diagnostics now separate the complete research goal from their observed window. At the first-interval cutoff, two timing checks are due and 712 remain in the future; neither probe has an observed missing check. The original-driver stop probe has one observed late check. Derived `diagnosis.json` reports make this distinction without changing the frozen execution metadata. Future trip deadlines are no longer listed as observed unfinished service. Paired state probes also preserve their branch reports when their budget ends, including a valid zero-step case.
+
 ## Report the right target
 
 The signed public contract defines departure indicators with their own windows and a completed-trip denominator. They differ from this project's stronger exact-second test. The [definition audit](701-punctuality-definition-2026-10-30.md) identifies the precise events, source pages and limits. Neither those windows nor minute-valued API timestamps justify changing all 714 checkpoints or hiding the 42 unfinished candidate trips. Public explanatory text and exports now make the distinction explicit; no contractual-compliance percentage is invented.

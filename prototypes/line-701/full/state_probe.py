@@ -1,6 +1,7 @@
 """Paired, bounded mechanism probes from a snapshot; never service verification."""
 import gzip
 import json
+import math
 from pathlib import Path
 import time
 import xml.etree.ElementTree as ET
@@ -12,11 +13,13 @@ from trial_evidence import load_trial, sha256
 
 
 def probe_snapshot(source, output, vehicle, *, trial_id=None, model=None, snapshot='final-state.xml', seconds=60,
-                   connections=1):
+                   connections=1, wall_budget_seconds=120):
     if not isinstance(seconds, int) or not 1 <= seconds <= 300:
         raise ValueError('State mechanism probes must be bounded to 1–300 simulated seconds')
     if not isinstance(connections, int) or not 1 <= connections <= 5:
         raise ValueError('State mechanism probes must be bounded to 1–5 route connections')
+    if not math.isfinite(wall_budget_seconds) or not 0 < wall_budget_seconds <= 120:
+        raise ValueError('State mechanism probes must be bounded to at most 120 native seconds per branch')
     evidence = load_trial(source, trial_id, model)
     require_native_version(evidence)
     names = ['network.net.xml', 'routes.rou.xml', 'additional.add.xml', snapshot]
@@ -56,6 +59,7 @@ def probe_snapshot(source, output, vehicle, *, trial_id=None, model=None, snapsh
                     native.vehicle.getWaitingTime(ident), native.vehicle.getRoute(ident))
                     for ident in sorted(native.vehicle.getIDList())]).encode())
                 rows = []
+                stop_reason = 'simulation_window'
                 if variant == 'control':
                     lane = native.vehicle.getLaneID(vehicle)
                     links = native.vehicle.getNextLinks(vehicle)
@@ -80,8 +84,9 @@ def probe_snapshot(source, output, vehicle, *, trial_id=None, model=None, snapsh
                               'requested_connections': connections, 'physical_intervention': False}
                     ET.ElementTree(xml).write(folder / 'variant.net.xml', encoding='utf-8', xml_declaration=True)
                 for _ in range(seconds):
-                    if time.monotonic() - started > 120:
-                        raise TimeoutError('State probe exceeded its native wall-time budget')
+                    if time.monotonic() - started > wall_budget_seconds:
+                        stop_reason = 'native_wall_budget'
+                        break
                     native.simulationStep()
                     now = native.simulation.getTime()
                     if vehicle in native.vehicle.getIDList():
@@ -90,6 +95,7 @@ def probe_snapshot(source, output, vehicle, *, trial_id=None, model=None, snapsh
                     else:
                         rows.append({'time': now, 'vehicle_exited': True,
                                      'arrived': vehicle in native.simulation.getArrivedIDList()})
+                        stop_reason = 'vehicle_exited'
                         break
                 after = native.simulation.getTime()
             finally:
@@ -99,7 +105,9 @@ def probe_snapshot(source, output, vehicle, *, trial_id=None, model=None, snapsh
             runs[variant] = {'command': command, 'before': before, 'begin': begin, 'end': after,
                              'initial_distance_metres': start_distance,
                              'initial_vehicle_state_sha256': initial,
-                             'simulation_steps': len(rows), 'last': rows[-1], 'collision_records': collisions,
+                             'simulation_steps': len(rows), 'stop_reason': stop_reason,
+                             'last': rows[-1] if rows else {'time': begin, 'distance_metres': 0, 'vehicles': before},
+                             'collision_records': collisions,
                              'elapsed_seconds': time.monotonic() - started,
                              'trace_sha256': sha256((run / 'trace.json').read_bytes())}
         if any(sha256((folder / name).read_bytes()) != sha256(payload) for name, payload in raw.items()):
@@ -111,6 +119,7 @@ def probe_snapshot(source, output, vehicle, *, trial_id=None, model=None, snapsh
                   'changed_parameter': change, 'control': runs['control'], 'variant': runs['variant'],
                   'input_hashes': {name: sha256(payload) for name, payload in raw.items()},
                   'variant_network_sha256': sha256((folder / 'variant.net.xml').read_bytes()),
+                  'native_wall_budget_seconds_per_branch': wall_budget_seconds,
                   'implementation_hashes': implementation, 'controller_state_restored': False,
                   'original_continuation_verified': False,
                   'full_service_compliance': False, 'field_validated': False, 'qualified': False,
