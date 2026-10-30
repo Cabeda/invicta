@@ -92,7 +92,7 @@ def reproduce_prefix(source, output, trial_id=None, model=None, trip_id=None, st
         differences = [list(key) for key in sorted(set(original) | set(actual)) if original.get(key) != actual.get(key)]
         completed = {row.get('id') for row in ET.parse(output / 'trips.xml').getroot()
                      if row.tag == 'tripinfo' and float(row.get('arrival', -1)) >= 0}
-        metrics = assess_trial(evidence.buses, calls, completed)
+        metrics = assess_trial(evidence.buses, calls, completed & {bus['id'] for bus in evidence.buses})
         call = next((row for row in calls if (row['id'], row['busStop']) == (trip_id, stop_id)), None)
         target_passes = call is not None and not any(f['trip'] == trip_id and f['stop'] == stop_id for f in metrics['failures'])
         for name, expected in input_hashes.items():

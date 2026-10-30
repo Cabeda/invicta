@@ -7,6 +7,7 @@ import subprocess
 import io
 import gzip
 import hashlib
+import shutil
 from contextlib import redirect_stdout
 import sumo
 import sumolib
@@ -58,6 +59,36 @@ def empty_config(ident='fixture-empty'):
 
 
 class InvestigationTests(unittest.TestCase):
+    def test_traffic_prefix_counts_only_completed_scheduled_buses(self):
+        import xml.etree.ElementTree as ET
+        from prefix_reproduction import set_option
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root)
+            base = run_trial(model, root, empty_config())
+            source = root / 'with-car'
+            source.mkdir()
+            names = ['network.net.xml', 'routes.rou.xml', 'additional.add.xml', 'reference.json']
+            for name in names:
+                shutil.copy2(root / 'fixture-empty' / name, source / name)
+            xml = ET.parse(source / 'routes.rou.xml')
+            car = ET.SubElement(xml.getroot(), 'vehicle', id='car', type='resident', depart='18100')
+            ET.SubElement(car, 'route', edges='east')
+            xml.write(source / 'routes.rou.xml')
+            command = list(base['command'])
+            for flag, name in [('--net-file', 'network.net.xml'), ('--route-files', 'routes.rou.xml'),
+                               ('--additional-files', 'additional.add.xml'), ('--tripinfo-output', 'trips.xml'),
+                               ('--stop-output', 'stops.xml'), ('--collision-output', 'collisions.xml'),
+                               ('--save-state.files', 'final-state.xml')]:
+                set_option(command, flag, source / name)
+            subprocess.run(command, check=True, capture_output=True)
+            write_json(source / 'result.json', {**base, 'config': {'id': 'with-car', 'traffic': 'moderate'},
+                'command': command, 'input_hashes': {name: digest(source / name) for name in names},
+                'output_hashes': {name: digest(source / name) for name in ['stops.xml', 'trips.xml', 'collisions.xml']}})
+            prefix = reproduce_prefix(source, root / 'traffic-control', trip_id='d1_bus_0', stop_id='d1_B')
+            self.assertEqual(prefix['metrics']['completed'], 2)
+            self.assertEqual(prefix['metrics']['completed'], diagnose_trial(root / 'traffic-control')['metrics']['completed'])
+
     def test_published_prefix_evidence_retains_original_bindings_and_full_day_rejection(self):
         folder = ROOT.parents[2] / 'docs/research/701-investigation-2026-10-30'
         manifest = json.loads((folder / 'manifest.json').read_text())
