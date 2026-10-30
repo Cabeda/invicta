@@ -37,11 +37,14 @@ function sourceMarkers(points,color,segments=12){return points.map(s=>{const p=w
 const equipmentMarkers=sourceMarkers(audit.official_equipment_within_75_metres,'#3379c4');
 const osmCrossings=audit.osm_nodes_under_joined_controller.filter(s=>s.tags.crossing==='traffic_signals');
 const osmMarkers=sourceMarkers(osmCrossings,'#8d52b8',4);
+const osmSourceLinks=osmCrossings.map(node=>{const a=document.createElement('a');a.href='https://www.openstreetmap.org/node/'+node.osm_node;a.target='_blank';a.rel='noopener';const row=document.createElement('p');row.append(a);$('osmLinks').append(row);return a});
+let signalControlKey='';
 function renderSignalControls(){
+ const key=lang+'|'+signalLayer;if(key===signalControlKey)return;const languageChanged=signalControlKey.split('|')[0]!==lang;signalControlKey=key;
  const labels=lang==='pt'?{next:'Ligações seguintes do autocarro',all:'Todos os movimentos do modelo (depuração)',osm:'Travessias na origem OSM',equipment:'Inventário de equipamentos dos Combatentes',none:'Sem marcadores semafóricos'}:{next:'Next bus links',all:'All model movements (debug)',osm:'OSM source crossings',equipment:'Combatentes equipment inventory',none:'No signal markers'};
  for(const option of $('signalLayer').options)option.textContent=labels[option.value];$('signalLayer').value=signalLayer;
  $('layerNote').textContent=signalLayer==='equipment'?(lang==='pt'?'Localizações do inventário municipal nos Combatentes; tipo de cabeça e tempos desconhecidos.':'Municipal equipment locations at Combatentes; head type and timings unknown.'):signalLayer==='osm'?(lang==='pt'?'Nós de travessias semaforizadas do OSM nos Combatentes; não representam a contagem de cabeças semafóricas.':'OSM signalised-crossing nodes at Combatentes; these do not count physical signal heads.'):(lang==='pt'?'Os marcadores coloridos representam movimentos do modelo, não semáforos físicos.':'Coloured markers represent model movements, not physical traffic lights.');
- $('osmSourceTitle').textContent=lang==='pt'?'Objetos de origem no OSM':'OSM source objects';$('osmLinks').replaceChildren();for(const node of osmCrossings){const a=document.createElement('a');a.href='https://www.openstreetmap.org/node/'+node.osm_node;a.target='_blank';a.rel='noopener';a.textContent=(lang==='pt'?'Travessia OSM ':'OSM crossing ')+node.osm_node;const row=document.createElement('p');row.append(a);$('osmLinks').append(row)}
+ if(languageChanged){$('osmSourceTitle').textContent=lang==='pt'?'Objetos de origem no OSM':'OSM source objects';for(let i=0;i<osmCrossings.length;i++)osmSourceLinks[i].textContent=(lang==='pt'?'Travessia OSM ':'OSM crossing ')+osmCrossings[i].osm_node}
 }
 
 function showLink(s,f){return signalLayer==='all'||signalLayer==='next'&&(f.focus?.next_signals||[]).some(next=>next[0]===s.tls&&next[1]===s.index)}

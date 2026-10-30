@@ -80,3 +80,15 @@ test('phone layout keeps the inspection within the viewport',async({page})=>{
  await page.getByRole('button',{name:'2D',exact:true}).click();
  await expect(page.locator('#time')).toHaveText('20:25:30');
 });
+
+test('OSM source links keep keyboard focus while playback advances',async({page})=>{
+ await page.goto('/701-inspection/?signals=osm&dimension=2d');
+ await expect(page.locator('#proof')).toContainText('6,024');
+ await page.locator('#osmSourceTitle').click();
+ await page.getByRole('button',{name:'Play',exact:true}).click();
+ const link=page.locator('#osmLinks a').first();
+ await link.focus();
+ const frame=await page.evaluate(()=>window.focusedReplay.index);
+ await expect.poll(()=>page.evaluate(()=>window.focusedReplay.index)).toBeGreaterThan(frame);
+ expect(await link.evaluate(el=>document.activeElement===el)).toBe(true);
+});
