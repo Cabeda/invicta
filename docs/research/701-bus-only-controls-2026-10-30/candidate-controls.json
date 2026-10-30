@@ -1,0 +1,783 @@
+{
+  "schema": "invicta.bus-only-controls.v1",
+  "role": "failed_model_geometry_hypothesis_not_a_street_proposal",
+  "status": "rejected_prerequisite_still_fails",
+  "qualified": false,
+  "field_validated": false,
+  "source_control": {
+    "ledger": "controls.json",
+    "trial": "v6-bus-only-existing-signals-60-s17"
+  },
+  "models": {
+    "street-detail-combatentes-candidate": {
+      "status": "rejected_geometry_candidate",
+      "network_sha256": "9c594ce26559f7057665156bfcb796524b302619cbe5b7d00642f35d12f228d9",
+      "reference_sha256": "fa7a2efaf89f655ac6cf97183dc3155a49889bf5e8f5a0bbd3155c668fa7ee5c",
+      "evidence": {
+        "baseline.net.xml": {
+          "file": "objects/9c594ce26559f7057665156bfcb796524b302619cbe5b7d00642f35d12f228d9.gz",
+          "sha256": "9c594ce26559f7057665156bfcb796524b302619cbe5b7d00642f35d12f228d9",
+          "gzip_sha256": "2b0b52fe3f9c81813e27a28f1e3f5d0e25b35aceeb3dbb26a9477407fd816a69",
+          "bytes": 125933051
+        },
+        "routes.json": {
+          "file": "objects/fa7a2efaf89f655ac6cf97183dc3155a49889bf5e8f5a0bbd3155c668fa7ee5c.gz",
+          "sha256": "fa7a2efaf89f655ac6cf97183dc3155a49889bf5e8f5a0bbd3155c668fa7ee5c",
+          "gzip_sha256": "cb79e5f12db1e8a75f0b9de775a505c2684d69ea165b660a05d33cc595a69c6d",
+          "bytes": 6638923
+        },
+        "model.json": {
+          "file": "objects/21585f21410744b0daaf78544cac1346410c8d04f536f089ec85c212310e5cc0.gz",
+          "sha256": "21585f21410744b0daaf78544cac1346410c8d04f536f089ec85c212310e5cc0",
+          "gzip_sha256": "70865f8d7f1fd88d00eb5ac4946611191fd69864d88f60cee2207e18b9ed955a",
+          "bytes": 7772844
+        },
+        "junction-corrections.nod.xml": {
+          "file": "objects/0034307bd895090b2e7a5d7cf7900bed633763b67f4e92e00017f0f10c6b0fe8.gz",
+          "sha256": "0034307bd895090b2e7a5d7cf7900bed633763b67f4e92e00017f0f10c6b0fe8",
+          "gzip_sha256": "c49b46b05311e73a243dae4aa477da8b5d3d3b2337d7d629a42edfe70ff2eb9c",
+          "bytes": 323
+        },
+        "overlay.con.xml": {
+          "file": "objects/bbb7548976c31863fbcced28d65c45810b5c04edf43846fc8fbd8dd1fc16e71d.gz",
+          "sha256": "bbb7548976c31863fbcced28d65c45810b5c04edf43846fc8fbd8dd1fc16e71d",
+          "gzip_sha256": "fabca033bac0c7a1b32b278546fda64cea1d4bcf7c45d282285f5605a9226dfe",
+          "bytes": 153
+        },
+        "import.log": {
+          "file": "objects/e9b9e402766867b31b9959da1b1cdf9f73ba738b00b66a88be1695b41f903a67.gz",
+          "sha256": "e9b9e402766867b31b9959da1b1cdf9f73ba738b00b66a88be1695b41f903a67",
+          "gzip_sha256": "7676f973701e21eb21e21b16b866ff4484ef8a8de125eca411a752dfe399317b",
+          "bytes": 23040
+        },
+        "overlay.log": {
+          "file": "objects/958705183d76ffe2e0b4268bf0e90876e1533c3e76ff94abf3ef46258fb11eca.gz",
+          "sha256": "958705183d76ffe2e0b4268bf0e90876e1533c3e76ff94abf3ef46258fb11eca",
+          "gzip_sha256": "7a51cbc4874ff4b180ff9cff6a1339a93c409d887e73cde2df2aa2d56a8e70dd",
+          "bytes": 5962
+        }
+      }
+    }
+  },
+  "trials": [
+    {
+      "config": {
+        "traffic": "none",
+        "seed": 17,
+        "dwell": 0,
+        "passengers_per_minute": 0,
+        "crossing_persons_per_minute": 0,
+        "request_stops": true,
+        "diagnostic_all_green": false,
+        "holding_bays": true,
+        "id": "v6-combatentes-bus-only-existing-signals-60-s17",
+        "diagnostic_control": "existing_signals",
+        "operational_lateness_seconds": 60
+      },
+      "metrics": {
+        "planned": 127,
+        "completed": 127,
+        "on_time_starts": 127,
+        "on_time_finishes": 125,
+        "checkpoints": 714,
+        "missing_checkpoints": 0,
+        "late_checkpoints": 10,
+        "early_departures": 0,
+        "passes": false,
+        "failures": [
+          {
+            "trip": "d1_bus_0",
+            "stop": "d1_ERM3",
+            "scheduled": 19980,
+            "arrival": 20001.0,
+            "departure": 20002.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_1",
+            "stop": "d1_MPL4",
+            "scheduled": 22620,
+            "arrival": 22731.0,
+            "departure": 22732.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_1",
+            "stop": "d1_0BLRB",
+            "scheduled": 22800,
+            "arrival": 22879.0,
+            "departure": 22880.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_2",
+            "stop": "d1_MPL4",
+            "scheduled": 24180,
+            "arrival": 24186.0,
+            "departure": 24187.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_3",
+            "stop": "d1_MPL4",
+            "scheduled": 25380,
+            "arrival": 25386.0,
+            "departure": 25387.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_58",
+            "stop": "d1_MPL4",
+            "scheduled": 78360,
+            "arrival": 78396.0,
+            "departure": 78397.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_60",
+            "stop": "d1_MPL4",
+            "scheduled": 83760,
+            "arrival": 83761.0,
+            "departure": 83762.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_61",
+            "stop": "d1_MPL4",
+            "scheduled": 86460,
+            "arrival": 86571.0,
+            "departure": 86572.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_61",
+            "stop": "d1_0BLRB",
+            "scheduled": 86700,
+            "arrival": 86703.0,
+            "departure": 86704.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_62",
+            "stop": "d1_MPL4",
+            "scheduled": 89160,
+            "arrival": 89165.0,
+            "departure": 89166.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          }
+        ]
+      },
+      "grading_schema": 2,
+      "native": true,
+      "acceptance_criteria": {
+        "lateness_tolerance_seconds": 60,
+        "early_departures_allowed": false,
+        "terminal_measure": "arrival",
+        "other_checkpoint_measure": "departure",
+        "scope": "project_target_not_operator_contract"
+      },
+      "operational_metrics": {
+        "planned": 127,
+        "completed": 127,
+        "on_time_starts": 127,
+        "on_time_finishes": 126,
+        "checkpoints": 714,
+        "missing_checkpoints": 0,
+        "late_checkpoints": 3,
+        "early_departures": 0,
+        "passes": false,
+        "failures": [
+          {
+            "trip": "d1_bus_1",
+            "stop": "d1_MPL4",
+            "scheduled": 22620,
+            "arrival": 22731.0,
+            "departure": 22732.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_1",
+            "stop": "d1_0BLRB",
+            "scheduled": 22800,
+            "arrival": 22879.0,
+            "departure": 22880.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_61",
+            "stop": "d1_MPL4",
+            "scheduled": 86460,
+            "arrival": 86571.0,
+            "departure": 86572.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          }
+        ]
+      },
+      "readiness": {
+        "status": "diagnostic_only",
+        "acceptance_criteria": {
+          "lateness_tolerance_seconds": 60,
+          "early_departures_allowed": false,
+          "terminal_measure": "arrival",
+          "other_checkpoint_measure": "departure",
+          "scope": "project_target_not_operator_contract"
+        },
+        "field_validated": false
+      },
+      "scenario_audit": {
+        "schema": "invicta.scenario-audit.v1",
+        "scheduled_trips": 127,
+        "ordinary_requests": 0,
+        "passenger_requests": 0,
+        "walking_requests": 0,
+        "pedestrian_permissions_sha256": "a405db7128d25191b9bf7646f14ce6f4e21a0671228be2d66456c04e56cb12e6",
+        "physical_requests_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "status": "ready_for_execution",
+        "field_validated": false
+      },
+      "diagnostics": {
+        "first_deadline_pending": {
+          "kind": "checkpoint_pending",
+          "time": 19981.0,
+          "trip": "d1_bus_0",
+          "stop": "d1_ERM3",
+          "snapshot": "first-deadline-state.xml.gz",
+          "vehicles": [
+            {
+              "id": "d1_bus_0",
+              "lane": "99958735#1_2",
+              "road": "99958735#1",
+              "position_metres": 29.024792453420275,
+              "speed_mps": 13.306647456147605,
+              "waiting_seconds": 0.0,
+              "stop_state": 0,
+              "passengers": 0,
+              "time_loss_seconds": 34.6505047938518,
+              "leader": null,
+              "next_route": [
+                "99958735#1",
+                "211466031#0",
+                "211466031#1",
+                "211466031#2",
+                "1108592201",
+                "-211466029#1"
+              ],
+              "next_signals": [
+                [
+                  "cluster_10709274011_10709274012_269567465_7967146061",
+                  1,
+                  2167.55520754658,
+                  "r"
+                ],
+                [
+                  "cluster_10866191149_1714753715_4422206030_4422206034",
+                  1,
+                  2626.5852075465796,
+                  "y"
+                ]
+              ],
+              "junction_foes": [],
+              "next_links": [
+                [
+                  "211466031#0_2",
+                  true,
+                  true,
+                  false,
+                  ":cluster_1155459245_1155459352_1155503724_1_1",
+                  "M",
+                  "R",
+                  33.95
+                ],
+                [
+                  "211466031#1_2",
+                  true,
+                  true,
+                  false,
+                  ":6845383361_1_1",
+                  "M",
+                  "s",
+                  4.02
+                ]
+              ],
+              "next_stops": [
+                {
+                  "id": "d1_ERM3",
+                  "lane": "1108592201_1",
+                  "position": 48.99303235979817,
+                  "duration": 0.0,
+                  "flags": 9
+                },
+                {
+                  "id": "d1_CRZ2",
+                  "lane": "-741767474#3_0",
+                  "position": 59.14765128998817,
+                  "duration": 0.0,
+                  "flags": 8
+                }
+              ],
+              "signals": [
+                {
+                  "id": "cluster_10709274011_10709274012_269567465_7967146061",
+                  "phase": 0,
+                  "state": "rrrGGgrrrGGg",
+                  "spent_seconds": 1.0,
+                  "next_switch": 19985.0
+                },
+                {
+                  "id": "cluster_10866191149_1714753715_4422206030_4422206034",
+                  "phase": 1,
+                  "state": "yyyrrryyyrrr",
+                  "spent_seconds": 1.0,
+                  "next_switch": 19983.0
+                }
+              ],
+              "proximate_observation": "unclassified",
+              "cause": "unclassified"
+            }
+          ],
+          "cause": "unclassified"
+        },
+        "first_prolonged_wait": null,
+        "simulation_time": 99300.0,
+        "stopped_on_first_blockage": false,
+        "stop_reason": null,
+        "sample_count": 12045,
+        "sample_limit": 20000,
+        "snapshots": [
+          {
+            "file": "first-deadline-state.xml.gz",
+            "time": 19981.0,
+            "kind": "checkpoint_pending",
+            "sha256": "818cff78e14dbe8538af9852529689096b6480e24f4891849409bf3f3f6bd577"
+          }
+        ],
+        "events_file": "trace.jsonl",
+        "limitations": [
+          "A pending-deadline snapshot is checked against native stop output after execution.",
+          "Proximate observations do not establish the physical cause of delay.",
+          "Snapshots are for diagnosis; resumed-run equivalence is not established."
+        ]
+      },
+      "runtime": {
+        "libsumo": [
+          22,
+          "SUMO 1.28.0"
+        ],
+        "python": "3.12.13",
+        "packages": {
+          "libsumo": "1.28.0",
+          "traci": "1.28.0",
+          "sumolib": "1.28.0",
+          "sumo-data": "1.28.0",
+          "rtree": "1.4.1"
+        }
+      },
+      "phase_timings": {
+        "input_preparation_seconds": 12.553412417008076,
+        "native_execution_seconds": 14.320614582975395,
+        "evaluation_seconds": 0.03061449999222532,
+        "output_verification_seconds": 0.1776966660108883
+      },
+      "network_model": "9c594ce26559f7057665156bfcb796524b302619cbe5b7d00642f35d12f228d9",
+      "input_hashes": {
+        "network.net.xml": "9c594ce26559f7057665156bfcb796524b302619cbe5b7d00642f35d12f228d9",
+        "routes.rou.xml": "e73376d074017104765b2af3d04a72023e36be9a832c372b5b5ccbf6f682c420",
+        "additional.add.xml": "39c563cf97f791310317419ce7e158ab3b26e08821c9c465e0bdb78226a3dfaf",
+        "endpoint-mapping.json": "e43b19c8626abbc7c9006e4c199c7f0cc7ab9cf72e48bd4dd0a5e08cf47af89e",
+        "crossing-requests.json": "7fe6a976c931eecb9cf2a4ffcf8c9c660d6a3be88b16feee55123e4c7ca7c06a",
+        "compiled-audit.json": "54548055e395bbcd8928eb728b9537f70e953ccb53d9416fd7e131658cd7fd68",
+        "implementation-priority_search.py": "34f2f3e230c81ce88fe516c8f13a415c4d67b05c965256310ba8399ddc5921d2",
+        "implementation-priority_model.py": "0591f9b9e239570373a1850a3abff7b2b0bdedf1b16f2bcc0bc044f3a329a22d",
+        "implementation-native_runner.py": "86f6ddddf21388a011bd24e264750e6b28b9846b5ed9c860aa5cc441b807a623",
+        "implementation-signal_priority.py": "dd252d9b0e1f554c43aba0e890f07af1117cf9a1dacb51447c3c7a2147b9e566",
+        "implementation-model_audit.py": "295cf045765ff6bc627d6e7aa0b5a72c8ad466c15da3eaf5cfd5d0107abc6ec0",
+        "implementation-run_diagnostics.py": "d0a8a69763d844021f70d9cfbf1cb93abd7910505254bbcb5f045b0272c17a5a",
+        "implementation-trial_evidence.py": "08803d8e73bf7f4f62f1cfc1f5228db4e0ba68707da33440457d3cee058d2350",
+        "implementation-timetable.py": "48fdff0dfe9a155d1b8b38876c4c2a03eb1624bbe1283eb4472a2256d07a2275",
+        "implementation-priority_demand.py": "102284f98365556af45ce7d27ff98067ecf39ed00f7f44793c97664a4cefe8a4",
+        "implementation-prepare.py": "d3edb1ccdce37937da88aecbe388c44dde8e4325c52041c3f58c662e79995007",
+        "implementation-experiment.py": "984447643e1d15e68afaa181050a25c5f9d904cb0bdc360e5c7ce64c94888227",
+        "implementation-prefix_reproduction.py": "6fc3ff6496b1ce56167776c9cef48e11213ca77d20e693a38f6b4ef663b74497",
+        "implementation-scenario_audit.py": "51997121e45af08881041647cf4917ee7d99deda061feb5d8953079288dcb280",
+        "implementation-state_probe.py": "3883db818586ca81606cf4b36a778a04a27521b79a8865aecaccbde3eac684eb",
+        "implementation-requirements-simulation.txt": "76f31556bed93fd46f757f3ce832a4d59fb34b37fc0a852a93dd8fe642150963",
+        "implementation-requirements.txt": "861134c89682a3739072681e8b2cbe314237115d225c7e1b0e02cb842476e3c9",
+        "reference.json": "fa7a2efaf89f655ac6cf97183dc3155a49889bf5e8f5a0bbd3155c668fa7ee5c",
+        "model.json": "21585f21410744b0daaf78544cac1346410c8d04f536f089ec85c212310e5cc0"
+      },
+      "output_hashes": {
+        "trips.xml": "a411449fe283fc35696b46a673cbea65f0d2c726142f2be350728e744e4a0b9c",
+        "stops.xml": "19823a83dea37ad55b81d4cbfb7f680a61738c174fdd50fe3afdf30c51e54eb2",
+        "collisions.xml": "aeb2fb0a1de6f12a3e5136ee6fadfb65feed0d046b8752cb78c87a6c2df5180e",
+        "priority-events.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "final-state.xml": "1d68abd91e9ddcf156c94e5e82b50fa91aa961b8d6c75b8f1ed42f98d16900a0",
+        "monitor.json": "a897c56526cd506ec1bc6b6307092d43b754494188d4b8dd39c49823bb83b33b",
+        "trace.jsonl": "c1db993288878bedfc8941c51b684e2d48e54567f00bfefb8984cc3c1127e723",
+        "progress.json": "4befeecf01795a2dc34d49d0a575c8884bbd5dfbbe2cdc2798bcd08130319f03",
+        "first-deadline-state.xml.gz": "818cff78e14dbe8538af9852529689096b6480e24f4891849409bf3f3f6bd577"
+      },
+      "demand_mapping_sha256": "e43b19c8626abbc7c9006e4c199c7f0cc7ab9cf72e48bd4dd0a5e08cf47af89e",
+      "reference_sha256": "fa7a2efaf89f655ac6cf97183dc3155a49889bf5e8f5a0bbd3155c668fa7ee5c",
+      "command": [
+        "/Users/jose.cabeda/Git/invicta/.venv/lib/python3.12/site-packages/sumo/bin/sumo",
+        "--net-file",
+        "/Users/jose.cabeda/Git/invicta/.cache/701-regional-fix/trials/v6-combatentes-bus-only-existing-signals-60-s17/network.net.xml",
+        "--route-files",
+        "/Users/jose.cabeda/Git/invicta/.cache/701-regional-fix/trials/v6-combatentes-bus-only-existing-signals-60-s17/routes.rou.xml",
+        "--additional-files",
+        "/Users/jose.cabeda/Git/invicta/.cache/701-regional-fix/trials/v6-combatentes-bus-only-existing-signals-60-s17/additional.add.xml",
+        "--begin",
+        "18000",
+        "--end",
+        "99300",
+        "--seed",
+        "17",
+        "--tripinfo-output",
+        "/Users/jose.cabeda/Git/invicta/.cache/701-regional-fix/trials/v6-combatentes-bus-only-existing-signals-60-s17/trips.xml",
+        "--tripinfo-output.write-unfinished",
+        "true",
+        "--tripinfo-output.write-undeparted",
+        "true",
+        "--stop-output",
+        "/Users/jose.cabeda/Git/invicta/.cache/701-regional-fix/trials/v6-combatentes-bus-only-existing-signals-60-s17/stops.xml",
+        "--stop-output.write-unfinished",
+        "true",
+        "--collision-output",
+        "/Users/jose.cabeda/Git/invicta/.cache/701-regional-fix/trials/v6-combatentes-bus-only-existing-signals-60-s17/collisions.xml",
+        "--time-to-teleport",
+        "-1",
+        "--time-to-teleport.ride",
+        "-1",
+        "--no-step-log",
+        "true",
+        "--collision.action",
+        "warn",
+        "--collision.check-junctions",
+        "true",
+        "--duration-log.disable",
+        "true",
+        "--xml-validation",
+        "never",
+        "--device.rerouting.period",
+        "60",
+        "--routing-algorithm",
+        "dijkstra",
+        "--save-state.times",
+        "99299",
+        "--save-state.files",
+        "/Users/jose.cabeda/Git/invicta/.cache/701-regional-fix/trials/v6-combatentes-bus-only-existing-signals-60-s17/final-state.xml",
+        "--save-state.rng",
+        "true",
+        "--save-state.transportables",
+        "true"
+      ],
+      "passenger_requests": 0,
+      "arrived_passengers": 0,
+      "walking_requests": 0,
+      "arrived_walkers": 0,
+      "vehicle_requests": 0,
+      "completed_ordinary_vehicles": 0,
+      "unroutable_requests": 0,
+      "unserved_vehicle_requests": 0,
+      "collision_records": 0,
+      "lane_changes": [],
+      "signal_priority": {
+        "extensions": 0,
+        "early_green_requests": 0,
+        "changed_signals": [],
+        "extension_limit_seconds": 10,
+        "phase_order_preserved": true,
+        "clearance_phases_preserved": true
+      },
+      "shock_vehicle": null,
+      "standby_resources": 0,
+      "elapsed_seconds": 27.33,
+      "qualified": false,
+      "qualification_note": "Exploratory model: pedestrian demand, stop positions, signal plans, passenger demand and vehicle blocks require validation.",
+      "id": "v6-combatentes-bus-only-existing-signals-60-s17",
+      "model_id": "street-detail-combatentes-candidate",
+      "evidence": {
+        "network.net.xml": {
+          "file": "objects/9c594ce26559f7057665156bfcb796524b302619cbe5b7d00642f35d12f228d9.gz",
+          "sha256": "9c594ce26559f7057665156bfcb796524b302619cbe5b7d00642f35d12f228d9",
+          "gzip_sha256": "2b0b52fe3f9c81813e27a28f1e3f5d0e25b35aceeb3dbb26a9477407fd816a69",
+          "bytes": 125933051
+        },
+        "routes.rou.xml": {
+          "file": "objects/e73376d074017104765b2af3d04a72023e36be9a832c372b5b5ccbf6f682c420.gz",
+          "sha256": "e73376d074017104765b2af3d04a72023e36be9a832c372b5b5ccbf6f682c420",
+          "gzip_sha256": "804d7be353c88410d1c9839f7ee7812494108717ae4bcebc4f53ec66c61a8ab2",
+          "bytes": 981210
+        },
+        "additional.add.xml": {
+          "file": "objects/39c563cf97f791310317419ce7e158ab3b26e08821c9c465e0bdb78226a3dfaf.gz",
+          "sha256": "39c563cf97f791310317419ce7e158ab3b26e08821c9c465e0bdb78226a3dfaf",
+          "gzip_sha256": "a7a03df9d43c57c3ba8ffbf92354b1d1e86f05ab030029d6fb7c13d5bc851518",
+          "bytes": 14666
+        },
+        "endpoint-mapping.json": {
+          "file": "objects/e43b19c8626abbc7c9006e4c199c7f0cc7ab9cf72e48bd4dd0a5e08cf47af89e.gz",
+          "sha256": "e43b19c8626abbc7c9006e4c199c7f0cc7ab9cf72e48bd4dd0a5e08cf47af89e",
+          "gzip_sha256": "6103a730dd81ab0084d49a3cba829b9cdabcaca58c69fbb8d61b63031298d9b5",
+          "bytes": 38
+        },
+        "crossing-requests.json": {
+          "file": "objects/7fe6a976c931eecb9cf2a4ffcf8c9c660d6a3be88b16feee55123e4c7ca7c06a.gz",
+          "sha256": "7fe6a976c931eecb9cf2a4ffcf8c9c660d6a3be88b16feee55123e4c7ca7c06a",
+          "gzip_sha256": "cfe9b1f88861e9742690f98b42833c72853a79da0cbafeb9a6cd29980a96b7de",
+          "bytes": 35
+        },
+        "compiled-audit.json": {
+          "file": "objects/54548055e395bbcd8928eb728b9537f70e953ccb53d9416fd7e131658cd7fd68.gz",
+          "sha256": "54548055e395bbcd8928eb728b9537f70e953ccb53d9416fd7e131658cd7fd68",
+          "gzip_sha256": "6c72c77fc49bedd59c57f6ea08cfd64eebb35f807ccb8e9a8c64ed0d4d4d58c1",
+          "bytes": 412
+        },
+        "implementation-priority_search.py": {
+          "file": "objects/34f2f3e230c81ce88fe516c8f13a415c4d67b05c965256310ba8399ddc5921d2.gz",
+          "sha256": "34f2f3e230c81ce88fe516c8f13a415c4d67b05c965256310ba8399ddc5921d2",
+          "gzip_sha256": "2dae3fa770f01f68f268892e6c76e129adbed6958eca0c173aa881b48d2597cc",
+          "bytes": 19726
+        },
+        "implementation-priority_model.py": {
+          "file": "objects/0591f9b9e239570373a1850a3abff7b2b0bdedf1b16f2bcc0bc044f3a329a22d.gz",
+          "sha256": "0591f9b9e239570373a1850a3abff7b2b0bdedf1b16f2bcc0bc044f3a329a22d",
+          "gzip_sha256": "2f975169a2945bab99e4c43d8064571ef1b0fe501414b992a6b0eeab258bc6f9",
+          "bytes": 8255
+        },
+        "implementation-native_runner.py": {
+          "file": "objects/86f6ddddf21388a011bd24e264750e6b28b9846b5ed9c860aa5cc441b807a623.gz",
+          "sha256": "86f6ddddf21388a011bd24e264750e6b28b9846b5ed9c860aa5cc441b807a623",
+          "gzip_sha256": "c4a8d41a8c6a6bc32e4934dfb78808779affefc5efc92da80a4fa2531a8fc083",
+          "bytes": 11177
+        },
+        "implementation-signal_priority.py": {
+          "file": "objects/dd252d9b0e1f554c43aba0e890f07af1117cf9a1dacb51447c3c7a2147b9e566.gz",
+          "sha256": "dd252d9b0e1f554c43aba0e890f07af1117cf9a1dacb51447c3c7a2147b9e566",
+          "gzip_sha256": "86e20ab759c749001f1b2b0119c6e2a59d0cad8a04a8ab05dbbe50a609c0d867",
+          "bytes": 7087
+        },
+        "implementation-model_audit.py": {
+          "file": "objects/295cf045765ff6bc627d6e7aa0b5a72c8ad466c15da3eaf5cfd5d0107abc6ec0.gz",
+          "sha256": "295cf045765ff6bc627d6e7aa0b5a72c8ad466c15da3eaf5cfd5d0107abc6ec0",
+          "gzip_sha256": "14a336e2bfa12d24d911c376b5740736b737f91975596edb3aac57f7c9f35e4b",
+          "bytes": 12455
+        },
+        "implementation-run_diagnostics.py": {
+          "file": "objects/d0a8a69763d844021f70d9cfbf1cb93abd7910505254bbcb5f045b0272c17a5a.gz",
+          "sha256": "d0a8a69763d844021f70d9cfbf1cb93abd7910505254bbcb5f045b0272c17a5a",
+          "gzip_sha256": "4800feb6f72cd3007a90cd6e4d7fc41f054787f2fa5ee175de1e5b435a623402",
+          "bytes": 5868
+        },
+        "implementation-trial_evidence.py": {
+          "file": "objects/08803d8e73bf7f4f62f1cfc1f5228db4e0ba68707da33440457d3cee058d2350.gz",
+          "sha256": "08803d8e73bf7f4f62f1cfc1f5228db4e0ba68707da33440457d3cee058d2350",
+          "gzip_sha256": "5584d62654cbe94e6f2982960f6f9b3b6db88c781dd6d298bc254fc8db6e680e",
+          "bytes": 5650
+        },
+        "implementation-timetable.py": {
+          "file": "objects/48fdff0dfe9a155d1b8b38876c4c2a03eb1624bbe1283eb4472a2256d07a2275.gz",
+          "sha256": "48fdff0dfe9a155d1b8b38876c4c2a03eb1624bbe1283eb4472a2256d07a2275",
+          "gzip_sha256": "05af5204bc523c99af61f079860757eaa0bb7e2f47124bfa6a6471df5c03d08c",
+          "bytes": 4744
+        },
+        "implementation-priority_demand.py": {
+          "file": "objects/102284f98365556af45ce7d27ff98067ecf39ed00f7f44793c97664a4cefe8a4.gz",
+          "sha256": "102284f98365556af45ce7d27ff98067ecf39ed00f7f44793c97664a4cefe8a4",
+          "gzip_sha256": "a3915595ac86607d20cf0028c14590e2a43bf61dceee507536687ac3e36935c6",
+          "bytes": 3625
+        },
+        "implementation-prepare.py": {
+          "file": "objects/d3edb1ccdce37937da88aecbe388c44dde8e4325c52041c3f58c662e79995007.gz",
+          "sha256": "d3edb1ccdce37937da88aecbe388c44dde8e4325c52041c3f58c662e79995007",
+          "gzip_sha256": "0646b87756adfd6c7829101247a34d90bb835a592349c150eb4a87f4b0740332",
+          "bytes": 12944
+        },
+        "implementation-experiment.py": {
+          "file": "objects/984447643e1d15e68afaa181050a25c5f9d904cb0bdc360e5c7ce64c94888227.gz",
+          "sha256": "984447643e1d15e68afaa181050a25c5f9d904cb0bdc360e5c7ce64c94888227",
+          "gzip_sha256": "059b44a712a5d06f32b654d1a04f06c1f895fcf43471b011abddf15ca8e887f6",
+          "bytes": 18349
+        },
+        "implementation-prefix_reproduction.py": {
+          "file": "objects/6fc3ff6496b1ce56167776c9cef48e11213ca77d20e693a38f6b4ef663b74497.gz",
+          "sha256": "6fc3ff6496b1ce56167776c9cef48e11213ca77d20e693a38f6b4ef663b74497",
+          "gzip_sha256": "722a497407c2a889e2b89dbf8ef9037a638b11b0eb377f742188483f732d1f62",
+          "bytes": 12412
+        },
+        "implementation-scenario_audit.py": {
+          "file": "objects/51997121e45af08881041647cf4917ee7d99deda061feb5d8953079288dcb280.gz",
+          "sha256": "51997121e45af08881041647cf4917ee7d99deda061feb5d8953079288dcb280",
+          "gzip_sha256": "6b227e8c42019761b2505cf0796026e576227ae025e8dddac1b03a4531db66ae",
+          "bytes": 3294
+        },
+        "implementation-state_probe.py": {
+          "file": "objects/3883db818586ca81606cf4b36a778a04a27521b79a8865aecaccbde3eac684eb.gz",
+          "sha256": "3883db818586ca81606cf4b36a778a04a27521b79a8865aecaccbde3eac684eb",
+          "gzip_sha256": "68702f278b1779e5ee9c40beb2625db65f172145c23dfc91b3776eab0ca3c5f4",
+          "bytes": 8829
+        },
+        "implementation-requirements-simulation.txt": {
+          "file": "objects/76f31556bed93fd46f757f3ce832a4d59fb34b37fc0a852a93dd8fe642150963.gz",
+          "sha256": "76f31556bed93fd46f757f3ce832a4d59fb34b37fc0a852a93dd8fe642150963",
+          "gzip_sha256": "49e9abdd8efabe906faa8d7dc9683ee4899fa8b94794fa3ad0e5b4005a4f7690",
+          "bytes": 126
+        },
+        "implementation-requirements.txt": {
+          "file": "objects/861134c89682a3739072681e8b2cbe314237115d225c7e1b0e02cb842476e3c9.gz",
+          "sha256": "861134c89682a3739072681e8b2cbe314237115d225c7e1b0e02cb842476e3c9",
+          "gzip_sha256": "a0c68ed71b72a95047451176dfbafd4f0e37270f7446a45351c6e7a150d9e152",
+          "bytes": 208
+        },
+        "reference.json": {
+          "file": "objects/fa7a2efaf89f655ac6cf97183dc3155a49889bf5e8f5a0bbd3155c668fa7ee5c.gz",
+          "sha256": "fa7a2efaf89f655ac6cf97183dc3155a49889bf5e8f5a0bbd3155c668fa7ee5c",
+          "gzip_sha256": "cb79e5f12db1e8a75f0b9de775a505c2684d69ea165b660a05d33cc595a69c6d",
+          "bytes": 6638923
+        },
+        "model.json": {
+          "file": "objects/21585f21410744b0daaf78544cac1346410c8d04f536f089ec85c212310e5cc0.gz",
+          "sha256": "21585f21410744b0daaf78544cac1346410c8d04f536f089ec85c212310e5cc0",
+          "gzip_sha256": "70865f8d7f1fd88d00eb5ac4946611191fd69864d88f60cee2207e18b9ed955a",
+          "bytes": 7772844
+        },
+        "trips.xml": {
+          "file": "objects/a411449fe283fc35696b46a673cbea65f0d2c726142f2be350728e744e4a0b9c.gz",
+          "sha256": "a411449fe283fc35696b46a673cbea65f0d2c726142f2be350728e744e4a0b9c",
+          "gzip_sha256": "a494e495dc352a652e6cc73b84f557c4ccfd118e053d7cca1d074d24b66377cc",
+          "bytes": 56006
+        },
+        "stops.xml": {
+          "file": "objects/19823a83dea37ad55b81d4cbfb7f680a61738c174fdd50fe3afdf30c51e54eb2.gz",
+          "sha256": "19823a83dea37ad55b81d4cbfb7f680a61738c174fdd50fe3afdf30c51e54eb2",
+          "gzip_sha256": "de0c77613de936ab34381317591ec1b999653d18edbce34730c1ee418bed7811",
+          "bytes": 2010334
+        },
+        "collisions.xml": {
+          "file": "objects/aeb2fb0a1de6f12a3e5136ee6fadfb65feed0d046b8752cb78c87a6c2df5180e.gz",
+          "sha256": "aeb2fb0a1de6f12a3e5136ee6fadfb65feed0d046b8752cb78c87a6c2df5180e",
+          "gzip_sha256": "0761f20f94e9f4b494f137f257ff26b4ad20cad0487425276ff9b0b668011175",
+          "bytes": 2554
+        },
+        "priority-events.json": {
+          "file": "objects/37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570.gz",
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "gzip_sha256": "7e9822432ddbc7c2682c87809c75babb37f3a1f4a6e7f6ab1302e1f629e646e2",
+          "bytes": 3
+        },
+        "final-state.xml": {
+          "file": "objects/1d68abd91e9ddcf156c94e5e82b50fa91aa961b8d6c75b8f1ed42f98d16900a0.gz",
+          "sha256": "1d68abd91e9ddcf156c94e5e82b50fa91aa961b8d6c75b8f1ed42f98d16900a0",
+          "gzip_sha256": "52dd04cf14e6dfc3832c95c5b619318b51b59d516ba4523d3265dc7b53d7a8fc",
+          "bytes": 53008
+        },
+        "monitor.json": {
+          "file": "objects/a897c56526cd506ec1bc6b6307092d43b754494188d4b8dd39c49823bb83b33b.gz",
+          "sha256": "a897c56526cd506ec1bc6b6307092d43b754494188d4b8dd39c49823bb83b33b",
+          "gzip_sha256": "cc80be7f1e84439e9c300cb3063a44af177db1139406b8a2ebd3cf7c9e67353d",
+          "bytes": 3261
+        },
+        "trace.jsonl": {
+          "file": "objects/c1db993288878bedfc8941c51b684e2d48e54567f00bfefb8984cc3c1127e723.gz",
+          "sha256": "c1db993288878bedfc8941c51b684e2d48e54567f00bfefb8984cc3c1127e723",
+          "gzip_sha256": "56c6109e87a7c470277b9c2db98cc793598a34fa660e7e902ee6f001c4a0d7fc",
+          "bytes": 14422503
+        },
+        "progress.json": {
+          "file": "objects/4befeecf01795a2dc34d49d0a575c8884bbd5dfbbe2cdc2798bcd08130319f03.gz",
+          "sha256": "4befeecf01795a2dc34d49d0a575c8884bbd5dfbbe2cdc2798bcd08130319f03",
+          "gzip_sha256": "0d0f6c2e483135805d5294782715abef063836394980011bd0eede7c968e4bb7",
+          "bytes": 103
+        },
+        "first-deadline-state.xml.gz": {
+          "file": "objects/818cff78e14dbe8538af9852529689096b6480e24f4891849409bf3f3f6bd577.gz",
+          "sha256": "818cff78e14dbe8538af9852529689096b6480e24f4891849409bf3f3f6bd577",
+          "gzip_sha256": "82a7db9ea62f12739d5bce9140c4b082692cbd3f29814668c2e6fb3c18c89f3c",
+          "bytes": 52742
+        },
+        "result.json": {
+          "file": "objects/ad66e2c2676c5a113a75bcd395624fc7498864af61a35b05044edf6f66a2c995.gz",
+          "sha256": "ad66e2c2676c5a113a75bcd395624fc7498864af61a35b05044edf6f66a2c995",
+          "gzip_sha256": "061a5c35e10a13336cf973d6f7d9bfc003306e48715f7818dbbb8a0513e8c375",
+          "bytes": 15251
+        }
+      },
+      "console": {
+        "file": "objects/c932f317e87874badfd2cec64f1552cd128602cb382c15bbe2b2b8dbe6a6b3b0.gz",
+        "sha256": "c932f317e87874badfd2cec64f1552cd128602cb382c15bbe2b2b8dbe6a6b3b0",
+        "gzip_sha256": "b24ee7e2304cdeb6136fbc8f6dbd61bf32bf510f248a84de1b831123efc4ed1b",
+        "bytes": 1933
+      }
+    }
+  ],
+  "geometry_identity_screen": {
+    "scope": "edge_identifiers_not_physical_movement_equivalence",
+    "physical_access_preserved": "not_established",
+    "note": "Reimport changes OSM edge fragment identifiers; lost/added lane IDs cannot establish lost/added physical turns. Candidate rejected on timetable failure before remaining seeds.",
+    "evidence": {
+      "file": "objects/6185a263fa8d6084ced0b1e318796387cca89467d707d075fe373138237dbe6e.gz",
+      "sha256": "6185a263fa8d6084ced0b1e318796387cca89467d707d075fe373138237dbe6e",
+      "gzip_sha256": "9a78de21eea74ea1b0c2161f4d4bc14a6db14f419353c43abf2d6f169cd4cdc8",
+      "bytes": 12319
+    },
+    "implementation": {
+      "file": "objects/a57d43c7087ed27deaf56ec509fdb020bae665941219bebb95bdfb4d9cfbe3a4.gz",
+      "sha256": "a57d43c7087ed27deaf56ec509fdb020bae665941219bebb95bdfb4d9cfbe3a4",
+      "gzip_sha256": "e8a44adcfa6fa6816fc0f4b12d72faba439a86160246b54c46e41274f1469270",
+      "bytes": 2794
+    }
+  },
+  "failed_import_attempt": {
+    "reason": "Comma-separated join list rejected; corrected to the documented space-separated list before any execution.",
+    "patch": {
+      "file": "objects/780e506e5755e70e2087fdd10d2613be8b541543d4cc5a1897305dfad8378756.gz",
+      "sha256": "780e506e5755e70e2087fdd10d2613be8b541543d4cc5a1897305dfad8378756",
+      "gzip_sha256": "5055abf60f1f343e204fe577337d1b535e52bb70c8add574c8c7b72fffcb4809",
+      "bytes": 323
+    },
+    "console": {
+      "file": "objects/3145675f54b3f031c08c76679dcdc4d407ae555200e994f31a515d9eab4f3186.gz",
+      "sha256": "3145675f54b3f031c08c76679dcdc4d407ae555200e994f31a515d9eab4f3186",
+      "gzip_sha256": "007e7a082f9ecaebd6dd13f0ef9ab5e14834ec3c9bec42912ee377e2a7c997b0",
+      "bytes": 4530
+    },
+    "import_log": {
+      "file": "objects/afee04670f2257e55f1bdfeb00cb6949a6b30eb0a59f9725bf04feafc77ce836.gz",
+      "sha256": "afee04670f2257e55f1bdfeb00cb6949a6b30eb0a59f9725bf04feafc77ce836",
+      "gzip_sha256": "6fe358be20fde8a99334b0c76dc553b037677243b333d6ed5f764858c507ec85",
+      "bytes": 7500
+    }
+  },
+  "freezer": {
+    "file": "objects/9a24de82100536f130fef9a1cb4b291dad6203341ca25d976ec731e845c31884.gz",
+    "sha256": "9a24de82100536f130fef9a1cb4b291dad6203341ca25d976ec731e845c31884",
+    "gzip_sha256": "effae0d80578e2f11c8efc56f7df3d543d4c0ad3ef23d62cc31dad83aad902b9",
+    "bytes": 3020
+  }
+}

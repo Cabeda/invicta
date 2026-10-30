@@ -93,6 +93,19 @@ class InvestigationTests(unittest.TestCase):
             self.assertFalse(report['simulation_compliance'])
             self.assertEqual(report['operational_compliance'], trial['config'].get('diagnostic_all_green', False))
 
+    def test_failed_compound_candidate_does_not_become_a_timetable_pass(self):
+        source = ROOT.parents[2] / 'docs/research/701-bus-only-controls-2026-10-30/candidate-controls.json'
+        ledger = json.loads(source.read_text())
+        self.assertEqual(ledger['status'], 'rejected_prerequisite_still_fails')
+        self.assertFalse(ledger['qualified'])
+        report = diagnose_trial(source, ledger['trials'][0]['id'])
+        self.assertEqual(report['metrics']['completed'], 127)
+        self.assertEqual(report['metrics']['checkpoints'], 714)
+        self.assertEqual(report['metrics']['late_checkpoints'], 10)
+        self.assertEqual(report['operational_metrics']['late_checkpoints'], 3)
+        self.assertFalse(report['operational_compliance'])
+        self.assertFalse(report['simulation_compliance'])
+
     def test_operational_tolerance_is_reported_without_replacing_strict_or_early_failures(self):
         from timetable import assess_trial
         scheduled = [{'id': 'bus', 'stops': [

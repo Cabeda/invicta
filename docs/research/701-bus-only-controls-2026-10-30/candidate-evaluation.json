@@ -1,0 +1,273 @@
+{
+  "schema": "invicta.run-diagnosis.v1",
+  "source": {
+    "kind": "archive",
+    "trial": "v6-combatentes-bus-only-existing-signals-60-s17",
+    "model": "street-detail-combatentes-candidate",
+    "manifest_sha256": "17a22c4642a98d32e51592cb20496be81f98ffe083952fef95be052cd3f0bab4",
+    "available_files": [
+      "additional.add.xml",
+      "collisions.xml",
+      "compiled-audit.json",
+      "crossing-requests.json",
+      "endpoint-mapping.json",
+      "final-state.xml",
+      "first-deadline-state.xml.gz",
+      "implementation-experiment.py",
+      "implementation-model_audit.py",
+      "implementation-native_runner.py",
+      "implementation-prefix_reproduction.py",
+      "implementation-prepare.py",
+      "implementation-priority_demand.py",
+      "implementation-priority_model.py",
+      "implementation-priority_search.py",
+      "implementation-requirements-simulation.txt",
+      "implementation-requirements.txt",
+      "implementation-run_diagnostics.py",
+      "implementation-scenario_audit.py",
+      "implementation-signal_priority.py",
+      "implementation-state_probe.py",
+      "implementation-timetable.py",
+      "implementation-trial_evidence.py",
+      "model.json",
+      "monitor.json",
+      "network.net.xml",
+      "priority-events.json",
+      "progress.json",
+      "reference.json",
+      "result.json",
+      "routes.rou.xml",
+      "stops.xml",
+      "trace.jsonl",
+      "trips.xml"
+    ],
+    "reference_sha256": "fa7a2efaf89f655ac6cf97183dc3155a49889bf5e8f5a0bbd3155c668fa7ee5c",
+    "network_sha256": "9c594ce26559f7057665156bfcb796524b302619cbe5b7d00642f35d12f228d9",
+    "execution_sha256": "ad66e2c2676c5a113a75bcd395624fc7498864af61a35b05044edf6f66a2c995",
+    "verified_files": {
+      "stops.xml": "19823a83dea37ad55b81d4cbfb7f680a61738c174fdd50fe3afdf30c51e54eb2",
+      "trips.xml": "a411449fe283fc35696b46a673cbea65f0d2c726142f2be350728e744e4a0b9c",
+      "monitor.json": "a897c56526cd506ec1bc6b6307092d43b754494188d4b8dd39c49823bb83b33b"
+    }
+  },
+  "coverage": {
+    "scheduled_trips": 127,
+    "timing_checks": 714,
+    "directions": [
+      "0",
+      "1"
+    ],
+    "kind": "full_service_day",
+    "begin": 18000.0,
+    "end": 99300.0,
+    "full_service_day": true
+  },
+  "metrics": {
+    "planned": 127,
+    "completed": 127,
+    "on_time_starts": 127,
+    "on_time_finishes": 125,
+    "checkpoints": 714,
+    "missing_checkpoints": 0,
+    "late_checkpoints": 10,
+    "early_departures": 0,
+    "passes": false
+  },
+  "acceptance_criteria": {
+    "lateness_tolerance_seconds": 60,
+    "early_departures_allowed": false,
+    "terminal_measure": "arrival",
+    "other_checkpoint_measure": "departure",
+    "scope": "project_target_not_operator_contract"
+  },
+  "operational_metrics": {
+    "planned": 127,
+    "completed": 127,
+    "on_time_starts": 127,
+    "on_time_finishes": 126,
+    "checkpoints": 714,
+    "missing_checkpoints": 0,
+    "late_checkpoints": 3,
+    "early_departures": 0,
+    "passes": false,
+    "failures": [
+      {
+        "trip": "d1_bus_1",
+        "stop": "d1_MPL4",
+        "scheduled": 22620,
+        "arrival": 22731.0,
+        "departure": 22732.0,
+        "missing": false,
+        "late": true,
+        "early": false
+      },
+      {
+        "trip": "d1_bus_1",
+        "stop": "d1_0BLRB",
+        "scheduled": 22800,
+        "arrival": 22879.0,
+        "departure": 22880.0,
+        "missing": false,
+        "late": true,
+        "early": false
+      },
+      {
+        "trip": "d1_bus_61",
+        "stop": "d1_MPL4",
+        "scheduled": 86460,
+        "arrival": 86571.0,
+        "departure": 86572.0,
+        "missing": false,
+        "late": true,
+        "early": false
+      }
+    ]
+  },
+  "operational_compliance": false,
+  "metrics_scope": "whole_reference_goal",
+  "observation": {
+    "cutoff_exclusive": 99300.0,
+    "planned_trips": 127,
+    "reference_checks": 714,
+    "due_checks": 714,
+    "future_checks": 0,
+    "missing_due_checks": 0,
+    "late_observed_checks": 10,
+    "early_observed_checks": 0,
+    "on_time_due_checks": 704,
+    "completed_observed_trips": 127,
+    "unfinished_due_trip_ids": [],
+    "active_reference_trip_ids": [],
+    "future_trip_ids": []
+  },
+  "simulation_compliance": false,
+  "field_validated": false,
+  "first_failure": {
+    "trip": "d1_bus_0",
+    "stop": "d1_ERM3",
+    "scheduled": 19980,
+    "arrival": 20001.0,
+    "departure": 20002.0,
+    "missing": false,
+    "late": true,
+    "early": false,
+    "cause": "unclassified",
+    "interval": {
+      "from_stop": "d1_COD4",
+      "to_stop": "d1_ERM3",
+      "scheduled_seconds": 480,
+      "observed_seconds": 502.0,
+      "inherited_delay_seconds": 0,
+      "added_delay_seconds": 22.0
+    },
+    "trace_observation": {
+      "kind": "checkpoint_pending",
+      "time": 19981.0,
+      "trip": "d1_bus_0",
+      "stop": "d1_ERM3",
+      "snapshot": "first-deadline-state.xml.gz",
+      "vehicles": [
+        {
+          "id": "d1_bus_0",
+          "lane": "99958735#1_2",
+          "road": "99958735#1",
+          "position_metres": 29.024792453420275,
+          "speed_mps": 13.306647456147605,
+          "waiting_seconds": 0.0,
+          "stop_state": 0,
+          "passengers": 0,
+          "time_loss_seconds": 34.6505047938518,
+          "leader": null,
+          "next_route": [
+            "99958735#1",
+            "211466031#0",
+            "211466031#1",
+            "211466031#2",
+            "1108592201",
+            "-211466029#1"
+          ],
+          "next_signals": [
+            [
+              "cluster_10709274011_10709274012_269567465_7967146061",
+              1,
+              2167.55520754658,
+              "r"
+            ],
+            [
+              "cluster_10866191149_1714753715_4422206030_4422206034",
+              1,
+              2626.5852075465796,
+              "y"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "211466031#0_2",
+              true,
+              true,
+              false,
+              ":cluster_1155459245_1155459352_1155503724_1_1",
+              "M",
+              "R",
+              33.95
+            ],
+            [
+              "211466031#1_2",
+              true,
+              true,
+              false,
+              ":6845383361_1_1",
+              "M",
+              "s",
+              4.02
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d1_ERM3",
+              "lane": "1108592201_1",
+              "position": 48.99303235979817,
+              "duration": 0.0,
+              "flags": 9
+            },
+            {
+              "id": "d1_CRZ2",
+              "lane": "-741767474#3_0",
+              "position": 59.14765128998817,
+              "duration": 0.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "cluster_10709274011_10709274012_269567465_7967146061",
+              "phase": 0,
+              "state": "rrrGGgrrrGGg",
+              "spent_seconds": 1.0,
+              "next_switch": 19985.0
+            },
+            {
+              "id": "cluster_10866191149_1714753715_4422206030_4422206034",
+              "phase": 1,
+              "state": "yyyrrryyyrrr",
+              "spent_seconds": 1.0,
+              "next_switch": 19983.0
+            }
+          ],
+          "proximate_observation": "unclassified",
+          "cause": "unclassified"
+        }
+      ],
+      "cause": "unclassified"
+    }
+  },
+  "first_failure_criterion": "strict",
+  "unfinished_trips": [],
+  "next_step": "Inspect the first failed interval and its native trace before changing a traffic package.",
+  "limitations": [
+    "Recorded stop calls establish timing, not the physical cause of a delay.",
+    "Unclassified failures require a native trace or targeted reproduction.",
+    "Simulation compliance does not establish field validation."
+  ]
+}

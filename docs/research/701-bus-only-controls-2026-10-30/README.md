@@ -8,4 +8,6 @@ The model includes only the candidate Alfena node join, not a new street proposa
 
 `reduction_attempt` is separate: a one-bus control loses the recorded late outcome, and an empty-request-stop probe on that passing reduction cannot establish a remedy. It must never be counted as another complete-service pass. Both traces, commands, route inputs and native outputs are retained; their unchanged network/additional inputs are those of `source_trial`.
 
+`candidate-controls.json` separately retains a failed Combatentes compound-junction hypothesis and its single full-day seed-17 control. `candidate-evaluation.json` regrades it. It is not part of the six-control matrix and is not promoted: three checks still exceed 60 seconds, and physical-access equivalence is not established. The edge-identifier screen cannot interpret regenerated fragment IDs as physical turn changes. The failed comma-separated import attempt is retained separately from the successful import used in the execution.
+
 See [the results and limits](../701-bus-only-results-2026-10-30.md) and [acceptance scope](../../product/bus-only-prerequisite-2026-10-30.md).
