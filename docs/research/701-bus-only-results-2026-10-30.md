@@ -25,7 +25,7 @@ The candidate model applies the [previously isolated Alfena compound-junction co
 
 Each row evaluates all 714 checks. Every row has **zero missing timing checks, zero early departures and zero recorded collisions**. Zero collision records do not establish street safety. The three seeds are diagnostic repetitions, not a robust forecast or validated operating distribution.
 
-The sole strict miss with signals off is `d1_bus_0`, Codiceira 05:25 → Ermesinde Estação 05:33: departure is 05:33:16, **16 seconds late**, in all three seeds. No schedule, speed or driving parameter was changed to remove that miss. The historical configuration name `diagnostic_all_green` invokes `--tls.all-off true`: signals are switched **off**, with applicable priority rules retained. It does not make all traffic movements green.
+The sole strict miss with signals off is `d1_bus_0`, Codiceira 05:25 → Ermesinde Estação 05:33: departure is **16 seconds late in seed 17, 17 seconds in seed 29 and 19 seconds in seed 41**. No schedule, speed or driving parameter was changed to remove that miss. The historical configuration name `diagnostic_all_green` invokes `--tls.all-off true`: signals are switched **off**, with applicable priority rules retained. It does not make all traffic movements green.
 
 ## Which signal-enabled services fail the 60-second target?
 
