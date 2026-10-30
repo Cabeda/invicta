@@ -6,6 +6,8 @@ Application modules live in `web/`; registered studies are listed in `web/lines.
 
 When changing the experiment workflow or investigating slow preparation, read the [simulation-loop retrospective](docs/product/simulation-loop-retro-2026-10-29.md). It identifies the missing model audit, diagnostic and search interfaces and the measured spatial-index dependency issue.
 
+The first audit/diagnosis slice is now available through `prototypes/line-701/full/investigate.py`: audit a model, diagnose one frozen execution, reproduce a bounded prefix or inspect saved state without advancing traffic. See [the commands](prototypes/line-701/full/README.md#investigate-before-another-priority-search-run), [recorded results](docs/research/701-investigation-results-2026-10-30.md) and [bus reliability research](docs/research/bus-reliability-best-practices-2026-10-30.md). No compliant proposal has been found yet.
+
 Install development dependencies with `npm ci` and Python simulation dependencies with `python -m pip install -r requirements-simulation.txt` in your virtual environment. Use `npm run build`, `npm run prepare:deploy`, `npm run check` and `npm run test:browser` before publishing. CI uses the same pinned Python requirements and checks that the native spatial index loads; an existing `.venv` is used locally. CI runs these acceptance checks on pushes and pull requests.
 
 [Live demo](https://invicta-dusky.vercel.app/?lang=pt#route) · [Open in 3D](https://invicta-dusky.vercel.app/?lang=pt&dimension=3d&camera=combatentes&view=compare#replay)

@@ -4,6 +4,8 @@ No tested package meets every published checkpoint yet. The target is unchanged:
 
 The new experiments are separate from the site's existing animated replay. They do not establish present-day STCP punctuality or a field-validated design. The frozen timetable refers to 28 October 2026. The [complete trial ledger](priority-search.json) includes successful executions, failed timetable checks, superseded imports, optimistic diagnostics and one corrected controller API failure. Native bus calls and trip outputs are available as gzip files through each trial's `evidence` entries. No failed trip is removed from a denominator.
 
+The [30 October investigation](https://github.com/Cabeda/invicta/blob/main/docs/research/701-investigation-results-2026-10-30.md) adds a model-readiness gate, first-failure traces and code-first state inspection. An eight-second unchanged prefix reproduces all 25 completed calls and the first 19-second miss; an explicit vehicle-behaviour sensitivity still misses by five seconds. These two diagnostic prefixes do not change the full-day results or establish a transport proposal. The [best-practice review](https://github.com/Cabeda/invicta/blob/main/docs/research/bus-reliability-best-practices-2026-10-30.md) guides the next experiments.
+
 ## What the iterations have established
 
 ### Correct the route before attributing delay to street policy

@@ -2,6 +2,30 @@
 
 This is an actual native SUMO traffic simulation of both complete directions in one regional road network. It includes 56 inbound stops, 54 outbound stops, all 127 scheduled workings and 6,024 served timetable calls. Short workings keep their actual origins and destinations; 960 unserved timetable cells remain absent. It uses the frozen 28 October 2026 school-weekday timetable, not a live service feed.
 
+## Investigate before another priority-search run
+
+The supplementary street-detail search now has an audit gate and one code-first investigation interface. Install `requirements-simulation.txt` from the repository root. These commands read frozen evidence; only `reproduce` advances native traffic, in a bounded prefix:
+
+```sh
+.venv/bin/python prototypes/line-701/full/investigate.py diagnose \
+  --source prototypes/line-701/full/priority-search.json --trial v5-empty-diagnostic-s17
+.venv/bin/python prototypes/line-701/full/investigate.py inspect \
+  --source prototypes/line-701/full/priority-search.json \
+  --trial v5-moderate-priority-mapped-s17 --limit 5
+.venv/bin/python prototypes/line-701/full/investigate.py reproduce \
+  --source prototypes/line-701/full/priority-search.json --trial v5-empty-diagnostic-s17 \
+  --output-dir .cache/701-investigation/new-control
+.venv/bin/python prototypes/line-701/full/investigate.py audit \
+  --model .cache/701-optimisation/model-v5 \
+  --source prototypes/line-701/full/priority-search.json --trial v5-empty-diagnostic-s17
+```
+
+`audit` requires the prepared model folder, returns exit code 2 when blocked, and identifies the specific findings. `diagnose` and `inspect` return success when evidence inspection succeeds, even if the transport goal fails. Use `--format json` or `--format markdown`; `--report new-path.json` saves a new report. `inspect --snapshot first-deadline-state.xml.gz` reads a new run's first-failure state. A selected `--stop` requires its `--trip`.
+
+The current model remains blocked: three stop placements exceed the project's 25 m review trigger, and the empty control misses Ermesinde by 19 seconds. The unchanged prefix reproduces all 25 completed calls; the explicit `reproduce --bus-sigma 0` sensitivity reduces that miss to five seconds and still fails. This changes an uncertain vehicle-behaviour assumption, not the proposed streets. Prefixes preserve the original complete demand and warmup, are capped at one simulated hour and a 120-second native wall budget checked after each step, and cannot qualify a full-day proposal. Later failures can be inspected from saved states; resume equivalence has not been established.
+
+New `priority_search.py` configurations require `readiness: {"source": "...", "trial": "..."}` and `hypothesis: {"change": "...", "prediction": "...", "evidence": "..."}`. A matching complete-service empty diagnostic supplies readiness only after its checks pass. The existing explicit empty profile can run to bootstrap this process; there is no force flag. New native executions retain source copies, first-failure states, bounded traces, progress and phase timings. The gate applies to this supplementary search; the earlier `run.sh` replay pipeline below retains its separate publication checks.
+
 ## Run and reproduce
 
 From the repository root, using the pinned environment in `prototypes/costa-cabral/requirements.txt`:

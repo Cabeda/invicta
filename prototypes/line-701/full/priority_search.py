@@ -8,7 +8,6 @@ import argparse
 import collections
 import json
 import random
-import subprocess
 import time
 import xml.etree.ElementTree as ET
 
@@ -17,48 +16,14 @@ import sumolib
 from prepare import DATA, digest, write_json
 from experiment import ALLOWED, CLASSES, BEGIN, demand, route
 from priority_demand import migrate_requests
+from timetable import assess_trial
+from model_audit import require_readiness, ModelNotReadyError
+from native_runner import freeze_implementation, run_native
+from scenario_audit import audit_scenario
 
 
 class ExistingTrialError(FileExistsError):
     """An existing trial must never be overwritten, including a failed one."""
-
-
-def assess_trial(scheduled, calls, completed):
-    """Strict zero-tolerance timetable test, including missing scheduled trips."""
-    indexed = {(c['id'], c['busStop']): c for c in calls}
-    if len(indexed) != len(calls):
-        raise ValueError('Duplicate native stop calls')
-    failures = []
-    result = dict(planned=len(scheduled), completed=len(completed), on_time_starts=0,
-                  on_time_finishes=0, checkpoints=0, missing_checkpoints=0,
-                  late_checkpoints=0, early_departures=0, passes=True)
-    for trip in scheduled:
-        for index, stop in enumerate(trip['stops']):
-            if index not in [0, len(trip['stops']) - 1] and not stop['designated_timing_point']:
-                continue
-            result['checkpoints'] += 1
-            call = indexed.get((trip['id'], stop['native_stop_id']), {})
-            arrival, departure = float(call.get('started', -1)), float(call.get('ended', -1))
-            terminal = index == len(trip['stops']) - 1
-            missing = arrival < 0 or (not terminal and departure < 0)
-            late = not missing and (arrival if terminal else departure) > stop['scheduled']
-            early = not missing and not terminal and departure < stop['scheduled']
-            result['missing_checkpoints'] += missing
-            result['late_checkpoints'] += late
-            result['early_departures'] += early
-            okay = not (missing or late or early)
-            if index == 0:
-                result['on_time_starts'] += okay
-            if terminal:
-                result['on_time_finishes'] += okay
-            if not okay:
-                failures.append({'trip': trip['id'], 'stop': stop['native_stop_id'],
-                    'scheduled': stop['scheduled'], 'arrival': arrival if arrival >= 0 else None,
-                    'departure': departure if departure >= 0 else None,
-                    'missing': missing, 'late': late, 'early': early})
-    result['passes'] = bool(scheduled) and not failures and result['completed'] == result['planned']
-    result['failures'] = failures
-    return result
 
 
 def make_inputs(model, folder, config):
@@ -230,6 +195,8 @@ def make_inputs(model, folder, config):
         routes.append(element)
     ET.ElementTree(routes).write(folder / 'routes.rou.xml', encoding='utf-8', xml_declaration=True)
     ET.ElementTree(additional).write(folder / 'additional.add.xml', encoding='utf-8', xml_declaration=True)
+    audit = audit_scenario(folder, reference, requests, passengers, pedestrian_requests, baseline, net)
+    write_json(folder / 'compiled-audit.json', audit)
     return reference, buses, requests, passengers, unroutable, changes, shock, pedestrian_requests
 
 
@@ -241,24 +208,30 @@ def run_trial(model, output, config):
         raise ValueError('Trial id must name one directory')
     if folder.exists():
         raise ExistingTrialError('Use a fresh trial id; every trial folder is immutable')
+    readiness = require_readiness(model, config)
     try:
         folder.mkdir(parents=True)
     except FileExistsError as error:
         raise ExistingTrialError('A concurrent process already created this trial') from error
     try:
-        return _execute_trial(model, folder, config)
+        return _execute_trial(model, folder, config, readiness)
     except Exception as error:
         write_json(folder / 'error.json', {'config': config, 'status': 'failed', 'reason': str(error)})
         raise
 
 
-def _execute_trial(model, folder, config):
+def _execute_trial(model, folder, config, readiness):
     started = time.monotonic()
+    implementations = freeze_implementation(folder)
+    (folder / 'reference.json').write_bytes((model / 'routes.json').read_bytes())
     source_hashes = {name: digest(model / name) for name in ['baseline.net.xml', 'routes.json', 'model.json']}
     if source_hashes['baseline.net.xml'] != json.loads((model / 'model.json').read_text())['network_sha256']:
         raise ValueError('Model network bytes changed')
     reference, buses, requests, passengers, unroutable, changes, shock, pedestrian_requests = make_inputs(model, folder, config)
-    native_hashes = {name: digest(folder / name) for name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml', 'endpoint-mapping.json']}
+    native_hashes = {name: digest(folder / name) for name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml', 'endpoint-mapping.json', 'crossing-requests.json', 'compiled-audit.json']}
+    native_hashes.update(implementations)
+    native_hashes['reference.json'] = digest(folder / 'reference.json')
+    preparation_seconds = time.monotonic() - started
     end = max(s['scheduled'] for t in buses for s in t['stops']) + 7200
     command = [str(Path(sumo.SUMO_HOME) / 'bin/sumo'), '--net-file', str(folder / 'network.net.xml'),
         '--route-files', str(folder / 'routes.rou.xml'), '--additional-files', str(folder / 'additional.add.xml'),
@@ -273,17 +246,12 @@ def _execute_trial(model, folder, config):
         '--save-state.rng', 'true', '--save-state.transportables', 'true']
     if config.get('diagnostic_all_green'):
         command += ['--tls.all-off', 'true']
-    if config.get('signal_priority'):
-        from signal_priority import simulate_with_priority
-        priority = simulate_with_priority(command, {t['id'] for t in buses}, folder,
-            early_green=config.get('early_green', False),
-            shorten_served_pedestrian_green=config.get('shorten_served_pedestrian_green', False))
-    else:
-        process = subprocess.run(command, capture_output=True, text=True)
-        (folder / 'sumo.log').write_text(process.stdout + '\n' + process.stderr)
-        if process.returncode:
-            raise RuntimeError(process.stderr[-3000:])
-        priority = {'extensions': 0, 'changed_signals': []}
+    options = ({'early_green': config.get('early_green', False),
+                'shorten_served_pedestrian_green': config.get('shorten_served_pedestrian_green', False)}
+               if config.get('signal_priority') else None)
+    execution = run_native(command, buses, folder, options)
+    priority = execution['priority']
+    evaluation_started = time.monotonic()
     trips = list(ET.parse(folder / 'trips.xml').getroot())
     completed = {t.get('id') for t in trips if t.tag == 'tripinfo' and float(t.get('arrival', -1)) >= 0}
     metrics = assess_trial(buses, [c.attrib for c in ET.parse(folder / 'stops.xml').getroot()],
@@ -293,13 +261,25 @@ def _execute_trial(model, folder, config):
                          for stage in p) for p in person_results)
     served_vehicles = len(completed - {b['id'] for b in buses})
     collisions = len(list(ET.parse(folder / 'collisions.xml').getroot()))
+    evaluation_seconds = time.monotonic() - evaluation_started
+    verification_started = time.monotonic()
     if any(digest(model / name) != value for name, value in source_hashes.items()) or any(
             digest(folder / name) != value for name, value in native_hashes.items()):
         raise ValueError('Simulation inputs changed during execution')
+    outputs = ['trips.xml', 'stops.xml', 'collisions.xml', 'priority-events.json', 'final-state.xml',
+               'monitor.json', 'trace.jsonl', 'progress.json'] + [s['file'] for s in execution['diagnostics']['snapshots']]
+    output_hashes = {name: digest(folder / name) for name in outputs if (folder / name).exists()}
     result = {'config': config, 'metrics': metrics, 'grading_schema': 2, 'native': True,
+        'readiness': readiness,
+        'scenario_audit': json.loads((folder / 'compiled-audit.json').read_text()),
+        'diagnostics': execution['diagnostics'], 'runtime': execution['runtime'],
+        'phase_timings': {'input_preparation_seconds': preparation_seconds,
+                          'native_execution_seconds': execution['elapsed_seconds'],
+                          'evaluation_seconds': evaluation_seconds,
+                          'output_verification_seconds': time.monotonic() - verification_started},
         'network_model': json.loads((model / 'model.json').read_text())['network_sha256'],
         'input_hashes': native_hashes,
-        'output_hashes': {name: digest(folder / name) for name in ['trips.xml', 'stops.xml', 'collisions.xml', 'priority-events.json', 'final-state.xml'] if (folder / name).exists()},
+        'output_hashes': output_hashes,
         'demand_mapping_sha256': digest(folder / 'endpoint-mapping.json'),
         'reference_sha256': digest(model / 'routes.json'), 'command': command,
         'passenger_requests': passengers, 'arrived_passengers': arrived_people,

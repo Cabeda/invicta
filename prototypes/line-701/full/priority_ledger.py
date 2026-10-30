@@ -8,7 +8,8 @@ import json
 import xml.etree.ElementTree as ET
 from sumolib.net.lane import get_allowed
 from prepare import DATA, digest, write_json
-from priority_search import assess_trial
+from timetable import assess_trial
+from trial_evidence import read_archive
 
 MODEL_CATALOG = {
     'model': {'id': 'street-detail-v2-superseded', 'current': False, 'defect': None},
@@ -130,23 +131,41 @@ def export_ledger(cache, destination):
     evidence.mkdir(exist_ok=True)
     configs = destination / 'priority-configs'
     configs.mkdir(exist_ok=True)
+    shared_inputs = {}
+    previous = destination / 'priority-search.json'
+    if previous.exists():
+        for trial in json.loads(previous.read_text())['trials']:
+            for name, item in trial.get('evidence', {}).items():
+                if name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml']:
+                    shared_inputs[item['sha256']] = item
 
-    def freeze(folder, ident):
+    def freeze(folder, ident, archive_inputs=False):
         files = {}
         target = evidence / ident
         target.mkdir(exist_ok=True)
         names = ['stops.xml', 'trips.xml', 'collisions.xml', 'priority-events.json', 'endpoint-mapping.json', 'result.json', 'final-state.xml']
-        if '-mapped-' in ident:
+        if '-mapped-' in ident or archive_inputs:
             names += ['network.net.xml', 'routes.rou.xml', 'additional.add.xml']
-        for name in names:
+        if archive_inputs:
+            original = json.loads((folder / 'result.json').read_text())
+            names += list(original['input_hashes']) + list(original.get('output_hashes', {}))
+        for name in dict.fromkeys(names):
             source = folder / name
             if not source.exists():
+                continue
+            fingerprint = digest(source)
+            if name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml'] and fingerprint in shared_inputs:
+                item = shared_inputs[fingerprint]
+                read_archive(destination, item)
+                files[name] = item
                 continue
             payload = gzip.compress(source.read_bytes(), mtime=0)
             path = target / (name + '.gz')
             path.write_bytes(payload)
             files[name] = {'file': str(path.relative_to(destination)),
-                'sha256': digest(source), 'gzip_sha256': digest(path)}
+                'sha256': fingerprint, 'gzip_sha256': digest(path)}
+            if name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml']:
+                shared_inputs[fingerprint] = files[name]
         return files
 
     for path in sorted((cache / 'trials').glob('*/result.json')):
@@ -215,7 +234,7 @@ def export_ledger(cache, destination):
             'diagnostic_only': bool(config.get('diagnostic_all_green')) or
                 config.get('passengers_per_minute', 0) == 0,
             'superseded_model': not registration['current'],
-            'evidence': freeze(path.parent, config['id'])})
+            'evidence': freeze(path.parent, config['id'], archive_inputs=registration['current'])})
     # Retain the eight earlier bus-only controls rather than selecting favourable
     # runs. They cannot be used to qualify a traffic proposal.
     reference = json.loads((DATA / 'routes.json').read_text())

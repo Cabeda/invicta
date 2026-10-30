@@ -12,7 +12,7 @@ import libsumo as simulation
 
 
 def simulate_with_priority(command, bus_ids, folder, extension_limit=10, early_green=False,
-                           shorten_served_pedestrian_green=False):
+                           shorten_served_pedestrian_green=False, enabled=True, observer=None):
     events = []
     phase_state = {}
     active = set()
@@ -22,7 +22,7 @@ def simulate_with_priority(command, bus_ids, folder, extension_limit=10, early_g
         network = ET.parse(command[command.index('--net-file') + 1]).getroot()
         crossing_lanes = {l.get('id') for e in network.findall('edge')
                           if e.get('function') == 'crossing' for l in e.findall('lane')}
-        for tls in simulation.trafficlight.getIDList():
+        for tls in simulation.trafficlight.getIDList() if enabled else []:
             links = simulation.trafficlight.getControlledLinks(tls)
             pedestrian_links[tls] = {i for i, alternatives in enumerate(links)
                 if any(simulation.lane.getAllowed(link[0]) == ('pedestrian',)
@@ -35,6 +35,10 @@ def simulate_with_priority(command, bus_ids, folder, extension_limit=10, early_g
             now = simulation.simulation.getTime()
             active.update(set(simulation.simulation.getDepartedIDList()) & bus_ids)
             active.difference_update(simulation.simulation.getArrivedIDList())
+            if observer is not None:
+                observer.step(simulation, now)
+            if not enabled:
+                continue
             if int(now) % 2:
                 continue
             requests, red_requests = {}, set()

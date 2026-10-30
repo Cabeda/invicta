@@ -35688,7 +35688,7 @@
           "gzip_sha256": "38ae8957da4569cabdc205587124fef4f1980952108e931956bf00c647a7fbf0"
         },
         "network.net.xml": {
-          "file": "priority-evidence/v3-moderate-baseline-mapped-s17/network.net.xml.gz",
+          "file": "priority-evidence/v5-moderate-baseline-mapped-s17/network.net.xml.gz",
           "sha256": "799d2b05097f8a7b761b654cc871be72f65fedd2efa9d511361aa0782226bd15",
           "gzip_sha256": "65f5f8a263a69f3724f0ee26dc3fabb4eb707398e474d8bf9fc40262c36417f9"
         },
@@ -35698,7 +35698,7 @@
           "gzip_sha256": "d33dfd9b3486c44f32d8ff5c72607c77613cf8721cc51afd39ac9923f9243113"
         },
         "additional.add.xml": {
-          "file": "priority-evidence/v3-moderate-baseline-mapped-s17/additional.add.xml.gz",
+          "file": "priority-evidence/v3-moderate-priority-mapped-s17/additional.add.xml.gz",
           "sha256": "223b31030265cdb15007a6f185f964d3ae9042320a5941e2a94138af98b7725b",
           "gzip_sha256": "73cb5c542bfd7196903a122203ba41d8ef6fb599c4273ec67daa17b9eb4d13b9"
         }
@@ -38536,7 +38536,7 @@
           "gzip_sha256": "8a31f84ea4d95c3dfe852624fbc37e782b260798cf22c07684e135fb697f01a7"
         },
         "network.net.xml": {
-          "file": "priority-evidence/v3-moderate-priority-mapped-s17/network.net.xml.gz",
+          "file": "priority-evidence/v5-moderate-priority-mapped-s17/network.net.xml.gz",
           "sha256": "b85d84ebb9a1c15641d63b5539180f4fc7487cd1357376e1268a3e5d1b844b8f",
           "gzip_sha256": "5e2193f8aaff83a932add146c2e6573229ddd36da1ccb2079f60435e78812788"
         },
@@ -43520,6 +43520,21 @@
           "file": "priority-evidence/v5-bays-smart-s17/final-state.xml.gz",
           "sha256": "27c624491552b5bb749670bf07c643143916f8b250c378fb79ffd3ccaac2431a",
           "gzip_sha256": "3e20fa5046663b95bc3d52dc6906f8c983f3b30fa690c45927cbfc442f5bacba"
+        },
+        "network.net.xml": {
+          "file": "priority-evidence/v5-moderate-baseline-mapped-s17/network.net.xml.gz",
+          "sha256": "799d2b05097f8a7b761b654cc871be72f65fedd2efa9d511361aa0782226bd15",
+          "gzip_sha256": "65f5f8a263a69f3724f0ee26dc3fabb4eb707398e474d8bf9fc40262c36417f9"
+        },
+        "routes.rou.xml": {
+          "file": "priority-evidence/v5-bays-smart-s17/routes.rou.xml.gz",
+          "sha256": "4f29b4e62db9245a0bbd8cceef954624aa6d06dbbebae76ccf1b82dfb65f7163",
+          "gzip_sha256": "d93a3d5fc7e4cf294c278b70f60207ebb200b8b29ae9300c23e2915dac6dc278"
+        },
+        "additional.add.xml": {
+          "file": "priority-evidence/v5-moderate-priority-mapped-s17/additional.add.xml.gz",
+          "sha256": "0bae44e0ea051c04179f05305a3a3146c1ed8f9fb488cd803900471c61deeaaf",
+          "gzip_sha256": "f9680ceb24f05fb22a78394df5ee863de3834f1288414761987b8af95808a9d9"
         }
       }
     },
@@ -43695,6 +43710,21 @@
           "file": "priority-evidence/v5-empty-diagnostic-s17/final-state.xml.gz",
           "sha256": "a64e4c21276dc610115c809837d85bc66b8251b8525e04f2a589e32d91522cd1",
           "gzip_sha256": "ad65d1f6a3a941efd95498f932bd45b931f512b38501aa30f9d4258af61f1a25"
+        },
+        "network.net.xml": {
+          "file": "priority-evidence/v5-moderate-baseline-mapped-s17/network.net.xml.gz",
+          "sha256": "799d2b05097f8a7b761b654cc871be72f65fedd2efa9d511361aa0782226bd15",
+          "gzip_sha256": "65f5f8a263a69f3724f0ee26dc3fabb4eb707398e474d8bf9fc40262c36417f9"
+        },
+        "routes.rou.xml": {
+          "file": "priority-evidence/v5-empty-diagnostic-s17/routes.rou.xml.gz",
+          "sha256": "11627575228fc07994402f6dafad1b92e488ae747cd6bc50e18cec846e2203f5",
+          "gzip_sha256": "8edb9a6a6e676e514db9d0073ed8d553adaefe55f3ec4302d5db27373f171ada"
+        },
+        "additional.add.xml": {
+          "file": "priority-evidence/v5-moderate-priority-mapped-s17/additional.add.xml.gz",
+          "sha256": "0bae44e0ea051c04179f05305a3a3146c1ed8f9fb488cd803900471c61deeaaf",
+          "gzip_sha256": "f9680ceb24f05fb22a78394df5ee863de3834f1288414761987b8af95808a9d9"
         }
       }
     },
@@ -48073,7 +48103,7 @@
           "gzip_sha256": "9ac4490139e2c4dfc906de9c739c66b59259776be725f9049fa552fad6f45879"
         },
         "additional.add.xml": {
-          "file": "priority-evidence/v5-moderate-baseline-mapped-s17/additional.add.xml.gz",
+          "file": "priority-evidence/v5-moderate-priority-mapped-s17/additional.add.xml.gz",
           "sha256": "0bae44e0ea051c04179f05305a3a3146c1ed8f9fb488cd803900471c61deeaaf",
           "gzip_sha256": "f9680ceb24f05fb22a78394df5ee863de3834f1288414761987b8af95808a9d9"
         }

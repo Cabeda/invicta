@@ -1,0 +1,1790 @@
+{
+  "schema": "invicta.snapshot-inspection.v1",
+  "source": {
+    "kind": "archive",
+    "trial": "v5-moderate-baseline-mapped-s17",
+    "model": "street-detail-v5",
+    "manifest_sha256": "d5dd5ce0672159e8b3394fb97bbdd3e50391f2d08517b72a82e2bd3003dee9a3",
+    "available_files": [
+      "additional.add.xml",
+      "collisions.xml",
+      "endpoint-mapping.json",
+      "final-state.xml",
+      "network.net.xml",
+      "result.json",
+      "routes.rou.xml",
+      "stops.xml",
+      "trips.xml"
+    ],
+    "reference_sha256": "e8d0a8ae3f05151ddbf7ce5093110f74d95db4f0f44a39380aa5480c55fac394",
+    "network_sha256": "799d2b05097f8a7b761b654cc871be72f65fedd2efa9d511361aa0782226bd15",
+    "execution_sha256": "96f3bb51bc6606ed3b7b5d6f9e3e26c4473164df4196aaa0c7443e452170e5cb",
+    "verified_files": {
+      "stops.xml": "a27e722bf87ffe1f32b77a819137826cea2e6f16ed255f1ec3c0c3bc74293fdd",
+      "network.net.xml": "799d2b05097f8a7b761b654cc871be72f65fedd2efa9d511361aa0782226bd15",
+      "routes.rou.xml": "b1e130303425720452dd5fce8b679ac75650324f046561ff502dcfffa0db7b9f",
+      "additional.add.xml": "0bae44e0ea051c04179f05305a3a3146c1ed8f9fb488cd803900471c61deeaaf",
+      "final-state.xml": "4b8d225b684b31fcf7c8b3fd2815e121c0eee8e246b8cc4ffcb357c78d4b4e4e"
+    }
+  },
+  "snapshot": "final-state.xml",
+  "time": 99299.0,
+  "active_bus_count": 8,
+  "active_buses": [
+    "d0_bus_56",
+    "d0_bus_57",
+    "d0_bus_58",
+    "d0_bus_59",
+    "d0_bus_60",
+    "d0_bus_61",
+    "d0_bus_62",
+    "d0_bus_63"
+  ],
+  "inspected_bus_count": 5,
+  "contexts": [
+    {
+      "trip": "d0_bus_56",
+      "vehicles": [
+        {
+          "id": "d0_bus_56",
+          "lane": "482331424#8_1",
+          "road": "482331424#8",
+          "position_metres": 9.75,
+          "speed_mps": 0.0,
+          "waiting_seconds": 25558.0,
+          "stop_state": 0,
+          "passengers": 28,
+          "time_loss_seconds": 25901.02,
+          "leader": null,
+          "next_route": [
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1",
+            "1172588827#3"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              0.0,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              11.79,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ],
+            [
+              "1083211594_0",
+              true,
+              true,
+              false,
+              ":3897692280_5_0",
+              "G",
+              "s",
+              20.05
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "unclassified",
+          "cause": "unclassified"
+        }
+      ]
+    },
+    {
+      "trip": "d0_bus_57",
+      "vehicles": [
+        {
+          "id": "d0_bus_57",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 67.28,
+          "speed_mps": 0.0,
+          "waiting_seconds": 24356.0,
+          "stop_state": 0,
+          "passengers": 35,
+          "time_loss_seconds": 24427.08,
+          "leader": [
+            "through_20_106",
+            1.3322676295501878e-15
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              22.0,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              33.79,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "through_20_106",
+          "lane": ":299610700_3_1",
+          "road": ":299610700_3",
+          "position_metres": 2.97,
+          "speed_mps": 0.0,
+          "waiting_seconds": 25205.0,
+          "stop_state": 0,
+          "passengers": 0,
+          "time_loss_seconds": 25477.95,
+          "leader": [
+            "d0_bus_56",
+            0.0
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              14.5,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              26.29,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ],
+            [
+              "1083211594_0",
+              true,
+              true,
+              false,
+              ":3897692280_5_0",
+              "G",
+              "s",
+              20.05
+            ]
+          ],
+          "next_stops": [],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_56",
+          "lane": "482331424#8_1",
+          "road": "482331424#8",
+          "position_metres": 9.75,
+          "speed_mps": 0.0,
+          "waiting_seconds": 25558.0,
+          "stop_state": 0,
+          "passengers": 28,
+          "time_loss_seconds": 25901.02,
+          "leader": null,
+          "next_route": [
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1",
+            "1172588827#3"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              0.0,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              11.79,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ],
+            [
+              "1083211594_0",
+              true,
+              true,
+              false,
+              ":3897692280_5_0",
+              "G",
+              "s",
+              20.05
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "unclassified",
+          "cause": "unclassified"
+        }
+      ]
+    },
+    {
+      "trip": "d0_bus_58",
+      "vehicles": [
+        {
+          "id": "d0_bus_58",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 52.78,
+          "speed_mps": 0.0,
+          "waiting_seconds": 22732.0,
+          "stop_state": 0,
+          "passengers": 51,
+          "time_loss_seconds": 22792.62,
+          "leader": [
+            "d0_bus_57",
+            0.0
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              36.5,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              48.29,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_57",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 67.28,
+          "speed_mps": 0.0,
+          "waiting_seconds": 24356.0,
+          "stop_state": 0,
+          "passengers": 35,
+          "time_loss_seconds": 24427.08,
+          "leader": [
+            "through_20_106",
+            1.3322676295501878e-15
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              22.0,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              33.79,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "through_20_106",
+          "lane": ":299610700_3_1",
+          "road": ":299610700_3",
+          "position_metres": 2.97,
+          "speed_mps": 0.0,
+          "waiting_seconds": 25205.0,
+          "stop_state": 0,
+          "passengers": 0,
+          "time_loss_seconds": 25477.95,
+          "leader": [
+            "d0_bus_56",
+            0.0
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              14.5,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              26.29,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ],
+            [
+              "1083211594_0",
+              true,
+              true,
+              false,
+              ":3897692280_5_0",
+              "G",
+              "s",
+              20.05
+            ]
+          ],
+          "next_stops": [],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_56",
+          "lane": "482331424#8_1",
+          "road": "482331424#8",
+          "position_metres": 9.75,
+          "speed_mps": 0.0,
+          "waiting_seconds": 25558.0,
+          "stop_state": 0,
+          "passengers": 28,
+          "time_loss_seconds": 25901.02,
+          "leader": null,
+          "next_route": [
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1",
+            "1172588827#3"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              0.0,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              11.79,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ],
+            [
+              "1083211594_0",
+              true,
+              true,
+              false,
+              ":3897692280_5_0",
+              "G",
+              "s",
+              20.05
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "unclassified",
+          "cause": "unclassified"
+        }
+      ]
+    },
+    {
+      "trip": "d0_bus_59",
+      "vehicles": [
+        {
+          "id": "d0_bus_59",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 38.27,
+          "speed_mps": 0.0,
+          "waiting_seconds": 19968.0,
+          "stop_state": 0,
+          "passengers": 70,
+          "time_loss_seconds": 20091.79,
+          "leader": [
+            "d0_bus_58",
+            0.00999999999999801
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              51.01,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              62.8,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_58",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 52.78,
+          "speed_mps": 0.0,
+          "waiting_seconds": 22732.0,
+          "stop_state": 0,
+          "passengers": 51,
+          "time_loss_seconds": 22792.62,
+          "leader": [
+            "d0_bus_57",
+            0.0
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              36.5,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              48.29,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_57",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 67.28,
+          "speed_mps": 0.0,
+          "waiting_seconds": 24356.0,
+          "stop_state": 0,
+          "passengers": 35,
+          "time_loss_seconds": 24427.08,
+          "leader": [
+            "through_20_106",
+            1.3322676295501878e-15
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              22.0,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              33.79,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "through_20_106",
+          "lane": ":299610700_3_1",
+          "road": ":299610700_3",
+          "position_metres": 2.97,
+          "speed_mps": 0.0,
+          "waiting_seconds": 25205.0,
+          "stop_state": 0,
+          "passengers": 0,
+          "time_loss_seconds": 25477.95,
+          "leader": [
+            "d0_bus_56",
+            0.0
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              14.5,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              26.29,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ],
+            [
+              "1083211594_0",
+              true,
+              true,
+              false,
+              ":3897692280_5_0",
+              "G",
+              "s",
+              20.05
+            ]
+          ],
+          "next_stops": [],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_56",
+          "lane": "482331424#8_1",
+          "road": "482331424#8",
+          "position_metres": 9.75,
+          "speed_mps": 0.0,
+          "waiting_seconds": 25558.0,
+          "stop_state": 0,
+          "passengers": 28,
+          "time_loss_seconds": 25901.02,
+          "leader": null,
+          "next_route": [
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1",
+            "1172588827#3"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              0.0,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              11.79,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ],
+            [
+              "1083211594_0",
+              true,
+              true,
+              false,
+              ":3897692280_5_0",
+              "G",
+              "s",
+              20.05
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "unclassified",
+          "cause": "unclassified"
+        }
+      ]
+    },
+    {
+      "trip": "d0_bus_60",
+      "vehicles": [
+        {
+          "id": "d0_bus_60",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 23.77,
+          "speed_mps": 0.0,
+          "waiting_seconds": 17308.0,
+          "stop_state": 0,
+          "passengers": 65,
+          "time_loss_seconds": 17373.71,
+          "leader": [
+            "d0_bus_59",
+            3.552713678800501e-15
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              65.51,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              77.30000000000001,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_59",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 38.27,
+          "speed_mps": 0.0,
+          "waiting_seconds": 19968.0,
+          "stop_state": 0,
+          "passengers": 70,
+          "time_loss_seconds": 20091.79,
+          "leader": [
+            "d0_bus_58",
+            0.00999999999999801
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              51.01,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              62.8,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_58",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 52.78,
+          "speed_mps": 0.0,
+          "waiting_seconds": 22732.0,
+          "stop_state": 0,
+          "passengers": 51,
+          "time_loss_seconds": 22792.62,
+          "leader": [
+            "d0_bus_57",
+            0.0
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              36.5,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              48.29,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_57",
+          "lane": "482331424#6_1",
+          "road": "482331424#6",
+          "position_metres": 67.28,
+          "speed_mps": 0.0,
+          "waiting_seconds": 24356.0,
+          "stop_state": 0,
+          "passengers": 35,
+          "time_loss_seconds": 24427.08,
+          "leader": [
+            "through_20_106",
+            1.3322676295501878e-15
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              22.0,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              33.79,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#8_1",
+              true,
+              true,
+              false,
+              ":299610700_3_1",
+              "M",
+              "s",
+              7.72
+            ],
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "through_20_106",
+          "lane": ":299610700_3_1",
+          "road": ":299610700_3",
+          "position_metres": 2.97,
+          "speed_mps": 0.0,
+          "waiting_seconds": 25205.0,
+          "stop_state": 0,
+          "passengers": 0,
+          "time_loss_seconds": 25477.95,
+          "leader": [
+            "d0_bus_56",
+            0.0
+          ],
+          "next_route": [
+            "482331424#6",
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              14.5,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              26.29,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ],
+            [
+              "1083211594_0",
+              true,
+              true,
+              false,
+              ":3897692280_5_0",
+              "G",
+              "s",
+              20.05
+            ]
+          ],
+          "next_stops": [],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "queue_behind_vehicle",
+          "cause": "unclassified"
+        },
+        {
+          "id": "d0_bus_56",
+          "lane": "482331424#8_1",
+          "road": "482331424#8",
+          "position_metres": 9.75,
+          "speed_mps": 0.0,
+          "waiting_seconds": 25558.0,
+          "stop_state": 0,
+          "passengers": 28,
+          "time_loss_seconds": 25901.02,
+          "leader": null,
+          "next_route": [
+            "482331424#8",
+            "482331424#9",
+            "1083211594",
+            "1172588827#0",
+            "1172588827#1",
+            "1172588827#3"
+          ],
+          "next_signals": [
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              5,
+              0.0,
+              "G"
+            ],
+            [
+              "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              11,
+              11.79,
+              "G"
+            ]
+          ],
+          "junction_foes": [],
+          "next_links": [
+            [
+              "482331424#9_1",
+              true,
+              true,
+              false,
+              ":12514324966_1_1",
+              "G",
+              "s",
+              5.97
+            ],
+            [
+              "1083211594_0",
+              true,
+              true,
+              false,
+              ":3897692280_5_0",
+              "G",
+              "s",
+              20.05
+            ]
+          ],
+          "next_stops": [
+            {
+              "id": "d0_PLIM1",
+              "lane": "1083211593#1_1",
+              "position": 48.154623498034645,
+              "duration": 20.0,
+              "flags": 8
+            },
+            {
+              "id": "d0_SVT3",
+              "lane": "434879925#1_0",
+              "position": 56.18395125657844,
+              "duration": 20.0,
+              "flags": 8
+            }
+          ],
+          "signals": [
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            },
+            {
+              "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+              "phase": 9,
+              "state": "rrrrGGrrrrGGrrrrrGGrr",
+              "spent_seconds": 27.0,
+              "next_switch": 99299.0
+            }
+          ],
+          "proximate_observation": "unclassified",
+          "cause": "unclassified"
+        }
+      ]
+    }
+  ],
+  "simulation_steps": 0,
+  "cause": "unclassified",
+  "field_validated": false,
+  "limitations": [
+    "State inspection does not resume traffic or establish controller-state equivalence.",
+    "A leader, signal or junction foe is an observation, not a confirmed cause.",
+    "Active buses at this snapshot are distinct from final uncompleted-trip counts."
+  ]
+}
