@@ -20,7 +20,7 @@ def require_native_version(evidence):
 
 def freeze_implementation(folder):
     here = Path(__file__).parent
-    paths = [here / name for name in ['priority_search.py', 'priority_model.py', 'native_runner.py', 'signal_priority.py',
+    paths = [here / name for name in ['priority_search.py', 'priority_model.py', 'native_runner.py', 'signal_priority.py', 'signal_mapping.py',
              'model_audit.py', 'run_diagnostics.py', 'trial_evidence.py', 'timetable.py',
              'priority_demand.py', 'prepare.py', 'experiment.py', 'prefix_reproduction.py', 'scenario_audit.py',
              'state_probe.py']]

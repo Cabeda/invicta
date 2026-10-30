@@ -1,0 +1,322 @@
+{
+  "schema": "invicta.model-audit.v1",
+  "id": "97d6fe537ce38ce7da283b25c598a3bc9038a393350261cb65b579eee79f7814",
+  "source": {
+    "baseline.net.xml": "64eeea8de7a2c43aac704faabef47e8500b71d57054db4daa11cc86d81ccae83",
+    "routes.json": "1db74e54b091451c4e74097f268b68f803127e39063fd7c5097f4b7e545c3e59",
+    "model.json": "8973b363fedf44d0d736884770d06642860b7c6a449418dcfcebb014fd54b7da",
+    "audit_version": 2,
+    "bus_length_metres": 12,
+    "acceptance_criteria": {
+      "lateness_tolerance_seconds": 60,
+      "early_departures_allowed": false,
+      "terminal_measure": "arrival",
+      "other_checkpoint_measure": "departure",
+      "scope": "project_target_not_operator_contract"
+    },
+    "implementation_sha256": "c47788be5c341b156cd9c976a21465599c2e05e906c3b4a7b3ba6e08b509dbde",
+    "diagnostic_execution_sha256": "2f4cc4d8419d5ade9e4c61e5f7792fcd567877f6b7ce526e7ca2ed162247d707"
+  },
+  "status": "blocked",
+  "blockers": [
+    "stop_match_review"
+  ],
+  "findings": [
+    {
+      "code": "stop_match_review",
+      "detail": "Stop is over 25 m from the source coordinate; inspect the street match.",
+      "severity": "review",
+      "stop": "d1_COD",
+      "distance_metres": 26.96
+    },
+    {
+      "code": "stop_match_review",
+      "detail": "Stop is over 25 m from the source coordinate; inspect the street match.",
+      "severity": "review",
+      "stop": "d0_BRO1",
+      "distance_metres": 30.652
+    },
+    {
+      "code": "stop_match_review",
+      "detail": "Stop is over 25 m from the source coordinate; inspect the street match.",
+      "severity": "review",
+      "stop": "d0_COD4",
+      "distance_metres": 46.796
+    }
+  ],
+  "geometry": {
+    "1": {
+      "stops": 56,
+      "trips": 63,
+      "max_stop_distance_metres": 26.96,
+      "route_screen_bound_metres": 34.038
+    },
+    "0": {
+      "stops": 54,
+      "trips": 64,
+      "max_stop_distance_metres": 46.796,
+      "route_screen_bound_metres": 22.394
+    }
+  },
+  "scheduled_trips": 127,
+  "directions": [
+    "0",
+    "1"
+  ],
+  "diagnosis": {
+    "schema": "invicta.run-diagnosis.v1",
+    "source": {
+      "kind": "archive",
+      "trial": "v9-frozen-bus-only-existing-signals-60-s17",
+      "model": "v9-frozen",
+      "manifest_sha256": "296aea2e40bb794ad51c4aa4254203d1ea30a2e21a536c4dbcf3839c07f99bed",
+      "available_files": [
+        "additional.add.xml",
+        "collisions.xml",
+        "compiled-audit.json",
+        "crossing-requests.json",
+        "endpoint-mapping.json",
+        "final-state.xml",
+        "first-deadline-state.xml.gz",
+        "implementation-experiment.py",
+        "implementation-model_audit.py",
+        "implementation-native_runner.py",
+        "implementation-prefix_reproduction.py",
+        "implementation-prepare.py",
+        "implementation-priority_demand.py",
+        "implementation-priority_model.py",
+        "implementation-priority_search.py",
+        "implementation-requirements-simulation.txt",
+        "implementation-requirements.txt",
+        "implementation-run_diagnostics.py",
+        "implementation-scenario_audit.py",
+        "implementation-signal_mapping.py",
+        "implementation-signal_priority.py",
+        "implementation-state_probe.py",
+        "implementation-timetable.py",
+        "implementation-trial_evidence.py",
+        "model.json",
+        "monitor.json",
+        "network.net.xml",
+        "priority-events.json",
+        "progress.json",
+        "reference.json",
+        "result.json",
+        "routes.rou.xml",
+        "stops.xml",
+        "trace.jsonl",
+        "trips.xml"
+      ],
+      "reference_sha256": "1db74e54b091451c4e74097f268b68f803127e39063fd7c5097f4b7e545c3e59",
+      "network_sha256": "64eeea8de7a2c43aac704faabef47e8500b71d57054db4daa11cc86d81ccae83",
+      "execution_sha256": "2f4cc4d8419d5ade9e4c61e5f7792fcd567877f6b7ce526e7ca2ed162247d707",
+      "verified_files": {
+        "stops.xml": "b04d1cb23e1f90075e9d3408df3b2a5cbae7b8cd5e0bcc0633632aa921a5b9ac",
+        "trips.xml": "590f5fb52c7013af5c1a3b4451ec8d1f4c1c7b95467cee58b2beddbdd921d3e2",
+        "monitor.json": "c6b9a46d9bab51e952be7ce90564cc85dbd0bfa9135350427a234a03d1d9a569"
+      }
+    },
+    "coverage": {
+      "scheduled_trips": 127,
+      "timing_checks": 714,
+      "directions": [
+        "0",
+        "1"
+      ],
+      "kind": "full_service_day",
+      "begin": 18000.0,
+      "end": 99300.0,
+      "full_service_day": true
+    },
+    "metrics": {
+      "planned": 127,
+      "completed": 127,
+      "on_time_starts": 127,
+      "on_time_finishes": 127,
+      "checkpoints": 714,
+      "missing_checkpoints": 0,
+      "late_checkpoints": 1,
+      "early_departures": 0,
+      "passes": false
+    },
+    "acceptance_criteria": {
+      "lateness_tolerance_seconds": 60,
+      "early_departures_allowed": false,
+      "terminal_measure": "arrival",
+      "other_checkpoint_measure": "departure",
+      "scope": "project_target_not_operator_contract"
+    },
+    "operational_metrics": {
+      "planned": 127,
+      "completed": 127,
+      "on_time_starts": 127,
+      "on_time_finishes": 127,
+      "checkpoints": 714,
+      "missing_checkpoints": 0,
+      "late_checkpoints": 0,
+      "early_departures": 0,
+      "passes": true,
+      "failures": []
+    },
+    "operational_compliance": true,
+    "metrics_scope": "whole_reference_goal",
+    "observation": {
+      "cutoff_exclusive": 99300.0,
+      "planned_trips": 127,
+      "reference_checks": 714,
+      "due_checks": 714,
+      "future_checks": 0,
+      "missing_due_checks": 0,
+      "late_observed_checks": 1,
+      "early_observed_checks": 0,
+      "on_time_due_checks": 713,
+      "completed_observed_trips": 127,
+      "unfinished_due_trip_ids": [],
+      "active_reference_trip_ids": [],
+      "future_trip_ids": []
+    },
+    "simulation_compliance": false,
+    "field_validated": false,
+    "first_failure": {
+      "trip": "d1_bus_0",
+      "stop": "d1_ERM3",
+      "scheduled": 19980,
+      "arrival": 19997.0,
+      "departure": 19998.0,
+      "missing": false,
+      "late": true,
+      "early": false,
+      "cause": "unclassified",
+      "interval": {
+        "from_stop": "d1_COD4",
+        "to_stop": "d1_ERM3",
+        "scheduled_seconds": 480,
+        "observed_seconds": 498.0,
+        "inherited_delay_seconds": 0,
+        "added_delay_seconds": 18.0
+      },
+      "trace_observation": {
+        "kind": "checkpoint_pending",
+        "time": 19981.0,
+        "trip": "d1_bus_0",
+        "stop": "d1_ERM3",
+        "snapshot": "first-deadline-state.xml.gz",
+        "vehicles": [
+          {
+            "id": "d1_bus_0",
+            "lane": "99958735#1_1",
+            "road": "99958735#1",
+            "position_metres": 83.27498311729377,
+            "speed_mps": 13.641088648921707,
+            "waiting_seconds": 0.0,
+            "stop_state": 0,
+            "passengers": 0,
+            "time_loss_seconds": 29.976757249661134,
+            "leader": null,
+            "next_route": [
+              "99958735#1",
+              "211466031#0",
+              "211466031#1",
+              "211466031#2",
+              "1108592201",
+              "-211466029#1"
+            ],
+            "next_signals": [
+              [
+                "cluster_10709274011_10709274012_269567465_7967146061",
+                1,
+                2112.2650168827063,
+                "r"
+              ],
+              [
+                "cluster_10866191149_1714753715_4422206030_4422206034",
+                1,
+                2571.295016882706,
+                "y"
+              ]
+            ],
+            "junction_foes": [],
+            "next_links": [
+              [
+                "211466031#0_1",
+                true,
+                true,
+                false,
+                ":cluster_1155459245_1155459352_1155503724_1_0",
+                "M",
+                "R",
+                32.91
+              ],
+              [
+                "211466031#1_1",
+                true,
+                true,
+                false,
+                ":6845383361_1_0",
+                "M",
+                "s",
+                4.02
+              ]
+            ],
+            "next_stops": [
+              {
+                "id": "d1_ERM3",
+                "lane": "1108592201_1",
+                "position": 48.99303235979817,
+                "duration": 0.0,
+                "flags": 9
+              },
+              {
+                "id": "d1_CRZ2",
+                "lane": "-741767474#3_0",
+                "position": 59.14765128998817,
+                "duration": 0.0,
+                "flags": 8
+              }
+            ],
+            "signals": [
+              {
+                "id": "cluster_10709274011_10709274012_269567465_7967146061",
+                "phase": 0,
+                "state": "rrrGGgrrrGGg",
+                "spent_seconds": 1.0,
+                "next_switch": 19985.0
+              },
+              {
+                "id": "cluster_10866191149_1714753715_4422206030_4422206034",
+                "phase": 1,
+                "state": "yyyrrryyyrrr",
+                "spent_seconds": 1.0,
+                "next_switch": 19983.0
+              }
+            ],
+            "proximate_observation": "unclassified",
+            "cause": "unclassified"
+          }
+        ],
+        "cause": "unclassified"
+      }
+    },
+    "first_failure_criterion": "strict",
+    "unfinished_trips": [],
+    "next_step": "Inspect the first failed interval and its native trace before changing a traffic package.",
+    "limitations": [
+      "Recorded stop calls establish timing, not the physical cause of a delay.",
+      "Unclassified failures require a native trace or targeted reproduction.",
+      "Simulation compliance does not establish field validation."
+    ]
+  },
+  "field_validated": false,
+  "assumptions": [
+    "Urban road speed capped at 50 km/h, preserving lower imported limits; unverified signage.",
+    "Crossings imported from frozen OSM; sidewalk guesses are inferred, not surveyed.",
+    "Signal phases, yellow (3 s) and all-red (2 s) are generated assumptions, not municipal timing plans.",
+    "Known Porto signal equipment points do not establish controlled movements.",
+    "Stop matching accepts road fragments long enough for the 12 m study bus; actual stopping footprints remain unsurveyed.",
+    "Independent scheduled workings; no observed vehicle blocks.",
+    "Combatentes internal controls removed by an opt-in mapping correction; external phases remain inferred.",
+    "Unused internal-only stages remain in the generated programme; no municipal timing plan is available.",
+    "Pedestrian connectivity is retained; crossing coverage and signal clearance remain unsurveyed."
+  ],
+  "next_step": "Resolve findings or reproduce the first missed checkpoint before another full traffic run."
+}

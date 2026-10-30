@@ -43,6 +43,11 @@ def audit_model(model, diagnostic_source=None, diagnostic_trial=None, *, bus_len
     def issue(code, detail, severity='blocker', **context):
         findings.append({'code': code, 'detail': detail, 'severity': severity, **context})
 
+    if description.get('signal_mapping_correction', {}).get('requires_regional_scope_review',
+            bool(description.get('signal_mapping_correction'))):
+        issue('signal_mapping_scope_review',
+              'The local signal correction passes its bus-only tests, but regional conversion/access changes remain unreviewed.')
+
     network_hash = fingerprints['baseline.net.xml']
     if description.get('network_sha256') != network_hash or reference.get('network_sha256') != network_hash:
         issue('network_binding', 'Network bytes disagree with model/reference identity.')

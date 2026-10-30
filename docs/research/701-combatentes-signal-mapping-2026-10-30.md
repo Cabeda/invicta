@@ -1,5 +1,7 @@
 # Combatentes: signal observations, inferred control and duplicated markers
 
+**Follow-up:** the [native regression and correction](701-combatentes-native-fix-2026-10-30.md) now demonstrate the extra internal stop and remove it in an opt-in model, while preserving external entry controls. This document retains the original source/mapping audit; its unresolved field-head and timing questions still apply.
+
 **The coloured circles in the inspection are SUMO movement-state markers, not an inventory of physical signal heads. The underlying controller is inferred from OpenStreetMap; it was not generated from official Porto timing plans.** Cabeda reports that the pictured Costa Cabral stretch should have two vehicle signals, while the view showed eight markers. That observation is retained as a constraint to validate; the two physical heads have not yet been assigned to particular native lanes or municipal equipment IDs.
 
 ## Source chain

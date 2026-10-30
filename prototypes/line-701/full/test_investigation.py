@@ -76,6 +76,44 @@ def empty_config(ident='fixture-empty'):
 
 
 class InvestigationTests(unittest.TestCase):
+    def test_final_combatentes_controls_pass_operational_but_retain_strict_failures(self):
+        source = ROOT.parents[2] / 'docs/research/701-combatentes-controls-2026-10-30/controls.json'
+        ledger = json.loads(source.read_text())
+        self.assertFalse(ledger['qualified'])
+        self.assertEqual(ledger['selected_model'], 'v9-frozen')
+        for seed, strict in [(17, 1), (29, 3), (41, 2)]:
+            trial = f'v9-frozen-bus-only-existing-signals-60-s{seed}'
+            report = diagnose_trial(source, trial)
+            self.assertTrue(report['coverage']['full_service_day'])
+            self.assertEqual(report['coverage']['timing_checks'], 714)
+            self.assertEqual(report['metrics']['completed'], 127)
+            self.assertEqual(report['metrics']['late_checkpoints'], strict)
+            self.assertEqual(report['operational_metrics']['late_checkpoints'], 0)
+            self.assertEqual(report['operational_metrics']['early_departures'], 0)
+            self.assertEqual(report['operational_metrics']['missing_checkpoints'], 0)
+            self.assertTrue(report['operational_compliance'])
+            self.assertFalse(report['simulation_compliance'])
+
+    def test_local_signal_success_does_not_bypass_pending_regional_mapping_review(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root)
+            metadata = json.loads((model / 'model.json').read_text())
+            metadata['signal_mapping_correction'] = {'recipe': 'combatentes-boundary-controls-v1',
+                                                    'requires_regional_scope_review': True}
+            write_json(model / 'model.json', metadata)
+            config = {**empty_config('scope-review-control'), 'diagnostic_all_green': False,
+                      'diagnostic_control': 'existing_signals', 'operational_lateness_seconds': 60}
+            result = run_trial(model, root, config)
+            self.assertTrue(result['operational_metrics']['passes'])
+            report = audit_model(model, root / config['id'], lateness_tolerance_seconds=60)
+            self.assertIn('signal_mapping_scope_review', report['blockers'])
+            with self.assertRaises(ModelNotReadyError):
+                run_trial(model, root, {'id': 'scope-review-traffic', 'traffic': 'moderate', 'seed': 17,
+                    'operational_lateness_seconds': 60, 'readiness': {'source': str(root / config['id'])},
+                    'hypothesis': {'change': 'Add traffic', 'prediction': 'Assess delays', 'evidence': 'Local fix'}})
+            self.assertFalse((root / 'scope-review-traffic').exists())
+
     def test_archived_bus_only_controls_retain_both_scores_and_complete_service(self):
         source = ROOT.parents[2] / 'docs/research/701-bus-only-controls-2026-10-30/controls.json'
         ledger = json.loads(source.read_text())
