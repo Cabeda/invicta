@@ -16,5 +16,10 @@
     "A three-second hotspot snapshot, not a full-run phase profile or speedup benchmark.",
     "Inclusive stack counts must not be added as independent costs.",
     "No routing frequency, demand, seed or vehicle physics was changed in the measured replay."
+  ],
+  "source_excerpt": [
+    "2382 Thread_25842189   DispatchQueue_1: com.apple.main-thread  (serial)",
+    "+                       ! : | 2357 libsumo::Simulation::step(double)  (in _libsumo.so) + 132  [0x10c75c438]",
+    "+                       ! : |   + ! : 1138 MSDevice_Routing::reroute(long long, bool)  (in _libsumo.so) + 492  [0x10c32a56c]"
   ]
 }

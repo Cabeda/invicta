@@ -185,6 +185,20 @@ class InvestigationTests(unittest.TestCase):
         self.assertEqual(onset['complete_bus_calls_compared'], 855)
         self.assertTrue(onset['bus_call_prefix_matches'])
         self.assertIsNone(onset['first_prolonged_wait'])
+        later = report('original-candidate-onset-600', 'reproduction.json')
+        self.assertEqual(later['execution_scope']['end'], 54602)
+        self.assertEqual(later['prefix_equivalence']['compared_calls'], 3025)
+        self.assertTrue(later['prefix_equivalence']['matched'])
+        self.assertIsNone(later['target'])
+        self.assertEqual(later['observation']['future_checks'], 353)
+        self.assertEqual(later['observation']['missing_due_checks'], 1)
+        reduced = report('reduced-two-vehicle-junction', 'summary.json')
+        self.assertFalse(reduced['full_service_compliance'])
+        self.assertEqual(len(reduced['cases']), 4)
+        for case in reduced['cases']:
+            self.assertEqual(case['departed'], ['major', 'minor'])
+            self.assertEqual(case['completed'], ['major', 'minor'])
+            self.assertEqual(case['collision_records'], 0)
 
     def test_computation_budget_preserves_partial_evidence_without_passing_the_target(self):
         with tempfile.TemporaryDirectory() as temporary:
