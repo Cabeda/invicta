@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parents[3]
 class FocusedReplayTests(unittest.TestCase):
     def test_capture_matches_native_calls_and_retains_real_holding(self):
         folder=ROOT/'prototypes/line-701/focused-replay'
-        evidence_root=ROOT/'docs/research/701-focused-replay-2026-10-30'
+        evidence_root=ROOT/'docs/research/701-focused-replay-2026-10-30-r2'
         archive=json.loads((evidence_root/'evidence.json').read_text())
         source=load_trial(ROOT/'docs/research/701-bus-only-controls-2026-10-30/controls.json',
                           'v6-bus-only-existing-signals-60-s17')
@@ -32,6 +32,8 @@ class FocusedReplayTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256((folder/'manifest.json').read_bytes()).hexdigest(),index['manifest_sha256'])
         data=json.loads(gzip.decompress((folder/'replay.json.gz').read_bytes()))
         self.assertFalse(data['manifest']['qualified'])
+        self.assertEqual(data['buildings'],[])
+        self.assertTrue(any('No buildings are included' in note for note in data['manifest']['limits']))
         evening=next(w for w in data['windows'] if w['id']=='evening')
         self.assertEqual([f['time'] for f in evening['frames']],list(range(73200,74041)))
         frame=next(f for f in evening['frames'] if f['time']==73530)

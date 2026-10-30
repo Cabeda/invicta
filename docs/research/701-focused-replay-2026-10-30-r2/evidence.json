@@ -1,0 +1,63 @@
+{
+  "role": "source_matched_focused_observation_replay",
+  "revision": 2,
+  "supersedes": "../701-focused-replay-2026-10-30/evidence.json",
+  "change": "Correct omitted-building metadata; all sampled frames, geometry and timing rows equal R1.",
+  "source_control": {
+    "ledger": "../701-bus-only-controls-2026-10-30/controls.json",
+    "trial": "v6-bus-only-existing-signals-60-s17"
+  },
+  "native_stop_events_equal": true,
+  "native_tripinfo_rows_equal": true,
+  "all_sampled_frames_equal_previous_revision": true,
+  "compared_stop_events": 6024,
+  "completed_services": 127,
+  "evidence": {
+    "stops.xml": {
+      "file": "stops.xml.gz",
+      "sha256": "a20b605a99534f3f60db91d06b3c6248d5872130c31c0be5d0fd6afdd59022c3",
+      "gzip_sha256": "3848a43c6583368eb096da379a1d54bbb45940b55a3c15fe0ddd6effa2ad19c6",
+      "bytes": 2009638
+    },
+    "trips.xml": {
+      "file": "trips.xml.gz",
+      "sha256": "96e142352d59fc47e07b629df6200433c395219d93f4c33ba74519b0b84a5b50",
+      "gzip_sha256": "812a7d37cb366f5e838a5112627fc2ae17a6a976c1aa5a2b9062b5797dd3ba3f",
+      "bytes": 55771
+    },
+    "collisions.xml": {
+      "file": "collisions.xml.gz",
+      "sha256": "03d03d0b2a77c81832fefcaa6a49bfac99afe070d5512fc0d446c30dc2f73426",
+      "gzip_sha256": "e3ecec23d03f5e36d5263cf1b47c05a6d19d6fb6835716b78027369e199c568e",
+      "bytes": 2295
+    },
+    "final-state.xml": {
+      "file": "final-state.xml.gz",
+      "sha256": "f97132e4645f47e2dbc2e96440cf4ad85c32c2d81483a2f894808d0c43673c7a",
+      "gzip_sha256": "763ffc078c02cfd70d0a71aca2037499af9828d28452f264e4bc6ace3e74fcec",
+      "bytes": 52767
+    },
+    "capture.py": {
+      "file": "capture.py.gz",
+      "sha256": "7ebadbcbae3bb325561a5b36578b8df5c5e838f2b97eccd46945446c334f2266",
+      "gzip_sha256": "e1496d7ffcee5182c9b2af1633a9a21ccb70e62c5e11455cadb9bd8ecbb22d4b",
+      "bytes": 6701
+    },
+    "manifest.json": {
+      "file": "manifest.json.gz",
+      "sha256": "5c78d026e96e5da6fe43a3230d82c77a67747ad292806e3e79902c6a6a072555",
+      "gzip_sha256": "2fa6186e42e0a0c4d4733774be95d8c4f7093bb686b82eb3c9ff62e2edde8207",
+      "bytes": 4715
+    },
+    "capture-index.json": {
+      "file": "capture-index.json.gz",
+      "sha256": "afaa5e50ec28adc64bd9f8a1bca79d4cdd3141aecd219b7be739452be8475cf9",
+      "gzip_sha256": "cfe2c21a5cbaf503d3489dbe9434ce206291c66e7d98d65c4868a89c771a4a68",
+      "bytes": 220
+    }
+  },
+  "replay": {
+    "repository_path": "docs/research/701-focused-replay-2026-10-30-r2/replay.json.gz",
+    "sha256": "fce631a611d5738314c60996dd1a737ae239a65555d37f9c7e54e634b1e80d44"
+  }
+}

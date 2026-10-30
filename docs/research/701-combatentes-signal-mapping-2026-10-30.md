@@ -41,9 +41,24 @@ The inspector now separates:
 
 - **Next bus links:** the selected bus's next logical movement states; the default. These coloured symbols are explicitly not physical signal heads.
 - **All model movements:** the complete diagnostic overlay, for inspecting inferred control.
+- **OSM source crossings:** the original seven signalised-crossing nodes in the audited controller, with links to review current OSM objects; these are not a physical signal-head count.
 - **Combatentes equipment inventory:** neutral markers for the municipal equipment points, with unknown head type/timing; no invented red/green state.
 - **No signal markers:** geometry/vehicle inspection alone.
 
 These presentation changes do not alter the native run, remove control points or improve its punctuality scores. The audited controller and every recorded failure remain available.
 
 Before changing physics, locate the two vehicle signals reported in the screenshot, distinguish them from pedestrian heads, map each controlled entry approach once, and identify which internal movements should clear under the same permission. Then test an explicitly documented controller/mapping candidate with pedestrian clearance and native collision checks. Until that mapping is resolved, signal-enabled lateness remains an **inferred-model diagnostic**, not evidence that Porto's actual timetable is infeasible or that the real junction requires more signals.
+
+## Use OSM as the canonical map, with fixes at the right boundary
+
+OSM is a suitable canonical source for roads, lanes where mapped, crossings, turn restrictions and signal-related geographic features. STCP remains the source for its timetable; signal phase programmes and detector/coordination assumptions remain separate model inputs. Municipal equipment can stay a comparison layer without independently creating extra simulated controllers.
+
+There are three different correction paths:
+
+1. A verified real-world feature is missing or wrong in OSM: prepare a source-backed OSM correction, retaining original IDs/history and evidence. Import a new frozen map version after that correction.
+2. OSM accurately describes the street, but conversion duplicates control or creates inappropriate internal stops: correct the SUMO import/overlay and test it locally. Do not change accurate OSM geometry to accommodate a simulator limitation.
+3. Timing or coordination is absent: record an explicit model assumption or obtain controller observations. A map edit cannot manufacture a real timing programme.
+
+OSM's own signal documentation says its traffic-signal mapping is an abstraction of regulated ways/junctions, not a count of individual devices. It supports optional facing-direction tags and distinguishes signalised-crossing nodes from separately mapped signal devices. Therefore OSM-only sourcing would not make a naive one-node/one-head conversion valid. [OSM traffic-signal modelling](https://wiki.openstreetmap.org/wiki/Tag:highway%3Dtraffic_signals).
+
+OSM also asks contributors to map verifiable ground conditions and avoid distorting correct data for a particular renderer/router. For this case, first trace the seven crossing nodes through the importer and validate the two reported vehicle stop controls. No upstream OSM edit has been made. [OSM good practice](https://wiki.openstreetmap.org/wiki/Good_practice#Don't_map_for_the_renderer).

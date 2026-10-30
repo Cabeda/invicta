@@ -1,4 +1,6 @@
 import {test,expect} from '@playwright/test';
+import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 
 test('focused replay preserves native time across 2D/3D and displays timetable holding',async({page})=>{
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
@@ -16,6 +18,9 @@ test('focused replay preserves native time across 2D/3D and displays timetable h
  expect(await page.evaluate(()=>window.focusedReplay.data.windows.find(w=>w.id==='evening').frames[window.focusedReplay.index])).toEqual(recorded);
  await page.locator('#signalLayer').selectOption('all');
  await expect(page.locator('#layerNote')).toContainText('not physical');
+ await page.locator('#signalLayer').selectOption('osm');
+ await expect(page.locator('#layerNote')).toContainText('OSM signalised-crossing');
+ await expect(page.locator('#osmLinks a')).toHaveCount(7);
  await page.locator('#signalLayer').selectOption('next');
  await expect(page.locator('#schedule')).toContainText('20:12:29');
  await expect(page.locator('#schedule')).toContainText('20:18:00');
@@ -42,6 +47,16 @@ test('focused replay preserves native time across 2D/3D and displays timetable h
 
 test('focused replay rejects altered capture bytes',async({page})=>{
  await page.route('**/replay.json.gz',async route=>{const response=await route.fetch();const bytes=await response.body();bytes[11]^=1;await route.fulfill({response,body:bytes});});
+ await page.goto('/701-inspection/');
+ await expect(page.locator('#load')).toContainText('Unable to load the verified replay');
+ expect(await page.evaluate(()=>window.focusedReplay)).toBeUndefined();
+});
+
+test('a validly hashed signal audit cannot describe another network',async({page})=>{
+ const audit=JSON.parse(await readFile('prototypes/line-701/focused-replay/signal-audit.json','utf8'));
+ audit.network_sha256='0'.repeat(64);const body=JSON.stringify(audit);
+ await page.route('**/signal-audit.json',route=>route.fulfill({contentType:'application/json',body}));
+ await page.route('**/signal-audit-index.json',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({sha256:createHash('sha256').update(body).digest('hex'),network_sha256:audit.network_sha256})}));
  await page.goto('/701-inspection/');
  await expect(page.locator('#load')).toContainText('Unable to load the verified replay');
  expect(await page.evaluate(()=>window.focusedReplay)).toBeUndefined();

@@ -53,7 +53,9 @@
     }
   },
   "replay": {
-    "repository_path": "prototypes/line-701/focused-replay/replay.json.gz",
+    "repository_path": "docs/research/701-focused-replay-2026-10-30/replay.json.gz",
     "sha256": "5c0de62a34748fa9deb641fb79589111265eb898b91e04464654c1720ba81e24"
-  }
+  },
+  "known_metadata_defect": "The original capture limit incorrectly described building footprints; the recording has zero buildings. Native positions, stop calls and timing remain valid.",
+  "superseded_by": "../701-focused-replay-2026-10-30-r2/evidence.json"
 }
