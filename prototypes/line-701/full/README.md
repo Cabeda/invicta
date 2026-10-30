@@ -52,6 +52,8 @@ The current model remains blocked: three stop placements exceed the project's 25
 
 New `priority_search.py` configurations require `readiness: {"source": "...", "trial": "..."}` and `hypothesis: {"change": "...", "prediction": "...", "evidence": "..."}`. A matching complete-service empty diagnostic supplies readiness only after its checks pass. The existing explicit empty profile can run to bootstrap this process; there is no force flag. New native executions retain source copies, first-failure states, bounded traces, progress and phase timings. The gate applies to this supplementary search; the earlier `run.sh` replay pipeline below retains its separate publication checks.
 
+The [Alfena two-car diagnostic](diagnostics/alfena-junction/README.md) now isolates a split-junction blocking mechanism using a 13-road fixture. Five native tests retain the original failure, check each actor alone, reject unmodified reprocessing as the remedy, preserve eight external movements and exercise 21 arrival offsets after an explicit compound-junction patch. Run `.venv/bin/python -m unittest discover -s prototypes/line-701/full -p test_junction_geometry.py -v`. This candidate geometry correction is not promoted into the regional model and cannot qualify service or alter the existing replay. The [results and original-input queue capture](../../../docs/research/701-queue-onset-results-2026-10-30.md) explain what remains.
+
 ## Run and reproduce
 
 From the repository root, using the pinned environment in `prototypes/costa-cabral/requirements.txt`:

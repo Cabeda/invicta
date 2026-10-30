@@ -1,0 +1,58 @@
+{
+  "schema": "invicta.local-junction-provenance.v1",
+  "source": {
+    "kind": "archive",
+    "trial": "v5-moderate-priority-mapped-s17",
+    "model": "street-detail-v5",
+    "manifest_sha256": "f19b26d0e1cf9d1f7bc96aedddf5f7af20774642a072f4163cc90e6949236135",
+    "available_files": [
+      "additional.add.xml",
+      "collisions.xml",
+      "endpoint-mapping.json",
+      "final-state.xml",
+      "network.net.xml",
+      "priority-events.json",
+      "result.json",
+      "routes.rou.xml",
+      "stops.xml",
+      "trips.xml"
+    ],
+    "reference_sha256": "e8d0a8ae3f05151ddbf7ce5093110f74d95db4f0f44a39380aa5480c55fac394",
+    "network_sha256": "799d2b05097f8a7b761b654cc871be72f65fedd2efa9d511361aa0782226bd15",
+    "execution_sha256": "63543dc09f8ebce72f40e81a787014ecb06201cae66986fe7703bda6864a0c7c",
+    "verified_files": {
+      "network.net.xml": "b85d84ebb9a1c15641d63b5539180f4fc7487cd1357376e1268a3e5d1b844b8f"
+    }
+  },
+  "fixture_hashes": {
+    "split.net.xml": "870381c05ed6311f2402c9d412134814d2ce986fe5898fd3ed4963d27bd98dab",
+    "pair.rou.xml": "b5ff3a771ce2086864c1022452ee71e0d854e0f4cbbf405a7a5ef717eee034c0",
+    "join.nod.xml": "d859355d1fe8622663d6b25b0e9d9b8cccffc4b463820c5c9f979cca2d73af81"
+  },
+  "critical_junction_comparison": {
+    "14297876949": {
+      "attributes_equal": true,
+      "request_matrices_equal": true
+    },
+    "14297876959": {
+      "attributes_equal": true,
+      "request_matrices_equal": true
+    }
+  },
+  "source_osm_nodes": [
+    "14297876949",
+    "14297876959"
+  ],
+  "source_osm_ways": [
+    "1569557887",
+    "1569557888",
+    "1569557889",
+    "1569557892",
+    "1569557893",
+    "1569557895",
+    "1569557896"
+  ],
+  "status": "candidate_model_correction_not_promoted",
+  "full_service_compliance": false,
+  "field_validated": false
+}

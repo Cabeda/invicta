@@ -1,5 +1,7 @@
 # 701 follow-up: what the small probes establish
 
+Subsequent work has isolated a two-car split-junction blocking mechanism in Alfena and tested a compound-junction candidate correction. See the [queue investigation](701-queue-onset-results-2026-10-30.md). The earlier cases below remain unchanged; their limits and negative results are retained.
+
 The unchanged target remains all 127 scheduled trips, both directions, exact departures at designated checks and terminal arrivals no later than scheduled. **No passenger-service proposal has met that target.** These are bounded diagnostic experiments, separate from the 34 frozen full-service executions and the older animated replay.
 
 ## The first Codiceira–Ermesinde interval

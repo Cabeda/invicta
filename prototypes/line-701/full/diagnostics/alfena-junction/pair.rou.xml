@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<routes><vType id="crossing" vClass="passenger" sigma=".5" speedFactor="1" speedDev="0" /><vehicle id="crossing_14_109" type="crossing" depart="20" departLane="best" departPos="0" departSpeed="0"><route edges="-1569557886#0 1569557887 -1569557889 1569557893#0" /></vehicle><vehicle id="crossing_14_33" type="crossing" depart="20" departLane="best" departPos="0" departSpeed="0"><route edges="466704796#18 1569557888#0 1569557889 1569557896#0 -466704796#18 -466704796#17 -466704796#16" /></vehicle></routes>
