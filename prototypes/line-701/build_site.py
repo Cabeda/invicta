@@ -145,6 +145,9 @@ def build():
     shutil.copy2(LEGACY/'inspection-3d.js',SITE/'inspection-3d.js')
     shutil.copy2(LEGACY/'native-replay.mjs',SITE/'native-replay.mjs')
     shutil.copytree(LEGACY/'vendor',SITE/'vendor',dirs_exist_ok=True)
+    inspection=SITE/'701-inspection';inspection.mkdir(exist_ok=True)
+    for name in ['index.html','viewer.mjs','replay.json.gz','manifest.json','capture-index.json','signal-audit.json','signal-audit-index.json']:
+        shutil.copy2(ROOT/'focused-replay'/name,inspection/name)
     shutil.copytree(LEGACY/'inspection-assets',SITE/'inspection-assets',dirs_exist_ok=True)
     shutil.copytree(ROOT/'inspection-assets',SITE/'line-701-assets',dirs_exist_ok=True)
     shutil.copytree(ROOT/'data/official',SITE/'701-official',dirs_exist_ok=True)

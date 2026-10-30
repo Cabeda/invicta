@@ -1,0 +1,1035 @@
+{
+  "schema": "invicta.signal-mapping-audit.v1",
+  "role": "source_to_model_audit_not_a_corrected_controller",
+  "network_sha256": "4ccaa3d85ba2e8b998a300c16a05f5e2714ec9e5289da0266125f988272706fe",
+  "source_execution_sha256": "2178eac0f2a9bd5f07026e53260101ba2705b0e7c554dc69e8a12282d48237d8",
+  "source_chain": {
+    "osm_archive_sha256": "b1fac2ec60f8183a5669326c33f8746a1bc93858e96bfd5258ec257f2fa7c726",
+    "osm_role": "Community map observations via public OSM API; not a Porto municipal signal plan",
+    "municipal_review_layer_sha256": "110977050f4df0b05bb657f5be99fef894474fad63a68051eb60ff4f25de687e",
+    "municipal_sources": [
+      {
+        "filename": "porto-semaforos.geojson",
+        "url": "https://dadosabertos.cm-porto.pt/dataset/63c06501-9e19-11f1-84ed-6abdb6d5cf34/resource/4f67e2f7-f445-4f18-b3cb-211ea8c7c098/download/ext-sistema-de-gestao-de-trafego-semaforos-geojson.geojson",
+        "status": 200,
+        "bytes": 549795,
+        "sha256": "cda5d669a0e1b3a8562eaa8cb367edd16eb02d399e4aaafe181af78c755eebff",
+        "retrieved_at": "2026-10-29T16:26:59.916936+00:00",
+        "licence": "CCZero",
+        "publisher": "Câmara Municipal do Porto"
+      },
+      {
+        "filename": "porto-led-crossings.geojson",
+        "url": "https://dadosabertos.cm-porto.pt/dataset/63519d35-9e19-11f1-84ed-6abdb6d5cf34/resource/f1e9e386-88e6-42ab-9363-5dd5b4f6e3d7/download/ext-sinalizacao-led-em-travessias-de-peoes-geojson.geojson",
+        "status": 200,
+        "bytes": 10816,
+        "sha256": "db51e5377115decddf3623d5bd7fbb8c9ebcf247358ab2345d9c382282ea15f4",
+        "retrieved_at": "2026-10-29T16:26:59.733389+00:00",
+        "licence": "CCZero",
+        "publisher": "Câmara Municipal do Porto"
+      }
+    ],
+    "municipal_layer_route_screen_metres": 40,
+    "municipal_local_selection_radius_metres": 75,
+    "municipal_role": "Equipment-location review layer; not consumed by priority_model.py to generate signal control",
+    "coordinate_rule": "GeoJSON longitude/latitude transformed by the native projection and netOffset",
+    "native_projection": {
+      "netOffset": "-532362.31,-4555848.88",
+      "convBoundary": "-325.98,-1275.33,9651.25,11501.18",
+      "origBoundary": "-8.757380,41.074944,-8.469928,41.402383",
+      "projParameter": "+proj=utm +zone=29 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+    }
+  },
+  "official_equipment_within_75_metres": [
+    {
+      "objectid": 1521,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598397525623737,
+      "lat": 41.165809650908365,
+      "point": [
+        1328.3262495852541,
+        1392.6132854800671
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1522,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598446236776862,
+      "lat": 41.16578801210198,
+      "point": [
+        1324.250919099548,
+        1390.192242315039
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1523,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598421933914823,
+      "lat": 41.165695199044464,
+      "point": [
+        1326.3372396623017,
+        1379.8981866370887
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1524,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598381911929318,
+      "lat": 41.16560840404486,
+      "point": [
+        1329.7391756976722,
+        1370.2782990634441
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1525,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598473071773753,
+      "lat": 41.165571108093594,
+      "point": [
+        1322.110788816819,
+        1366.1026797704399
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1526,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598554604732424,
+      "lat": 41.16551002729966,
+      "point": [
+        1315.3021805499448,
+        1359.2903651567176
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1527,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598508454219166,
+      "lat": 41.16544827295279,
+      "point": [
+        1319.2054184747394,
+        1352.4526835437864
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1528,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598580479420413,
+      "lat": 41.165380082913195,
+      "point": [
+        1313.1980517765041,
+        1344.854831165634
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1529,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598667015867953,
+      "lat": 41.165579850942386,
+      "point": [
+        1305.8361497636652,
+        1366.9982143091038
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1530,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598800624229847,
+      "lat": 41.1655268965942,
+      "point": [
+        1294.6547080519376,
+        1361.0679191183299
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1531,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.59879181656551,
+      "lat": 41.16561865397111,
+      "point": [
+        1295.3466405634535,
+        1371.257591641508
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1532,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598730932747962,
+      "lat": 41.165479532795935,
+      "point": [
+        1300.5254395068623,
+        1355.8368692630902
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1533,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598844007132275,
+      "lat": 41.16542070593461,
+      "point": [
+        1291.0696005623322,
+        1349.2625956675038
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1534,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598760297093252,
+      "lat": 41.165397220707234,
+      "point": [
+        1298.1041536387056,
+        1346.6877970518544
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 1535,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598652606830894,
+      "lat": 41.16532618679881,
+      "point": [
+        1307.1747814164264,
+        1338.8437566095963
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    },
+    {
+      "objectid": 2281,
+      "installation": "121",
+      "equipment": "SEM",
+      "lon": -8.598494739826721,
+      "lat": 41.16562581463344,
+      "point": [
+        1320.2650204024976,
+        1372.1674349512905
+      ],
+      "head_type": "unknown",
+      "movement_assignment": "unverified",
+      "timing": "unknown"
+    }
+  ],
+  "osm_nodes_under_joined_controller": [
+    {
+      "osm_node": "773982493",
+      "lon": -8.59866,
+      "lat": 41.165431,
+      "point": [
+        1306.5009090020321,
+        1350.4765302482992
+      ],
+      "tags": {}
+    },
+    {
+      "osm_node": "3897692280",
+      "lon": -8.5985204,
+      "lat": 41.1657017,
+      "point": [
+        1318.0735081257299,
+        1380.5817722445354
+      ],
+      "tags": {}
+    },
+    {
+      "osm_node": "12514324964",
+      "lon": -8.5986868,
+      "lat": 41.1653691,
+      "point": [
+        1304.284307492897,
+        1343.5944561986253
+      ],
+      "tags": {
+        "crossing": "traffic_signals",
+        "crossing:island": "no",
+        "highway": "crossing"
+      }
+    },
+    {
+      "osm_node": "12514324966",
+      "lon": -8.5987672,
+      "lat": 41.1655865,
+      "point": [
+        1297.4282013906632,
+        1367.6976000657305
+      ],
+      "tags": {
+        "crossing": "traffic_signals",
+        "highway": "crossing"
+      }
+    },
+    {
+      "osm_node": "1387283703",
+      "lon": -8.5986073,
+      "lat": 41.1655526,
+      "point": [
+        1310.8597235368798,
+        1363.996103768237
+      ],
+      "tags": {}
+    },
+    {
+      "osm_node": "10894511568",
+      "lon": -8.5985525,
+      "lat": 41.1654157,
+      "point": [
+        1315.5270442726323,
+        1348.8196178665385
+      ],
+      "tags": {
+        "crossing": "traffic_signals",
+        "highway": "crossing",
+        "kerb": "lowered",
+        "tactile_paving": "no"
+      }
+    },
+    {
+      "osm_node": "12514310097",
+      "lon": -8.5985262,
+      "lat": 41.1655408,
+      "point": [
+        1317.669327536365,
+        1362.7175270756707
+      ],
+      "tags": {
+        "crossing": "traffic_signals",
+        "highway": "crossing"
+      }
+    },
+    {
+      "osm_node": "12514310100",
+      "lon": -8.5984336,
+      "lat": 41.1656183,
+      "point": [
+        1325.3979459787952,
+        1371.3568734005094
+      ],
+      "tags": {
+        "crossing": "traffic_signals",
+        "highway": "crossing",
+        "tactile_paving": "no"
+      }
+    },
+    {
+      "osm_node": "12514324903",
+      "lon": -8.5987797,
+      "lat": 41.1654444,
+      "point": [
+        1296.4522780495463,
+        1351.917811253108
+      ],
+      "tags": {
+        "crossing": "traffic_signals",
+        "highway": "crossing"
+      }
+    },
+    {
+      "osm_node": "12514324965",
+      "lon": -8.598418,
+      "lat": 41.1657482,
+      "point": [
+        1326.6401134368498,
+        1385.7835074430332
+      ],
+      "tags": {
+        "crossing": "traffic_signals",
+        "crossing:island": "no",
+        "highway": "crossing",
+        "tactile_paving": "no"
+      }
+    }
+  ],
+  "controller": {
+    "id": "joinedS_12514310100_12514324965_12514324966_3897692280_#1more",
+    "type": "actuated",
+    "offset_seconds": 0.0,
+    "represented_junctions": [
+      "12514310100",
+      "12514324965",
+      "12514324966",
+      "3897692280",
+      "cluster_10894511568_12514310097_12514324903_12514324964_#2more"
+    ],
+    "movement_links": 21,
+    "incoming_lanes": 14,
+    "green_stages": 8,
+    "phase_count": 24,
+    "nominal_phase_duration_sum_seconds": 288.0,
+    "actual_cycle_duration": "Variable under generated actuation, not a measured 288-second cycle",
+    "synchronisation": "One generated joined programme; real phase groups, offsets and adjacent coordination unverified",
+    "phases": [
+      {
+        "duration": "31",
+        "state": "Grrrrrrrrrrrrrrrrrrrr",
+        "minDur": "10",
+        "maxDur": "50"
+      },
+      {
+        "duration": "3",
+        "state": "yrrrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "2",
+        "state": "rrrrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "31",
+        "state": "rGrrrrrrrrrrrrrrrrrrr",
+        "minDur": "13",
+        "maxDur": "50"
+      },
+      {
+        "duration": "3",
+        "state": "ryrrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "2",
+        "state": "rrrrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "31",
+        "state": "rrGrrrrrrrrrrrrrrrrrr",
+        "minDur": "13",
+        "maxDur": "50"
+      },
+      {
+        "duration": "3",
+        "state": "rryrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "2",
+        "state": "rrrrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "31",
+        "state": "rrrrGGrrrrGGrrrrrGGrr",
+        "minDur": "13",
+        "maxDur": "50"
+      },
+      {
+        "duration": "3",
+        "state": "rrrryyrrrryyrrrrryyrr"
+      },
+      {
+        "duration": "2",
+        "state": "rrrrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "31",
+        "state": "rrrGrrGGrrrrrrrrrGGrr",
+        "minDur": "13",
+        "maxDur": "50"
+      },
+      {
+        "duration": "3",
+        "state": "rrryrryyrrrrrrrrryyrr"
+      },
+      {
+        "duration": "2",
+        "state": "rrrrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "31",
+        "state": "rrrGrrrrGGrrGGrrrrrrr",
+        "minDur": "13",
+        "maxDur": "50"
+      },
+      {
+        "duration": "3",
+        "state": "rrryrrrryyrryyrrrrrrr"
+      },
+      {
+        "duration": "2",
+        "state": "rrrrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "31",
+        "state": "rrrGrrrrGGrrrrGGGrrrr",
+        "minDur": "10",
+        "maxDur": "50"
+      },
+      {
+        "duration": "3",
+        "state": "rrryrrrryyrrrryyyrrrr"
+      },
+      {
+        "duration": "2",
+        "state": "rrrrrrrrrrrrrrrrrrrrr"
+      },
+      {
+        "duration": "31",
+        "state": "rrrGrrrrGGrrrrrrrrrGG",
+        "minDur": "13",
+        "maxDur": "50"
+      },
+      {
+        "duration": "3",
+        "state": "rrryrrrryyrrrrrrrrryy"
+      },
+      {
+        "duration": "2",
+        "state": "rrrrrrrrrrrrrrrrrrrrr"
+      }
+    ],
+    "movements": [
+      {
+        "link_index": 0,
+        "junction": "12514310100",
+        "from_road": "1083175718#0",
+        "from_lane": "1083175718#0_0",
+        "to_road": "1083175718#2",
+        "street": "Avenida dos Combatentes da Grande Guerra",
+        "movement": "s",
+        "point": [
+          1326.04,
+          1368.78
+        ],
+        "incoming_lane_length_metres": 3.96,
+        "green_phase_indices": [
+          0
+        ]
+      },
+      {
+        "link_index": 1,
+        "junction": "12514324965",
+        "from_road": "-1172588827#2",
+        "from_lane": "-1172588827#2_0",
+        "to_road": "-1172588827#0",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1328.2,
+          1388.61
+        ],
+        "incoming_lane_length_metres": 48.62,
+        "green_phase_indices": [
+          3
+        ]
+      },
+      {
+        "link_index": 2,
+        "junction": "12514324965",
+        "from_road": "1172588827#0",
+        "from_lane": "1172588827#0_0",
+        "to_road": "1172588827#1",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1325.73,
+          1383.19
+        ],
+        "incoming_lane_length_metres": 0.2,
+        "green_phase_indices": [
+          6
+        ]
+      },
+      {
+        "link_index": 3,
+        "junction": "12514324966",
+        "from_road": "-482331424#10",
+        "from_lane": "-482331424#10_0",
+        "to_road": "-482331424#8",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1296.94,
+          1371.21
+        ],
+        "incoming_lane_length_metres": 5.98,
+        "green_phase_indices": [
+          12,
+          15,
+          18,
+          21
+        ]
+      },
+      {
+        "link_index": 4,
+        "junction": "12514324966",
+        "from_road": "482331424#8",
+        "from_lane": "482331424#8_0",
+        "to_road": "482331424#9",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1295.47,
+          1362.58
+        ],
+        "incoming_lane_length_metres": 9.75,
+        "green_phase_indices": [
+          9
+        ]
+      },
+      {
+        "link_index": 5,
+        "junction": "12514324966",
+        "from_road": "482331424#8",
+        "from_lane": "482331424#8_1",
+        "to_road": "482331424#9",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1293.71,
+          1365.25
+        ],
+        "incoming_lane_length_metres": 9.75,
+        "green_phase_indices": [
+          9
+        ]
+      },
+      {
+        "link_index": 6,
+        "junction": "3897692280",
+        "from_road": "-1083211594",
+        "from_lane": "-1083211594_0",
+        "to_road": "-482331424#10",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1319.94,
+          1383.49
+        ],
+        "incoming_lane_length_metres": 0.2,
+        "green_phase_indices": [
+          12
+        ]
+      },
+      {
+        "link_index": 7,
+        "junction": "3897692280",
+        "from_road": "-1083211594",
+        "from_lane": "-1083211594_0",
+        "to_road": "-675897037#1",
+        "street": "Rua de Costa Cabral",
+        "movement": "L",
+        "point": [
+          1319.94,
+          1383.49
+        ],
+        "incoming_lane_length_metres": 0.2,
+        "green_phase_indices": [
+          12
+        ]
+      },
+      {
+        "link_index": 8,
+        "junction": "3897692280",
+        "from_road": "675897037#0",
+        "from_lane": "675897037#0_0",
+        "to_road": "1083211594",
+        "street": "Rua da Alegria",
+        "movement": "s",
+        "point": [
+          1312.61,
+          1364.18
+        ],
+        "incoming_lane_length_metres": 0.2,
+        "green_phase_indices": [
+          15,
+          18,
+          21
+        ]
+      },
+      {
+        "link_index": 9,
+        "junction": "3897692280",
+        "from_road": "675897037#0",
+        "from_lane": "675897037#0_0",
+        "to_road": "-482331424#10",
+        "street": "Rua da Alegria",
+        "movement": "l",
+        "point": [
+          1312.61,
+          1364.18
+        ],
+        "incoming_lane_length_metres": 0.2,
+        "green_phase_indices": [
+          15,
+          18,
+          21
+        ]
+      },
+      {
+        "link_index": 10,
+        "junction": "3897692280",
+        "from_road": "482331424#9",
+        "from_lane": "482331424#9_0",
+        "to_road": "-675897037#1",
+        "street": "Rua de Costa Cabral",
+        "movement": "r",
+        "point": [
+          1305.3,
+          1368.98
+        ],
+        "incoming_lane_length_metres": 5.82,
+        "green_phase_indices": [
+          9
+        ]
+      },
+      {
+        "link_index": 11,
+        "junction": "3897692280",
+        "from_road": "482331424#9",
+        "from_lane": "482331424#9_1",
+        "to_road": "1083211594",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1303.63,
+          1371.71
+        ],
+        "incoming_lane_length_metres": 5.82,
+        "green_phase_indices": [
+          9
+        ]
+      },
+      {
+        "link_index": 12,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "27292882#8",
+        "from_lane": "27292882#8_1",
+        "to_road": "434878391#1",
+        "street": "Rua da Alegria",
+        "movement": "r",
+        "point": [
+          1305.1,
+          1340.79
+        ],
+        "incoming_lane_length_metres": 16.22,
+        "green_phase_indices": [
+          15
+        ]
+      },
+      {
+        "link_index": 13,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "27292882#8",
+        "from_lane": "27292882#8_1",
+        "to_road": "675897037#0",
+        "street": "Rua da Alegria",
+        "movement": "s",
+        "point": [
+          1305.1,
+          1340.79
+        ],
+        "incoming_lane_length_metres": 16.22,
+        "green_phase_indices": [
+          15
+        ]
+      },
+      {
+        "link_index": 14,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "1083170378#0",
+        "from_lane": "1083170378#0_0",
+        "to_road": "-27292882#9",
+        "street": "Avenida dos Combatentes da Grande Guerra",
+        "movement": "r",
+        "point": [
+          1291.53,
+          1352.78
+        ],
+        "incoming_lane_length_metres": 3.36,
+        "green_phase_indices": [
+          18
+        ]
+      },
+      {
+        "link_index": 15,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "1083170378#0",
+        "from_lane": "1083170378#0_0",
+        "to_road": "434878391#1",
+        "street": "Avenida dos Combatentes da Grande Guerra",
+        "movement": "s",
+        "point": [
+          1291.53,
+          1352.78
+        ],
+        "incoming_lane_length_metres": 3.36,
+        "green_phase_indices": [
+          18
+        ]
+      },
+      {
+        "link_index": 16,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "1083170378#0",
+        "from_lane": "1083170378#0_0",
+        "to_road": "675897037#0",
+        "street": "Avenida dos Combatentes da Grande Guerra",
+        "movement": "l",
+        "point": [
+          1291.53,
+          1352.78
+        ],
+        "incoming_lane_length_metres": 3.36,
+        "green_phase_indices": [
+          18
+        ]
+      },
+      {
+        "link_index": 17,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "-675897037#1",
+        "from_lane": "-675897037#1_0",
+        "to_road": "-27292882#9",
+        "street": "Rua da Alegria",
+        "movement": "s",
+        "point": [
+          1308.72,
+          1362.68
+        ],
+        "incoming_lane_length_metres": 2.74,
+        "green_phase_indices": [
+          9,
+          12
+        ]
+      },
+      {
+        "link_index": 18,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "-675897037#1",
+        "from_lane": "-675897037#1_0",
+        "to_road": "434878391#1",
+        "street": "Rua da Alegria",
+        "movement": "l",
+        "point": [
+          1308.72,
+          1362.68
+        ],
+        "incoming_lane_length_metres": 2.74,
+        "green_phase_indices": [
+          9,
+          12
+        ]
+      },
+      {
+        "link_index": 19,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "124718133#0",
+        "from_lane": "124718133#0_0",
+        "to_road": "675897037#0",
+        "street": "Avenida dos Combatentes da Grande Guerra",
+        "movement": "r",
+        "point": [
+          1318.44,
+          1362.59
+        ],
+        "incoming_lane_length_metres": 6.64,
+        "green_phase_indices": [
+          21
+        ]
+      },
+      {
+        "link_index": 20,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "124718133#0",
+        "from_lane": "124718133#0_0",
+        "to_road": "-27292882#9",
+        "street": "Avenida dos Combatentes da Grande Guerra",
+        "movement": "l",
+        "point": [
+          1318.44,
+          1362.59
+        ],
+        "incoming_lane_length_metres": 6.64,
+        "green_phase_indices": [
+          21
+        ]
+      }
+    ]
+  },
+  "scheduled_route_links_under_controller": {
+    "1": [
+      {
+        "link_index": 1,
+        "junction": "12514324965",
+        "from_road": "-1172588827#2",
+        "from_lane": "-1172588827#2_0",
+        "to_road": "-1172588827#0",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1328.2,
+          1388.61
+        ],
+        "incoming_lane_length_metres": 48.62,
+        "green_phase_indices": [
+          3
+        ]
+      },
+      {
+        "link_index": 7,
+        "junction": "3897692280",
+        "from_road": "-1083211594",
+        "from_lane": "-1083211594_0",
+        "to_road": "-675897037#1",
+        "street": "Rua de Costa Cabral",
+        "movement": "L",
+        "point": [
+          1319.94,
+          1383.49
+        ],
+        "incoming_lane_length_metres": 0.2,
+        "green_phase_indices": [
+          12
+        ]
+      },
+      {
+        "link_index": 17,
+        "junction": "cluster_10894511568_12514310097_12514324903_12514324964_#2more",
+        "from_road": "-675897037#1",
+        "from_lane": "-675897037#1_0",
+        "to_road": "-27292882#9",
+        "street": "Rua da Alegria",
+        "movement": "s",
+        "point": [
+          1308.72,
+          1362.68
+        ],
+        "incoming_lane_length_metres": 2.74,
+        "green_phase_indices": [
+          9,
+          12
+        ]
+      }
+    ],
+    "0": [
+      {
+        "link_index": 4,
+        "junction": "12514324966",
+        "from_road": "482331424#8",
+        "from_lane": "482331424#8_0",
+        "to_road": "482331424#9",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1295.47,
+          1362.58
+        ],
+        "incoming_lane_length_metres": 9.75,
+        "green_phase_indices": [
+          9
+        ]
+      },
+      {
+        "link_index": 5,
+        "junction": "12514324966",
+        "from_road": "482331424#8",
+        "from_lane": "482331424#8_1",
+        "to_road": "482331424#9",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1293.71,
+          1365.25
+        ],
+        "incoming_lane_length_metres": 9.75,
+        "green_phase_indices": [
+          9
+        ]
+      },
+      {
+        "link_index": 11,
+        "junction": "3897692280",
+        "from_road": "482331424#9",
+        "from_lane": "482331424#9_1",
+        "to_road": "1083211594",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1303.63,
+          1371.71
+        ],
+        "incoming_lane_length_metres": 5.82,
+        "green_phase_indices": [
+          9
+        ]
+      },
+      {
+        "link_index": 2,
+        "junction": "12514324965",
+        "from_road": "1172588827#0",
+        "from_lane": "1172588827#0_0",
+        "to_road": "1172588827#1",
+        "street": "Rua de Costa Cabral",
+        "movement": "s",
+        "point": [
+          1325.73,
+          1383.19
+        ],
+        "incoming_lane_length_metres": 0.2,
+        "green_phase_indices": [
+          6
+        ]
+      }
+    ]
+  },
+  "user_observation": {
+    "scope": "Pictured Costa Cabral stretch",
+    "displayed_markers": 8,
+    "expected_vehicle_lights": 2,
+    "status": "User-reported physical count; not yet assigned to source equipment objects or native approach stop lines"
+  },
+  "conclusion": "The viewer displayed logical movement links as coloured markers. Neither the official inventory nor OSM tags establishes one-to-one vehicle signal-head mapping. Inbound meets three controlled road transitions under this joined programme; serial control requires review before punctuality attribution.",
+  "field_validated": false,
+  "native_inputs_changed": false,
+  "implementation_sha256": "9efc6222a88ca4fda48d998e7236604f7db8665878a1df2ba056e9e83e2fff24"
+}

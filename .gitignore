@@ -29,3 +29,4 @@ prototypes/line-701/full/replay-inputs.json
 node_modules/
 test-results/
 playwright-report/
+prototypes/line-701/focused-replay/native/

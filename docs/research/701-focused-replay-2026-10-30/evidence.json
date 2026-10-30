@@ -1,0 +1,59 @@
+{
+  "role": "source_matched_focused_observation_replay",
+  "source_control": {
+    "ledger": "../701-bus-only-controls-2026-10-30/controls.json",
+    "trial": "v6-bus-only-existing-signals-60-s17"
+  },
+  "native_stop_events_equal": true,
+  "native_tripinfo_rows_equal": true,
+  "compared_stop_events": 6024,
+  "completed_services": 127,
+  "evidence": {
+    "stops.xml": {
+      "file": "stops.xml.gz",
+      "sha256": "ff8bf7e28d97c1dbcf3423bb48a462bf471931d004834060db40a624d95553de",
+      "gzip_sha256": "b5308e7c217166d6311c8d3f66d05a2c0c6f145661ac74cc48ab686df6898106",
+      "bytes": 2009638
+    },
+    "trips.xml": {
+      "file": "trips.xml.gz",
+      "sha256": "1ac14cf157a23630bdb4ccf5829e9928fb151ce26b802e3a8c7849e2c8e46f9b",
+      "gzip_sha256": "d6d0206d3d1bbcdb66c98e65d3165268ce8283f4155c29d9e3ba8e27dd94ff2c",
+      "bytes": 55771
+    },
+    "collisions.xml": {
+      "file": "collisions.xml.gz",
+      "sha256": "29e31177bbebd12689d200a87e0aeeb66e5a19249817c5900004636aad0375ed",
+      "gzip_sha256": "e69105487ce09bb04a198e3cc5cf8b25d2f74dbd899a28b3ac180e3364bf7e88",
+      "bytes": 2295
+    },
+    "final-state.xml": {
+      "file": "final-state.xml.gz",
+      "sha256": "0c67fae2ce253c4f9e9169ae7f0d4e9a3d9228911278abe0156caa9e64a59075",
+      "gzip_sha256": "78902cf4545be7128027e3be4ed1e5ce3705800a895000ca1a5226772706cda6",
+      "bytes": 52767
+    },
+    "capture.py": {
+      "file": "capture.py.gz",
+      "sha256": "d1679fa41a56a1e0790183199d9c42cfcd575c046b36848e05d922457955e40b",
+      "gzip_sha256": "b2c556360802a0d0b965ca7bc4004a57930c7bd49683906cfedab9e58d7018ac",
+      "bytes": 6668
+    },
+    "manifest.json": {
+      "file": "manifest.json.gz",
+      "sha256": "d22906ce54f99f2fdfa0f386c5aa5f6f7b7a5c474f46f0027fda80d7ef3c7159",
+      "gzip_sha256": "88fff29506a7e52f45ffc2338a130c9e0097ff5ac350b1c44f619b7a7ee58c46",
+      "bytes": 4682
+    },
+    "capture-index.json": {
+      "file": "capture-index.json.gz",
+      "sha256": "12739749465c0fd424b99c37afe541af90baf06d33fd0429620423d088cf87ac",
+      "gzip_sha256": "4a7a5ecc2e7f9711bb93854feaff8e31f5ea13b1f422d2cd037fefa910e23bef",
+      "bytes": 220
+    }
+  },
+  "replay": {
+    "repository_path": "prototypes/line-701/focused-replay/replay.json.gz",
+    "sha256": "5c0de62a34748fa9deb641fb79589111265eb898b91e04464654c1720ba81e24"
+  }
+}

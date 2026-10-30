@@ -3,6 +3,16 @@ import {createHash} from 'node:crypto';
 import {validateRegistry} from '../web/line-registry.mjs';
 import {evaluateStudy} from '../web/study-reliability.mjs';
 const site='prototypes/costa-cabral/proposal';
+for(const name of ['index.html','viewer.mjs','replay.json.gz','manifest.json','capture-index.json','signal-audit.json','signal-audit-index.json']){
+ if(!(await readFile('prototypes/line-701/focused-replay/'+name)).equals(await readFile(site+'/701-inspection/'+name)))throw Error('Focused replay source differs: '+name);
+}
+const focused=JSON.parse(await readFile(site+'/701-inspection/capture-index.json','utf8'));
+for(const [file,key]of [['replay.json.gz','replay_sha256'],['manifest.json','manifest_sha256']])if(createHash('sha256').update(await readFile(site+'/701-inspection/'+file)).digest('hex')!==focused[key])throw Error('Focused replay hash mismatch: '+file);
+const signalAudit=JSON.parse(await readFile(site+'/701-inspection/signal-audit-index.json','utf8'));
+if(createHash('sha256').update(await readFile(site+'/701-inspection/signal-audit.json')).digest('hex')!==signalAudit.sha256)throw Error('Signal source audit hash mismatch');
+const signalReport=JSON.parse(await readFile(site+'/701-inspection/signal-audit.json','utf8'));
+const focusedCapture=JSON.parse(await readFile(site+'/701-inspection/manifest.json','utf8'));
+if(signalReport.network_sha256!==signalAudit.network_sha256||signalReport.network_sha256!==focusedCapture.source.network_sha256)throw Error('Signal audit differs from captured native network');
 const pairs=[['prototypes/line-701/pilot.template.html','index.html'],['prototypes/line-701/pilot.js','line-701.js'],...['proposal.mjs','proposal-views.mjs','line-explorer.mjs','line-explorer.css','inspection-2d.mjs'].map(n=>['prototypes/line-701/'+n,n]),...['inspection-3d.js','native-replay.mjs'].map(n=>['prototypes/costa-cabral/'+n,n]),...['line-registry.mjs','proposal-page.mjs','punctuality.mjs','study-labels.mjs','lines.json'].map(n=>['web/'+n,n])];
 for(const [source,name]of pairs)if(!(await readFile(source)).equals(await readFile(site+'/'+name)))throw Error('Generated public source differs: '+name);
 for(const [source,target]of [['prototypes/line-701/priority-panel.mjs','priority-panel.mjs'],['prototypes/line-701/data/porto-street-assets.geojson','701-street-assets.geojson'],['prototypes/line-701/full/priority-search.json','701-priority/priority-search.json'],['prototypes/line-701/full/PRIORITY_SEARCH.md','701-priority/PRIORITY_SEARCH.md']])if(!(await readFile(source)).equals(await readFile(site+'/'+target)))throw Error('Generated priority evidence differs: '+target);
