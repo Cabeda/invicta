@@ -92,3 +92,7 @@ for name, descriptor in ledger['models']['v14']['evidence'].items():
 ```
 
 Archive analysis and zero-step inspection work directly from the manifest. Full-day reruns need the restored prepared model plus their declared source-bound readiness review. Regenerating geometry starts from the frozen source import, not a fresh current OSM download. `areosa_compound.py` reproduces the V13 base network and rejects changes outside its reviewed footprint or to normal-lane semantics. `route_topology.contract_reference` preserves canonical stop indices for short workings; a removed served stop requires explicit rematching. A passing local case never bypasses the stop-berth audit.
+
+The new loop enforces the agreed 60-second operational criterion explicitly, including when analysing a legacy run recorded with a broader score. Strict scoring remains independent. Service proposals cannot silently relax that threshold. Partial executions retain their evidence but cannot replace a complete workload failure profile.
+
+Native completion is checkpointed before analysis. A reporting/storage failure can therefore resume the same verified physical execution. Casebooks are built in separate pending directories and promoted with source/hash receipts. Native initialization attempts, successful starts and measured elapsed time are distinct; preflight rejection consumes no reported native execution. Additional local XML is restricted to signal programmes and supported stopping/parking definitions; demand-bearing or unknown definitions are rejected before allocation.

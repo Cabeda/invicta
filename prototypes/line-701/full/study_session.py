@@ -5,6 +5,7 @@ import fcntl
 import functools
 import json
 import os
+import uuid
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
@@ -93,6 +94,15 @@ def _append_event(workspace, state, event):
     atomic_json(workspace / 'session.json', state)
 
 
+def _failed_native_accounting(folder, *, preexisting, local=False):
+    result = {'native_attempted':False, 'native_started':False, 'native_wall_seconds':0}
+    witness = folder / ('error.json' if local else 'native-failure.json')
+    if not preexisting and witness.exists():
+        recorded = json.loads(witness.read_text())
+        result.update({key:recorded[key] for key in result if key in recorded})
+    return result
+
+
 @_serialized
 def run_local_step(workspace, proposal):
     workspace = Path(workspace)
@@ -123,13 +133,15 @@ def run_local_step(workspace, proposal):
         case, reused = cached['case'], True
     else:
         case = 'cases/' + name
+        preexisting = (workspace / case).exists()
         try:
             result = run_case(proposal['network'], proposal['routes'], workspace / case,
                 additional=proposal.get('additional'), end_seconds=inputs['end_seconds'], wall_seconds=inputs['wall_seconds'])
         except Exception as error:
             _append_event(workspace, state, {'sequence': state['events'] + 1, 'id': name,
                 'signature': signature, 'case': case, 'status': 'failed', 'reason': str(error),
-                'reused': False, 'hypothesis': hypothesis, 'qualified': False})
+                'reused': False, 'hypothesis': hypothesis, 'qualified': False,
+                **_failed_native_accounting(workspace / case, preexisting=preexisting, local=True)})
             raise
         reused = False
     view_error = None
@@ -148,6 +160,7 @@ def run_local_step(workspace, proposal):
              'requested': len(result['requested_actors']), 'completed': len(result['arrived']),
              'collisions': result['collision_records'], 'qualified': False,
              'native_wall_seconds':0 if reused else result['wall_seconds'],
+             'native_attempted':not reused, 'native_started':not reused,
              'local_case_clears': result['all_requested_completed'] and result['collision_records'] == 0}
     # Journal first. If interrupted before state promotion, the immutable case
     # and event remain available for explicit recovery rather than being lost.
@@ -179,6 +192,8 @@ def run_service_step(workspace, proposal):
                                               for k in ['change', 'prediction', 'evidence']):
         raise ValueError('Each step requires a specific change, prediction and prior evidence')
     config = {**proposal['config'], 'id': name, 'hypothesis': hypothesis}
+    if config.setdefault('operational_lateness_seconds', 60) != 60:
+        raise ValueError('This study loop requires the agreed 60-second operational target; strict is reported separately')
     budget = config.setdefault('diagnostic_budget_seconds', 180)
     if state.get('deadline'):
         deadline = dt.datetime.fromisoformat(state['deadline'].replace('Z', '+00:00'))
@@ -206,26 +221,51 @@ def run_service_step(workspace, proposal):
     signature = sha256(json.dumps({'files': signatures, 'config': signature_config,
         'native_version': list(libsumo.getVersion())}, sort_keys=True).encode())
     cached = next((r for r in state['runs'] if r.get('kind') == 'service_trial'
-                   and r['signature'] == signature and r['status'] == 'recorded'
+                   and r['signature'] == signature and r['status'] in ['recorded', 'native_recorded', 'analysis_failed']
                    and r.get('full_reference_day')), None)
     trial = cached['trial'] if cached else 'trials/' + name
     if cached:
         if sha256((workspace / trial / 'result.json').read_bytes()) != cached['result_sha256']:
             raise ValueError('Cached native trial metadata changed; do not reuse it')
     else:
+        preexisting = (workspace / trial).exists()
         try:
-            run_trial(model, workspace / 'trials', config)
+            native_result = run_trial(model, workspace / 'trials', config)
         except Exception as error:
             _append_event(workspace, state, {'sequence': state['events'] + 1, 'id': name,
                 'kind': 'service_trial', 'signature': signature, 'trial': trial,
                 'status': 'failed', 'reason': str(error), 'reused': False,
-                'hypothesis': hypothesis, 'qualified': False})
+                'hypothesis': hypothesis, 'qualified': False,
+                **_failed_native_accounting(workspace / trial, preexisting=preexisting)})
             raise
+        complete_scope = not native_result.get('execution_scope')
+        _append_event(workspace, state, {'sequence':state['events'] + 1, 'id':name,
+            'kind':'service_trial', 'signature':signature, 'trial':trial, 'status':'native_recorded',
+            'result_sha256':sha256((workspace / trial / 'result.json').read_bytes()),
+            'full_reference_day':complete_scope, 'reused':False, 'hypothesis':hypothesis,
+            'native_attempted':True, 'native_started':True,
+            'native_wall_seconds':native_result.get('phase_timings', {}).get('native_execution_seconds', 0),
+            'qualified':False})
+    try:
+        return _analyse_service(workspace, state, name, signature, trial, cached, config, hypothesis)
+    except Exception as error:
+        metadata = workspace / trial / 'result.json'
+        raw = json.loads(metadata.read_text()) if metadata.exists() else {}
+        _append_event(workspace, state, {'sequence':state['events'] + 1, 'id':name,
+            'kind':'service_trial', 'signature':signature, 'trial':trial, 'status':'analysis_failed',
+            'reason':str(error), 'result_sha256':sha256(metadata.read_bytes()) if metadata.exists() else None,
+            'full_reference_day':bool(raw) and not raw.get('execution_scope'),
+            'native_attempted':False, 'native_started':False, 'native_wall_seconds':0,
+            'reused':bool(cached), 'hypothesis':hypothesis, 'qualified':False})
+        raise
+
+
+def _analyse_service(workspace, state, name, signature, trial, cached, config, hypothesis):
     evidence = load_trial(workspace / trial)
     for filename in {**evidence.result['input_hashes'], **evidence.result['output_hashes']}:
         evidence.payload(filename)
     from run_diagnostics import explain
-    diagnosis = explain(evidence)
+    diagnosis = explain(evidence, lateness_tolerance_seconds=60)
     routes = ET.fromstring(evidence.payload('routes.rou.xml'))
     requested_vehicles = {v.get('id') for v in routes.findall('vehicle')}
     requested_people = {v.get('id') for v in routes.findall('person')}
@@ -246,7 +286,23 @@ def run_service_step(workspace, proposal):
     same_analysis = cached and cached.get('analysis_sha256') == analysis
     casebook = cached['casebook'] if same_analysis else 'casebooks/' + name + '-' + analysis[:12]
     if not same_analysis:
-        book = build_casebook(workspace / trial, workspace / casebook, line_id=state['line_id'])
+        final = workspace / casebook
+        if final.exists():
+            receipt = json.loads((final / 'analysis-receipt.json').read_text())
+            if (receipt['analysis_sha256'] != analysis
+                    or receipt['execution_sha256'] != evidence.verified_identity()['execution_sha256']
+                    or receipt['casebook_sha256'] != sha256((final / 'casebook.json').read_bytes())
+                    or receipt['readme_sha256'] != sha256((final / 'README.md').read_bytes())):
+                raise ValueError('Retained analysis differs from its native execution')
+            book = json.loads((final / 'casebook.json').read_text())
+        else:
+            pending = final.with_name(final.name + '.pending-' + uuid.uuid4().hex)
+            book = build_casebook(workspace / trial, pending, line_id=state['line_id'])
+            atomic_json(pending / 'analysis-receipt.json', {'analysis_sha256':analysis,
+                'execution_sha256':evidence.verified_identity()['execution_sha256'],
+                'casebook_sha256':sha256((pending / 'casebook.json').read_bytes()),
+                'readme_sha256':sha256((pending / 'README.md').read_bytes())})
+            pending.rename(final)
     else:
         if sha256((workspace / casebook / 'casebook.json').read_bytes()) != cached['casebook_sha256']:
             raise ValueError('Cached casebook changed; do not reuse its analysis')
@@ -263,11 +319,13 @@ def run_service_step(workspace, proposal):
         'full_reference_day': gates['full_reference_day'], 'gates': gates,
         'strict_metrics': diagnosis['metrics'], 'operational_metrics': diagnosis['operational_metrics'],
         'study_case_passes': all(gates.values()), 'qualified': False, 'next_case': book['next_case'],
-        'native_wall_seconds':0 if cached else evidence.result.get('phase_timings', {}).get('native_execution_seconds', 0),
+        'native_wall_seconds':0, 'native_attempted':False, 'native_started':False,
         'qualification_note': 'One study case; access review, paired scenario/seed matrix and field validation remain separate.'}
-    event['profile'] = {'context':book['workload_context_sha256'], 'trial':book['source']['trial'],
-        'next_case':book['next_case'] if not event['study_case_passes'] else None}
-    _apply_profile(state, event['profile'])
+    event['profile'] = None
+    if event['full_reference_day']:
+        event['profile'] = {'context':book['workload_context_sha256'], 'trial':book['source']['trial'],
+            'next_case':book['next_case'] if not event['study_case_passes'] else None}
+        _apply_profile(state, event['profile'])
     _append_event(workspace, state, event)
     return event
 
@@ -275,8 +333,9 @@ def run_service_step(workspace, proposal):
 @_serialized
 def session_status(workspace):
     state = _load_session(Path(workspace))
-    return {**state, 'native_executions': sum(not r['reused'] for r in state['runs']),
-            'reused_executions': sum(r['reused'] for r in state['runs']),
+    return {**state, 'native_executions': sum(r.get('native_started', not r['reused']) for r in state['runs']),
+            'native_attempts':sum(r.get('native_attempted', not r['reused']) for r in state['runs']),
+            'reused_executions': sum(r['reused'] and r['status'] in ['recorded', 'view_failed'] for r in state['runs']),
             'spent_native_seconds':sum(r.get('native_wall_seconds', 0) for r in state['runs'])}
 
 

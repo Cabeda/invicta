@@ -47,7 +47,7 @@ def workload_context(evidence):
 
 def build_casebook(source, output, *, trial_id=None, model=None, line_id):
     evidence = load_trial(source, trial_id, model)
-    diagnosis = explain(evidence)
+    diagnosis = explain(evidence, lateness_tolerance_seconds=60)
     calls = {(c['id'], c['busStop']): c for c in evidence.calls()}
     failures = {(f['trip'], f['stop']) for f in diagnosis['operational_metrics']['failures']}
     intervals = []
@@ -141,6 +141,10 @@ def build_casebook(source, output, *, trial_id=None, model=None, line_id):
         next_case = {'kind': 'added_bus_delay', 'trip': row['trip'],
             'from_stop': row['from_stop'], 'to_stop': row['to_stop'], 'cause': 'unclassified',
             'next_action': 'Inspect this interval and its sampled waits; build a short native reproduction before a policy change.'}
+    elif diagnosis['operational_metrics']['failures']:
+        next_case = {'kind':'timetable_event', 'failure':diagnosis['operational_metrics']['failures'][0],
+            'cause':'unclassified',
+            'next_action':'Inspect the missing or origin timing event; do not substitute a later destination as its cause.'}
     else:
         next_case = {'kind': 'qualification_review', 'cause': 'unclassified',
             'next_action': 'Check remaining origin/missing events, coverage, demand, access and seed matrix before ranking proposals.'}

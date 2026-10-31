@@ -20,6 +20,10 @@ prototypes/costa-cabral/proposal/701-experiments.json
 prototypes/costa-cabral/proposal/701-extension/dgt_municipios_near_areosa.geojson
 prototypes/costa-cabral/proposal/701-full-experiments.json
 prototypes/costa-cabral/proposal/701-full-routes.json
+prototypes/costa-cabral/proposal/701-investigation/areosa-collision-before/vendor/three.core.js
+prototypes/costa-cabral/proposal/701-investigation/areosa-protected-turn/vendor/three.core.js
+prototypes/costa-cabral/proposal/701-investigation/areosa-storage-before/vendor/three.core.js
+prototypes/costa-cabral/proposal/701-investigation/areosa-storage-compound/vendor/three.core.js
 prototypes/costa-cabral/proposal/701-official/municipal_latest_gtfs.zip
 prototypes/costa-cabral/proposal/701-priority/priority-evidence/baseline-moderate-s17/trips.xml.gz
 prototypes/costa-cabral/proposal/701-priority/priority-evidence/fixed20-ped-s17/trips.xml.gz

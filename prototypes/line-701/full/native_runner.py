@@ -108,6 +108,7 @@ class RunMonitor:
         self.max_wall_seconds, self.started = max_wall_seconds, time.monotonic()
         self.stop_on_first_blockage, self.stop_requested, self.last_time = stop_on_first_blockage, False, None
         self.stop_reason = None
+        self.native_started = False
         self.samples, self.first_deadline, self.first_stall, self.snapshots = 0, None, None, []
         self.deadlines = collections.defaultdict(list)
         for bus in buses:
@@ -118,6 +119,9 @@ class RunMonitor:
                     self.deadlines[stop['scheduled'] + 1].append(
                         (bus['id'], stop['native_stop_id'], index == len(bus['stops']) - 1))
         self.stream = (folder / 'trace.jsonl').open('w')
+
+    def on_native_start(self):
+        self.native_started = True
 
     def emit(self, event):
         self.stream.write(json.dumps(event, ensure_ascii=False) + '\n')
@@ -209,6 +213,11 @@ def run_native(command, buses, folder, priority_options=None, monitor_options=No
         priority = simulate_with_priority(command, {bus['id'] for bus in buses}, folder,
                                          enabled=priority_options is not None, observer=monitor,
                                          **(priority_options or {}))
+    except BaseException as error:
+        atomic_json(Path(folder) / 'native-failure.json', {'reason':str(error),
+            'native_attempted':True, 'native_started':monitor.native_started,
+            'native_wall_seconds':time.monotonic() - started, 'qualified':False})
+        raise
     finally:
         diagnostics = monitor.close()
     return {'priority': priority, 'diagnostics': diagnostics,

@@ -11,6 +11,118 @@ SOURCE = ROOT / 'docs/research/701-traffic-stress-2026-10-30/study.json'
 
 
 class InvestigationLoopTests(unittest.TestCase):
+    def test_native_start_is_recorded_before_controller_setup_failure(self):
+        from test_investigation import native_fixture, empty_config
+        from priority_search import make_inputs
+        from native_runner import run_native, freeze_implementation
+        import sumo
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root)
+            folder = root / 'run'
+            folder.mkdir()
+            reference, buses, *_ = make_inputs(model, folder, empty_config())
+            freeze_implementation(folder)
+            command = [str(Path(sumo.SUMO_HOME) / 'bin/sumo'), '--net-file',str(folder / 'network.net.xml'),
+                '--route-files',str(folder / 'routes.rou.xml'), '--additional-files',str(folder / 'additional.add.xml'),
+                '--begin','18000', '--end','18500', '--no-step-log','true']
+            with self.assertRaisesRegex(ValueError, 'unknown traffic-light'):
+                run_native(command, buses, folder, {'tls_filter':['absent']})
+            failure = json.loads((folder / 'native-failure.json').read_text())
+            self.assertTrue(failure['native_started'])
+            self.assertTrue(failure['native_attempted'])
+            self.assertGreater(failure['native_wall_seconds'], 0)
+
+    def test_additional_xml_cannot_hide_future_demand(self):
+        from native_case import run_case
+        fixture = Path(__file__).parent / 'diagnostics/areosa-junction'
+        with tempfile.TemporaryDirectory() as temporary:
+            extra = Path(temporary) / 'hidden.add.xml'
+            extra.write_text('<additional><vehicle id="hidden" depart="200"><route edges="unused"/></vehicle></additional>')
+            with self.assertRaisesRegex(ValueError, 'additional.*demand'):
+                run_case(fixture / 'source.net.xml', fixture / 'regional-five.rou.xml',
+                         Path(temporary) / 'case', additional=extra, end_seconds=100)
+
+    def test_analysis_failure_reuses_completed_native_physics(self):
+        from study_session import start_session, run_service_step, session_status
+        from test_investigation import native_fixture, empty_config
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root)
+            work = root / 'session'
+            start_session(work, SOURCE, line_id='701', trial_id='v11-traffic-and-people-010-baseline-s17')
+            proposal = {'id':'recover-analysis', 'model':str(model),
+                'config':{**empty_config(), 'diagnostic_all_green':False,
+                          'diagnostic_control':'existing_signals', 'operational_lateness_seconds':60},
+                'hypothesis':{'change':'Unchanged control', 'prediction':'Native completes before a reporting error',
+                              'evidence':'Feasible native bidirectional fixture'}}
+            with patch('study_session.build_casebook', side_effect=OSError('report storage unavailable')):
+                with self.assertRaisesRegex(OSError, 'report storage'):
+                    run_service_step(work, proposal)
+            status = session_status(work)
+            self.assertEqual(status['native_executions'], 1)
+            self.assertEqual(status['runs'][-1]['status'], 'analysis_failed')
+            spent = status['spent_native_seconds']
+            self.assertGreater(spent, 0)
+            resumed = run_service_step(work, proposal)
+            self.assertTrue(resumed['reused'])
+            self.assertTrue(resumed['study_case_passes'])
+            self.assertEqual(session_status(work)['native_executions'], 1)
+            self.assertEqual(session_status(work)['spent_native_seconds'], spent)
+            with self.assertRaises(ValueError):
+                run_service_step(work, {**proposal, 'id':'invalid-preflight',
+                    'config':{**proposal['config'], 'diagnostic_budget_seconds':-1}})
+            status = session_status(work)
+            self.assertFalse(status['runs'][-1]['native_attempted'])
+            self.assertEqual(status['native_executions'], 1)
+            self.assertEqual(status['spent_native_seconds'], spent)
+
+    def test_partial_service_does_not_replace_a_complete_failure_profile(self):
+        from study_session import start_session, run_service_step, session_status
+        from test_investigation import native_fixture, empty_config
+        from prepare import digest
+        import xml.etree.ElementTree as ET
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root, budget=1)
+            tree = ET.parse(model / 'baseline.net.xml')
+            for lane in tree.getroot().findall('.//lane'):
+                lane.set('speed', '3')
+            tree.write(model / 'baseline.net.xml')
+            reference = json.loads((model / 'routes.json').read_text())
+            reference['network_sha256'] = digest(model / 'baseline.net.xml')
+            (model / 'routes.json').write_text(json.dumps(reference))
+            meta = json.loads((model / 'model.json').read_text())
+            meta.update(network_sha256=reference['network_sha256'], reference_sha256=digest(model / 'routes.json'))
+            (model / 'model.json').write_text(json.dumps(meta))
+            config = {**empty_config(), 'diagnostic_all_green':False,
+                      'diagnostic_control':'existing_signals', 'operational_lateness_seconds':60}
+            work = root / 'session'
+            start_session(work, SOURCE, line_id='701', trial_id='v11-traffic-and-people-010-baseline-s17')
+            proposal = {'id':'complete-failure', 'model':str(model), 'config':config,
+                'hypothesis':{'change':'Explicit infeasible fixture control', 'prediction':'Late terminal calls',
+                              'evidence':'265m road with3m/s limit and1second timetable budget'}}
+            full = run_service_step(work, proposal)
+            self.assertFalse(full['study_case_passes'])
+            self.assertEqual(full['profile']['next_case']['kind'], 'added_bus_delay')
+            partial = run_service_step(work, {**proposal, 'id':'partial',
+                'config':{**config, 'diagnostic_budget_seconds':1e-9}})
+            self.assertFalse(partial['full_reference_day'])
+            self.assertIsNone(partial.get('profile'))
+            self.assertEqual(session_status(work)['profiles'][full['profile']['context']], full['profile'])
+            with self.assertRaisesRegex(ValueError, '60-second'):
+                run_service_step(work, {**proposal, 'id':'relaxed',
+                    'config':{**config, 'operational_lateness_seconds':3600}})
+            # Legacy/native experiments may use another score. Analysis must
+            # still calculate this project's declared operational target.
+            from priority_search import run_trial
+            run_trial(model, root / 'legacy', {**config, 'id':'broad-score',
+                'operational_lateness_seconds':3600})
+            book = build_casebook(root / 'legacy/broad-score', root / 'explicit-target', line_id='701')
+            self.assertEqual(book['acceptance_criteria']['lateness_tolerance_seconds'], 60)
+            self.assertEqual(book['operational_metrics']['late_checkpoints'], 2)
+
     def test_archive_retains_verified_local_failures_and_rejects_changed_frames(self):
         from archive_traffic_study import archive_study
         from native_case import run_case
@@ -145,9 +257,10 @@ class InvestigationLoopTests(unittest.TestCase):
             # promotion. Recovery must not repeat native physics.
             state_path = work / 'session.json'
             stale = json.loads(state_path.read_text())
+            expected_events = stale['events']
             stale.update(events=1, runs=stale['runs'][:1])
             state_path.write_text(json.dumps(stale))
-            self.assertEqual(session_status(work)['events'], 2)
+            self.assertEqual(session_status(work)['events'], expected_events)
             self.assertEqual(session_status(work)['native_executions'], 1)
             casebook = json.loads((work / first['casebook'] / 'casebook.json').read_text())
             self.assertEqual(casebook['coverage']['scheduled_trips'], 2)
@@ -187,6 +300,9 @@ class InvestigationLoopTests(unittest.TestCase):
             self.assertEqual(state['events'], 1)
             self.assertEqual(state['runs'][0]['status'], 'failed')
             self.assertFalse(state['runs'][0]['qualified'])
+            self.assertEqual(state['native_attempts'], 1)
+            self.assertEqual(state['native_executions'], 0)
+            self.assertGreater(state['spent_native_seconds'], 0)
             self.assertTrue((work / 'cases/bad-route/error.json').exists())
             proposal.update(id='valid-control', routes=str(fixture / 'regional-five.rou.xml'))
             event = run_local_step(work, proposal)

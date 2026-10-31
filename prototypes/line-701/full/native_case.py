@@ -25,6 +25,13 @@ def run_case(network, routes, output, *, additional=None, end_seconds=900, wall_
     departures = [float(row.get('depart')) for row in source.findall('vehicle')]
     if any(not math.isfinite(t) or t < 0 for t in departures) or departures != sorted(departures):
         raise ValueError('Local actors must have finite nonnegative times sorted by departure')
+    if additional is not None:
+        extra = ET.parse(additional).getroot()
+        allowed = {'tlLogic', 'busStop', 'trainStop', 'parkingArea'}
+        demand_tags = {'vehicle', 'flow', 'trip', 'person', 'personFlow', 'container', 'containerFlow', 'calibrator'}
+        if (extra.tag != 'additional' or any(row.tag not in allowed for row in extra)
+                or any(row.tag in demand_tags for row in extra.iter())):
+            raise ValueError('Local additional XML cannot contain implicit or unaccounted demand')
     folder = Path(output)
     folder.mkdir(parents=True, exist_ok=False)
     inputs = {}
@@ -79,6 +86,7 @@ def run_case(network, routes, output, *, additional=None, end_seconds=900, wall_
     except Exception as error:
         (folder / 'error.json').write_text(json.dumps({'status': 'failed', 'reason': str(error),
             'requested_actors': actors, 'input_hashes': inputs, 'command': command,
+            'native_attempted':True, 'native_started':loaded,
             'native_wall_seconds':time.monotonic() - started, 'qualified': False}, indent=2) + '\n')
         raise
     finally:

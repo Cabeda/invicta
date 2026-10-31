@@ -29,6 +29,26 @@
       "sha256": "f14ceced3d68eea0805715d9e5ac76c5d0e59c2251940a3fe71ecd0d7096df1a"
     },
     {
+      "repository_path": "prototypes/costa-cabral/proposal/701-investigation/areosa-collision-before/vendor/three.core.js",
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-investigation/areosa-protected-turn/vendor/three.core.js",
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-investigation/areosa-storage-before/vendor/three.core.js",
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    },
+    {
+      "repository_path": "prototypes/costa-cabral/proposal/701-investigation/areosa-storage-compound/vendor/three.core.js",
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    },
+    {
       "repository_path": "prototypes/costa-cabral/proposal/701-official/municipal_latest_gtfs.zip",
       "bytes": 4512116,
       "sha256": "6bf73d93cf943de9f51254020ef7d089acc40403666a7b878f12150b4559f7e1"

@@ -1,0 +1,760 @@
+{
+  "schema": "invicta.traffic-stress.v1",
+  "role": "uncalibrated_native_investigation",
+  "qualified": false,
+  "field_validated": false,
+  "models": {
+    "v14": {
+      "network_sha256": "e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59",
+      "reference_sha256": "a011a19e7aac685b70faa851f214adbc7e5c66c02e8697b3238f9b1de63c0e06",
+      "evidence": {
+        "baseline.net.xml": {
+          "file": "objects/e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59.gz",
+          "sha256": "e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59",
+          "gzip_sha256": "312adb87d0a7bd9b71fbae598f016c1ccb6fc28826e8d73b7d6130a0c746ac38",
+          "bytes": 125922474
+        },
+        "routes.json": {
+          "file": "objects/a011a19e7aac685b70faa851f214adbc7e5c66c02e8697b3238f9b1de63c0e06.gz",
+          "sha256": "a011a19e7aac685b70faa851f214adbc7e5c66c02e8697b3238f9b1de63c0e06",
+          "gzip_sha256": "1fcc95a17b9de72d378514e95940554d94a08c6004b71eec1e5163707e583788",
+          "bytes": 6642819
+        },
+        "model.json": {
+          "file": "objects/0c511904b047a086be82de0aad9509d5e554b8eeb147f2a668aecab2d4d58655.gz",
+          "sha256": "0c511904b047a086be82de0aad9509d5e554b8eeb147f2a668aecab2d4d58655",
+          "gzip_sha256": "b672b2d7aba83143e97d254360cf075cf3c2b01c553eae16be33333b9e6f25cc",
+          "bytes": 7821202
+        },
+        "signal-programs.add.xml": {
+          "file": "objects/ff3d2622f88ae552dbac377a1903d9dc37533f956b681a49107bff9c736be2ee.gz",
+          "sha256": "ff3d2622f88ae552dbac377a1903d9dc37533f956b681a49107bff9c736be2ee",
+          "gzip_sha256": "698c53b876307cac4db4a505be08940ca0611b14ecd72f1f7d6b0763f11d8e26",
+          "bytes": 962
+        },
+        "geometry-recipe.json": {
+          "file": "objects/024675ad48b27b2916e2e5c9b81270ce28c37d7486fcfab4605d832d3eda224c.gz",
+          "sha256": "024675ad48b27b2916e2e5c9b81270ce28c37d7486fcfab4605d832d3eda224c",
+          "gzip_sha256": "fed1f58127ad7cfe7654af0400747b37d31ee4b6f342cfabfb3505b0e3a8ed68",
+          "bytes": 701
+        }
+      }
+    }
+  },
+  "trials": [
+    {
+      "config": {
+        "id": "full-current-control",
+        "traffic": "none",
+        "seed": 17,
+        "dwell": 0,
+        "passengers_per_minute": 0,
+        "crossing_persons_per_minute": 0,
+        "request_stops": true,
+        "holding_bays": true,
+        "diagnostic_control": "existing_signals",
+        "operational_lateness_seconds": 60,
+        "hypothesis": {
+          "change": "Exercise the new session workflow on the source-bound V14 full reference",
+          "prediction": "Retain all127services and714checks; second invocation reuses verified physics without another SUMO run",
+          "evidence": "V14empty passes60secondcriterion onthree seeds; combinedsource used for triage"
+        },
+        "diagnostic_budget_seconds": 180
+      },
+      "metrics": {
+        "planned": 127,
+        "completed": 127,
+        "on_time_starts": 127,
+        "on_time_finishes": 126,
+        "checkpoints": 714,
+        "missing_checkpoints": 0,
+        "late_checkpoints": 5,
+        "early_departures": 0,
+        "passes": false,
+        "failures": [
+          {
+            "trip": "d1_bus_0",
+            "stop": "d1_ERM3",
+            "scheduled": 19980,
+            "arrival": 20004.0,
+            "departure": 20005.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_2",
+            "stop": "d1_0BLRB",
+            "scheduled": 24360,
+            "arrival": 24396.0,
+            "departure": 24397.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_3",
+            "stop": "d1_MPL4",
+            "scheduled": 25380,
+            "arrival": 25385.0,
+            "departure": 25386.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_58",
+            "stop": "d1_MPL4",
+            "scheduled": 78360,
+            "arrival": 78369.0,
+            "departure": 78370.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          },
+          {
+            "trip": "d1_bus_60",
+            "stop": "d1_MPL4",
+            "scheduled": 83760,
+            "arrival": 83775.0,
+            "departure": 83776.0,
+            "missing": false,
+            "late": true,
+            "early": false
+          }
+        ]
+      },
+      "grading_schema": 2,
+      "native": true,
+      "acceptance_criteria": {
+        "lateness_tolerance_seconds": 60,
+        "early_departures_allowed": false,
+        "terminal_measure": "arrival",
+        "other_checkpoint_measure": "departure",
+        "scope": "project_target_not_operator_contract"
+      },
+      "operational_metrics": {
+        "planned": 127,
+        "completed": 127,
+        "on_time_starts": 127,
+        "on_time_finishes": 127,
+        "checkpoints": 714,
+        "missing_checkpoints": 0,
+        "late_checkpoints": 0,
+        "early_departures": 0,
+        "passes": true,
+        "failures": []
+      },
+      "readiness": {
+        "status": "diagnostic_only",
+        "acceptance_criteria": {
+          "lateness_tolerance_seconds": 60,
+          "early_departures_allowed": false,
+          "terminal_measure": "arrival",
+          "other_checkpoint_measure": "departure",
+          "scope": "project_target_not_operator_contract"
+        },
+        "field_validated": false
+      },
+      "scenario_audit": {
+        "schema": "invicta.scenario-audit.v1",
+        "scheduled_trips": 127,
+        "ordinary_requests": 0,
+        "passenger_requests": 0,
+        "walking_requests": 0,
+        "pedestrian_permissions_sha256": "8c6b73c83933695cbdb5180f1b2a5098448b79041e7f4d9916f707a990e14f90",
+        "physical_requests_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "status": "ready_for_execution",
+        "field_validated": false
+      },
+      "diagnostics": {
+        "first_deadline_pending": {
+          "kind": "checkpoint_pending",
+          "time": 19981.0,
+          "trip": "d1_bus_0",
+          "stop": "d1_ERM3",
+          "snapshot": "first-deadline-state.xml.gz",
+          "vehicles": [
+            {
+              "id": "d1_bus_0",
+              "lane": ":6845383369_0_1",
+              "road": ":6845383369_0",
+              "position_metres": 3.8581484641920056,
+              "speed_mps": 13.392182046770015,
+              "waiting_seconds": 0.0,
+              "stop_state": 0,
+              "passengers": 0,
+              "time_loss_seconds": 37.785520346225624,
+              "leader": null,
+              "next_route": [
+                "99958735#0",
+                "99958735#1",
+                "211466031#0",
+                "211466031#1",
+                "211466031#2",
+                "1108592201"
+              ],
+              "next_signals": [
+                [
+                  "cluster_10709274011_10709274012_269567465_7967146061",
+                  1,
+                  2196.7218515358086,
+                  "r"
+                ],
+                [
+                  "cluster_10866191149_1714753715_4422206030_4422206034",
+                  1,
+                  2655.7518515358083,
+                  "y"
+                ]
+              ],
+              "junction_foes": [],
+              "next_links": [
+                [
+                  "211466031#0_2",
+                  true,
+                  true,
+                  false,
+                  ":cluster_1155459245_1155459352_1155503724_1_1",
+                  "M",
+                  "R",
+                  33.95
+                ],
+                [
+                  "211466031#1_2",
+                  true,
+                  true,
+                  false,
+                  ":6845383361_1_1",
+                  "M",
+                  "s",
+                  4.02
+                ]
+              ],
+              "next_stops": [
+                {
+                  "id": "d1_ERM3",
+                  "lane": "1108592201_1",
+                  "position": 48.99303235979817,
+                  "duration": 0.0,
+                  "flags": 9
+                },
+                {
+                  "id": "d1_CRZ2",
+                  "lane": "-741767474#3_0",
+                  "position": 59.14765128998817,
+                  "duration": 0.0,
+                  "flags": 8
+                }
+              ],
+              "signals": [
+                {
+                  "id": "cluster_10709274011_10709274012_269567465_7967146061",
+                  "phase": 0,
+                  "state": "rrrGGgrrrGGg",
+                  "spent_seconds": 1.0,
+                  "next_switch": 19985.0
+                },
+                {
+                  "id": "cluster_10866191149_1714753715_4422206030_4422206034",
+                  "phase": 1,
+                  "state": "yyyrrryyyrrr",
+                  "spent_seconds": 1.0,
+                  "next_switch": 19983.0
+                }
+              ],
+              "proximate_observation": "unclassified",
+              "cause": "unclassified"
+            }
+          ],
+          "cause": "unclassified"
+        },
+        "first_prolonged_wait": null,
+        "simulation_time": 99300.0,
+        "stopped_on_first_blockage": false,
+        "stop_reason": null,
+        "sample_count": 12044,
+        "sample_limit": 20000,
+        "snapshots": [
+          {
+            "file": "first-deadline-state.xml.gz",
+            "time": 19981.0,
+            "kind": "checkpoint_pending",
+            "sha256": "78d6f581974bf165baca853705cae4c2271bfcb3b667f46b70366142b326cf73"
+          }
+        ],
+        "events_file": "trace.jsonl",
+        "limitations": [
+          "A pending-deadline snapshot is checked against native stop output after execution.",
+          "Proximate observations do not establish the physical cause of delay.",
+          "Snapshots are for diagnosis; resumed-run equivalence is not established."
+        ]
+      },
+      "runtime": {
+        "libsumo": [
+          22,
+          "SUMO 1.28.0"
+        ],
+        "python": "3.12.13",
+        "packages": {
+          "libsumo": "1.28.0",
+          "traci": "1.28.0",
+          "sumolib": "1.28.0",
+          "sumo-data": "1.28.0",
+          "rtree": "1.4.1"
+        }
+      },
+      "phase_timings": {
+        "input_preparation_seconds": 9.21812570898328,
+        "native_execution_seconds": 10.911859040963463,
+        "evaluation_seconds": 0.023886958020739257,
+        "output_verification_seconds": 0.11907108401646838
+      },
+      "network_model": "e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59",
+      "input_hashes": {
+        "network.net.xml": "e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59",
+        "routes.rou.xml": "11627575228fc07994402f6dafad1b92e488ae747cd6bc50e18cec846e2203f5",
+        "additional.add.xml": "a842ffc5d743158285138aadf2864d4d876b32a58c1cb15deba4aa866780eb4c",
+        "endpoint-mapping.json": "e43b19c8626abbc7c9006e4c199c7f0cc7ab9cf72e48bd4dd0a5e08cf47af89e",
+        "crossing-requests.json": "7fe6a976c931eecb9cf2a4ffcf8c9c660d6a3be88b16feee55123e4c7ca7c06a",
+        "compiled-audit.json": "b21b1e098ef8e48179509ec630955f54b69e860394da56aead5f77935a3ad7ca",
+        "traffic-workload.json": "46a10ee4d423ba5401b69b7edd9b072aefc6c51e73ecd3d44266c78277265e38",
+        "implementation-priority_search.py": "8956ea615f23e5314d42c25275ff67ae9cec6940602514892af07fc1fabf01ff",
+        "implementation-priority_model.py": "1dc5ba2a716226c9882f099f1f491a4a8e1164511f8aa5665c839ef194bcf22b",
+        "implementation-native_runner.py": "88e822c32f2fbf7d1becfd6af876971583fe4bbd35855494ac3d058d5689aeff",
+        "implementation-signal_priority.py": "06745a00643d844255ad4d0cb6a4bcdc8617b288cf26ed37b1d2897594fcd0bc",
+        "implementation-signal_mapping.py": "ed6cc2964195624f313c04477b265c71fcc29df345dba40968f51f9d6b489f16",
+        "implementation-model_audit.py": "962aa46555d204794cabc295f44ec63be0c058dd72604e48535f391b3e9fde14",
+        "implementation-run_diagnostics.py": "d0a8a69763d844021f70d9cfbf1cb93abd7910505254bbcb5f045b0272c17a5a",
+        "implementation-trial_evidence.py": "08803d8e73bf7f4f62f1cfc1f5228db4e0ba68707da33440457d3cee058d2350",
+        "implementation-timetable.py": "48fdff0dfe9a155d1b8b38876c4c2a03eb1624bbe1283eb4472a2256d07a2275",
+        "implementation-priority_demand.py": "102284f98365556af45ce7d27ff98067ecf39ed00f7f44793c97664a4cefe8a4",
+        "implementation-prepare.py": "d3edb1ccdce37937da88aecbe388c44dde8e4325c52041c3f58c662e79995007",
+        "implementation-experiment.py": "984447643e1d15e68afaa181050a25c5f9d904cb0bdc360e5c7ce64c94888227",
+        "implementation-prefix_reproduction.py": "30701f1c95d9d1ad309c68c34f3d4679f214daafc26378d465d08fbb25b015ee",
+        "implementation-scenario_audit.py": "51997121e45af08881041647cf4917ee7d99deda061feb5d8953079288dcb280",
+        "implementation-state_probe.py": "3883db818586ca81606cf4b36a778a04a27521b79a8865aecaccbde3eac684eb",
+        "implementation-model_review.py": "51a8ad49d72a126d8388cfe63f3a75fd9556c714cdc69ffad21e7961c491315d",
+        "implementation-traffic_workload.py": "983b4c28863c2b454ad2daba08af5f0e069c082ea9bc0a59525c978168508498",
+        "implementation-paired_workload.py": "ee800c78dc6ae06a95cd5675e6437c4757bce4a0e2c2490eab9f031e2ddcf725",
+        "implementation-native_input_cache.py": "1b1cc67457b1da3e888aeec235e2c93f44ce674fe777e19807c7c91226a3ca9b",
+        "implementation-unused_signal_stages.py": "d7abae2ac4f74327e4c6d4e05c03d09491ec5b6b6904c7c1ae42b629689ff05e",
+        "implementation-areosa_detection.py": "c010703f3c4db5e518af4bbbd3ec704a69dda0fad35ca1a24dcde25b24985735",
+        "implementation-signal_program_model.py": "3a8590370772d972548928427b5ab23974431277a9f967b059c211a180135d65",
+        "implementation-controller_options.py": "165ef2340e9c6283a78c5886d254f32636ef9e735c898dfc644d3426df1889ea",
+        "implementation-protected_turn.py": "060361fb16bfd839fa85e9f79cb1d3e787531db084c664311867f931c391a462",
+        "implementation-areosa_compound.py": "1d91baafc720324be6f5adfe9e94fece8444c480957628e65203f7be10cd7d21",
+        "implementation-junction_scope.py": "42ed4dde76485e344aaf32ddc180c1f4c20644d01a127cb6df5b4cdca15631dd",
+        "implementation-requirements-simulation.txt": "76f31556bed93fd46f757f3ce832a4d59fb34b37fc0a852a93dd8fe642150963",
+        "implementation-requirements.txt": "861134c89682a3739072681e8b2cbe314237115d225c7e1b0e02cb842476e3c9",
+        "reference.json": "a011a19e7aac685b70faa851f214adbc7e5c66c02e8697b3238f9b1de63c0e06",
+        "model.json": "0c511904b047a086be82de0aad9509d5e554b8eeb147f2a668aecab2d4d58655"
+      },
+      "output_hashes": {
+        "trips.xml": "47b5cb87db761423d0ded25c1cbfe964da210ddab91e4c33ebe429af0c029bdf",
+        "stops.xml": "91a159d81c1e9aed1872188fa40da7176b9d45b187f9395a3042b0a8bab385d2",
+        "collisions.xml": "531a3144b762e704908d47076e429a44054a3c019b68ee5ed6be85ee678687b6",
+        "priority-events.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "final-state.xml": "d36508e2c7086e6acacb82dd098a7fedc6c96cd2d1455b5502df1b5bb1d9328c",
+        "monitor.json": "d39ed41079c2306a85c33326f4017d405b48d89ed05bd91c512c96b109a95b53",
+        "trace.jsonl": "e2cdfe79de30f62d279a484c31c0d130394b1714d335bfb6d4d3d0dd2620f50f",
+        "progress.json": "69ab66f7aa561e141a5215777cde8ebb69decd78d3240316a3cdeddf2936a1c6",
+        "first-deadline-state.xml.gz": "78d6f581974bf165baca853705cae4c2271bfcb3b667f46b70366142b326cf73"
+      },
+      "demand_mapping_sha256": "e43b19c8626abbc7c9006e4c199c7f0cc7ab9cf72e48bd4dd0a5e08cf47af89e",
+      "reference_sha256": "a011a19e7aac685b70faa851f214adbc7e5c66c02e8697b3238f9b1de63c0e06",
+      "command": [
+        "/Users/jose.cabeda/Git/invicta/.venv/lib/python3.12/site-packages/sumo/bin/sumo",
+        "--net-file",
+        ".cache/701-loop/workspaces/701-final/trials/full-current-control/network.net.xml",
+        "--route-files",
+        ".cache/701-loop/workspaces/701-final/trials/full-current-control/routes.rou.xml",
+        "--additional-files",
+        ".cache/701-loop/workspaces/701-final/trials/full-current-control/additional.add.xml",
+        "--begin",
+        "18000",
+        "--end",
+        "99300",
+        "--seed",
+        "17",
+        "--tripinfo-output",
+        ".cache/701-loop/workspaces/701-final/trials/full-current-control/trips.xml",
+        "--tripinfo-output.write-unfinished",
+        "true",
+        "--tripinfo-output.write-undeparted",
+        "true",
+        "--stop-output",
+        ".cache/701-loop/workspaces/701-final/trials/full-current-control/stops.xml",
+        "--stop-output.write-unfinished",
+        "true",
+        "--collision-output",
+        ".cache/701-loop/workspaces/701-final/trials/full-current-control/collisions.xml",
+        "--time-to-teleport",
+        "-1",
+        "--time-to-teleport.ride",
+        "-1",
+        "--no-step-log",
+        "true",
+        "--collision.action",
+        "warn",
+        "--collision.check-junctions",
+        "true",
+        "--duration-log.disable",
+        "true",
+        "--xml-validation",
+        "never",
+        "--device.rerouting.period",
+        "60",
+        "--routing-algorithm",
+        "dijkstra",
+        "--save-state.times",
+        "99299",
+        "--save-state.files",
+        ".cache/701-loop/workspaces/701-final/trials/full-current-control/final-state.xml",
+        "--save-state.rng",
+        "true",
+        "--save-state.transportables",
+        "true"
+      ],
+      "passenger_requests": 0,
+      "arrived_passengers": 0,
+      "walking_requests": 0,
+      "arrived_walkers": 0,
+      "vehicle_requests": 0,
+      "completed_ordinary_vehicles": 0,
+      "unroutable_requests": 0,
+      "unserved_vehicle_requests": 0,
+      "collision_records": 0,
+      "lane_changes": [],
+      "signal_priority": {
+        "extensions": 0,
+        "early_green_requests": 0,
+        "changed_signals": [],
+        "extension_limit_seconds": 10,
+        "phase_order_preserved": true,
+        "minimum_conflicting_green_seconds": 15,
+        "clearance_phases_preserved": true
+      },
+      "shock_vehicle": null,
+      "standby_resources": 0,
+      "elapsed_seconds": 20.31,
+      "qualified": false,
+      "qualification_note": "Exploratory model: pedestrian demand, stop positions, signal plans, passenger demand and vehicle blocks require validation.",
+      "id": "full-current-control",
+      "model_id": "v14",
+      "evidence": {
+        "network.net.xml": {
+          "file": "objects/e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59.gz",
+          "sha256": "e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59",
+          "gzip_sha256": "312adb87d0a7bd9b71fbae598f016c1ccb6fc28826e8d73b7d6130a0c746ac38",
+          "bytes": 125922474
+        },
+        "routes.rou.xml": {
+          "file": "objects/11627575228fc07994402f6dafad1b92e488ae747cd6bc50e18cec846e2203f5.gz",
+          "sha256": "11627575228fc07994402f6dafad1b92e488ae747cd6bc50e18cec846e2203f5",
+          "gzip_sha256": "550a415056931e2629bb46c44013c4b91f21dc8e21c915ce7f18bd91fa2af87b",
+          "bytes": 982722
+        },
+        "additional.add.xml": {
+          "file": "objects/a842ffc5d743158285138aadf2864d4d876b32a58c1cb15deba4aa866780eb4c.gz",
+          "sha256": "a842ffc5d743158285138aadf2864d4d876b32a58c1cb15deba4aa866780eb4c",
+          "gzip_sha256": "053078b21f419ddfeddca3a1d880f1b1b9181e817c5480b486b4ff82ce9cc273",
+          "bytes": 15584
+        },
+        "endpoint-mapping.json": {
+          "file": "objects/e43b19c8626abbc7c9006e4c199c7f0cc7ab9cf72e48bd4dd0a5e08cf47af89e.gz",
+          "sha256": "e43b19c8626abbc7c9006e4c199c7f0cc7ab9cf72e48bd4dd0a5e08cf47af89e",
+          "gzip_sha256": "6103a730dd81ab0084d49a3cba829b9cdabcaca58c69fbb8d61b63031298d9b5",
+          "bytes": 38
+        },
+        "crossing-requests.json": {
+          "file": "objects/7fe6a976c931eecb9cf2a4ffcf8c9c660d6a3be88b16feee55123e4c7ca7c06a.gz",
+          "sha256": "7fe6a976c931eecb9cf2a4ffcf8c9c660d6a3be88b16feee55123e4c7ca7c06a",
+          "gzip_sha256": "cfe9b1f88861e9742690f98b42833c72853a79da0cbafeb9a6cd29980a96b7de",
+          "bytes": 35
+        },
+        "compiled-audit.json": {
+          "file": "objects/b21b1e098ef8e48179509ec630955f54b69e860394da56aead5f77935a3ad7ca.gz",
+          "sha256": "b21b1e098ef8e48179509ec630955f54b69e860394da56aead5f77935a3ad7ca",
+          "gzip_sha256": "42a1a1206d7ad6cddce37c264c369ea9434454f1430c92f60e469515e4b80412",
+          "bytes": 412
+        },
+        "traffic-workload.json": {
+          "file": "objects/46a10ee4d423ba5401b69b7edd9b072aefc6c51e73ecd3d44266c78277265e38.gz",
+          "sha256": "46a10ee4d423ba5401b69b7edd9b072aefc6c51e73ecd3d44266c78277265e38",
+          "gzip_sha256": "1b8363e03c44c78c534ffbc798c72573446354772608b45af2c5f8c3b866f014",
+          "bytes": 381
+        },
+        "implementation-priority_search.py": {
+          "file": "objects/8956ea615f23e5314d42c25275ff67ae9cec6940602514892af07fc1fabf01ff.gz",
+          "sha256": "8956ea615f23e5314d42c25275ff67ae9cec6940602514892af07fc1fabf01ff",
+          "gzip_sha256": "b0d644cc3abf2a84615a251a54aa054e8f9b1123113ef420bac9b0e51de27cf2",
+          "bytes": 22231
+        },
+        "implementation-priority_model.py": {
+          "file": "objects/1dc5ba2a716226c9882f099f1f491a4a8e1164511f8aa5665c839ef194bcf22b.gz",
+          "sha256": "1dc5ba2a716226c9882f099f1f491a4a8e1164511f8aa5665c839ef194bcf22b",
+          "gzip_sha256": "411debc8f57fb5687638a553b88d480229542ff7404c7f70d092cf58f4cb8f8c",
+          "bytes": 11839
+        },
+        "implementation-native_runner.py": {
+          "file": "objects/88e822c32f2fbf7d1becfd6af876971583fe4bbd35855494ac3d058d5689aeff.gz",
+          "sha256": "88e822c32f2fbf7d1becfd6af876971583fe4bbd35855494ac3d058d5689aeff",
+          "gzip_sha256": "38da2f11338c32a3df51fad63b29da73ba31b1e00cf100579ca12b95c60fa974",
+          "bytes": 12487
+        },
+        "implementation-signal_priority.py": {
+          "file": "objects/06745a00643d844255ad4d0cb6a4bcdc8617b288cf26ed37b1d2897594fcd0bc.gz",
+          "sha256": "06745a00643d844255ad4d0cb6a4bcdc8617b288cf26ed37b1d2897594fcd0bc",
+          "gzip_sha256": "bcc4f99ff0ab1f0fe55b89659356563c86fe6696d516a4515e5d6d566e4a415c",
+          "bytes": 8438
+        },
+        "implementation-signal_mapping.py": {
+          "file": "objects/ed6cc2964195624f313c04477b265c71fcc29df345dba40968f51f9d6b489f16.gz",
+          "sha256": "ed6cc2964195624f313c04477b265c71fcc29df345dba40968f51f9d6b489f16",
+          "gzip_sha256": "fe2cc3df75d0737fb2e7d0a07f573be6f1a7a4f08300b2eea3f2ee2cb20c8387",
+          "bytes": 11168
+        },
+        "implementation-model_audit.py": {
+          "file": "objects/962aa46555d204794cabc295f44ec63be0c058dd72604e48535f391b3e9fde14.gz",
+          "sha256": "962aa46555d204794cabc295f44ec63be0c058dd72604e48535f391b3e9fde14",
+          "gzip_sha256": "566a31b57f975838f00e6d338c0eb0c81eec33a61305b425b57bce33b2398c96",
+          "bytes": 13302
+        },
+        "implementation-run_diagnostics.py": {
+          "file": "objects/d0a8a69763d844021f70d9cfbf1cb93abd7910505254bbcb5f045b0272c17a5a.gz",
+          "sha256": "d0a8a69763d844021f70d9cfbf1cb93abd7910505254bbcb5f045b0272c17a5a",
+          "gzip_sha256": "4800feb6f72cd3007a90cd6e4d7fc41f054787f2fa5ee175de1e5b435a623402",
+          "bytes": 5868
+        },
+        "implementation-trial_evidence.py": {
+          "file": "objects/08803d8e73bf7f4f62f1cfc1f5228db4e0ba68707da33440457d3cee058d2350.gz",
+          "sha256": "08803d8e73bf7f4f62f1cfc1f5228db4e0ba68707da33440457d3cee058d2350",
+          "gzip_sha256": "5584d62654cbe94e6f2982960f6f9b3b6db88c781dd6d298bc254fc8db6e680e",
+          "bytes": 5650
+        },
+        "implementation-timetable.py": {
+          "file": "objects/48fdff0dfe9a155d1b8b38876c4c2a03eb1624bbe1283eb4472a2256d07a2275.gz",
+          "sha256": "48fdff0dfe9a155d1b8b38876c4c2a03eb1624bbe1283eb4472a2256d07a2275",
+          "gzip_sha256": "05af5204bc523c99af61f079860757eaa0bb7e2f47124bfa6a6471df5c03d08c",
+          "bytes": 4744
+        },
+        "implementation-priority_demand.py": {
+          "file": "objects/102284f98365556af45ce7d27ff98067ecf39ed00f7f44793c97664a4cefe8a4.gz",
+          "sha256": "102284f98365556af45ce7d27ff98067ecf39ed00f7f44793c97664a4cefe8a4",
+          "gzip_sha256": "a3915595ac86607d20cf0028c14590e2a43bf61dceee507536687ac3e36935c6",
+          "bytes": 3625
+        },
+        "implementation-prepare.py": {
+          "file": "objects/d3edb1ccdce37937da88aecbe388c44dde8e4325c52041c3f58c662e79995007.gz",
+          "sha256": "d3edb1ccdce37937da88aecbe388c44dde8e4325c52041c3f58c662e79995007",
+          "gzip_sha256": "0646b87756adfd6c7829101247a34d90bb835a592349c150eb4a87f4b0740332",
+          "bytes": 12944
+        },
+        "implementation-experiment.py": {
+          "file": "objects/984447643e1d15e68afaa181050a25c5f9d904cb0bdc360e5c7ce64c94888227.gz",
+          "sha256": "984447643e1d15e68afaa181050a25c5f9d904cb0bdc360e5c7ce64c94888227",
+          "gzip_sha256": "059b44a712a5d06f32b654d1a04f06c1f895fcf43471b011abddf15ca8e887f6",
+          "bytes": 18349
+        },
+        "implementation-prefix_reproduction.py": {
+          "file": "objects/30701f1c95d9d1ad309c68c34f3d4679f214daafc26378d465d08fbb25b015ee.gz",
+          "sha256": "30701f1c95d9d1ad309c68c34f3d4679f214daafc26378d465d08fbb25b015ee",
+          "gzip_sha256": "117f252738534786ecbb2f2ded6688613dce16f05a5bd784970b19d98b02ee29",
+          "bytes": 12224
+        },
+        "implementation-scenario_audit.py": {
+          "file": "objects/51997121e45af08881041647cf4917ee7d99deda061feb5d8953079288dcb280.gz",
+          "sha256": "51997121e45af08881041647cf4917ee7d99deda061feb5d8953079288dcb280",
+          "gzip_sha256": "6b227e8c42019761b2505cf0796026e576227ae025e8dddac1b03a4531db66ae",
+          "bytes": 3294
+        },
+        "implementation-state_probe.py": {
+          "file": "objects/3883db818586ca81606cf4b36a778a04a27521b79a8865aecaccbde3eac684eb.gz",
+          "sha256": "3883db818586ca81606cf4b36a778a04a27521b79a8865aecaccbde3eac684eb",
+          "gzip_sha256": "68702f278b1779e5ee9c40beb2625db65f172145c23dfc91b3776eab0ca3c5f4",
+          "bytes": 8829
+        },
+        "implementation-model_review.py": {
+          "file": "objects/51a8ad49d72a126d8388cfe63f3a75fd9556c714cdc69ffad21e7961c491315d.gz",
+          "sha256": "51a8ad49d72a126d8388cfe63f3a75fd9556c714cdc69ffad21e7961c491315d",
+          "gzip_sha256": "6a06c486b4fd62e295c641625c025d2fb67428ca5b8d63a49155ae5084604197",
+          "bytes": 3874
+        },
+        "implementation-traffic_workload.py": {
+          "file": "objects/983b4c28863c2b454ad2daba08af5f0e069c082ea9bc0a59525c978168508498.gz",
+          "sha256": "983b4c28863c2b454ad2daba08af5f0e069c082ea9bc0a59525c978168508498",
+          "gzip_sha256": "9d04c2b658918a21a3d406c10f008cf2387008327985fd1a5219235fafcd50ad",
+          "bytes": 1178
+        },
+        "implementation-paired_workload.py": {
+          "file": "objects/ee800c78dc6ae06a95cd5675e6437c4757bce4a0e2c2490eab9f031e2ddcf725.gz",
+          "sha256": "ee800c78dc6ae06a95cd5675e6437c4757bce4a0e2c2490eab9f031e2ddcf725",
+          "gzip_sha256": "0c7285855ba6bcf4ad7e0deba1cd9d5f033cf2579e2fab94d5484aef7549b94a",
+          "bytes": 2455
+        },
+        "implementation-native_input_cache.py": {
+          "file": "objects/1b1cc67457b1da3e888aeec235e2c93f44ce674fe777e19807c7c91226a3ca9b.gz",
+          "sha256": "1b1cc67457b1da3e888aeec235e2c93f44ce674fe777e19807c7c91226a3ca9b",
+          "gzip_sha256": "4abb48330d1f6885c2cf4a32274dbcd127ece46b28d42c193e530323df4aceba",
+          "bytes": 1333
+        },
+        "implementation-unused_signal_stages.py": {
+          "file": "objects/d7abae2ac4f74327e4c6d4e05c03d09491ec5b6b6904c7c1ae42b629689ff05e.gz",
+          "sha256": "d7abae2ac4f74327e4c6d4e05c03d09491ec5b6b6904c7c1ae42b629689ff05e",
+          "gzip_sha256": "ee5405a85704088fd51d539aaee35d8f3b0d558e0432e872a5a9324140a03991",
+          "bytes": 2383
+        },
+        "implementation-areosa_detection.py": {
+          "file": "objects/c010703f3c4db5e518af4bbbd3ec704a69dda0fad35ca1a24dcde25b24985735.gz",
+          "sha256": "c010703f3c4db5e518af4bbbd3ec704a69dda0fad35ca1a24dcde25b24985735",
+          "gzip_sha256": "928644889941fbeb679c04b905ef90844899f99d31aadafc0be6f3011f0ee045",
+          "bytes": 1533
+        },
+        "implementation-signal_program_model.py": {
+          "file": "objects/3a8590370772d972548928427b5ab23974431277a9f967b059c211a180135d65.gz",
+          "sha256": "3a8590370772d972548928427b5ab23974431277a9f967b059c211a180135d65",
+          "gzip_sha256": "267b6af19daba9f483148ea0c33e99b22c9226562248049b5371b961d66d6265",
+          "bytes": 1664
+        },
+        "implementation-controller_options.py": {
+          "file": "objects/165ef2340e9c6283a78c5886d254f32636ef9e735c898dfc644d3426df1889ea.gz",
+          "sha256": "165ef2340e9c6283a78c5886d254f32636ef9e735c898dfc644d3426df1889ea",
+          "gzip_sha256": "de7f5db9b70383b5a3e0285d226d4dae2899d4f3593cd85eda86ba37cb4030fc",
+          "bytes": 692
+        },
+        "implementation-protected_turn.py": {
+          "file": "objects/060361fb16bfd839fa85e9f79cb1d3e787531db084c664311867f931c391a462.gz",
+          "sha256": "060361fb16bfd839fa85e9f79cb1d3e787531db084c664311867f931c391a462",
+          "gzip_sha256": "093a261aeb32957328556f29210400d69d6fad8f3e671fe6b5d7427a2f77298d",
+          "bytes": 2673
+        },
+        "implementation-areosa_compound.py": {
+          "file": "objects/1d91baafc720324be6f5adfe9e94fece8444c480957628e65203f7be10cd7d21.gz",
+          "sha256": "1d91baafc720324be6f5adfe9e94fece8444c480957628e65203f7be10cd7d21",
+          "gzip_sha256": "c6195beb68f63bdc5046e63ee0253407adff3988f02ba5e34df6fe1c1f464b03",
+          "bytes": 4088
+        },
+        "implementation-junction_scope.py": {
+          "file": "objects/42ed4dde76485e344aaf32ddc180c1f4c20644d01a127cb6df5b4cdca15631dd.gz",
+          "sha256": "42ed4dde76485e344aaf32ddc180c1f4c20644d01a127cb6df5b4cdca15631dd",
+          "gzip_sha256": "3bf457a6405709408d62efe9f5bb64f0c89f63e8f30ebe03d789877b02484065",
+          "bytes": 3086
+        },
+        "implementation-requirements-simulation.txt": {
+          "file": "objects/76f31556bed93fd46f757f3ce832a4d59fb34b37fc0a852a93dd8fe642150963.gz",
+          "sha256": "76f31556bed93fd46f757f3ce832a4d59fb34b37fc0a852a93dd8fe642150963",
+          "gzip_sha256": "49e9abdd8efabe906faa8d7dc9683ee4899fa8b94794fa3ad0e5b4005a4f7690",
+          "bytes": 126
+        },
+        "implementation-requirements.txt": {
+          "file": "objects/861134c89682a3739072681e8b2cbe314237115d225c7e1b0e02cb842476e3c9.gz",
+          "sha256": "861134c89682a3739072681e8b2cbe314237115d225c7e1b0e02cb842476e3c9",
+          "gzip_sha256": "a0c68ed71b72a95047451176dfbafd4f0e37270f7446a45351c6e7a150d9e152",
+          "bytes": 208
+        },
+        "reference.json": {
+          "file": "objects/a011a19e7aac685b70faa851f214adbc7e5c66c02e8697b3238f9b1de63c0e06.gz",
+          "sha256": "a011a19e7aac685b70faa851f214adbc7e5c66c02e8697b3238f9b1de63c0e06",
+          "gzip_sha256": "1fcc95a17b9de72d378514e95940554d94a08c6004b71eec1e5163707e583788",
+          "bytes": 6642819
+        },
+        "model.json": {
+          "file": "objects/0c511904b047a086be82de0aad9509d5e554b8eeb147f2a668aecab2d4d58655.gz",
+          "sha256": "0c511904b047a086be82de0aad9509d5e554b8eeb147f2a668aecab2d4d58655",
+          "gzip_sha256": "b672b2d7aba83143e97d254360cf075cf3c2b01c553eae16be33333b9e6f25cc",
+          "bytes": 7821202
+        },
+        "trips.xml": {
+          "file": "objects/47b5cb87db761423d0ded25c1cbfe964da210ddab91e4c33ebe429af0c029bdf.gz",
+          "sha256": "47b5cb87db761423d0ded25c1cbfe964da210ddab91e4c33ebe429af0c029bdf",
+          "gzip_sha256": "9de5f721abf381ab345c7c000750e5f322aafb6b564d4b2bca0510513168be54",
+          "bytes": 55660
+        },
+        "stops.xml": {
+          "file": "objects/91a159d81c1e9aed1872188fa40da7176b9d45b187f9395a3042b0a8bab385d2.gz",
+          "sha256": "91a159d81c1e9aed1872188fa40da7176b9d45b187f9395a3042b0a8bab385d2",
+          "gzip_sha256": "4d1672c38cfe73f2d344fda252c49fb032018fa271ae8ab7d44c0a48a07380f0",
+          "bytes": 2010115
+        },
+        "collisions.xml": {
+          "file": "objects/531a3144b762e704908d47076e429a44054a3c019b68ee5ed6be85ee678687b6.gz",
+          "sha256": "531a3144b762e704908d47076e429a44054a3c019b68ee5ed6be85ee678687b6",
+          "gzip_sha256": "a3451499155e9aec1f1cf5fc35ba3af6d06a2e763988f45f3608d4728732b3b5",
+          "bytes": 2239
+        },
+        "priority-events.json": {
+          "file": "objects/37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570.gz",
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "gzip_sha256": "7e9822432ddbc7c2682c87809c75babb37f3a1f4a6e7f6ab1302e1f629e646e2",
+          "bytes": 3
+        },
+        "final-state.xml": {
+          "file": "objects/d36508e2c7086e6acacb82dd098a7fedc6c96cd2d1455b5502df1b5bb1d9328c.gz",
+          "sha256": "d36508e2c7086e6acacb82dd098a7fedc6c96cd2d1455b5502df1b5bb1d9328c",
+          "gzip_sha256": "19af047c645b25832957414a6b631bcd38e47f4838f7a51aac9f569fa8e00b4d",
+          "bytes": 52966
+        },
+        "monitor.json": {
+          "file": "objects/d39ed41079c2306a85c33326f4017d405b48d89ed05bd91c512c96b109a95b53.gz",
+          "sha256": "d39ed41079c2306a85c33326f4017d405b48d89ed05bd91c512c96b109a95b53",
+          "gzip_sha256": "d767bf6e34eee56e55f691c62d5395cc407229c3d92545edadddb244ee5d46f7",
+          "bytes": 3269
+        },
+        "trace.jsonl": {
+          "file": "objects/e2cdfe79de30f62d279a484c31c0d130394b1714d335bfb6d4d3d0dd2620f50f.gz",
+          "sha256": "e2cdfe79de30f62d279a484c31c0d130394b1714d335bfb6d4d3d0dd2620f50f",
+          "gzip_sha256": "ad527383e8dca5c47599ef7c73965a8ac2ce5d9590dc7d08732f56d18a7c7106",
+          "bytes": 13982551
+        },
+        "progress.json": {
+          "file": "objects/69ab66f7aa561e141a5215777cde8ebb69decd78d3240316a3cdeddf2936a1c6.gz",
+          "sha256": "69ab66f7aa561e141a5215777cde8ebb69decd78d3240316a3cdeddf2936a1c6",
+          "gzip_sha256": "e823f028f916ec083b06d11500504e8bb6ed7507834525e737f117b55cb7896a",
+          "bytes": 103
+        },
+        "first-deadline-state.xml.gz": {
+          "file": "objects/78d6f581974bf165baca853705cae4c2271bfcb3b667f46b70366142b326cf73.gz",
+          "sha256": "78d6f581974bf165baca853705cae4c2271bfcb3b667f46b70366142b326cf73",
+          "gzip_sha256": "77f9eaa847efd7ecf30c987d0bad3fe937dd24db0bccde9c26c2ac1054f29137",
+          "bytes": 52799
+        },
+        "result.json": {
+          "file": "objects/c4192db85437516444bdd3ca70fb5e051aa418f34988cf2479454c9ff3d2fbd3.gz",
+          "sha256": "c4192db85437516444bdd3ca70fb5e051aa418f34988cf2479454c9ff3d2fbd3",
+          "gzip_sha256": "c608f1193c68cbce2815b6e64220d18a20dc68fa4a8f3b6208d1f5e1a3f615d7",
+          "bytes": 14882
+        }
+      },
+      "supplementary_snapshot_evidence": {}
+    }
+  ],
+  "incomplete_attempts": [],
+  "freezer": {
+    "file": "objects/c1c9ea34fdda45bfc13c5c34e31c7a5694a1c410572249fb5fc2bc1c2d14fd91.gz",
+    "sha256": "c1c9ea34fdda45bfc13c5c34e31c7a5694a1c410572249fb5fc2bc1c2d14fd91",
+    "gzip_sha256": "6dfb667d56e573741c5548b96cfebbfff2f75a38a0109d703e75fb7a43b7c4ee",
+    "bytes": 6580
+  },
+  "supplementary": {
+    "session-events.json": {
+      "file": "objects/1d6e7b2960d86bd0ecf94a33e903d0ed3e0f416dc083fb5719f80a7fa57237e8.gz",
+      "sha256": "1d6e7b2960d86bd0ecf94a33e903d0ed3e0f416dc083fb5719f80a7fa57237e8",
+      "gzip_sha256": "bae3eb20e3b6cf5ca41c9e10ee8cac69a18c778277220d30a5d672edfc8b17ca",
+      "bytes": 6115
+    },
+    "session.json": {
+      "file": "objects/81c4447dcf9160dd1b596ea45f64c713821756eae546dd6fbb8c830505b50ff1.gz",
+      "sha256": "81c4447dcf9160dd1b596ea45f64c713821756eae546dd6fbb8c830505b50ff1",
+      "gzip_sha256": "13c06feff51b9f6ee645e5cf47dd39ad906365431deaef8a2d88507af649d176",
+      "bytes": 11183
+    },
+    "verified-status.json": {
+      "file": "objects/80756e92edbd699510f70a33552f461fbaa05b0b58f9f2e2fbc130b517cd51f7.gz",
+      "sha256": "80756e92edbd699510f70a33552f461fbaa05b0b58f9f2e2fbc130b517cd51f7",
+      "gzip_sha256": "4ccccec828231c27c6ff360ba7286e446ddf67b6964b342695d9e6f2da6afba0",
+      "bytes": 11313
+    }
+  },
+  "local_cases": {}
+}

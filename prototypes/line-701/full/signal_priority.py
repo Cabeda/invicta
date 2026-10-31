@@ -23,6 +23,9 @@ def simulate_with_priority(command, bus_ids, folder, extension_limit=10, early_g
     active = set()
     simulation.start(command)
     try:
+        on_start = getattr(observer, 'on_native_start', None)
+        if on_start is not None:
+            on_start()
         if tls_filter is not None and (not isinstance(tls_filter, list)
                 or any(not isinstance(tls, str) for tls in tls_filter)):
             raise ValueError('Priority selection must be a list of controller identifiers')
