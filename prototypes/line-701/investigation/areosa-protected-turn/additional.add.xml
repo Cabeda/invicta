@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<additional><tlLogic id="areosa_compound" type="actuated" programID="invicta.areosa.protected-turn.v1" offset="0">
+        <phase duration="36" state="rrrrrGGGGrrrrrrrrGGGGrrr" minDur="13" maxDur="50" />
+        <phase duration="3" state="rrrrryyyyrrrrrrrryyyyrrr" />
+        <phase duration="6" state="rrrrrrrrrGGrrrrrrrrrrGGG" minDur="13" maxDur="50" />
+        <phase duration="3" state="rrrrrrrrryyrrrrrrrrrryyy" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="35" state="GGGrgrrrrrrggGGGgrrrrrrr" minDur="13" maxDur="50" />
+        <phase duration="3" state="yyyryrrrrrryyyyyyrrrrrrr" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrrrrr" />
+    <phase duration="13" state="rrrGrrrrrrrrrrrrrrrrrrrr" minDur="13" maxDur="30" /><phase duration="3" state="rrryrrrrrrrrrrrrrrrrrrrr" /><phase duration="8" state="rrrrrrrrrrrrrrrrrrrrrrrr" /></tlLogic>
+    </additional>

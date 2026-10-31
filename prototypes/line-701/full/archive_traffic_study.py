@@ -9,7 +9,7 @@ from prepare import write_json
 from trial_evidence import load_trial
 
 
-def archive_study(work, destination, models):
+def archive_study(work, destination, models, *, local_cases=None):
     work, destination = Path(work), Path(destination)
     destination.mkdir(parents=True, exist_ok=False)
     objects = destination / 'objects'
@@ -34,6 +34,11 @@ def archive_study(work, destination, models):
         names = ['baseline.net.xml', 'routes.json', 'model.json']
         if (folder / 'signal-programs.add.xml').exists():
             names.append('signal-programs.add.xml')
+        if (folder / 'geometry-recipe.json').exists():
+            names.append('geometry-recipe.json')
+            reference = json.loads((folder / 'routes.json').read_text())
+            if reference.get('geometry_correction_sha256') != hashlib.sha256((folder / 'geometry-recipe.json').read_bytes()).hexdigest():
+                raise ValueError('Geometry recipe does not bind its model reference')
         evidence = {name: freeze(folder / name) for name in names}
         key = (metadata['network_sha256'], metadata['reference_sha256'])
         if key in identities or evidence['baseline.net.xml']['sha256'] != key[0] or evidence['routes.json']['sha256'] != key[1]:
@@ -72,6 +77,20 @@ def archive_study(work, destination, models):
                                 'supplementary_snapshot_evidence': supplementary})
     ledger['supplementary'] = {p.name: freeze(p) for p in sorted(work.iterdir())
                                if p.is_file() and p.suffix in ['.json', '.log', '.py']}
+    ledger['local_cases'] = {}
+    for ident, folder in (local_cases or {}).items():
+        folder = Path(folder)
+        metadata = folder / 'case.json' if (folder / 'case.json').exists() else folder / 'error.json'
+        case = json.loads(metadata.read_text())
+        if case.get('qualified') is not False:
+            raise ValueError('A local reproduction cannot qualify a complete proposal')
+        bindings = {**case.get('input_hashes', {}), **case.get('output_hashes', {})}
+        for name, signature in bindings.items():
+            if Path(name).name != name or hashlib.sha256((folder / name).read_bytes()).hexdigest() != signature:
+                raise ValueError('Changed local native evidence')
+        files = [p for p in folder.iterdir() if p.is_file() and p.suffix not in ['.html', '.mjs']]
+        ledger['local_cases'][ident] = {'status':'failed_native' if metadata.name == 'error.json' else 'recorded',
+            'qualified':False, 'evidence':{p.name:freeze(p) for p in files}}
     manifest = destination / 'study.pending.json'
     write_json(manifest, ledger)
     # The frozen public interface must produce the same counts from raw outputs.

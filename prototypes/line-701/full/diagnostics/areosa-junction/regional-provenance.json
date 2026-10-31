@@ -1,0 +1,52 @@
+{
+  "schema": "invicta.areosa-regional-regression.v1",
+  "role": "controlled_reproduction_not_state_continuation",
+  "source_original_trial": "v11-traffic-and-people-010-baseline-s17",
+  "source_original_archive": "docs/research/701-traffic-stress-2026-10-30/study.json",
+  "source_compound_model_sha256": "59ed6dc25982593e8853d44e3fc9ebd6808ebc51998a279549dab09bdecc9f36",
+  "source_compound_network_sha256": "e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59",
+  "local_focus_all_elements_exact": false,
+  "collision_lane_shapes_and_lengths_exact": [
+    ":areosa_compound_3_0",
+    ":areosa_compound_24_0",
+    ":areosa_compound_15_0"
+  ],
+  "local_network_sha256": "3bc372bc30a67281850ce216e5e7d9a7dc3bac579142f46963a8bdef2a682939",
+  "files": {
+    "regional-five.rou.xml": "d37beaa6edafaaa19bf47480311d41c80b719657ee1507edb8dfdfbd3e61f8b7",
+    "regional-nine.rou.xml": "d8789eb2c1127d68906d208bcbcf20c2414d8fce971132617355df7138d3c8af",
+    "collision-pair.rou.xml": "5ce45b8facc3282ef972b841a93bd2d57c11f0e3e2639c07347643ae1dc8247f"
+  },
+  "source_compound_collision_trial": "v13-traffic-010-s17",
+  "observed_source_conflict": [
+    "743539878#7:1 -> 743461566#2:1",
+    "-482332563#0:1 -> -743539878#9:1"
+  ],
+  "controlled_collision_pair_departures": [
+    40,
+    55
+  ],
+  "limitations": [
+    "Local departures replace regional arrival histories.",
+    "Routes are cropped to the local graph. Joined queue routes contract only the two removed short normal roads.",
+    "Netconvert reprocesses other focus movements as well as outer boundaries. The three collision-path lane shapes/lengths match, not the entire junction; speed rounding differs.",
+    "No surveyed signal timing, traffic counts or field safety validation."
+  ],
+  "qualified": false,
+  "original_network_pair_verification": {
+    "before": {
+      "network_sha256": "e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59",
+      "requested": 2,
+      "completed": 2,
+      "collisions": 1,
+      "case_sha256": "c9417899a7f7829d77860566f2878ddaa9342ecd5c8bbb61456dac799b180456"
+    },
+    "protected": {
+      "network_sha256": "e53c32aeac787e051a105da37dd25a30f1379864fa11f80d44cf16f6b522ad59",
+      "requested": 2,
+      "completed": 2,
+      "collisions": 0,
+      "case_sha256": "7b95ddc227a8a40ba002232bd3cfb6ea49fa9259128f9bdb3c1d769d5ddc110f"
+    }
+  }
+}

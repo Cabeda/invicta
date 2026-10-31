@@ -1,0 +1,68 @@
+{
+  "schema": "invicta.native-case.v1",
+  "role": "local_reproduction_not_service_qualification",
+  "requested_actors": [
+    "background_7_1092",
+    "d0_bus_7"
+  ],
+  "departed": [
+    "background_7_1092",
+    "d0_bus_7"
+  ],
+  "arrived": [
+    "background_7_1092",
+    "d0_bus_7"
+  ],
+  "unfinished": [],
+  "undeparted": [],
+  "uncompleted": [],
+  "all_requested_completed": true,
+  "simulation_end": 114.0,
+  "stop_reason": "simulation_window",
+  "collision_records": 1,
+  "input_hashes": {
+    "network.net.xml": "3bc372bc30a67281850ce216e5e7d9a7dc3bac579142f46963a8bdef2a682939",
+    "routes.rou.xml": "5ce45b8facc3282ef972b841a93bd2d57c11f0e3e2639c07347643ae1dc8247f",
+    "implementation-native_case.py": "5a65c9bd6f83cf98dc7a89525bc1e4ca46dccf4a243727d80bf05b874f4a8dbd"
+  },
+  "output_hashes": {
+    "collisions.xml": "b47849604b6d2a688e966d1cb480b200f1aa9391da43b1c3b41a5d3296df7214",
+    "frames.json.gz": "d4ed14838a5addfedda067c3541e045b88a8ea8c97df92863adc235491d96d56"
+  },
+  "native_version": [
+    22,
+    "SUMO 1.28.0"
+  ],
+  "command": [
+    "/Users/jose.cabeda/Git/invicta/.venv/lib/python3.12/site-packages/sumo/bin/sumo",
+    "--net-file",
+    ".cache/701-loop/public-cases/areosa-collision-before/network.net.xml",
+    "--route-files",
+    ".cache/701-loop/public-cases/areosa-collision-before/routes.rou.xml",
+    "--begin",
+    "0",
+    "--end",
+    "900",
+    "--seed",
+    "17",
+    "--time-to-teleport",
+    "-1",
+    "--no-warnings",
+    "true",
+    "--no-step-log",
+    "true",
+    "--collision.check-junctions",
+    "true",
+    "--collision.action",
+    "warn",
+    "--collision-output",
+    ".cache/701-loop/public-cases/areosa-collision-before/collisions.xml",
+    "--duration-log.disable",
+    "true",
+    "--xml-validation",
+    "never"
+  ],
+  "wall_seconds": 0.013890083006117493,
+  "qualified": false,
+  "field_validated": false
+}

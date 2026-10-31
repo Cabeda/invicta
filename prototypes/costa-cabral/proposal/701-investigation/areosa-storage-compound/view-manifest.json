@@ -1,0 +1,25 @@
+{
+  "schema": "invicta.case-view.v1",
+  "title": {
+    "en": "Areosa: compound-junction diagnostic",
+    "pt": "Areosa: diagn\u00f3stico com interse\u00e7\u00e3o composta"
+  },
+  "qualified": false,
+  "source_case_sha256": "e9d6e528dc08e551d314c889603d050d4d6ab6bf6162b753218d433f20a7db9b",
+  "requested_actors": [
+    "background_7_1025",
+    "background_7_686",
+    "bicycle_7_10",
+    "bicycle_7_22",
+    "resident_7_7"
+  ],
+  "scene_sha256": "240f157463b68dd3cdabeb3a0b9209223753bb04f5c799e2e34aae5ddc5bc612",
+  "frames_sha256": "6a229364e06ff7a93652ef8f900f6dd490cd311f40bdf8540b252fd15f6b5c61",
+  "view_implementation_sha256": "003ca7ba98b4c4ac2306f8f6711315c93cd7631cf8d3e4e91c0346096d2703ab",
+  "focus_actor": "background_7_1025",
+  "focus_point": [
+    2564.9852891549835,
+    3106.9297008272315
+  ],
+  "collision_events": []
+}

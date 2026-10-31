@@ -148,6 +148,15 @@ def build():
     inspection=SITE/'701-inspection';inspection.mkdir(exist_ok=True)
     for name in ['index.html','viewer.mjs','replay.json.gz','manifest.json','capture-index.json','signal-audit.json','signal-audit-index.json']:
         shutil.copy2(ROOT/'focused-replay'/name,inspection/name)
+    shutil.copytree(ROOT/'investigation',SITE/'701-investigation',dirs_exist_ok=True,
+        ignore=shutil.ignore_patterns('network.net.xml','routes.rou.xml','additional.add.xml',
+                                     'implementation-native_case.py','collisions.xml'))
+    # Earlier local builds included the complete native inputs. They remain in
+    # the repository; the public view needs only its verified recording/scene.
+    for path in (SITE/'701-investigation').rglob('*'):
+        if path.is_file() and path.name in {'network.net.xml','routes.rou.xml','additional.add.xml',
+                                           'implementation-native_case.py','collisions.xml'}:
+            path.unlink()
     shutil.copytree(LEGACY/'inspection-assets',SITE/'inspection-assets',dirs_exist_ok=True)
     shutil.copytree(ROOT/'inspection-assets',SITE/'line-701-assets',dirs_exist_ok=True)
     shutil.copytree(ROOT/'data/official',SITE/'701-official',dirs_exist_ok=True)

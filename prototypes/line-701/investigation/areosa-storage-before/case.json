@@ -1,0 +1,97 @@
+{
+  "schema": "invicta.native-case.v1",
+  "role": "local_reproduction_not_service_qualification",
+  "requested_actors": [
+    "background_7_1025",
+    "background_7_686",
+    "bicycle_7_10",
+    "bicycle_7_22",
+    "resident_7_7"
+  ],
+  "departed": [
+    "background_7_1025",
+    "background_7_686",
+    "bicycle_7_10",
+    "bicycle_7_22",
+    "resident_7_7"
+  ],
+  "arrived": [
+    "background_7_1025",
+    "background_7_686",
+    "bicycle_7_10"
+  ],
+  "unfinished": [
+    {
+      "id": "bicycle_7_22",
+      "lane": "1165499581#3_2",
+      "wait": 708.0,
+      "point": [
+        2575.0291054284485,
+        3100.8105517417353
+      ]
+    },
+    {
+      "id": "resident_7_7",
+      "lane": "1304910030_1",
+      "wait": 789.0,
+      "point": [
+        2576.139136316053,
+        3096.0206477629604
+      ]
+    }
+  ],
+  "undeparted": [],
+  "uncompleted": [
+    "bicycle_7_22",
+    "resident_7_7"
+  ],
+  "all_requested_completed": false,
+  "simulation_end": 900.0,
+  "stop_reason": "simulation_window",
+  "collision_records": 0,
+  "input_hashes": {
+    "network.net.xml": "db5f1958d0bf6917cdcd66ef209f7c04e19932314f073d7c2e5f85a9e708c14c",
+    "routes.rou.xml": "d37beaa6edafaaa19bf47480311d41c80b719657ee1507edb8dfdfbd3e61f8b7",
+    "implementation-native_case.py": "5a65c9bd6f83cf98dc7a89525bc1e4ca46dccf4a243727d80bf05b874f4a8dbd"
+  },
+  "output_hashes": {
+    "collisions.xml": "70288dd103a0b9ef7790fa45957e0697748490865d71cb07d3f74846c0875a51",
+    "frames.json.gz": "f9da417fac60206f409b84cd72ad0412b29680424fc62d2f4d2d1b402bcf0331"
+  },
+  "native_version": [
+    22,
+    "SUMO 1.28.0"
+  ],
+  "command": [
+    "/Users/jose.cabeda/Git/invicta/.venv/lib/python3.12/site-packages/sumo/bin/sumo",
+    "--net-file",
+    ".cache/701-loop/public-cases/areosa-storage-before/network.net.xml",
+    "--route-files",
+    ".cache/701-loop/public-cases/areosa-storage-before/routes.rou.xml",
+    "--begin",
+    "0",
+    "--end",
+    "900",
+    "--seed",
+    "17",
+    "--time-to-teleport",
+    "-1",
+    "--no-warnings",
+    "true",
+    "--no-step-log",
+    "true",
+    "--collision.check-junctions",
+    "true",
+    "--collision.action",
+    "warn",
+    "--collision-output",
+    ".cache/701-loop/public-cases/areosa-storage-before/collisions.xml",
+    "--duration-log.disable",
+    "true",
+    "--xml-validation",
+    "never"
+  ],
+  "wall_seconds": 0.03767908300505951,
+  "qualified": false,
+  "field_validated": false
+}

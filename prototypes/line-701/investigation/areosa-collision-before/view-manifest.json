@@ -1,0 +1,40 @@
+{
+  "schema": "invicta.case-view.v1",
+  "title": {
+    "en": "The collision introduced by that change",
+    "pt": "A colis\u00e3o introduzida por essa altera\u00e7\u00e3o"
+  },
+  "qualified": false,
+  "source_case_sha256": "64228f52399722e1b6e6429520ad6ff0669528bd04ca3418fc379eadb228a8a2",
+  "requested_actors": [
+    "background_7_1092",
+    "d0_bus_7"
+  ],
+  "scene_sha256": "da6d0f70221aa6de61a72a7a0a999a5c5dae1233a101e6eaa6801dddecd92bd1",
+  "frames_sha256": "d4ed14838a5addfedda067c3541e045b88a8ea8c97df92863adc235491d96d56",
+  "view_implementation_sha256": "003ca7ba98b4c4ac2306f8f6711315c93cd7631cf8d3e4e91c0346096d2703ab",
+  "focus_actor": "d0_bus_7",
+  "focus_point": [
+    2592.42,
+    3112.94
+  ],
+  "collision_events": [
+    {
+      "time": "94.00",
+      "type": "junction",
+      "lane": ":areosa_compound_15_0",
+      "pos": "36.99",
+      "collider": "d0_bus_7",
+      "victim": "background_7_1092",
+      "colliderType": "bus",
+      "victimType": "background",
+      "colliderSpeed": "7.64",
+      "victimSpeed": "0.00",
+      "colliderFront": "2592.42,3112.94",
+      "colliderBack": "2589.71,3101.25",
+      "victimFront": "2590.83,3106.17",
+      "victimBack": "2591.40,3111.14"
+    }
+  ],
+  "focus_frame": 91
+}

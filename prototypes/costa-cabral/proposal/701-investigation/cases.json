@@ -1,0 +1,51 @@
+{
+  "schema": "invicta.investigation-gallery.v1",
+  "line_id": "701",
+  "qualified": false,
+  "cases": [
+    {
+      "id": "areosa-storage-before",
+      "title": {
+        "en": "Areosa: the storage blockage",
+        "pt": "Areosa: o bloqueio por falta de espaço"
+      },
+      "requested": 5,
+      "arrived": 3,
+      "collisions": 0,
+      "source_case_sha256": "94e6e92ea860c094006b42507b9043d3593ec11863a8ce6f6940d3b1d1827f7e"
+    },
+    {
+      "id": "areosa-storage-compound",
+      "title": {
+        "en": "Areosa: compound-junction diagnostic",
+        "pt": "Areosa: diagnóstico com interseção composta"
+      },
+      "requested": 5,
+      "arrived": 5,
+      "collisions": 0,
+      "source_case_sha256": "e9d6e528dc08e551d314c889603d050d4d6ab6bf6162b753218d433f20a7db9b"
+    },
+    {
+      "id": "areosa-collision-before",
+      "title": {
+        "en": "The collision introduced by that change",
+        "pt": "A colisão introduzida por essa alteração"
+      },
+      "requested": 2,
+      "arrived": 2,
+      "collisions": 1,
+      "source_case_sha256": "64228f52399722e1b6e6429520ad6ff0669528bd04ca3418fc379eadb228a8a2"
+    },
+    {
+      "id": "areosa-protected-turn",
+      "title": {
+        "en": "Testing a protected turn",
+        "pt": "Teste com viragem protegida"
+      },
+      "requested": 2,
+      "arrived": 2,
+      "collisions": 0,
+      "source_case_sha256": "02814d366a2d9b201f2b7b2590cf35cfff7f52c247273e2d86cc11cc15a637e3"
+    }
+  ]
+}

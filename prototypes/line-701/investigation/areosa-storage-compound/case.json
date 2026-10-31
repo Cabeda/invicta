@@ -1,0 +1,77 @@
+{
+  "schema": "invicta.native-case.v1",
+  "role": "local_reproduction_not_service_qualification",
+  "requested_actors": [
+    "background_7_1025",
+    "background_7_686",
+    "bicycle_7_10",
+    "bicycle_7_22",
+    "resident_7_7"
+  ],
+  "departed": [
+    "background_7_1025",
+    "background_7_686",
+    "bicycle_7_10",
+    "bicycle_7_22",
+    "resident_7_7"
+  ],
+  "arrived": [
+    "background_7_1025",
+    "background_7_686",
+    "bicycle_7_10",
+    "bicycle_7_22",
+    "resident_7_7"
+  ],
+  "unfinished": [],
+  "undeparted": [],
+  "uncompleted": [],
+  "all_requested_completed": true,
+  "simulation_end": 157.0,
+  "stop_reason": "simulation_window",
+  "collision_records": 0,
+  "input_hashes": {
+    "network.net.xml": "3bc372bc30a67281850ce216e5e7d9a7dc3bac579142f46963a8bdef2a682939",
+    "routes.rou.xml": "68aa4d6358156553d91f078547e5474fe6988ea8bf247a6373022edd19d95334",
+    "implementation-native_case.py": "5a65c9bd6f83cf98dc7a89525bc1e4ca46dccf4a243727d80bf05b874f4a8dbd"
+  },
+  "output_hashes": {
+    "collisions.xml": "9c4e5dd005957834a964304c91dc137c9d81342f94f919e026d799944ac58b8a",
+    "frames.json.gz": "6a229364e06ff7a93652ef8f900f6dd490cd311f40bdf8540b252fd15f6b5c61"
+  },
+  "native_version": [
+    22,
+    "SUMO 1.28.0"
+  ],
+  "command": [
+    "/Users/jose.cabeda/Git/invicta/.venv/lib/python3.12/site-packages/sumo/bin/sumo",
+    "--net-file",
+    ".cache/701-loop/public-cases/areosa-storage-compound/network.net.xml",
+    "--route-files",
+    ".cache/701-loop/public-cases/areosa-storage-compound/routes.rou.xml",
+    "--begin",
+    "0",
+    "--end",
+    "900",
+    "--seed",
+    "17",
+    "--time-to-teleport",
+    "-1",
+    "--no-warnings",
+    "true",
+    "--no-step-log",
+    "true",
+    "--collision.check-junctions",
+    "true",
+    "--collision.action",
+    "warn",
+    "--collision-output",
+    ".cache/701-loop/public-cases/areosa-storage-compound/collisions.xml",
+    "--duration-log.disable",
+    "true",
+    "--xml-validation",
+    "never"
+  ],
+  "wall_seconds": 0.011628000007476658,
+  "qualified": false,
+  "field_validated": false
+}

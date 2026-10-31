@@ -18,17 +18,22 @@ def require_native_version(evidence):
         raise ValueError('Native version differs or is unrecorded; reproduce with the recorded environment')
 
 
-def freeze_implementation(folder):
+def implementation_sources():
     here = Path(__file__).parent
     paths = [here / name for name in ['priority_search.py', 'priority_model.py', 'native_runner.py', 'signal_priority.py', 'signal_mapping.py',
              'model_audit.py', 'run_diagnostics.py', 'trial_evidence.py', 'timetable.py',
              'priority_demand.py', 'prepare.py', 'experiment.py', 'prefix_reproduction.py', 'scenario_audit.py',
              'state_probe.py', 'model_review.py', 'traffic_workload.py', 'paired_workload.py', 'native_input_cache.py',
-             'unused_signal_stages.py', 'areosa_detection.py', 'signal_program_model.py', 'controller_options.py']]
+             'unused_signal_stages.py', 'areosa_detection.py', 'signal_program_model.py', 'controller_options.py',
+             'protected_turn.py', 'areosa_compound.py', 'junction_scope.py']]
     paths += [here.parents[2] / 'requirements-simulation.txt',
               here.parents[1] / 'costa-cabral/requirements.txt']
+    return paths
+
+
+def freeze_implementation(folder):
     files = {}
-    for path in paths:
+    for path in implementation_sources():
         payload = path.read_bytes()
         name = 'implementation-' + path.name
         (folder / name).write_bytes(payload)

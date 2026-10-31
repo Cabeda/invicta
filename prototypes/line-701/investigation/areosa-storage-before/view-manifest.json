@@ -1,0 +1,25 @@
+{
+  "schema": "invicta.case-view.v1",
+  "title": {
+    "en": "Areosa: the storage blockage",
+    "pt": "Areosa: o bloqueio por falta de espa\u00e7o"
+  },
+  "qualified": false,
+  "source_case_sha256": "94e6e92ea860c094006b42507b9043d3593ec11863a8ce6f6940d3b1d1827f7e",
+  "requested_actors": [
+    "background_7_1025",
+    "background_7_686",
+    "bicycle_7_10",
+    "bicycle_7_22",
+    "resident_7_7"
+  ],
+  "scene_sha256": "e0cf0844cc87b2657c1a760bdb4c8c09b8d5494b8893aed2ffeab40717f6fdaf",
+  "frames_sha256": "f9da417fac60206f409b84cd72ad0412b29680424fc62d2f4d2d1b402bcf0331",
+  "view_implementation_sha256": "003ca7ba98b4c4ac2306f8f6711315c93cd7631cf8d3e4e91c0346096d2703ab",
+  "focus_actor": "resident_7_7",
+  "focus_point": [
+    2576.139136316053,
+    3096.0206477629604
+  ],
+  "collision_events": []
+}

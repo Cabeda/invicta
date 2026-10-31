@@ -1,0 +1,22 @@
+{
+  "schema": "invicta.case-view.v1",
+  "title": {
+    "en": "Testing a protected turn",
+    "pt": "Teste com viragem protegida"
+  },
+  "qualified": false,
+  "source_case_sha256": "02814d366a2d9b201f2b7b2590cf35cfff7f52c247273e2d86cc11cc15a637e3",
+  "requested_actors": [
+    "background_7_1092",
+    "d0_bus_7"
+  ],
+  "scene_sha256": "2a0e656cf9c8a1f3ec28881d80164f91b4082490790fdb419f3095ba2fadd1d4",
+  "frames_sha256": "e84a62c447ea99c49623e69c9d0b5452d39575cbe129effd1dc8db29b58fa4cc",
+  "view_implementation_sha256": "003ca7ba98b4c4ac2306f8f6711315c93cd7631cf8d3e4e91c0346096d2703ab",
+  "focus_actor": "d0_bus_7",
+  "focus_point": [
+    2583.813353606371,
+    3075.9033544631584
+  ],
+  "collision_events": []
+}

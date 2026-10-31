@@ -99,6 +99,7 @@ def main(argv=None):
             command.add_argument('--snapshot', default='final-state.xml')
         if name == 'inspect':
             command.add_argument('--limit', type=int, default=8)
+            command.add_argument('--vehicle', help='Inspect an ordinary native actor as a zero-step diagnostic')
         if name == 'probe-state':
             command.add_argument('--vehicle', required=True)
             command.add_argument('--seconds', type=int, default=60)
@@ -114,7 +115,8 @@ def main(argv=None):
             report = diagnose_trial(args.source, args.trial, args.model, args.trip,
                                     lateness_tolerance_seconds=args.lateness_tolerance)
         elif args.operation == 'inspect':
-            report = inspect_snapshot(args.source, args.trial, args.model, args.snapshot, args.trip, args.limit)
+            report = inspect_snapshot(args.source, args.trial, args.model, args.snapshot, args.trip, args.limit,
+                                      actor_id=args.vehicle)
         elif args.operation == 'probe-state':
             report = probe_snapshot(args.source, args.output_dir, args.vehicle, trial_id=args.trial, model=args.model,
                                     snapshot=args.snapshot, seconds=args.seconds, connections=args.connections,
