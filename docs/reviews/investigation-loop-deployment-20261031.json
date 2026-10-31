@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-31",
+  "production_url": "https://invicta.cabeda.dev",
+  "deployment_id": "dpl_9ACND83aX4ydPkNmVDdbMxM6C7FQ",
+  "asset_commit": "b645bb155551491421d8afe46b99de47deb2a332",
+  "state": "READY",
+  "ci_run": 41203848998,
+  "ci_conclusion": "success",
+  "live_files": [
+    {
+      "path": "701-investigation/index.html",
+      "status": 200,
+      "sha256": "859feb4f9e638764a7fe7e42f83be68d4d5ed8a2e4a775f7f6c0cd1d1b028c4a",
+      "matches": true
+    },
+    {
+      "path": "701-investigation/cases.json",
+      "status": 200,
+      "sha256": "399c02b06e1c7d1847c36963b47842b08d06c462ba23425f3b4bb9a7af670d89",
+      "matches": true
+    },
+    {
+      "path": "701-investigation/areosa-collision-before/view-manifest.json",
+      "status": 200,
+      "sha256": "9ee9fdab419094fbb09a0c103be4a0907abc9c0df22c06513be3dcae94b2ff23",
+      "matches": true
+    },
+    {
+      "path": "701-investigation/areosa-collision-before/frames.json.gz",
+      "status": 200,
+      "sha256": "d4ed14838a5addfedda067c3541e045b88a8ea8c97df92863adc235491d96d56",
+      "matches": true
+    },
+    {
+      "path": "701-investigation/areosa-collision-before/viewer.mjs",
+      "status": 200,
+      "sha256": "003ca7ba98b4c4ac2306f8f6711315c93cd7631cf8d3e4e91c0346096d2703ab",
+      "matches": true
+    },
+    {
+      "path": "701-inspection/index.html",
+      "status": 200,
+      "sha256": "efac15717f2710f8a424b924f0ae2408a5599b28bb62c3900c6b07f686e23978",
+      "matches": true
+    }
+  ],
+  "scope": "Published controlled local 2D/3D recordings; not full-line proposal qualification. Subsequent backend/research commits do not change these public asset bytes."
+}

@@ -45,7 +45,9 @@ def run_case(network, routes, output, *, additional=None, end_seconds=900, wall_
     intern_network(folder / 'network.net.xml')
     command = [str(Path(sumo.SUMO_HOME) / 'bin/sumo'), '--net-file', str(folder / 'network.net.xml'),
         '--route-files', str(folder / 'routes.rou.xml'), '--begin', '0', '--end', str(end_seconds),
-        '--seed', '17', '--time-to-teleport', '-1', '--no-warnings', 'true', '--no-step-log', 'true',
+        '--seed', '17', '--time-to-teleport', '-1', '--no-warnings', 'false', '--no-step-log', 'true',
+        '--error-log', str(folder / 'native-warnings.log'),
+        '--stop-output', str(folder / 'stops.xml'),
         '--collision.check-junctions', 'true', '--collision.action', 'warn',
         '--collision-output', str(folder / 'collisions.xml'),
         '--duration-log.disable', 'true', '--xml-validation', 'never']
@@ -103,7 +105,8 @@ def run_case(network, routes, output, *, additional=None, end_seconds=900, wall_
         'undeparted': sorted(set(actors) - departed), 'uncompleted': sorted(set(actors) - arrived),
         'all_requested_completed': set(actors) == arrived, 'simulation_end': end, 'stop_reason': stop_reason,
         'collision_records': len(ET.parse(folder / 'collisions.xml').getroot()),
-        'input_hashes': inputs, 'output_hashes': {name: digest(folder / name) for name in ['collisions.xml', 'frames.json.gz']},
+        'input_hashes': inputs, 'output_hashes': {name: digest(folder / name) for name in
+            ['collisions.xml', 'frames.json.gz', 'native-warnings.log', 'stops.xml']},
         'native_version': version, 'command': command, 'wall_seconds': time.monotonic() - started,
         'qualified': False, 'field_validated': False}
     (folder / 'case.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')

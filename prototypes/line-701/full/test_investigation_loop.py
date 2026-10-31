@@ -11,6 +11,58 @@ SOURCE = ROOT / 'docs/research/701-traffic-stress-2026-10-30/study.json'
 
 
 class InvestigationLoopTests(unittest.TestCase):
+    def test_native_warnings_are_retained_with_the_execution(self):
+        from test_investigation import native_fixture
+        from native_case import run_case
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = native_fixture(root)
+            routes = root / 'short-stop.rou.xml'
+            routes.write_text('<routes><vType id="bus" vClass="bus" length="12"/>'
+                '<vehicle id="bus" type="bus" depart="0"><route edges="east"/>'
+                '<stop busStop="short" duration="20"/></vehicle></routes>')
+            extra = root / 'stop.add.xml'
+            extra.write_text('<additional><busStop id="short" lane="east_0" startPos="50" endPos="55"/></additional>')
+            report = run_case(model / 'baseline.net.xml', routes, root / 'case', additional=extra)
+            self.assertTrue(report['all_requested_completed'])
+            self.assertIn('native-warnings.log', report['output_hashes'])
+            self.assertIn('too short', (root / 'case/native-warnings.log').read_text())
+            self.assertFalse(report['qualified'])
+
+    def test_source_direct_route_can_dwell_on_a_strict_internal_stop(self):
+        from native_case import run_case
+        from trial_evidence import read_archive
+        import gzip
+        archive = ROOT / 'docs/research/701-codiceira-direct-route-2026-10-31/study.json'
+        ledger = json.loads(archive.read_text())
+        fixture = Path(__file__).parent / 'diagnostics/codiceira-stop'
+        with tempfile.TemporaryDirectory() as temporary:
+            folder = Path(temporary)
+            network = folder / 'network.net.xml'
+            network.write_bytes(read_archive(archive.parent, ledger['models']['v17']['evidence']['baseline.net.xml']))
+            result = run_case(network, fixture / 'source-direct.rou.xml', folder / 'case',
+                              additional=fixture / 'source-stop.add.xml', end_seconds=600)
+            self.assertTrue(result['all_requested_completed'])
+            self.assertEqual(len(result['requested_actors']), 2)
+            self.assertEqual(result['collision_records'], 0)
+            frames = json.loads(gzip.decompress((folder / 'case/frames.json.gz').read_bytes()))['frames']
+            longest = consecutive = 0
+            for frame in frames:
+                bus = next((v for v in frame['vehicles'] if v[0] == 'outbound'), None)
+                stopped = bus is not None and bus[4] < .1 and bus[6] == ':codiceira_compound_20_0'
+                consecutive = consecutive + 1 if stopped else 0
+                longest = max(longest, consecutive)
+            self.assertGreaterEqual(longest, 20)
+            import xml.etree.ElementTree as ET
+            stops = [row for row in ET.parse(folder / 'case/stops.xml').getroot()
+                     if row.get('id') == 'outbound']
+            self.assertEqual(len(stops), 1)
+            self.assertEqual(stops[0].get('busStop'), 'source_COD3')
+            self.assertEqual(stops[0].get('lane'), ':codiceira_compound_20_0')
+            self.assertGreaterEqual(float(stops[0].get('ended')) - float(stops[0].get('started')), 20)
+            self.assertIn('stops.xml', result['output_hashes'])
+            self.assertFalse(result['qualified'])
+
     def test_native_start_is_recorded_before_controller_setup_failure(self):
         from test_investigation import native_fixture, empty_config
         from priority_search import make_inputs

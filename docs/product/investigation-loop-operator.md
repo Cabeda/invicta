@@ -68,7 +68,7 @@ Service reuse includes prepared-model bytes, the actual runner implementation/de
 
 A full service case can pass its simulation gates while `qualified` remains false. Access review, the declared paired scenario/seed matrix and field validation remain separate. Empty, passenger and traffic profiles retain independent unresolved cases: passing an empty prerequisite cannot erase a failing combined workload. Policy variants remain in the journal even when a later result supersedes their workload profile.
 
-`events.jsonl` is flushed before the atomic state update. An interrupted state promotion is recovered from the journal. Concurrent writers are refused. Incomplete/corrupt journal records require explicit inspection rather than silently discarding evidence. The status reports native executions, verified reuses and measured native time. Native failures preserve their directories and reason; never overwrite them.
+`events.jsonl` is flushed before the atomic state update. An interrupted state promotion is recovered from the journal. Concurrent writers are refused. Incomplete/corrupt journal records require explicit inspection rather than silently discarding evidence. The status reports native executions, verified reuses and measured native time. Native failures preserve their directories and reason; never overwrite them. Local executions retain `native-warnings.log` and native `stops.xml` with their output hashes. Use the stop-service records to distinguish an actual scheduled stop from waiting at a signal or in a queue. Review warnings even when every actor completes: a short-stop warning is not cleared by a successful dwell animation.
 
 ## Restore prepared models from the archive
 

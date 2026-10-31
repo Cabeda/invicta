@@ -1,0 +1,33 @@
+<additional><tlLogic id="areosa_compound" type="actuated" programID="invicta.areosa.protected-turn.v1" offset="0">
+        <phase duration="36" state="rrrrrGGGGrrrrrrrrGGGGrrr" minDur="13" maxDur="50" />
+        <phase duration="3" state="rrrrryyyyrrrrrrrryyyyrrr" />
+        <phase duration="6" state="rrrrrrrrrGGrrrrrrrrrrGGG" minDur="13" maxDur="50" />
+        <phase duration="3" state="rrrrrrrrryyrrrrrrrrrryyy" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="35" state="GGGrgrrrrrrggGGGgrrrrrrr" minDur="13" maxDur="50" />
+        <phase duration="3" state="yyyryrrrrrryyyyyyrrrrrrr" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrrrrr" />
+    <phase duration="13" state="rrrGrrrrrrrrrrrrrrrrrrrr" minDur="13" maxDur="30" /><phase duration="3" state="rrryrrrrrrrrrrrrrrrrrrrr" /><phase duration="8" state="rrrrrrrrrrrrrrrrrrrrrrrr" /></tlLogic>
+    <tlLogic id="joinedS_12514310100_12514324965_12514324966_3897692280_#1more" type="actuated" programID="invicta.mapping-cleanup.v1" offset="0">
+        <phase duration="31" state="Grrrrrrrrrrrrrrrrrrrr" minDur="10" maxDur="50" />
+        <phase duration="3" state="yrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="31" state="rGrrrrrrrrrrrrrrrrrrr" minDur="13" maxDur="50" />
+        <phase duration="3" state="ryrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="31" state="rrrrGGrrrrGGrrrrrGGrr" minDur="13" maxDur="50" />
+        <phase duration="3" state="rrrryyrrrryyrrrrryyrr" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="31" state="rrrGrrrrGGrrGGrrrrrrr" minDur="13" maxDur="50" />
+        <phase duration="3" state="rrryrrrryyrryyrrrrrrr" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="31" state="rrrGrrrrGGrrrrGGGrrrr" minDur="10" maxDur="50" />
+        <phase duration="3" state="rrryrrrryyrrrryyyrrrr" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrr" />
+        <phase duration="31" state="rrrGrrrrGGrrrrrrrrrGG" minDur="13" maxDur="50" />
+        <phase duration="3" state="rrryrrrryyrrrrrrrrryy" />
+        <phase duration="2" state="rrrrrrrrrrrrrrrrrrrrr" />
+    </tlLogic>
+    <busStop id="source_COD3" lane=":codiceira_compound_20_0" startPos="21.206" endPos="36.206" friendlyPos="false" /></additional>
