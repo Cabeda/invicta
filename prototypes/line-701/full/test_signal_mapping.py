@@ -78,7 +78,7 @@ def run_buses(network, folder, actors=('d1', 'd0'), offset=0):
             'collisions': len(ET.parse(collisions).getroot())}
 
 
-def run_conflicts(network, folder, paths, offset=0, walkers=False):
+def run_conflicts(network, folder, paths, offset=0, walkers=False, additional=None):
     """Exercise retained movements; never count omitted actors as a success."""
     folder.mkdir()
     root = ET.Element('routes')
@@ -104,6 +104,8 @@ def run_conflicts(network, folder, paths, offset=0, walkers=False):
         '--xml-validation', 'never', '--time-to-teleport', '-1',
         '--collision.action', 'warn', '--collision.check-junctions', 'true',
         '--collision-output', str(folder / 'collisions.xml')]
+    if additional is not None:
+        command += ['--additional-files', str(additional)]
     departed, arrived, walking, walked = set(), set(), set(), set()
     simulation.start(command)
     try:

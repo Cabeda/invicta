@@ -12,12 +12,23 @@ import libsumo as simulation
 
 
 def simulate_with_priority(command, bus_ids, folder, extension_limit=10, early_green=False,
-                           shorten_served_pedestrian_green=False, enabled=True, observer=None):
+                           shorten_served_pedestrian_green=False, enabled=True, observer=None, tls_filter=None,
+                           minimum_conflicting_green=15):
+    if isinstance(extension_limit, bool) or not math.isfinite(extension_limit) or not 0 <= extension_limit <= 10:
+        raise ValueError('Green extension limit must be between 0 and 10 seconds')
+    if isinstance(minimum_conflicting_green, bool) or not math.isfinite(minimum_conflicting_green) or not 10 <= minimum_conflicting_green <= 15:
+        raise ValueError('Conflicting-green floor must be between 10 and 15 seconds; phase minima still apply')
     events = []
     phase_state = {}
     active = set()
     simulation.start(command)
     try:
+        if tls_filter is not None and (not isinstance(tls_filter, list)
+                or any(not isinstance(tls, str) for tls in tls_filter)):
+            raise ValueError('Priority selection must be a list of controller identifiers')
+        selected_tls = None if tls_filter is None else set(tls_filter)
+        if selected_tls is not None and not selected_tls.issubset(simulation.trafficlight.getIDList()):
+            raise ValueError('Priority selection contains an unknown traffic-light controller')
         pedestrian_links, pedestrian_lanes = {}, {}
         network = ET.parse(command[command.index('--net-file') + 1]).getroot()
         crossing_lanes = {l.get('id') for e in network.findall('edge')
@@ -51,6 +62,8 @@ def simulate_with_priority(command, bus_ids, folder, extension_limit=10, early_g
                 if not next_tls:
                     continue
                 tls, link, distance, colour = next_tls[0]
+                if selected_tls is not None and tls not in selected_tls:
+                    continue
                 speed = simulation.vehicle.getSpeed(bus)
                 if distance > 120:
                     continue
@@ -97,7 +110,7 @@ def simulate_with_priority(command, bus_ids, folder, extension_limit=10, early_g
                 phase = simulation.trafficlight.getPhase(tls)
                 logic = next(p for p in simulation.trafficlight.getAllProgramLogics(tls)
                              if p.programID == simulation.trafficlight.getProgram(tls))
-                minimum = max(15, logic.phases[phase].minDur)
+                minimum = max(minimum_conflicting_green, logic.phases[phase].minDur)
                 if has_pedestrian_green:
                     # An explicit sensitivity test: 0.8 m/s crossing speed plus
                     # five seconds startup, and no occupied controlled crossing.
@@ -123,4 +136,5 @@ def simulate_with_priority(command, bus_ids, folder, extension_limit=10, early_g
         'early_green_requests': sum(e['kind'] == 'end_conflicting_green' for e in events),
         'changed_signals': sorted({e['tls'] for e in events}),
         'extension_limit_seconds': extension_limit, 'phase_order_preserved': True,
+        'minimum_conflicting_green_seconds': minimum_conflicting_green,
         'clearance_phases_preserved': True}

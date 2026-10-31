@@ -20,6 +20,10 @@ from timetable import assess_trial, acceptance_criteria
 from model_audit import require_readiness, ModelNotReadyError
 from native_runner import freeze_implementation, run_native
 from scenario_audit import audit_scenario
+from traffic_workload import select_traffic
+from paired_workload import reuse_workload
+from native_input_cache import intern_network
+from controller_options import priority_options
 
 
 class ExistingTrialError(FileExistsError):
@@ -27,6 +31,8 @@ class ExistingTrialError(FileExistsError):
 
 
 def make_inputs(model, folder, config):
+    if config.get('paired_workload'):
+        return reuse_workload(model, folder, config)
     reference = json.loads((model / 'routes.json').read_text())
     net = sumolib.net.readNet(str(model / 'baseline.net.xml'), maxcache=0)
     baseline = net
@@ -55,6 +61,8 @@ def make_inputs(model, folder, config):
     last = max(t['depart'] for t in buses)
     od = json.loads((DATA / 'od-pools.json').read_text())['pools']
     requests = [] if config['traffic'] == 'none' else demand(config['traffic'], config['seed'], od, last)
+    requests, workload = select_traffic(requests, config.get('demand_fraction', 1))
+    write_json(folder / 'traffic-workload.json', workload)
     requests, endpoint_mapping = migrate_requests(baseline, requests)
     write_json(folder / 'endpoint-mapping.json', endpoint_mapping)
     retained = set()
@@ -77,6 +85,17 @@ def make_inputs(model, folder, config):
         if not route(net, a, b, kind)[0]:
             raise ValueError(f'Priority policy disconnects an OD request: {a} -> {b} ({kind})')
     routes, additional = ET.Element('routes'), ET.Element('additional')
+    metadata = json.loads((model / 'model.json').read_text())
+    programmes = metadata.get('signal_program_override')
+    # V10 experimental witnesses used this key before it was separated from
+    # the existing integer count of native programmes. Preserve their replay.
+    if programmes is None and isinstance(metadata.get('signal_programs'), dict):
+        programmes = metadata['signal_programs']
+    if programmes:
+        path = model / programmes['file']
+        if digest(path) != programmes['sha256'] or reference.get('signal_programs_sha256') != programmes['sha256']:
+            raise ValueError('Signal programme correction does not bind the model reference')
+        additional.extend(ET.parse(path).getroot())
     for group, kind in list(CLASSES.items()) + [('bus', 'bus')]:
         attributes = dict(id=group, vClass=kind, sigma='.5', speedFactor='1', speedDev='0')
         if group == 'bus':
@@ -203,6 +222,10 @@ def make_inputs(model, folder, config):
 def run_trial(model, output, config):
     if config['traffic'] not in ['none', 'moderate', 'busy', 'late']:
         raise ValueError('Unknown requested traffic case')
+    priority_options(config)  # Reject unsupported controller profiles before preparation.
+    budget = config.get('diagnostic_budget_seconds')
+    if budget is not None and (isinstance(budget, bool) or not isinstance(budget, (int, float)) or not 0 < budget <= 900):
+        raise ValueError('Diagnostic wall budget must be between 0 and 900 seconds')
     folder = output / config['id']
     if folder.resolve().parent != output.resolve():
         raise ValueError('Trial id must name one directory')
@@ -226,10 +249,20 @@ def _execute_trial(model, folder, config, readiness):
     (folder / 'reference.json').write_bytes((model / 'routes.json').read_bytes())
     (folder / 'model.json').write_bytes((model / 'model.json').read_bytes())
     source_hashes = {name: digest(model / name) for name in ['baseline.net.xml', 'routes.json', 'model.json']}
+    review = config.get('readiness', {}).get('geometry_review')
+    if review:
+        (folder / 'model-review.json').write_bytes(Path(review).read_bytes())
+        if digest(folder / 'model-review.json') != readiness['source']['geometry_review_sha256']:
+            raise ValueError('Geometry review changed after readiness was checked')
     if source_hashes['baseline.net.xml'] != json.loads((model / 'model.json').read_text())['network_sha256']:
         raise ValueError('Model network bytes changed')
     reference, buses, requests, passengers, unroutable, changes, shock, pedestrian_requests = make_inputs(model, folder, config)
-    native_hashes = {name: digest(folder / name) for name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml', 'endpoint-mapping.json', 'crossing-requests.json', 'compiled-audit.json']}
+    intern_network(folder / 'network.net.xml')
+    native_hashes = {name: digest(folder / name) for name in ['network.net.xml', 'routes.rou.xml', 'additional.add.xml', 'endpoint-mapping.json', 'crossing-requests.json', 'compiled-audit.json', 'traffic-workload.json']}
+    if review:
+        native_hashes['model-review.json'] = digest(folder / 'model-review.json')
+    if config.get('paired_workload'):
+        native_hashes['workload-source.json'] = digest(folder / 'workload-source.json')
     native_hashes.update(implementations)
     native_hashes['reference.json'] = digest(folder / 'reference.json')
     native_hashes['model.json'] = digest(folder / 'model.json')
@@ -249,10 +282,10 @@ def _execute_trial(model, folder, config, readiness):
         '--save-state.rng', 'true', '--save-state.transportables', 'true']
     if config.get('diagnostic_all_green'):
         command += ['--tls.all-off', 'true']
-    options = ({'early_green': config.get('early_green', False),
-                'shorten_served_pedestrian_green': config.get('shorten_served_pedestrian_green', False)}
-               if config.get('signal_priority') else None)
-    execution = run_native(command, buses, folder, options)
+    options = priority_options(config)
+    budget = config.get('diagnostic_budget_seconds')
+    execution = run_native(command, buses, folder, options,
+                           monitor_options={'max_wall_seconds': budget} if budget is not None else None)
     priority = execution['priority']
     evaluation_started = time.monotonic()
     trips = list(ET.parse(folder / 'trips.xml').getroot())
@@ -302,9 +335,14 @@ def _execute_trial(model, folder, config, readiness):
         'elapsed_seconds': round(time.monotonic() - started, 2),
         'qualified': False,
         'qualification_note': 'Exploratory model: pedestrian demand, stop positions, signal plans, passenger demand and vehicle blocks require validation.'}
+    if execution['diagnostics']['stop_reason'] is not None:
+        result['execution_scope'] = {'kind': 'bounded_diagnostic', 'begin': BEGIN,
+                                    'end': execution['diagnostics']['simulation_time']}
     write_json(folder / 'result.json', result)
     print(json.dumps({k: v for k, v in result.items() if k in ['config', 'elapsed_seconds', 'passenger_requests', 'arrived_passengers', 'vehicle_requests', 'unserved_vehicle_requests', 'collision_records']}, ensure_ascii=False), flush=True)
-    print(json.dumps({k: v for k, v in metrics.items() if k != 'failures'}), flush=True)
+    print(json.dumps({'strict_metrics': {k: v for k, v in metrics.items() if k != 'failures'},
+                      'operational_metrics': {k: v for k, v in operational.items() if k != 'failures'},
+                      'acceptance_criteria': criteria}), flush=True)
     return result
 
 

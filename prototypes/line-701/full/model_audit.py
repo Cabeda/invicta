@@ -8,6 +8,7 @@ import sumolib
 from run_diagnostics import diagnose_trial, execution_coverage
 from trial_evidence import sha256, load_trial
 from timetable import acceptance_criteria
+from model_review import stop_reviews
 
 
 class ModelNotReadyError(ValueError):
@@ -30,7 +31,7 @@ def is_empty_diagnostic(config):
 
 
 def audit_model(model, diagnostic_source=None, diagnostic_trial=None, *, bus_length=12,
-                lateness_tolerance_seconds=None):
+                lateness_tolerance_seconds=None, geometry_review=None):
     if not math.isfinite(bus_length) or bus_length <= 0:
         raise ValueError('Audit bus length must be positive and finite')
     folder = Path(model)
@@ -62,8 +63,10 @@ def audit_model(model, diagnostic_source=None, diagnostic_trial=None, *, bus_len
     if sum(len(t['stops']) for t in trips) != reference.get('served_calls'):
         issue('call_coverage', 'Declared served calls disagree with the complete schedule.')
     geometry = {}
+    review_hash = None
     if not findings:
         net = sumolib.net.readNet(str(paths['baseline.net.xml']), withInternal=True, maxcache=0)
+        reviews, review_hash = stop_reviews(geometry_review, description, reference, net)
         for key, direction in directions.items():
             path = direction['path']
             if not path or any(not net.hasEdge(edge) for edge in path):
@@ -102,7 +105,9 @@ def audit_model(model, diagnostic_source=None, diagnostic_trial=None, *, bus_len
                 snaps.append(distance)
                 if distance > 25:
                     issue('stop_match_review', 'Stop is over 25 m from the source coordinate; inspect the street match.',
-                          'review', stop=stop['native_stop_id'], distance_metres=round(distance, 3))
+                          'accepted_model_assumption' if stop['native_stop_id'] in reviews else 'review',
+                          stop=stop['native_stop_id'], distance_metres=round(distance, 3),
+                          disposition=reviews.get(stop['native_stop_id']))
             samples = []
             for edge in parts:
                 shape = edge.getShape()
@@ -156,9 +161,9 @@ def audit_model(model, diagnostic_source=None, diagnostic_trial=None, *, bus_len
                       'A signals-off pass is an optimistic bound; retain existing signals in the bus-only prerequisite.')
             if not diagnosis['operational_compliance']:
                 issue('unresolved_empty_diagnostic', 'The optimistic diagnostic misses a checkpoint; diagnose before traffic-only packages.')
-    blockers = sorted({finding['code'] for finding in findings})
+    blockers = sorted({finding['code'] for finding in findings if finding['severity'] != 'accepted_model_assumption'})
     identity = {**fingerprints, 'audit_version': 2,
-                'bus_length_metres': bus_length,
+                'bus_length_metres': bus_length, 'geometry_review_sha256': review_hash,
                 'acceptance_criteria': diagnosis['acceptance_criteria'] if diagnosis else acceptance_criteria(
                     0 if lateness_tolerance_seconds is None else lateness_tolerance_seconds),
                 'implementation_sha256': sha256(Path(__file__).read_bytes()),
@@ -187,7 +192,8 @@ def require_readiness(model, config):
                                               for key in ['change', 'prediction', 'evidence']):
         raise ModelNotReadyError({'status': 'blocked', 'blockers': ['missing_testable_hypothesis']})
     report = audit_model(model, readiness['source'], readiness.get('trial'), bus_length=config.get('bus_length', 12),
-                         lateness_tolerance_seconds=criteria['lateness_tolerance_seconds'])
+                         lateness_tolerance_seconds=criteria['lateness_tolerance_seconds'],
+                         geometry_review=readiness.get('geometry_review'))
     if report['status'] != 'ready_for_full_run':
         raise ModelNotReadyError(report)
     return report

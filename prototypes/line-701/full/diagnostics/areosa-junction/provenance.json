@@ -1,0 +1,13 @@
+{
+  "role": "reduced_native_diagnostic",
+  "source_model_network_sha256": "64eeea8de7a2c43aac704faabef47e8500b71d57054db4daa11cc86d81ccae83",
+  "source_trial": "ramp-busy-010-baseline-s17",
+  "source_actor_routes": "Final native route variants, cut to9 normal edges starting at -37141970#2; local actor departures20,30,40s; no field demand claim.",
+  "extraction": "netconvert --sumo-net-file SOURCE --keep-edges.input-file edges.txt --output-file source.net.xml",
+  "roads": 51,
+  "limitation": "Boundary reprocessing changes some internal geometry and fringe controls. The same one-car stall occurs on the full source and this reduced network; not bit-identical resumed state.",
+  "files": {
+    "source.net.xml": "db5f1958d0bf6917cdcd66ef209f7c04e19932314f073d7c2e5f85a9e708c14c",
+    "actors.rou.xml": "032d4cdfbbe066625d2ac9ecbd4405ba79bb33ab140f8713162bc9ad6a88ea0c"
+  }
+}

@@ -23,7 +23,8 @@ def freeze_implementation(folder):
     paths = [here / name for name in ['priority_search.py', 'priority_model.py', 'native_runner.py', 'signal_priority.py', 'signal_mapping.py',
              'model_audit.py', 'run_diagnostics.py', 'trial_evidence.py', 'timetable.py',
              'priority_demand.py', 'prepare.py', 'experiment.py', 'prefix_reproduction.py', 'scenario_audit.py',
-             'state_probe.py']]
+             'state_probe.py', 'model_review.py', 'traffic_workload.py', 'paired_workload.py', 'native_input_cache.py',
+             'unused_signal_stages.py', 'areosa_detection.py', 'signal_program_model.py', 'controller_options.py']]
     paths += [here.parents[2] / 'requirements-simulation.txt',
               here.parents[1] / 'costa-cabral/requirements.txt']
     files = {}
@@ -185,7 +186,17 @@ class RunMonitor:
 
 
 def run_native(command, buses, folder, priority_options=None, monitor_options=None):
-    from signal_priority import simulate_with_priority
+    # Execute the recorded controller, so edits made while another trial is
+    # preparing cannot change that trial after its implementation was frozen.
+    import importlib.util
+    controller = Path(folder) / 'implementation-signal_priority.py'
+    if controller.exists():
+        spec = importlib.util.spec_from_file_location('invicta_frozen_signal_priority', controller)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        simulate_with_priority = module.simulate_with_priority
+    else:
+        from signal_priority import simulate_with_priority
     import libsumo
     monitor = RunMonitor(folder, buses, **(monitor_options or {}))
     started = time.monotonic()

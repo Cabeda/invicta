@@ -1,0 +1,52 @@
+{
+  "schema": "invicta.stop-review.v1",
+  "scope": "synthetic_stress_only",
+  "field_validated": false,
+  "network_sha256": "64eeea8de7a2c43aac704faabef47e8500b71d57054db4daa11cc86d81ccae83",
+  "reference_sha256": "d362507714e1024d6977ca6bd7dbade7614fa1b9ec2e14018f702f43ddef67c7",
+  "osm_sha256": "b1fac2ec60f8183a5669326c33f8746a1bc93858e96bfd5258ec257f2fa7c726",
+  "stops": [
+    {
+      "stop": "d1_COD",
+      "lane": "151268557#9_0",
+      "pos": 12.930000000000001,
+      "osm_platform": "6143667229",
+      "nearby_route_fragment": "1124001683#0",
+      "disposition": "accepted_model_approximation",
+      "reason": "STCP coordinate is corroborated by OSM platform 6143667229; the nearby correct route fragment is shorter than the 12 m study bus. Retain the existing 26.96 m berth offset identically in both policies for synthetic stress tests.",
+      "limitations": [
+        "Native berth is a positional proxy, not a surveyed boarding location.",
+        "No geometry or official timetable is changed by this review.",
+        "Recheck berth/terminal placement and access before a street pilot or field reliability claim."
+      ]
+    },
+    {
+      "stop": "d0_BRO1",
+      "lane": "1082972083#7_1",
+      "pos": 14.770000000000001,
+      "osm_platform": "6875613051",
+      "nearby_route_fragment": "1082972083#11",
+      "disposition": "accepted_model_approximation",
+      "reason": "STCP coordinate is corroborated by OSM platform 6875613051; the nearby correct route fragment is shorter than the 12 m study bus. Retain the existing 30.66 m berth offset identically in both policies for synthetic stress tests.",
+      "limitations": [
+        "Native berth is a positional proxy, not a surveyed boarding location.",
+        "No geometry or official timetable is changed by this review.",
+        "Recheck berth/terminal placement and access before a street pilot or field reliability claim."
+      ]
+    },
+    {
+      "stop": "d0_COD4",
+      "lane": "655751777#2_0",
+      "pos": 12,
+      "osm_platform": "6143667226",
+      "nearby_route_fragment": "-447541193#0",
+      "disposition": "accepted_model_approximation",
+      "reason": "STCP coordinate is corroborated by OSM platform 6143667226; the nearby correct route fragment is shorter than the 12 m study bus. Retain the existing 46.80 m berth offset identically in both policies for synthetic stress tests.",
+      "limitations": [
+        "Native berth is a positional proxy, not a surveyed boarding location.",
+        "No geometry or official timetable is changed by this review.",
+        "Recheck berth/terminal placement and access before a street pilot or field reliability claim."
+      ]
+    }
+  ]
+}

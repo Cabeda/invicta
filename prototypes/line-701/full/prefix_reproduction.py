@@ -11,6 +11,7 @@ from native_runner import freeze_implementation, run_native, atomic_json, requir
 from timetable import assess_trial, observation_window
 from trial_evidence import load_trial, sha256
 from run_diagnostics import explain
+from controller_options import priority_options
 
 
 def set_option(command, name, value):
@@ -121,9 +122,7 @@ def reproduce_prefix(source, output, trial_id=None, model=None, trip_id=None, st
         set_option(command, '--save-state.rng', 'true')
         set_option(command, '--save-state.transportables', 'true')
         preparation_seconds = time.monotonic() - started
-        options = ({'early_green': evidence.result['config'].get('early_green', False),
-                    'shorten_served_pedestrian_green': evidence.result['config'].get('shorten_served_pedestrian_green', False)}
-                   if evidence.result['config'].get('signal_priority') else None)
+        options = priority_options(evidence.result['config'])
         execution = run_native(command, evidence.buses, output, options,
                                {'sample_seconds': 60 if until_blockage else 1,
                                 'focus_trip': None if until_blockage else trip_id,
